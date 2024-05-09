@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom"
+import BookButton from "../bookButton/BookButton.tsx";
 
 const Navbar = () => {
     return (
@@ -14,15 +15,9 @@ const Navbar = () => {
                 />
                 <h3 className={"font-inter text-[#013220] text-xl italic ml-5"}>La Branche d'Oliver</h3>
             </Link>
-
             <p className={"text-base text-[#013220] font-inter italic"}>Ouvert tous les jours de midi à 22h30</p>
             <p className={"text-base text-[#013220] font-inter italic"}>010/345 67 89 - Wavre</p>
-            <Link to={"/about"}>
-                <button className={"text-xl text-[#013220] hover:text-amber-50 hover:bg-[#013220] font-inter italic outline outline-2 outline-offset-1 outline-[#013220] px-4 py-2 rounded-md"}
-                >
-                    Réserver
-                </button>
-            </Link>
+            <BookButton/>
         </nav>
     );
 };
