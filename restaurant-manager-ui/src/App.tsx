@@ -1,6 +1,7 @@
 import {  RouterProvider, createBrowserRouter } from "react-router-dom"
 import {Home} from "./pages/home/Home.tsx";
 import {Menu} from "./pages/menu/Menu.tsx";
+import About from "./pages/about/About.tsx";
 
 function App() {
 
@@ -12,7 +13,11 @@ function App() {
         {
             path: "/menu",
             element: <Menu />
-        }
+        },
+        {
+            path: "/about",
+            element: <About />
+        },
 
     ])
    return <RouterProvider router={router} />

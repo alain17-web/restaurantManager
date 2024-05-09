@@ -16,8 +16,13 @@ const Navbar = () => {
             </Link>
 
             <p className={"text-base text-[#013220] font-inter italic"}>Ouvert tous les jours de midi à 22h30</p>
-            <p className={"text-base text-[#013220] font-inter italic"}>010/345 67 89</p>
-            <p className={"text-base text-[#013220] font-inter italic"}>Louvain-la-Neuve</p>
+            <p className={"text-base text-[#013220] font-inter italic"}>010/345 67 89 - Wavre</p>
+            <Link to={"/about"}>
+                <button className={"text-xl text-[#013220] hover:text-amber-50 hover:bg-[#013220] font-inter italic outline outline-2 outline-offset-1 outline-[#013220] px-4 py-2 rounded-md"}
+                >
+                    Réserver
+                </button>
+            </Link>
         </nav>
     );
 };
