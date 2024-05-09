@@ -5,7 +5,7 @@ export const dishes = [
         desc:"Une des variantes de houmous les plus appréciées au moyen orient! Elle se compose de purée de pois chiches, crème de sésame, jus de citron, ail concassé, persil, gains de pois chiche entiers.",
         img:"./img/Msabaha.jpg",
         price:6.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:2,
@@ -13,7 +13,7 @@ export const dishes = [
         desc:"Salade de fenouil, aneth, jeunes oignons, raisins secs et airelles",
         img:"./img/shoumar.jpg",
         price:6.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:3,
@@ -21,7 +21,7 @@ export const dishes = [
         desc:"Purée de pois chiches, crème de sésame, jus de citron, épices du pays",
         img:"./img/houmous.jpg",
         price:6,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:4,
@@ -29,7 +29,7 @@ export const dishes = [
         desc:"Salade composée, pétales de pain grillé, sirop de grenade.",
         img:"./img/Msabaha.jpg",
         price:5.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:5,
@@ -37,7 +37,7 @@ export const dishes = [
         desc:"Grains de grenade, aubergines grillées, tomates, oignons, poivrons et persil plat, huile d’olive et épices du pays.",
         img:"./img/baba_ghanouj.jpg",
         price:6.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:6,
@@ -45,7 +45,7 @@ export const dishes = [
         desc:"Aubergines grillées, pois chiches, oignons et sauce tomate, le tout cuisiné au four.",
         img:"./img/mousaka.jpg",
         price:6.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:7,
@@ -53,7 +53,7 @@ export const dishes = [
         desc:"Aubergines grillées façon caviar, jus de citron et crème de sésame, épices du pays.",
         img:"./img/moutabal.jpg",
         price:5.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:8,
@@ -61,14 +61,14 @@ export const dishes = [
         desc:"Persil plat, tomates, oignons, jus de citron, menthe fraîche, semoule, huile d’olive et savoir-faire du Chef.",
         img:"./img/taboule.jpg",
         price:6,
-        cat:"Mezze"
+        cat:"Mezzes"
     },{
         id:9,
         name:"Batata Harrara",
         desc:"Dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa.",
         img:"./img/batata.jpg",
         price:6,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:10,
@@ -76,7 +76,7 @@ export const dishes = [
         desc:"Croquette végétarienne à base de pois chiches moulu, ail, oignons, coriandre, épices du pays.",
         img:"./img/falafel.jpg",
         price:1.3,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:11,
@@ -84,7 +84,7 @@ export const dishes = [
         desc:"Potage palestinien aux lentilles de corail, oignons et jus de citron.",
         img:"./img/shorbat.jpg",
         price:6,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:12,
@@ -92,7 +92,7 @@ export const dishes = [
         desc:"Omelette végétarienne aux légumes, persil plat, oignons, tomates, courgettes, œufs fermiers.",
         img:"./img/aji.jpg",
         price:4.5,
-        cat:"Mezze"
+        cat:"Mezzes"
     },
     {
         id:13,
@@ -100,7 +100,7 @@ export const dishes = [
         desc:"2 Brochettes de poulet mariné Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix.",
         img:"./img/chichtaouk.jpg",
         price:16.5,
-        cat:"grill"
+        cat:"Grillades"
     },
     {
         id:14,
@@ -108,7 +108,7 @@ export const dishes = [
         desc:"2 Brochettes de viande hachée, aromatisée de boeuf et d’agneau Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
         img:"./img/kafta.jpg",
         price:16.5,
-        cat:"grill"
+        cat:"Grillades"
     },
     {
         id:15,
@@ -116,7 +116,7 @@ export const dishes = [
         desc:"2 Brochettes d’agneau mariné Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
         img:"./img/lahme.jpg",
         price:16.5,
-        cat:"grill"
+        cat:"Grillades"
     },
     {
         id:16,
@@ -124,7 +124,7 @@ export const dishes = [
         desc:"3 Coeurs d'artichaut farcis à la viande hachée, houmous, taboulé, baba ghanou",
         img:"./img/assiettes-artichauts.jpg",
         price:17.5,
-        cat:"assiette froide"
+        cat:"Assiette froides"
     },
     {
         id:17,
@@ -132,7 +132,7 @@ export const dishes = [
         desc:"3 Kebbehs, taboulé, baba ghanouj, houmous et sauce à l'ail (G; N; S)",
         img:"./img/kebbeh.jpg",
         price:16.5,
-        cat:"assiette froide"
+        cat:"Assiette froides"
     },
     {
         id:18,
@@ -140,7 +140,7 @@ export const dishes = [
         desc:"3 Falafels, houmous, taboulé, baba ghanouj et sauce tahina",
         img:"./img/assiette-falafel.jpg",
         price:14.5,
-        cat:"assiette froide"
+        cat:"Assiette froides"
     },
     {
         id:19,
@@ -148,7 +148,7 @@ export const dishes = [
         desc:"Dessert à la crème et aux pistache",
         img:"./img/aish.jpg",
         price:4.5,
-        cat:"dessert"
+        cat:"Desserts"
     },
     {
         id:20,
@@ -156,7 +156,7 @@ export const dishes = [
         desc:"Pâte feuilletée, pistache, cajou et amande, sirop de miel à la fleur d’oranger",
         img:"./img/baklava.jpg",
         price:3.5,
-        cat:"dessert"
+        cat:"Desserts"
     },
     {
         id:21,
@@ -164,69 +164,69 @@ export const dishes = [
         desc:"Gâteau de semoule, fleur d’oranger, amandes, sirop au miel maison",
         img:"./img/namoura.jpg",
         price:4.5,
-        cat:"dessert"
+        cat:"Desserts"
     },
 ]
 
 export const drinks = [
     {
         idDrink:1,
-        name:"Coca,Coca Zero,Sprite,Fanta,Ice tea",
+        name:"Coca,Sprite,Fanta,Ice tea",
         price:1.5,
-        cat:"soft"
+        cat:"Softs"
     },
     {
         idDrink:2,
         name:"Thé à la menthe fraîche",
         price:2,
-        cat:"boisson chaude"
+        cat:"Boissons chaudes"
     },
     {
         idDrink:3,
         name:"Thé à la Camomille",
         price:1.7,
-        cat:"boisson chaude"
+        cat:"Boissons chaudes"
     },
     {
         idDrink:4,
         name:"Café",
         price:1.6,
-        cat:"boisson chaude"
+        cat:"Boissons chaudes"
     },
     {
         idDrink:5,
         name:"Expresso",
         price:1.5,
-        cat:"boisson chaude"
+        cat:"Boissons chaudes"
     },
     {
         idDrink:6,
-        name:"Château Kefraya - Cab Sauvignon-Syrah",
+        name:"Château Kefraya - Syrah",
         price:75,
-        cat:"vin"
+        cat:"Vins"
     },
     {
         idDrink:7,
-        name:"Ksara - Cab Sauvignon-Syrah",
+        name:"Ksara - Syrah",
         price:36,
-        cat:"vin"
+        cat:"Vins"
     },
     {
         idDrink:8,
-        name:"Château St Thomas - Merlot-Syrah",
+        name:"Château St Thomas",
         price:69,
-        cat:"vin"
+        cat:"Vins"
     },
     {
         idDrink:9,
         name:"Taybeh Blonde",
         price:4.5,
-        cat:"bière"
+        cat:"Bières"
     },
     {
         idDrink:10,
         name:"Taybeh Blanche",
         price:4.5,
-        cat:"bière"
+        cat:"Bières"
     },
 ]
