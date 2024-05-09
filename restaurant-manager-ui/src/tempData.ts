@@ -120,6 +120,38 @@ export const dishes = [
     },
     {
         id:16,
+        name:"Assiette Chawarma poulet",
+        desc:"Viande de poulet en lamelle aromatisée et marinée avec des oignons et poivrons Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
+        img:"./img/chawarma.jpg",
+        price:15.5,
+        cat:"Grillades"
+    },
+    {
+        id:17,
+        name:"Assiette Chawarma maison",
+        desc:"Viande de dinde en lamelle aromatisée et marinée avec des oignons et poivrons Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
+        img:"./img/chawarma-maison.jpg",
+        price:15.5,
+        cat:"Grillades"
+    },
+    {
+        id:18,
+        name:"Assortiment Mixte Grill",
+        desc:"Assortiment de brochettes : Brochette d'agneau,Brochette de kefta (viande hachée de boeuf et d'agneau),Brochette chich taouk (poulet mariné) accompagnées de Salade fatouche : Salade composée, pétales de pain grillé, sumac, sirop de grenade et Batata harra Dés de pommes de terre marinés aux épices maison, ail, coriandre ",
+        img:"./img/assortissement.jpg",
+        price:24,
+        cat:"Grillades"
+    },
+    {
+        id:19,
+        name:"Plateau viande",
+        desc:"Assortiment de nos mezzés palestiniens sélectionnés par le Chef, accompagnés d’une grillade au choix ",
+        img:"./img/plateau_viande.jpg",
+        price:18.5,
+        cat:"Grillades"
+    },
+    {
+        id:20,
         name:"Assiette Artichauts",
         desc:"3 Coeurs d'artichaut farcis à la viande hachée, houmous, taboulé, baba ghanou",
         img:"./img/assiettes-artichauts.jpg",
@@ -127,7 +159,7 @@ export const dishes = [
         cat:"Assiette froides"
     },
     {
-        id:17,
+        id:21,
         name:"Assiette Kebbeh d'Arraba",
         desc:"3 Kebbehs, taboulé, baba ghanouj, houmous et sauce à l'ail (G; N; S)",
         img:"./img/kebbeh.jpg",
@@ -135,7 +167,7 @@ export const dishes = [
         cat:"Assiette froides"
     },
     {
-        id:18,
+        id:22,
         name:"Assiette Falafel d'Akko",
         desc:"3 Falafels, houmous, taboulé, baba ghanouj et sauce tahina",
         img:"./img/assiette-falafel.jpg",
@@ -143,7 +175,15 @@ export const dishes = [
         cat:"Assiette froides"
     },
     {
-        id:19,
+        id:23,
+        name:"Plateau végétarien",
+        desc:"Assortiment de nos mezzés palestiniens sélectionnés par le Chef ",
+        img:"./img/plateau-vegetarien.jpg",
+        price:16,
+        cat:"Assiette froides"
+    },
+    {
+        id:24,
         name:"Aish el saraya",
         desc:"Dessert à la crème et aux pistache",
         img:"./img/aish.jpg",
@@ -151,7 +191,7 @@ export const dishes = [
         cat:"Desserts"
     },
     {
-        id:20,
+        id:25,
         name:"Baklava",
         desc:"Pâte feuilletée, pistache, cajou et amande, sirop de miel à la fleur d’oranger",
         img:"./img/baklava.jpg",
@@ -159,11 +199,19 @@ export const dishes = [
         cat:"Desserts"
     },
     {
-        id:21,
+        id:26,
         name:"Namoura",
         desc:"Gâteau de semoule, fleur d’oranger, amandes, sirop au miel maison",
         img:"./img/namoura.jpg",
         price:4.5,
+        cat:"Desserts"
+    },
+    {
+        id:27,
+        name:"Chhyabat achta",
+        desc:"Chausson croustillant farci au fromage frais, sirop de miel à la fleur d’oranger et brisure de pistaches",
+        img:"./img/chaayabat.jpg",
+        price:3.5,
         cat:"Desserts"
     },
 ]
