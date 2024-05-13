@@ -10,7 +10,7 @@ const MenuSidebar = ({onItemSelect,selectedItem}) => {
         categories.push(dish.cat)
     })
 
-    const handleClick = (cat) => {
+    const handleClick = (cat:string) => {
         onItemSelect(cat)
     }
 

@@ -33,7 +33,7 @@ export const Menu = () => {
     return (
         <section className={"w-full h-screen bg-no-repeat bg-center bg-cover overflow-hidden"}
                  style={{backgroundImage: `url('./img/scenery.jpg')`}}>
-            <Navbar/>
+            <Navbar isOnAbout={false}/>
             <h1 className={"text-center text-5xl font-inter italic text-[#013220] mt-16"}>Bienvenue - مَرْحَباً - ברוך
                 הבא</h1>
            <section className={"w-full flex"}>
