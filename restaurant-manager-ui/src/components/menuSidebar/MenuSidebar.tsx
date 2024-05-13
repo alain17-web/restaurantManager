@@ -2,7 +2,12 @@ import {dishes} from '../../tempData.ts'
 import { Link } from "react-router-dom"
 import Drinks from "../drinks/Drinks.tsx";
 
-const MenuSidebar = ({onItemSelect,selectedItem}) => {
+interface Props {
+    onItemSelect: (item:string) => void
+    selectedItem: string
+}
+
+const MenuSidebar = (props:Props) => {
 
     const categories:string[] = []
     dishes.forEach((dish) => {
@@ -11,7 +16,7 @@ const MenuSidebar = ({onItemSelect,selectedItem}) => {
     })
 
     const handleClick = (cat:string) => {
-        onItemSelect(cat)
+        props.onItemSelect(cat)
     }
 
     return (
@@ -19,7 +24,7 @@ const MenuSidebar = ({onItemSelect,selectedItem}) => {
             <h1 className={"text-2xl font-inter underline"}>Les plats</h1>
             {categories.map(cat => (
                 <Link
-                    className={selectedItem === cat ? "font-inter font-semibold italic text-amber-100 underline text-2xl mt-5" : "font-inter font-semibold italic text-[#013220] text-2xl mt-5"}
+                    className={props.selectedItem === cat ? "font-inter font-semibold italic text-amber-100 underline text-2xl mt-5" : "font-inter font-semibold italic text-[#013220] text-2xl mt-5"}
                     key={cat}
                     onClick={() =>handleClick(cat)}
                 >

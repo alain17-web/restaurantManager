@@ -3,7 +3,7 @@ import {useState} from "react";
 
 const About = () => {
 
-    const [isOnAbout] = useState(true);
+    const [isOnAbout] = useState<boolean>(true);
     return (
         <section className={"w-full h-screen overflow-hidden"}>
             <header
