@@ -15,7 +15,7 @@ function App() {
             element: <Menu />
         },
         {
-            path: "/about",
+            path: "/reservation-infos",
             element: <About />
         },
 
