@@ -1,5 +1,7 @@
 import Navbar from "../../components/navbar/Navbar.tsx";
 import {useState} from "react";
+import BookingForm from "../../components/bookingForm/BookingForm.tsx";
+
 
 const About = () => {
 
@@ -12,6 +14,12 @@ const About = () => {
             >
                 <Navbar isOnAbout={isOnAbout}/>
             </header>
+            <main className={"w-full h-[45vh] flex items-center justify-center"}>
+               <BookingForm/>
+                <section className={"flex-1 h-full bg-amber-200"}>
+
+                </section>
+            </main>
         </section>
     );
 };
