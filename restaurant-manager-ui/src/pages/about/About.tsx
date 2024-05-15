@@ -2,6 +2,7 @@ import Navbar from "../../components/navbar/Navbar.tsx";
 import {useState} from "react";
 import BookingForm from "../../components/bookingForm/BookingForm.tsx";
 import Map from "../../components/map/Map.tsx";
+import FooterAbout from "../../components/footerAbout/FooterAbout.tsx";
 
 
 const About = () => {
@@ -14,6 +15,8 @@ const About = () => {
                 style={{backgroundImage: `url('./img/oliveTrees.png')`}}
             >
                 <Navbar isOnAbout={isOnAbout}/>
+                <h2 className={"text-center text-6xl text-white font-inter mt-20"}>Bienvenue</h2>
+                <p className={"text-center text-2xl text-amber-100 font-inter italic mt-8"}>Cuisine traditionnelle palestinienne</p>
             </header>
             <main className={"w-full h-[45vh] flex items-center justify-center"}>
                 <BookingForm/>
@@ -23,6 +26,7 @@ const About = () => {
                     </div>
                 </section>
             </main>
+            <FooterAbout />
         </section>
     );
 };
