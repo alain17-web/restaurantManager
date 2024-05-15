@@ -1,5 +1,6 @@
 import TimeOptions from "../timeOptions/TimeOptions.tsx";
 import {FormEvent, useEffect, useState} from "react";
+import SuccessMsg from "../successMsg/SuccessMsg.tsx";
 
 const BookingForm = () => {
 
@@ -187,18 +188,7 @@ const BookingForm = () => {
                     </div>
                 </form>
             ) : (
-                <article className={"w-[60%] h-auto border-2 border-[#6B8E23] rounded-xl mt-20 p-5"}>
-                    <p
-                        className={"text-2xl hover:text-3xl hover:text-orange-700 font-bold cursor-pointer"}
-                        onClick={closeSuccessMsg}
-                    >
-                        X
-                    </p>
-                    <p className={"text-center text-3xl text-[#6B8E23] font-inter"}>Merci {name}!</p>
-                    <p className={"text-center text-2xl text-[#6B8E23] font-inter mt-8"}>Votre réservation
-                        pour {people} {people > 1 ? "personnes" : "personne"} est confirmée. Nous vous accueillons
-                        le {formatedDate} à {hour}.</p>
-                </article>
+                <SuccessMsg closeSuccessMsg={closeSuccessMsg} name={name} people={people} formatedDate={formatedDate} hour={hour} />
             )}
         </section>
     );
