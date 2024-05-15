@@ -2,6 +2,7 @@ import {  RouterProvider, createBrowserRouter } from "react-router-dom"
 import {Home} from "./pages/home/Home.tsx";
 import {Menu} from "./pages/menu/Menu.tsx";
 import About from "./pages/about/About.tsx";
+import Login from "./pages/login/Login.tsx";
 
 function App() {
 
@@ -17,6 +18,10 @@ function App() {
         {
             path: "/reservation-infos",
             element: <About />
+        },
+        {
+            path: "/connexion",
+            element: <Login />
         },
 
     ])
