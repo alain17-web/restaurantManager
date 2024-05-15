@@ -16,7 +16,7 @@ const Navbar = (props:Props) => {
                 <h3 className={!props.isOnAbout ? "font-inter text-[#013220] text-xl italic ml-5" : "font-inter text-amber-100 text-xl italic ml-5"}>La Branche d'Oliver</h3>
             </Link>
             <p className={!props.isOnAbout ? "text-base text-[#013220] font-inter italic" : "text-base text-amber-100 font-inter italic"}>Ouvert tous les jours de midi à 22h30</p>
-            <p className={!props.isOnAbout ? "text-base text-[#013220] font-inter italic" : "text-base text-amber-100 font-inter italic"}>010/345 67 89 - Wavre</p>
+            <p className={!props.isOnAbout ? "text-base text-[#013220] font-inter italic" : "text-base text-amber-100 font-inter italic"}>010/345 67 89 - Charleroi</p>
             {!props.isOnAbout ? <BookButton/> : <MenuButton />}
         </nav>
     );
