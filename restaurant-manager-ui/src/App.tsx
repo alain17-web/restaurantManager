@@ -3,6 +3,9 @@ import {Home} from "./pages/home/Home.tsx";
 import {Menu} from "./pages/menu/Menu.tsx";
 import About from "./pages/about/About.tsx";
 import Login from "./pages/login/Login.tsx";
+import Dashboard from "./pages/dashboard/Dashboard.tsx";
+import Restaurant from "./pages/restaurant/Restaurant.tsx";
+import Kitchen from "./pages/kitchen/Kitchen.tsx";
 
 function App() {
 
@@ -23,6 +26,19 @@ function App() {
             path: "/connexion",
             element: <Login />
         },
+        {
+            path: "/dashboard",
+            element: <Dashboard />
+        },
+        {
+            path: "/restaurant",
+            element: <Restaurant />
+        },
+        {
+            path: "/kitchen",
+            element: <Kitchen />
+        },
+
 
     ])
    return <RouterProvider router={router} />

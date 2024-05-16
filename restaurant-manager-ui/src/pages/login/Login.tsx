@@ -1,7 +1,58 @@
 import Logo from "../../components/logo/Logo.tsx";
-import {Link} from "react-router-dom"
+import {Link,useNavigate} from "react-router-dom"
+import {useState} from "react";
+import {users} from '../../tempData.ts'
 
 const Login = () => {
+
+    const navigate = useNavigate();
+
+    const adminsArray:string[] = []
+    const waitersArray:string[] = []
+    const cooksArray:string[] = []
+
+
+        users.map((user) => {
+            if(user.role === "admin"){
+                adminsArray.push(user.username,user.password)
+            }
+            if(user.role === "waiter"){
+                waitersArray.push(user.username,user.password)
+            }
+            if(user.role === "cook"){
+                cooksArray.push(user.username,user.password)
+            }
+
+        })
+
+
+    const [username, setUsername] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<boolean>(false);
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setError(false)
+        console.log(username, password, adminsArray,waitersArray,cooksArray)
+        if(adminsArray.includes(username.toLowerCase()) && adminsArray.includes(password.toLowerCase())){
+            navigate("/dashboard");
+        } else {
+            setError(true)
+        }
+
+        if(waitersArray.includes(username.toLowerCase()) && waitersArray.includes(password.toLowerCase())){
+            navigate("/restaurant");
+        } else {
+            setError(true)
+        }
+
+        if(cooksArray.includes(username.toLowerCase()) && cooksArray.includes(password.toLowerCase())){
+            navigate("/kitchen");
+        } else {
+            setError(true)
+        }
+    }
+
     return (
         <section
             className={"w-full h-screen overflow-hidden bg-amber-50"}>
@@ -18,9 +69,24 @@ const Login = () => {
                 <form
                     className={"w-full flex flex-col items-center justify-around gap-8 pt-20"}
                     noValidate
+                    onSubmit={handleSubmit}
                 >
-                    <input type={"text"} placeholder={"Nom d'utilisateur"} className={"h-10 bg-white  placeholder:pl-2 rounded-md pl-2"}/>
-                    <input type={"password"} placeholder={"mot de passe"} className={"h-10 bg-white  placeholder:pl-2 rounded-md pl-2"} />
+                    <input
+                        type={"text"}
+                        placeholder={"Nom d'utilisateur"}
+                        className={"h-10 bg-white  placeholder:pl-2 rounded-md pl-2"}
+                        required
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <input
+                        type={"password"}
+                        placeholder={"mot de passe"}
+                        className={"h-10 bg-white  placeholder:pl-2 rounded-md pl-2"}
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                     <button type={"submit"} className={"h-10 bg-[#663399] hover:bg-amber-800 text-white px-16 cursor-pointer"}>Connexion</button>
                 </form>
             </main>

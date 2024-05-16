@@ -270,3 +270,49 @@ export const drinks = [
         cat:"Bières"
     },
 ]
+
+//username must be unique
+export const users = [
+    {
+        idUser:1,
+        username:"alain",
+        password:"admin",
+        role:"admin",
+    },
+    {
+        idUser:2,
+        username:"helene",
+        password:"waiter",
+        role:"waiter",
+    },
+    {
+        idUser:3,
+        username:"lea",
+        password:"waiter",
+        role:"waiter",
+    },
+    {
+        idUser:4,
+        username:"liam",
+        password:"waiter",
+        role:"waiter",
+    },
+    {
+        idUser:5,
+        username:"basile",
+        password:"cook",
+        role:"cook",
+    },
+    {
+        idUser:6,
+        username:"arnaud",
+        password:"cook",
+        role:"cook",
+    },
+    {
+        idUser:7,
+        username:"julie",
+        password:"cook",
+        role:"cook",
+    },
+]
