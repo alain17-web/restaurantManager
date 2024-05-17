@@ -4,7 +4,7 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Dashboard</h1>
-            <Link to={"/connexion"}>Back to Dashboard</Link>
+            <Link to={"/connexion"}>Back to Login</Link>
         </div>
     );
 };
