@@ -5,7 +5,8 @@ export const dishes = [
         desc:"Une des variantes de houmous les plus appréciées au moyen orient! Elle se compose de purée de pois chiches, crème de sésame, jus de citron, ail concassé, persil, gains de pois chiche entiers.",
         img:"./img/Msabaha.jpg",
         price:6.5,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: "Sésame, poids chiches"
     },
     {
         id:2,
@@ -13,7 +14,8 @@ export const dishes = [
         desc:"Salade de fenouil, aneth, jeunes oignons, raisins secs et airelles",
         img:"./img/shoumar.jpg",
         price:6.5,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: ""
     },
     {
         id:3,
@@ -21,7 +23,8 @@ export const dishes = [
         desc:"Purée de pois chiches, crème de sésame, jus de citron, épices du pays",
         img:"./img/houmous.jpg",
         price:6,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: "Sésame, poids chiches"
     },
     {
         id:4,
@@ -29,7 +32,8 @@ export const dishes = [
         desc:"Salade composée, pétales de pain grillé, sirop de grenade.",
         img:"./img/Msabaha.jpg",
         price:5.5,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: ""
     },
     {
         id:5,
@@ -37,7 +41,8 @@ export const dishes = [
         desc:"Grains de grenade, aubergines grillées, tomates, oignons, poivrons et persil plat, huile d’olive et épices du pays.",
         img:"./img/baba_ghanouj.jpg",
         price:6.5,
-        cat:"Mezzes"
+        cat:"Mezzes",
+
     },
     {
         id:6,
@@ -45,7 +50,8 @@ export const dishes = [
         desc:"Aubergines grillées, pois chiches, oignons et sauce tomate, le tout cuisiné au four.",
         img:"./img/mousaka.jpg",
         price:6.5,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: ""
     },
     {
         id:7,
@@ -53,7 +59,8 @@ export const dishes = [
         desc:"Aubergines grillées façon caviar, jus de citron et crème de sésame, épices du pays.",
         img:"./img/moutabal.jpg",
         price:5.5,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: "Sésame"
     },
     {
         id:8,
@@ -61,14 +68,16 @@ export const dishes = [
         desc:"Persil plat, tomates, oignons, jus de citron, menthe fraîche, semoule, huile d’olive et savoir-faire du Chef.",
         img:"./img/taboule.jpg",
         price:6,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: "La semoule contient du gluten"
     },{
         id:9,
         name:"Batata Harrara",
         desc:"Dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa.",
         img:"./img/batata.jpg",
         price:6,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: ""
     },
     {
         id:10,
@@ -76,7 +85,8 @@ export const dishes = [
         desc:"Croquette végétarienne à base de pois chiches moulu, ail, oignons, coriandre, épices du pays.",
         img:"./img/falafel.jpg",
         price:1.3,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: "Poids chiches"
     },
     {
         id:11,
@@ -84,7 +94,8 @@ export const dishes = [
         desc:"Potage palestinien aux lentilles de corail, oignons et jus de citron.",
         img:"./img/shorbat.jpg",
         price:6,
-        cat:"Mezzes"
+        cat:"Mezzes",
+        allerg: ""
     },
     {
         id:12,
@@ -92,7 +103,8 @@ export const dishes = [
         desc:"2 Brochettes de poulet mariné Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix.",
         img:"./img/chichtaouk.jpg",
         price:16.5,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: ""
     },
     {
         id:13,
@@ -100,7 +112,8 @@ export const dishes = [
         desc:"2 Brochettes de viande hachée, aromatisée de boeuf et d’agneau Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
         img:"./img/kafta.jpg",
         price:16.5,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: ""
     },
     {
         id:14,
@@ -108,7 +121,8 @@ export const dishes = [
         desc:"2 Brochettes d’agneau mariné Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
         img:"./img/lahme.jpg",
         price:16.5,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: ""
     },
     {
         id:15,
@@ -116,7 +130,8 @@ export const dishes = [
         desc:"Viande de poulet en lamelle aromatisée et marinée avec des oignons et poivrons Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
         img:"./img/chawarma.jpg",
         price:15.5,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: ""
     },
     {
         id:16,
@@ -124,7 +139,8 @@ export const dishes = [
         desc:"Viande de dinde en lamelle aromatisée et marinée avec des oignons et poivrons Les assiettes grillades sont servies avec des crudités, des batata harra (dés de pommes de terre marinés aux épices maison, ail, coriandre & harissa) ou des frites et une sauce au choix",
         img:"./img/chawarma-maison.jpg",
         price:15.5,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: ""
     },
     {
         id:17,
@@ -132,7 +148,8 @@ export const dishes = [
         desc:"Assortiment de brochettes : Brochette d'agneau,Brochette de kefta (viande hachée de boeuf et d'agneau),Brochette chich taouk (poulet mariné) accompagnées de Salade fatouche : Salade composée, pétales de pain grillé, sumac, sirop de grenade et Batata harra Dés de pommes de terre marinés aux épices maison, ail, coriandre ",
         img:"./img/assortissement.jpg",
         price:24,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: ""
     },
     {
         id:18,
@@ -140,7 +157,8 @@ export const dishes = [
         desc:"Assortiment de nos mezzés palestiniens sélectionnés par le Chef, accompagnés d’une grillade au choix ",
         img:"./img/plateau_viande.jpg",
         price:18.5,
-        cat:"Grillades"
+        cat:"Grillades",
+        allerg: "Sésame, poids chiches"
     },
     {
         id:19,
@@ -148,7 +166,8 @@ export const dishes = [
         desc:"3 Coeurs d'artichaut farcis à la viande hachée, houmous, taboulé, baba ghanou",
         img:"./img/assiettes-artichauts.jpg",
         price:17.5,
-        cat:"Assiette froides"
+        cat:"Assiette froides",
+        allerg: "Poids chiches"
     },
     {
         id:20,
@@ -156,7 +175,8 @@ export const dishes = [
         desc:"3 Kebbehs, taboulé, baba ghanouj, houmous et sauce à l'ail (G; N; S)",
         img:"./img/kebbeh.jpg",
         price:16.5,
-        cat:"Assiette froides"
+        cat:"Assiette froides",
+        allerg: "Poids chiches"
     },
     {
         id:21,
@@ -164,7 +184,8 @@ export const dishes = [
         desc:"3 Falafels, houmous, taboulé, baba ghanouj et sauce tahina",
         img:"./img/assiette-falafel.jpg",
         price:14.5,
-        cat:"Assiette froides"
+        cat:"Assiette froides",
+        allerg: "Poids chiches"
     },
     {
         id:22,
@@ -172,15 +193,17 @@ export const dishes = [
         desc:"Assortiment de nos mezzés palestiniens sélectionnés par le Chef ",
         img:"./img/plateau-vegetarien.jpg",
         price:16,
-        cat:"Assiette froides"
+        cat:"Assiette froides",
+        allerg: "Sésame, poids chiches"
     },
     {
         id:23,
         name:"Aish el saraya",
-        desc:"Dessert à la crème et aux pistache",
+        desc:"Dessert à la crème et aux pistaches",
         img:"./img/aish.jpg",
         price:4.5,
-        cat:"Desserts"
+        cat:"Desserts",
+        allerg: ""
     },
     {
         id:24,
@@ -188,7 +211,8 @@ export const dishes = [
         desc:"Pâte feuilletée, pistache, cajou et amande, sirop de miel à la fleur d’oranger",
         img:"./img/baklava.jpg",
         price:3.5,
-        cat:"Desserts"
+        cat:"Desserts",
+        allerg: "Peut contenir des traces de coques de fruits secs"
     },
     {
         id:25,
@@ -196,7 +220,8 @@ export const dishes = [
         desc:"Gâteau de semoule, fleur d’oranger, amandes, sirop au miel maison",
         img:"./img/namoura.jpg",
         price:4.5,
-        cat:"Desserts"
+        cat:"Desserts",
+        allerg: "Gluten et contenir des traces de coques de fruits secs"
     },
     {
         id:26,
@@ -204,7 +229,8 @@ export const dishes = [
         desc:"Chausson croustillant farci au fromage frais, sirop de miel à la fleur d’oranger et brisure de pistaches",
         img:"./img/chaayabat.jpg",
         price:3.5,
-        cat:"Desserts"
+        cat:"Desserts",
+        allerg: "Peut contenir des traces de coques de fruits secs"
     },
 ]
 
