@@ -28,7 +28,7 @@ const Login = () => {
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [success, setSuccess] = useState<boolean>(false); const [error, setError] = useState<boolean>(false);
+     const [error, setError] = useState<boolean>(false);
     const [usernameError, setUsernameError] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
     const [allFieldsValid, setAllFieldsValid] = useState<boolean>(false)
@@ -87,10 +87,6 @@ const Login = () => {
             navigate("/kitchen");
         } else {
             setError(true)
-        }
-
-        if(allFieldsValid){
-            setSuccess(true)
         }
     }
 
