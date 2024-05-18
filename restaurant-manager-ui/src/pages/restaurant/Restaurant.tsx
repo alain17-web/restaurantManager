@@ -4,12 +4,19 @@ import {Link} from "react-router-dom"
 
 const Restaurant = () => {
     return (
-        <section className={"w-full h-screen overflow-hidden flex items-center justify-center"}>
+        <section className={"w-full h-screen overflow-hidden flex items-center justify-center"} style={{
+            backgroundImage: "url('./img/resto2.jpg')",
+            backgroundPosition: "bottom",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundColor: "rgba(255, 255, 255, 1)"
+        }}>
+
             <div
-                className={"w-[500px] h-[900px] bg-[url('./img/vTablet.png')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center"}>
+                className={"w-[500px] h-[900px] bg-[url('./img/vTablet.png')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center z-20"}>
                 <div
-                    className={"w-[92%] h-[82%] bg-[url('./img/scenery.jpg')] bg-center bg-no-repeat bg-cover flex flex-col justify-around"}>
-                    <div className={"w-full h-full flex  items-start justify-between px-4"}>
+                    className={"w-[92%] h-[82%] bg-[url('./img/scenery.jpg')] bg-center bg-no-repeat bg-cover flex flex-col justify-between"}>
+                    <div className={"w-full h-auto flex items-start justify-between px-4"}>
                         <img src={'./img/logo.png'} alt="logo restaurant" width={'60px'} height={'60px'}/>
                         <div className={"w-auto flex items-center justify-center gap-3"}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -34,8 +41,22 @@ const Restaurant = () => {
                                           d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
                                 </svg>
                             </Link>
-
                         </div>
+                    </div>
+                    <button
+                        className={"w-[50%] mx-auto h-10 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}>Nouvelle commande
+                    </button>
+                    <div className={"w-auto flex items-center justify-end gap-3 px-4"}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
+                             className="bi bi-volume-off" viewBox="0 0 16 16">
+                            <path
+                                d="M10.717 3.55A.5.5 0 0 1 11 4v8a.5.5 0 0 1-.812.39L7.825 10.5H5.5A.5.5 0 0 1 5 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06M10 5.04 8.312 6.39A.5.5 0 0 1 8 6.5H6v3h2a.5.5 0 0 1 .312.11L10 10.96z"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             className="bi bi-toggle2-off" viewBox="0 0 16 16">
+                            <path d="M9 11c.628-.836 1-1.874 1-3a4.98 4.98 0 0 0-1-3h4a3 3 0 1 1 0 6z"/>
+                            <path d="M5 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8m0 1A5 5 0 1 0 5 3a5 5 0 0 0 0 10"/>
+                        </svg>
                     </div>
                 </div>
             </div>
