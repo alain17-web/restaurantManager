@@ -78,6 +78,7 @@ const Login = () => {
         }
 
         if(waitersArray.includes(username.toLowerCase()) && waitersArray.includes(password.toLowerCase())){
+            localStorage.setItem("username",username)
             navigate("/restaurant");
         } else {
             setError(true)

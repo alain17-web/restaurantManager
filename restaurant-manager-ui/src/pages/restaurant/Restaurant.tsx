@@ -1,8 +1,20 @@
 import {Link} from "react-router-dom"
+import {useEffect, useState} from "react";
+import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
 
 
 
 const Restaurant = () => {
+
+    const [username,setUsername] = useState("");
+
+    useEffect(() => {
+        const storedUsername = localStorage.getItem("username");
+        if(storedUsername){
+            setUsername(storedUsername);
+        }
+    },[])
+
     return (
         <section className={"w-full h-screen overflow-hidden flex items-center justify-center"} style={{
             backgroundImage: "url('./img/resto2.jpg')",
@@ -43,8 +55,10 @@ const Restaurant = () => {
                             </Link>
                         </div>
                     </div>
+                    <TimeDisplay />
+                    <h2 className={"text-center text-white text-2xl font-inter italic"}>Bienvenue {username}</h2>
                     <button
-                        className={"w-[50%] mx-auto h-10 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}>Nouvelle commande
+                        className={"w-[50%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}>Nouvelle commande
                     </button>
                     <div className={"w-auto flex items-center justify-end gap-3 px-4"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"

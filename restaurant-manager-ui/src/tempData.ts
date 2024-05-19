@@ -341,4 +341,10 @@ export const users = [
         password:"cook",
         role:"cook",
     },
+    {
+        idUser:8,
+        username:"alicia",
+        password:"cook",
+        role:"cook",
+    },
 ]
