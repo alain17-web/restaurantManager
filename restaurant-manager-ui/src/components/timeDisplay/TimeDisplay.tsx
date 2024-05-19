@@ -14,7 +14,7 @@ const TimeDisplay = memo(() => {
 
     return (
         <div className={'w-full h-auto'}>
-            <p className={"text-center text-white text-3xl"}>{time.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'})}</p>
+            <p className={"text-center text-white text-5xl"}>{time.toLocaleTimeString([],{hour: '2-digit', minute: '2-digit'})}</p>
         </div>
     );
 });
