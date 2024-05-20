@@ -2,10 +2,9 @@ import {Link} from "react-router-dom"
 
 const Kitchen = () => {
     return (
-        <div>
-            <h1>Kitchen</h1>
+        <section className={'w-full h-screen bg-[url(\'./img/kitchen.jpg\')] bg-center bg-no-repeat bg-cover overflow-hidden'}>
             <Link to={"/connexion"}>Back to Login</Link>
-        </div>
+        </section>
     );
 };
 export default Kitchen;

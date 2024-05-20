@@ -51,7 +51,7 @@ const NewOrder = (props: Props) => {
 
     }, [props.numberOfPeople])
 
-    const handleSubmit = (e:FormEvent) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
         props.closeNewOrder()
     }
@@ -62,7 +62,8 @@ const NewOrder = (props: Props) => {
             onSubmit={handleSubmit}
         >
             <h1 className={"text-center text-[#013220] text-xl font-inter"}>Commande
-                pour {props.numberOfPeople} - <span className={"text-[#013220] text-xl font-inter italic"}>{props.username}</span></h1>
+                pour {props.numberOfPeople} - <span
+                    className={"text-[#013220] text-xl font-inter italic"}>{props.username}</span></h1>
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Plats - Desserts</Accordion.Header>

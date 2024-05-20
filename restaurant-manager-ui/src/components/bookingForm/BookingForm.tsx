@@ -99,21 +99,21 @@ const BookingForm = () => {
 
     return (
         <section className={"flex-1 h-full flex flex-col items-center"}>
-            <h1 className={"text-2xl font-inter italic mt-5"}>Réserver une table</h1>
+            <h1 className={"text-2xl font-inter italic mt-4"}>Réserver une table</h1>
             {!success ? (
                 <form
-                    className={"w-[70%] h-full flex flex-col items-center mt-5"}
+                    className={"w-[55%] h-auto flex flex-col items-center"}
                     noValidate
                     onSubmit={handleSubmit}
                 >
-                    <div className={"w-[40%] flex items center justify-between"}>
+                    <div className={"w-full flex items-center justify-between"}>
                         <div className={"input-group mt-5 flex flex-col items-center"}>
                             <label htmlFor="date" className={!errorDate ? "self-start block" : "self-start block text-red-500"}>{!errorDate ? "Date" : errorDate}</label>
                             <input
                                 type="date"
                                 id="date"
                                 required
-                                className={"w-full h-10 px-3 border border-[#008080]"}
+                                className={"w-[70%] h-10 px-3 border border-[#008080]"}
                                 value={date}
                                 onChange={(e) => {
                                     setDate(e.target.value)
@@ -121,8 +121,9 @@ const BookingForm = () => {
                                 onBlur={validateDate}
                             />
                         </div>
-                        <div className={"input-group mt-12"}>
+                        <div className={"input-group mt-[73px]"}>
                             <select
+                                className={"h-10"}
                                 onChange={(e) => {
                                 setHour(e.target.value)}}
                             >
