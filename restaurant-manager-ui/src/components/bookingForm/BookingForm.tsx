@@ -166,7 +166,7 @@ const BookingForm = () => {
                         <input
                             type="number"
                             min="1"
-                            max="10"
+                            max="6"
                             id="numberOfPeople"
                             required
                             className={"w-full h-10 text-start pl-3 border border-[#008080]"}

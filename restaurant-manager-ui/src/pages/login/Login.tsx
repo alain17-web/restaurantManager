@@ -61,7 +61,7 @@ const Login = () => {
 
     useEffect(() => {
         setAllFieldsValid(
-            username !== "" && /^[A-Za-z]{4,25}$/.test(username) &&
+            username !== "" && /^[A-Za-z]{3,25}$/.test(username) &&
             password !== "" && /^[A-Za-z]{4,25}$/.test(password)
         )
     },[username, password])
@@ -90,6 +90,8 @@ const Login = () => {
             setError(true)
         }
     }
+
+    console.log(waitersArray)
 
     return (
         <section

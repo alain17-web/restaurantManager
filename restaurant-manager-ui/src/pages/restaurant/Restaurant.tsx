@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom"
 import {useEffect, useState} from "react";
 import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
 import NewOrder from "../../components/newOrder/NewOrder.tsx";
+import Avatar from "../../components/avatar/Avatar.tsx";
 
 
 const Restaurant = () => {
@@ -27,8 +28,12 @@ const Restaurant = () => {
     }
 
     const handleNewOrder = () => {
-        setNumberOfPeople(Math.floor(Math.random() * 11)+1)
+        setNumberOfPeople(Math.floor(Math.random() * 6)+1)
         setShowNewOrder(true);
+    }
+
+    const closeNewOrder = () => {
+        setShowNewOrder(false)
     }
 
     return (
@@ -73,6 +78,7 @@ const Restaurant = () => {
                     {showNewOrder === false ? (
                         <>
                             <TimeDisplay />
+                            <Avatar username={username}/>
                             <h2 className={"text-center text-white text-2xl font-inter italic"}>Bienvenue {username}</h2>
                             <button
                                 className={"w-[50%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
@@ -82,7 +88,7 @@ const Restaurant = () => {
                             </button>
                         </>
                     ) : (
-                        <NewOrder numberOfPeople={numberOfPeople}/>
+                        <NewOrder numberOfPeople={numberOfPeople} username={username} closeNewOrder={closeNewOrder}/>
                     )}
                     <div className={"w-auto flex items-center justify-end gap-3 px-4"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
