@@ -22,6 +22,8 @@ const NewOrder = (props: Props) => {
     const [coldDrinks, setColdDrinks] = useState<Item[]>([])
     const [warmDrinks, setWarmDrinks] = useState<Item[]>([])
 
+    const [total, setTotal] = useState<number>(0)
+
     useEffect(() => {
         const mainCoursesArray: Item[] = []
         const dessertsArray: Item[] = []
@@ -44,10 +46,23 @@ const NewOrder = (props: Props) => {
             }
         })
 
-        setMainCourses(getRandomItems(mainCoursesArray, props.numberOfPeople))
-        setDesserts(getRandomItems(dessertsArray, props.numberOfPeople))
-        setColdDrinks(getRandomItems(coldDrinksArray, props.numberOfPeople))
-        setWarmDrinks(getRandomItems(warmDrinksArray, props.numberOfPeople))
+        const selectedMainCourses = getRandomItems(mainCoursesArray, props.numberOfPeople)
+        const selectedDesserts = getRandomItems(dessertsArray, props.numberOfPeople)
+        const selectedColdDrinks = getRandomItems(coldDrinksArray, props.numberOfPeople)
+        const selectedWarmDrinks = getRandomItems(warmDrinksArray, props.numberOfPeople)
+
+        setMainCourses(selectedMainCourses)
+        setDesserts(selectedDesserts)
+        setColdDrinks(selectedColdDrinks)
+        setWarmDrinks(selectedWarmDrinks)
+
+        const totalCourses = selectedMainCourses.reduce((acc, item) => acc + item.price, 0)
+        const totalDesserts = selectedDesserts.reduce((acc, item) => acc + item.price, 0)
+        const totalColds = selectedColdDrinks.reduce((acc, item) => acc + item.price, 0)
+        const totalWarms = selectedWarmDrinks.reduce((acc, item) => acc + item.price, 0)
+
+        const totalAmount = totalCourses + totalDesserts + totalColds + totalWarms
+        setTotal(parseFloat(totalAmount.toFixed(2)))
 
     }, [props.numberOfPeople])
 
@@ -63,7 +78,7 @@ const NewOrder = (props: Props) => {
         >
             <h1 className={"text-center text-[#013220] text-xl font-inter"}>Commande
                 pour {props.numberOfPeople} - <span
-                    className={"text-[#013220] text-xl font-inter italic"}>{props.username}</span></h1>
+                    className={"text-[#013220] text-xl font-inter italic"}>{props.username} </span> - {total}€</h1>
             <Accordion defaultActiveKey="0">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Plats - Desserts</Accordion.Header>
@@ -80,9 +95,9 @@ const NewOrder = (props: Props) => {
                         <div className={"w-full"}>
                             <h2 className={"text-lg text-center font-inter underline"}>Desserts</h2>
                             <ul>
-                                {desserts.map((course, index) => (
+                                {desserts.map((dessert, index) => (
                                     <li className={"text-base text-center font-inter"}
-                                        key={index}>{course.name} - {course.price} €</li>
+                                        key={index}>{dessert.name} - {dessert.price} €</li>
                                 ))}
                             </ul>
                         </div>
@@ -94,16 +109,16 @@ const NewOrder = (props: Props) => {
                         <div className={"w-full"}>
                             <h2 className={"text-lg text-center font-inter underline"}>Boissons froides</h2>
                             <ul>
-                                {coldDrinks.map((course, index) => (
+                                {coldDrinks.map((cold, index) => (
                                     <li className={"text-base text-center font-inter"}
-                                        key={index}>{course.name} - {course.price} €</li>
+                                        key={index}>{cold.name} - {cold.price} €</li>
                                 ))}
                             </ul>
                             <h2 className={"text-lg text-center font-inter underline"}>Boissons chaudes</h2>
                             <ul>
-                                {warmDrinks.map((course, index) => (
+                                {warmDrinks.map((warm, index) => (
                                     <li className={"text-lg text-center font-inter"}
-                                        key={index}>{course.name} - {course.price} €</li>
+                                        key={index}>{warm.name} - {warm.price} €</li>
                                 ))}
                             </ul>
                         </div>
