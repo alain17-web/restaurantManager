@@ -1,11 +1,16 @@
-import {Link} from "react-router-dom"
+//import {Link} from "react-router-dom"
+import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 
 const Dashboard = () => {
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <Link to={"/connexion"}>Back to Login</Link>
-        </div>
+        <section className={"flex"}>
+            <DashboardSidebar/>
+            {/*<Link to={"/connexion"}>Back to Login</Link>*/}
+            <div className={"flex-[6]"}>
+                <DashboardNavbar/>
+            </div>
+        </section>
     );
 };
 export default Dashboard;

@@ -72,6 +72,7 @@ const Login = () => {
         validateUsername()
         validatePassword()
         if(adminsArray.includes(username.toLowerCase()) && adminsArray.includes(password.toLowerCase())){
+            localStorage.setItem("username",username)
             navigate("/dashboard");
         } else {
             setError(true)
