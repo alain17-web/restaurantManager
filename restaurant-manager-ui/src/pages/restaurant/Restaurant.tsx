@@ -5,6 +5,7 @@ import NewOrder from "../../components/newOrder/NewOrder.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
 
 
+
 const Restaurant = () => {
 
     const navigate = useNavigate()
@@ -22,10 +23,10 @@ const Restaurant = () => {
         }
     }, [])
 
-    const handleLogout = () => {
-        localStorage.removeItem("username")
+     const handleLogout = () => {
+         localStorage.removeItem("username")
         navigate("/connexion");
-    }
+     }
 
     const handleNewOrder = () => {
         setNumberOfPeople(Math.floor(Math.random() * 6)+1)

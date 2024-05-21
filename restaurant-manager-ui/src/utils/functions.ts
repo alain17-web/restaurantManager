@@ -1,3 +1,6 @@
+
+
+//get random dishes and drinks for NewOrder
 export const getRandomItems = <T>(arr: T[], num: number): T[] => {
     if (arr.length === 0 || num <= 0) {
         return [];
@@ -23,3 +26,5 @@ export const getRandomItems = <T>(arr: T[], num: number): T[] => {
         return result;
     }
 };
+
+

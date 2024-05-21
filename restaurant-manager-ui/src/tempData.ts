@@ -225,7 +225,7 @@ export const dishes = [
     },
     {
         id:26,
-        name:"Chhyabat achta",
+        name:"Chyabat achta",
         desc:"Chausson croustillant farci au fromage frais, sirop de miel à la fleur d’oranger et brisure de pistaches",
         img:"./img/chaayabat.jpg",
         price:3.5,
@@ -348,3 +348,4 @@ export const users = [
         role:"cook",
     },
 ]
+

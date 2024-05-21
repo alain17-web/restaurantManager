@@ -100,7 +100,7 @@ const Login = () => {
             <header className={"pl-10 pt-10"}>
                 <Link to={"/"} className={"w-24 flex justify-start items-center"}>
                     <Logo/>
-                    <p className={"font-inter text-center text-[#013220] hover:text-[#6B8E23] hover:underline text-base italic mt-12"}>Accueil</p>
+                    <p className={"font-inter text-center text-[#013220] hover:text-[#6B8E23] hover:underline text-base italic mt-12 ml-4"}>Accueil</p>
                 </Link>
             <h3 className={"text-5xl text-[#013220] text-center font-inter font-medium italic mt-12"}>La Branche d'Olivier</h3>
                 {error && <p className={"text-red-500 text-xl text-center font-inter mt-5"}>Identifiant ou mot de passe incorrect</p>}
