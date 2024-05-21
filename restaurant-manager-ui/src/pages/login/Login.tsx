@@ -85,6 +85,7 @@ const Login = () => {
         }
 
         if(cooksArray.includes(username.toLowerCase()) && cooksArray.includes(password.toLowerCase())){
+            localStorage.setItem("username",username)
             navigate("/kitchen");
         } else {
             setError(true)
