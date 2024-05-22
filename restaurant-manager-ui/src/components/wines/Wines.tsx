@@ -3,7 +3,7 @@ import {drinks} from "../../tempData.ts";
 const Wines = () => {
     return (
         <>
-            <p className={"mt-5 text-2xl font-inter italic font-semibold"}>Les Vins:</p>
+            <p className={"mt-3 text-2xl font-inter italic font-semibold"}>Les Vins:</p>
             {drinks.map((drink) => (
                 <div key={drink.idDrink} className={"flex items-center"}>
                     {drink.cat === "Vins" && (

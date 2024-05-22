@@ -24,7 +24,7 @@ const MenuSidebar = (props:Props) => {
             <h1 className={"text-2xl font-inter underline"}>Les plats</h1>
             {categories.map(cat => (
                 <Link
-                    className={props.selectedItem === cat ? "font-inter font-semibold italic text-amber-100 underline text-2xl mt-5" : "font-inter font-semibold italic text-[#013220] text-2xl mt-5"}
+                    className={props.selectedItem === cat ? "font-inter font-semibold italic text-amber-100 underline text-xl mt-3" : "font-inter font-semibold italic text-[#013220] text-xl mt-3"}
                     key={cat}
                     onClick={() =>handleClick(cat)}
                 >

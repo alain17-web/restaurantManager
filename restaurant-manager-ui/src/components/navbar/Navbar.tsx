@@ -13,7 +13,7 @@ const Navbar = (props:Props) => {
 
             <Link to={"/"} className={"w-auto h-32 flex items-center justify-between"}>
                 <Logo/>
-                <h3 className={!props.isOnAbout ? "font-inter text-[#013220] text-xl italic ml-5" : "font-inter text-amber-100 text-xl italic ml-5"}>La Branche d'Oliver</h3>
+                <h3 className={!props.isOnAbout ? "font-inter decoration-0 text-[#013220] text-xl italic ml-5" : "font-inter text-amber-100 text-xl italic ml-5"}>La Branche d'Oliver</h3>
             </Link>
             <p className={!props.isOnAbout ? "text-base text-[#013220] font-inter italic" : "text-base text-amber-100 font-inter italic"}>Ouvert tous les jours de midi à 22h30</p>
             <p className={!props.isOnAbout ? "text-base text-[#013220] font-inter italic" : "text-base text-amber-100 font-inter italic"}>012/345 67 89 - 18 AV Jean Mermoz, Charleroi</p>

@@ -5,6 +5,7 @@ interface Props {
     dishImg: string,
     dishDesc: string
     dishPrice: number
+    dishAllerg?: string
     closePopup:() => void
 }
 
@@ -26,6 +27,7 @@ const DishPopup = (props:Props) => {
             <article className={"flex flex-col items-center justify-center w-full gap-5 my-5"}>
                 <img src={props.dishImg} alt={props.dishName}/>
                 <p className={"text-[#ffffffde]  text-xl font-inter italic px-3"}>{props.dishDesc}</p>
+                <p className={"text-[#ffffffde]  text-xl font-inter italic px-3"}>{props.dishAllerg ? `Allergènes: ${props.dishAllerg}`: ""}</p>
             </article>
         </section>
     );
