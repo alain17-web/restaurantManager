@@ -11,3 +11,8 @@ body, html {
 *, *::before, *::after {
     box-sizing: border-box;
 }
+
+/* Custom shadow class for Widget */
+.custom-shadow {
+    box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+}
