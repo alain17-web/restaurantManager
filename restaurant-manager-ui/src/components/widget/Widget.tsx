@@ -12,7 +12,7 @@ type Data = {
 
 const Widget = (props: Props) => {
 
-    let data: Data
+    let data: Data = { title: "", link: "" };
 
 
     switch (props.type) {
@@ -41,8 +41,6 @@ const Widget = (props: Props) => {
         default:
             break;
     }
-
-
 
     return (
         <div className={"flex justify-between flex-1 h-[100px] p-[10px] custom-shadow rounded-[10px]"}>

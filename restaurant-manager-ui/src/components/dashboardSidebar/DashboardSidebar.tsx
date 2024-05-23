@@ -69,7 +69,7 @@ const DashboardSidebar = () => {
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>MENU</p>
                     <NavLink
                         //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={'/dishes'}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -83,8 +83,7 @@ const DashboardSidebar = () => {
                         </li>
                     </NavLink>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -99,8 +98,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>COMMANDES</p>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -114,8 +112,7 @@ const DashboardSidebar = () => {
                         </li>
                     </NavLink>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -130,8 +127,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>STOCK</p>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -145,8 +141,7 @@ const DashboardSidebar = () => {
                         </li>
                     </NavLink>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -161,8 +156,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>RESERVATIONS</p>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -176,8 +170,7 @@ const DashboardSidebar = () => {
                         </li>
                     </NavLink>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -192,8 +185,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>FINANCES</p>
                     <NavLink
-                        //to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        to={'#'}
+                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,

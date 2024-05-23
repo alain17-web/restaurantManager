@@ -6,6 +6,7 @@ import Login from "./pages/login/Login.tsx";
 import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import Restaurant from "./pages/restaurant/Restaurant.tsx";
 import Kitchen from "./pages/kitchen/Kitchen.tsx";
+import Dishes from "./pages/dishes/Dishes.tsx";
 
 function App() {
 
@@ -37,6 +38,10 @@ function App() {
         {
             path: "/kitchen",
             element: <Kitchen />
+        },
+        {
+            path: "/dishes",
+            element: <Dishes />
         },
 
 
