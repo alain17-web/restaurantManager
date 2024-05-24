@@ -39,7 +39,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>STAFF</p>
                     <NavLink
-                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
+                        to={"/listActive"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,

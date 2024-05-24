@@ -1,28 +1,28 @@
-import { drinks as drinkData} from "../../tempData.ts";
-import {drinksColumns} from "../../dataTable.ts";
+import {employees as employeeData} from "../../tempData.ts";
+import {employeeColumns} from "../../dataTable.ts";
 import {DataGrid} from "@mui/x-data-grid";
-import {useState,useEffect} from "react"
+import {useState, useEffect} from "react"
 
-interface Drink {
-    id: number;
-    name: string;
-    price: number;
-    cat: string;
-    cost: number;
-    min: number;
+interface Employee {
+    id: number
+    username: string;
+    password: string;
+    email: string;
+    tel: string;
+    role: string;
+    status: string;
 }
 
+const DataTableActive = () => {
 
-const DataTableDrinks = () => {
-
-    const [drinks, setDrinks] = useState<Drink[]>([])
+    const [employees, setEmployees] = useState<Employee[]>([])
 
     useEffect(() => {
-        getDrinks()
-    }, [])
+        getEmployees()
+    }, []);
 
-    const getDrinks = () => {
-        setDrinks(drinkData);
+    const getEmployees = () => {
+        setEmployees(employeeData)
     }
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
@@ -36,8 +36,8 @@ const DataTableDrinks = () => {
                 </button>
             </div>
             <DataGrid
-                rows={drinks}
-                columns={drinksColumns}
+                rows={employees}
+                columns={employeeColumns}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
                 pageSizeOptions={[10]}
@@ -45,5 +45,4 @@ const DataTableDrinks = () => {
         </div>
     );
 };
-export default DataTableDrinks;
-
+export default DataTableActive;

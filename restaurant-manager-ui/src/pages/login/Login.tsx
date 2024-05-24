@@ -1,7 +1,7 @@
 import Logo from "../../components/logo/Logo.tsx";
 import {Link,useNavigate} from "react-router-dom"
 import {useEffect, useState} from "react";
-import {users} from '../../tempData.ts'
+import {employees} from '../../tempData.ts'
 
 const Login = () => {
 
@@ -12,17 +12,16 @@ const Login = () => {
     const cooksArray:string[] = []
 
 
-        users.map((user) => {
-            if(user.role === "admin"){
-                adminsArray.push(user.username,user.password)
+        employees.map((employee) => {
+            if(employee.role === "admin"){
+                adminsArray.push(employee.username,employee.password)
             }
-            if(user.role === "waiter"){
-                waitersArray.push(user.username,user.password)
+            if(employee.role === "waiter"){
+                waitersArray.push(employee.username,employee.password)
             }
-            if(user.role === "cook"){
-                cooksArray.push(user.username,user.password)
+            if(employee.role === "cook"){
+                cooksArray.push(employee.username,employee.password)
             }
-
         })
 
 

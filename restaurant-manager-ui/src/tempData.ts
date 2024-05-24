@@ -371,60 +371,76 @@ export const drinks = [
 ]
 
 //username must be unique
-export const users = [
+export const employees = [
     {
-        idUser:1,
+        id:1,
         username:"alain",
         password:"admin",
+        email:"alain@gmail.com",
+        tel:"0470/346523",
         role:"admin",
         status:"actif"
     },
     {
-        idUser:2,
+        id:2,
         username:"helene",
         password:"waiter",
+        email:"helene@gmail.com",
+        tel:"0460/346524",
         role:"waiter",
         status:"actif"
     },
     {
-        idUser:3,
+        id:3,
         username:"lea",
         password:"waiter",
+        email:"lea@gmail.com",
+        tel:"0471/345533",
         role:"waiter",
         status:"actif"
     },
     {
-        idUser:4,
+        id:4,
         username:"liam",
         password:"waiter",
+        email:"liam@gmail.com",
+        tel:"0430/386921",
         role:"waiter",
         status:"actif"
     },
     {
-        idUser:5,
+        id:5,
         username:"basile",
         password:"cook",
+        email:"basile@gmail.com",
+        tel:"0476/256576",
         role:"cook",
         status:"actif"
     },
     {
-        idUser:6,
+        id:6,
         username:"arnaud",
         password:"cook",
+        email:"arnau@gmail.com",
+        tel:"0475/344526",
         role:"cook",
         status:"actif"
     },
     {
-        idUser:7,
+        id:7,
         username:"julie",
         password:"cook",
+        email:"julie@gmail.com",
+        tel:"0453/846523",
         role:"cook",
         status:"actif"
     },
     {
-        idUser:8,
+        id:8,
         username:"alicia",
         password:"cook",
+        email:"alicia@gmail.com",
+        tel:"0483/347223",
         role:"cook",
         status:"actif"
     },

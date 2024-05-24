@@ -67,3 +67,30 @@ export const drinksColumns=[
         width: 180,
     },
 ]
+
+export const employeeColumns=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 120
+    },
+    {
+        field: "username",
+        headerName: "identifiant",
+        width: 120
+    },
+    {
+        field: "email",
+        headerName: "email",
+        width: 220
+    },
+    {
+        field: "tel",
+        headerName: "tél",
+        width: 220
+    },{
+        field: "role",
+        headerName: "role",
+        width: 180
+    },
+]
