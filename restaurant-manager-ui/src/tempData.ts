@@ -446,3 +446,50 @@ export const employees = [
     },
 ]
 
+export const formerEmployees = [
+    {
+        id:1,
+        username:"jean-christophe",
+        password:"waiter",
+        email:"jcn@gmail.com",
+        tel:"0470/346525",
+        role:"waiter",
+        status:"actif"
+    },
+    {
+        id:2,
+        username:"maxime",
+        password:"waiter",
+        email:"max@gmail.com",
+        tel:"0440/346524",
+        role:"waiter",
+        status:"inactif"
+    },
+    {
+        id:3,
+        username:"kevser",
+        password:"cook",
+        email:"kevser@gmail.com",
+        tel:"0474/345533",
+        role:"cook",
+        status:"inactif"
+    },
+    {
+        id:4,
+        username:"tim",
+        password:"cook",
+        email:"tim@gmail.com",
+        tel:"0435/386921",
+        role:"cook",
+        status:"inactif"
+    },
+    {
+        id:5,
+        username:"tony",
+        password:"cook",
+        email:"tony@gmail.com",
+        tel:"0476/257576",
+        role:"cook",
+        status:"inactif"
+    },
+]
