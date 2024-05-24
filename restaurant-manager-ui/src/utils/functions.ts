@@ -1,6 +1,6 @@
 
 
-//get random dishes and drinks for NewOrder
+//get random listDishes and drinks for NewOrder
 export const getRandomItems = <T>(arr: T[], num: number): T[] => {
     if (arr.length === 0 || num <= 0) {
         return [];

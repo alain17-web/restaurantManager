@@ -37,8 +37,8 @@ export const dishColumns = [
 
 export const drinksColumns=[
     {
-        field: "idDrink",
-        headerName: "id",
+        field: "id",
+        headerName: "idDrink",
         width: 120,
     },
     {
@@ -47,8 +47,23 @@ export const drinksColumns=[
         width: 220,
     },
     {
+        field: "cat",
+        headerName: "Cat",
+        width: 220,
+    },
+    {
         field: "price",
         headerName: "prix vente",
+        width: 180,
+    },
+    {
+        field: "cost",
+        headerName: "prix achat",
+        width: 180,
+    },
+    {
+        field: "min",
+        headerName: "min",
         width: 180,
     },
 ]

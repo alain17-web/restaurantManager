@@ -11,7 +11,9 @@ interface Dish {
     img: string;
     price: number;
     cat: string;
-    allerg?: string; // Make allerg optional since some dishes don't have it
+    allerg?: string;
+    cost:number;
+    min:number;
 }
 
 const Dishes = () => {

@@ -289,7 +289,7 @@ export const dishes = [
 
 export const drinks = [
     {
-        idDrink:1,
+        id:1,
         name:"Coca,Sprite,Fanta,Ice tea",
         price:1.5,
         cat:"Softs",
@@ -297,7 +297,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:2,
+        id:2,
         name:"Thé à la menthe fraîche",
         price:2,
         cat:"Boissons chaudes",
@@ -305,7 +305,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:3,
+        id:3,
         name:"Thé à la Camomille",
         price:1.7,
         cat:"Boissons chaudes",
@@ -313,7 +313,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:4,
+        id:4,
         name:"Café",
         price:1.6,
         cat:"Boissons chaudes",
@@ -321,7 +321,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:5,
+        id:5,
         name:"Expresso",
         price:1.5,
         cat:"Boissons chaudes",
@@ -329,7 +329,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:6,
+        id:6,
         name:"Château Kefraya - Syrah",
         price:75,
         cat:"Vins",
@@ -337,13 +337,15 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:7,
+        id:7,
         name:"Ksara - Syrah",
         price:36,
-        cat:"Vins"
+        cat:"Vins",
+        cost:2.45,
+        min:10
     },
     {
-        idDrink:8,
+        id:8,
         name:"Château St Thomas",
         price:69,
         cat:"Vins",
@@ -351,7 +353,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:9,
+        id:9,
         name:"Taybeh Blonde",
         price:4.5,
         cat:"Bières",
@@ -359,7 +361,7 @@ export const drinks = [
         min:10
     },
     {
-        idDrink:10,
+        id:10,
         name:"Taybeh Blanche",
         price:4.5,
         cat:"Bières",

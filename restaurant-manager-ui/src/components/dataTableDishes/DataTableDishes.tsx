@@ -11,6 +11,8 @@ interface Dish {
     price: number;
     cat: string;
     allerg?: string;
+    cost:number;
+    min:number;
 }
 
 /*interface Props {
