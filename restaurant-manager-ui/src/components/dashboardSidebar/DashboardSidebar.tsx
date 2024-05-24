@@ -136,7 +136,7 @@ const DashboardSidebar = () => {
                     >
                         <li className={"flex items-center p-1.5 cursor-pointer"}>
                             <img src={'./img/freezer.svg'} width={25} height={25} className={'mr-[10px]'}/>
-                            Stock Frais
+                            Stock Nourriture
                         </li>
                     </NavLink>
                     <NavLink
@@ -155,7 +155,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>RESERVATIONS</p>
                     <NavLink
-                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
+                        to={"/listBookings"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,

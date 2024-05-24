@@ -726,3 +726,54 @@ export const purchases = [
         status:"livrée"
     },
 ]
+
+export const bookings = [
+    {
+        id:1,
+        date:"25/05/2024",
+        hour: "20h30",
+        name:"John Doe",
+        email:"john.doe@gmail.com",
+        numberOfPeople: 4
+    },
+    {
+        id:2,
+        date:"25/05/2024",
+        hour: "20h00",
+        name:"Jane Doe",
+        email:"jane.doe@gmail.com",
+        numberOfPeople: 3
+    },
+    {
+        id:3,
+        date:"25/05/2024",
+        hour: "21h00",
+        name:"Daenarys",
+        email:"daenarys@gmail.com",
+        numberOfPeople: 6
+    },
+    {
+        id:4,
+        date:"25/05/2024",
+        hour: "21h00",
+        name:"Vladimir",
+        email:"vladimir@gmail.com",
+        numberOfPeople: 2
+    },
+    {
+        id:5,
+        date:"25/05/2024",
+        hour: "12h30",
+        name:"Marianne",
+        email:"marianner@gmail.com",
+        numberOfPeople: 6
+    },
+    {
+        id:6,
+        date:"25/05/2024",
+        hour: "13h30",
+        name:"David",
+        email:"davidr@gmail.com",
+        numberOfPeople: 3
+    },
+]

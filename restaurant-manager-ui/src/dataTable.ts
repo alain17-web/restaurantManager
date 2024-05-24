@@ -191,3 +191,36 @@ export const purchaseColumns=[
     },
 
 ]
+
+export const bookingsColumns=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 120
+    },
+    {
+        field: "date",
+        headerName: "date",
+        width: 180
+    },
+    {
+        field: "hour",
+        headerName: "heure",
+        width: 180
+    },
+    {
+        field: "name",
+        headerName: "nom",
+        width: 180
+    },
+    {
+        field: "email",
+        headerName: "email",
+        width: 220
+    },
+    {
+        field: "numberOfPeople",
+        headerName: "pers",
+        width: 120
+    },
+]
