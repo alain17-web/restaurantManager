@@ -123,3 +123,46 @@ export const inactiveColumns=[
         width: 180
     },
 ]
+
+export const ordersColumns = [
+    {
+        field: "id",
+        headerName: "id",
+        width: 120
+    },
+    {
+        field: "date",
+        headerName: "date",
+        width: 180
+    },
+    {
+        field: "by",
+        headerName: "staff",
+        width: 180
+    },
+    {
+        field: "people",
+        headerName: "pers",
+        width: 180
+    },
+    {
+        field: "people",
+        headerName: "pers",
+        width: 180
+    },
+    {
+        field: "checked",
+        headerName: "validée",
+        width: 180
+    },
+    {
+        field: "checkedBy",
+        headerName: "cuisinier",
+        width: 180
+    },
+    {
+        field: "total",
+        headerName: "total €",
+        width: 180
+    },
+]

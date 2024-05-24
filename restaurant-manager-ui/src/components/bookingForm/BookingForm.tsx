@@ -162,7 +162,7 @@ const BookingForm = () => {
                         />
                     </div>
                     <div className={"w-[40%] input-group mt-8 flex flex-col items-center"}>
-                        <label htmlFor="numberOfPeople" className={"self-start block"}>Nombre de pers (10
+                        <label htmlFor="numberOfPeople" className={"self-start block"}>Nombre de pers (6
                             max)</label>
                         <input
                             type="number"
