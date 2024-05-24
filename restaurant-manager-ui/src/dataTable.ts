@@ -140,11 +140,7 @@ export const ordersColumns = [
         headerName: "staff",
         width: 180
     },
-    {
-        field: "people",
-        headerName: "pers",
-        width: 180
-    },
+
     {
         field: "people",
         headerName: "pers",
@@ -165,4 +161,33 @@ export const ordersColumns = [
         headerName: "total €",
         width: 180
     },
+]
+
+export const purchaseColumns=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 120
+    },
+    {
+        field: "date",
+        headerName: "date",
+        width: 180
+    },
+    {
+        field: "by",
+        headerName: "acheteur",
+        width: 180
+    },
+    {
+        field: "cost",
+        headerName: "Coût €",
+        width: 120
+    },
+    {
+        field: "status",
+        headerName: "statut",
+        width: 180
+    },
+
 ]

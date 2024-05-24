@@ -676,3 +676,53 @@ export const orders = [
         total:122,
     },
 ]
+
+export const purchases = [
+    {
+        id:1,
+        date:"20/05/2024",
+        by:"alain",
+        cost:750,
+        status:"en attente"
+    },{
+        id:2,
+        date:"15/05/2024",
+        by:"alain",
+        cost:750,
+        status:"livrée"
+    },{
+        id:3,
+        date:"10/05/2024",
+        by:"alain",
+        cost:700,
+        status:"livrée"
+    },
+    {
+        id:4,
+        date:"05/05/2024",
+        by:"alain",
+        cost:720,
+        status:"livrée"
+    },
+    {
+        id:5,
+        date:"01/05/2024",
+        by:"alain",
+        cost:650,
+        status:"livrée"
+    },
+    {
+        id:6,
+        date:"26/04/2024",
+        by:"alain",
+        cost:750,
+        status:"livrée"
+    },
+    {
+        id:7,
+        date:"20/04/2024",
+        by:"alain",
+        cost:650,
+        status:"livrée"
+    },
+]
