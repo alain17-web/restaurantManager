@@ -8,7 +8,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "Sésame, poids chiches",
         cost:4.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:2,
@@ -19,7 +20,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "",
         cost:4.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:3,
@@ -30,7 +32,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "Sésame, poids chiches",
         cost:4.20,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:4,
@@ -41,7 +44,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "",
         cost:3.88,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:5,
@@ -51,7 +55,8 @@ export const dishes = [
         price:6.50,
         cat:"Mezzes",
         cost:4.55,
-        min:10
+        min:10,
+        stock:20
 
     },
     {
@@ -63,7 +68,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "",
         cost:4.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:7,
@@ -74,7 +80,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "Sésame",
         cost:3.88,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:8,
@@ -85,7 +92,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "La semoule contient du gluten",
         cost:4.20,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:9,
@@ -96,7 +104,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "",
         cost:4.20,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:10,
@@ -107,7 +116,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "Poids chiches",
         cost:0.91,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:11,
@@ -118,7 +128,8 @@ export const dishes = [
         cat:"Mezzes",
         allerg: "",
         cost:4.20,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:12,
@@ -129,7 +140,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "",
         cost:11.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:13,
@@ -140,7 +152,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "",
         cost:11.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:14,
@@ -151,7 +164,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "",
         cost:11.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:15,
@@ -162,7 +176,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "",
         cost:10.85,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:16,
@@ -173,7 +188,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "",
         cost:10.85,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:17,
@@ -184,7 +200,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "",
         cost:16.80,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:18,
@@ -195,7 +212,8 @@ export const dishes = [
         cat:"Grillades",
         allerg: "Sésame, poids chiches",
         cost:12.95,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:19,
@@ -206,7 +224,8 @@ export const dishes = [
         cat:"Assiette froides",
         allerg: "Poids chiches",
         cost:12.25,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:20,
@@ -217,7 +236,8 @@ export const dishes = [
         cat:"Assiette froides",
         allerg: "Poids chiches",
         cost:11.55,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:21,
@@ -228,7 +248,8 @@ export const dishes = [
         cat:"Assiette froides",
         allerg: "Poids chiches",
         cost:10.15,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:22,
@@ -239,7 +260,8 @@ export const dishes = [
         cat:"Assiette froides",
         allerg: "Sésame, poids chiches",
         cost:11.20,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:23,
@@ -250,7 +272,8 @@ export const dishes = [
         cat:"Desserts",
         allerg: "",
         cost:3.15,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:24,
@@ -261,7 +284,8 @@ export const dishes = [
         cat:"Desserts",
         allerg: "Peut contenir des traces de coques de fruits secs",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:25,
@@ -272,7 +296,8 @@ export const dishes = [
         cat:"Desserts",
         allerg: "Gluten et contenir des traces de coques de fruits secs",
         cost:3.15,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:26,
@@ -283,7 +308,8 @@ export const dishes = [
         cat:"Desserts",
         allerg: "Peut contenir des traces de coques de fruits secs",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
 ]
 
@@ -294,7 +320,8 @@ export const drinks = [
         price:1.5,
         cat:"Softs",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:2,
@@ -302,7 +329,8 @@ export const drinks = [
         price:2,
         cat:"Boissons chaudes",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:3,
@@ -310,7 +338,8 @@ export const drinks = [
         price:1.7,
         cat:"Boissons chaudes",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:4,
@@ -318,7 +347,8 @@ export const drinks = [
         price:1.6,
         cat:"Boissons chaudes",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:5,
@@ -326,7 +356,8 @@ export const drinks = [
         price:1.5,
         cat:"Boissons chaudes",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:6,
@@ -334,7 +365,8 @@ export const drinks = [
         price:75,
         cat:"Vins",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:7,
@@ -342,7 +374,8 @@ export const drinks = [
         price:36,
         cat:"Vins",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:8,
@@ -350,7 +383,8 @@ export const drinks = [
         price:69,
         cat:"Vins",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:9,
@@ -358,7 +392,8 @@ export const drinks = [
         price:4.5,
         cat:"Bières",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
     {
         id:10,
@@ -366,7 +401,8 @@ export const drinks = [
         price:4.5,
         cat:"Bières",
         cost:2.45,
-        min:10
+        min:10,
+        stock:20
     },
 ]
 

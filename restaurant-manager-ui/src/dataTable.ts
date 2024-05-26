@@ -224,3 +224,32 @@ export const bookingsColumns=[
         width: 120
     },
 ]
+
+export const stockFoodsColumns=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 120
+    },
+    {
+        field: "name",
+        headerName: "Plat",
+        width: 220,
+    },
+
+    {
+        field: "cat",
+        headerName: "cat",
+        width: 180,
+    },
+    {
+        field: "stock",
+        headerName: "stock",
+        width: 120
+    },
+    {
+        field: "min",
+        headerName: "min",
+        width: 120
+    },
+]
