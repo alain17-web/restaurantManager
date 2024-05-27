@@ -1,4 +1,18 @@
+import {FormEvent, useState} from "react";
+
 const NewEmployee = () => {
+
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [tel, setTel] = useState<string>('');
+    const [role, setRole] = useState<string>('');
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(username, password, email, tel, role);
+    }
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -6,13 +20,19 @@ const NewEmployee = () => {
                     <h1 className={"text-[#808080B2] text-2xl text-center"}>Ajouter un employé</h1>
                 </div>
                 <div className={"custom-shadow p-[10px] m-5"}>
-                    <form className={"w-[40%] flex flex-col mx-auto gap-8"} noValidate>
+                    <form
+                        className={"w-[40%] flex flex-col mx-auto gap-8"}
+                        noValidate
+                        onSubmit={handleSubmit}
+                    >
                         <div className={"w-[75%]"}>
                             <label className={"flex items-center gap-[10px]"}>Identifiant*</label>
                             <input
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
                                 required
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -21,6 +41,8 @@ const NewEmployee = () => {
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"password"}
                                 required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -29,6 +51,8 @@ const NewEmployee = () => {
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"email"}
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -37,6 +61,8 @@ const NewEmployee = () => {
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
                                 required
+                                value={tel}
+                                onChange={(e) => setTel(e.target.value)}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -44,6 +70,8 @@ const NewEmployee = () => {
                             <select
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 required
+                                value={role}
+                                onChange={(e) => setRole(e.target.value)}
                             >
                                 <option>Choisir un rôle</option>
                                 <option>admin</option>

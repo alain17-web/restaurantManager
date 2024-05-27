@@ -1,4 +1,7 @@
-export const dishColumns = [
+import {GridColDef} from "@mui/x-data-grid";
+
+
+export const dishColumns : GridColDef[] = [
 
     {
         field: "id",
@@ -35,7 +38,7 @@ export const dishColumns = [
 
 ];
 
-export const drinksColumns=[
+export const drinksColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "idDrink",
@@ -68,7 +71,7 @@ export const drinksColumns=[
     },
 ]
 
-export const employeeColumns=[
+export const employeeColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "id",
@@ -96,7 +99,7 @@ export const employeeColumns=[
     },
 ]
 
-export const inactiveColumns=[
+export const inactiveColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "id",
@@ -124,7 +127,7 @@ export const inactiveColumns=[
     },
 ]
 
-export const ordersColumns = [
+export const ordersColumns : GridColDef[] = [
     {
         field: "id",
         headerName: "id",
@@ -163,7 +166,7 @@ export const ordersColumns = [
     },
 ]
 
-export const purchaseColumns=[
+export const purchaseColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "id",
@@ -192,7 +195,7 @@ export const purchaseColumns=[
 
 ]
 
-export const bookingsColumns=[
+export const bookingsColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "id",
@@ -225,7 +228,7 @@ export const bookingsColumns=[
     },
 ]
 
-export const stockFoodsColumns=[
+export const stockFoodsColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "id",
