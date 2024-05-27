@@ -12,7 +12,7 @@ body, html {
     box-sizing: border-box;
 }
 
-/* Custom shadow class for Widget */
+/* Custom shadow class for Widget,NewEmployee */
 .custom-shadow {
     box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
 }

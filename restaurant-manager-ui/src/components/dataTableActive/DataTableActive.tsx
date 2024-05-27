@@ -13,7 +13,11 @@ interface Employee {
     status: string;
 }
 
-const DataTableActive = () => {
+interface Props{
+    open:() => void
+}
+
+const DataTableActive = (props:Props) => {
 
     const [employees, setEmployees] = useState<Employee[]>([])
 
@@ -31,7 +35,8 @@ const DataTableActive = () => {
         <div className={"h-[950px] p-4"}>
             <div className={"w-full flex items-center justify-between text-[24px] mb-[10px]"}>
                 <button
-                    className={"no-underline text-green-600 text-xl font-normal bg-[#F0F8FF p-[5px] border-1 border-green-600 rounded-md cursor-pointer"}>
+                    onClick={props.open}
+                    className={"no-underline text-green-600 text-xl font-normal bg-[#F0F8FF] p-[5px] border-1 border-green-600 rounded-md cursor-pointer"}>
                     Ajouter un employé
                 </button>
             </div>
