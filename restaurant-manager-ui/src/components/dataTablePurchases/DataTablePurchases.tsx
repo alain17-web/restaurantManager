@@ -27,12 +27,6 @@ const DataTablePurchases = () => {
 
     return (
         <div className={"h-[950px] p-4"}>
-            <div className={"w-full flex items-center justify-between text-[24px] mb-[10px]"}>
-                <button
-                    className={"no-underline text-green-600 text-xl font-normal bg-[#F0F8FF p-[5px] border-1 border-green-600 rounded-md cursor-pointer"}>
-                    Ajouter un réappro
-                </button>
-            </div>
             <DataGrid
                 rows={purchases}
                 columns={purchaseColumns}

@@ -168,20 +168,6 @@ const DashboardSidebar = () => {
                             Confirmées
                         </li>
                     </NavLink>
-                    <NavLink
-                        to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
-                        className={({isActive}: { isActive: boolean }) =>
-                            classNames('no-underline', {
-                                'text-gray-500': !isActive,
-                                'text-purple-600': isActive,
-                            })
-                        }
-                    >
-                        <li className={"flex items-center p-1.5 cursor-pointer"}>
-                            <img src={'./img/cancel.svg'} width={25} height={25} className={'mr-[10px]'}/>
-                            Annulées - noShow
-                        </li>
-                    </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>FINANCES</p>
                     <NavLink
                         to={location.pathname !== "/dashboard" ? "/dashboard" : "#"}
