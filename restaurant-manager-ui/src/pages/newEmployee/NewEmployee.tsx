@@ -61,12 +61,7 @@ const NewEmployee = () => {
                 </div>
             </div>
         </div>
-        /*username:"liam",
-            password:"waiter",
-            email:"liam@gmail.com",
-            tel:"0430/386921",
-            role:"waiter",
-            status:*/
+
     );
 };
 export default NewEmployee;
