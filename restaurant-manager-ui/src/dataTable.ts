@@ -96,7 +96,7 @@ export const employeeColumns : GridColDef[]=[
         field: "role",
         headerName: "role",
         width: 180
-    },
+    }
 ]
 
 export const inactiveColumns : GridColDef[]=[
