@@ -1,3 +1,7 @@
+
+
+
+
 const NewDish = () => {
     return (
         <div className={"w-full flex"}>

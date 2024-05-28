@@ -17,20 +17,12 @@ interface Dish {
     min:number;
 }
 
+
+
 const Dishes = () => {
 
-    const [open,setOpen] = useState<boolean>(false);
-
-    const show = () => {
-        setOpen(true)
-    }
-
-    const close = () => {
-        setOpen(false);
-    }
-
     const [dishes,setDishes]= useState<Dish[]>([])
-    const [dishId, setDishId] = useState<number>(0)
+
 
     useEffect(() => {
         getDishes();
@@ -40,6 +32,22 @@ const Dishes = () => {
         setDishes(dishData);
     };
 
+    const [dishId, setDishId] = useState<number>(0)
+    const [open,setOpen] = useState<boolean>(false);
+
+    const handleGetDishId = (id: number) => {
+        setDishId(id)
+        setOpen(true);
+    }
+
+    const show = () => {
+        setOpen(true)
+    }
+
+    const close = () => {
+        setOpen(false);
+    }
+
 
     return (
         <div className={"w-full flex"}>
@@ -47,7 +55,7 @@ const Dishes = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Plats et desserts</h1>
-                {!open ? <DataTableDishes open={show}/> : <NewDish />}
+                {!open ? <DataTableDishes getDishId={handleGetDishId} open={show}/> : <NewDish id={dishId} setEmployeeId={setDishId}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button
