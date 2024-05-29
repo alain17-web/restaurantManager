@@ -76,6 +76,24 @@ const NewDish = (props: Props) => {
         }
     }
 
+    const handleCost = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = parseFloat(e.target.value)
+        if(!isNaN(value)){
+            setCost(value)
+        } else {
+            setCost(0)
+        }
+    }
+
+    const handleMin = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = parseFloat(e.target.value)
+        if(!isNaN(value)){
+            setMin(value)
+        } else {
+            setMin(0)
+        }
+    }
+
     return (
     <div className={"w-full flex"}>
         <div className={"flex-[6]"}>
@@ -154,7 +172,7 @@ const NewDish = (props: Props) => {
                             step="0.01"
                             required
                             value={cost}
-                            onChange={(e) => setCost(parseFloat(e.target.value))}
+                            onChange={handleCost}
                         />
                     </div>
                     <div className={"w-[75%]"}>
@@ -164,7 +182,7 @@ const NewDish = (props: Props) => {
                             type={"number"}
                             required
                             value={min}
-                            onChange={(e) => setMin(parseFloat(e.target.value))}
+                            onChange={handleMin}
                         />
                     </div>
                     <button

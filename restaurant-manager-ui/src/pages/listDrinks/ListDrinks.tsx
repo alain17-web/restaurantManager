@@ -1,8 +1,9 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 import DataTableDrinks from "../../components/dataTableDrinks/DataTableDrinks.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import NewDrink from "../newDrink/NewDrink.tsx";
+import {drinks as drinkData} from "../../tempData.ts";
 
 interface Drink {
     id: number;
@@ -15,9 +16,25 @@ interface Drink {
 
 const ListDrinks = () => {
 
+    const [drinks, setDrinks] = useState<Drink[]>([])
+    const [drinkId, setDrinkId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
 
+    useEffect(() => {
+        getDrinks();
+    }, []);
+
+    const getDrinks = () => {
+        setDrinks(drinkData);
+    };
+
+    const handleGetDrinkId = (id: number) => {
+        setDrinkId(id)
+        setOpen(true);
+    }
+
     const show = () => {
+        setDrinkId(null)
         setOpen(true)
     }
 
@@ -31,7 +48,7 @@ const ListDrinks = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Boissons</h1>
-                {!open ? <DataTableDrinks open={show}/> : <NewDrink />}
+                {!open ? <DataTableDrinks getDrinkId={handleGetDrinkId} open={show}/> : <NewDrink id={drinkId} setDrinkId={setDrinkId}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

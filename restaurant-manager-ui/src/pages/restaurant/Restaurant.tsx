@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom"
 import {useEffect, useState} from "react";
 import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
-import NewOrder from "../../components/newOrder/NewOrder.tsx";
+import NewOrder from "../newOrder/NewOrder.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
 
 
