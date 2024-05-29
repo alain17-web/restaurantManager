@@ -1,14 +1,41 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 import DataTableBookings from "../../components/dataTableBookings/DataTableBookings.tsx";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import NewBooking from "../newBooking/NewBooking.tsx";
+import { bookings as bookingData} from "../../tempData.ts";
+
+interface Booking {
+    id: number;
+    date: string;
+    hour: string;
+    name: string;
+    email: string;
+    numberOfPeople: number;
+}
 
 const ListBookings = () => {
 
+    const [bookings, setBookings] = useState<Booking[]>([])
+    const [bookingId, setBookingId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
 
+    useEffect(() => {
+        getBookings();
+    }, []);
+
+    const getBookings = () => {
+        setBookings(bookingData);
+    };
+
+
+    const handleGetBookingId = (id: number) => {
+        setBookingId(id)
+        bookings && setOpen(true);
+    }
+
     const show = () => {
+        setBookingId(null)
         setOpen(true)
     }
 
@@ -22,7 +49,7 @@ const ListBookings = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Réservations</h1>
-                {!open ? <DataTableBookings open={show}/> : <NewBooking/>}
+                {!open ? <DataTableBookings getBookingId={handleGetBookingId} open={show}/> : <NewBooking id={bookingId} setBookingId={setBookingId}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

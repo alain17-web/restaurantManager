@@ -159,6 +159,7 @@ const NewDish = (props: Props) => {
                             className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                             type={"number"}
                             step="0.01"
+                            min="0"
                             required
                             value={price}
                             onChange={handlePrice}
@@ -170,6 +171,7 @@ const NewDish = (props: Props) => {
                             className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                             type={"number"}
                             step="0.01"
+                            min="0"
                             required
                             value={cost}
                             onChange={handleCost}
@@ -180,6 +182,7 @@ const NewDish = (props: Props) => {
                         <input
                             className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                             type={"number"}
+                            min="0"
                             required
                             value={min}
                             onChange={handleMin}
