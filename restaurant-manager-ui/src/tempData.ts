@@ -480,6 +480,7 @@ export const employees = [
         role:"cook",
         status:"actif"
     },
+
 ]
 
 export const formerEmployees = [
@@ -526,6 +527,15 @@ export const formerEmployees = [
         email:"tony@gmail.com",
         tel:"0476/257576",
         role:"cook",
+        status:"inactif"
+    },
+    {
+        id:6,
+        username:"lionel",
+        password:"admin",
+        email:"lionel@gmail.com",
+        tel:"0473/263576",
+        role:"admin",
         status:"inactif"
     },
 ]

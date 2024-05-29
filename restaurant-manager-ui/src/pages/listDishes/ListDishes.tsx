@@ -22,6 +22,8 @@ interface Dish {
 const Dishes = () => {
 
     const [dishes,setDishes]= useState<Dish[]>([])
+    const [dishId, setDishId] = useState<number | null>(null)
+    const [open,setOpen] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -32,8 +34,6 @@ const Dishes = () => {
         setDishes(dishData);
     };
 
-    const [dishId, setDishId] = useState<number>(0)
-    const [open,setOpen] = useState<boolean>(false);
 
     const handleGetDishId = (id: number) => {
         setDishId(id)
@@ -41,6 +41,7 @@ const Dishes = () => {
     }
 
     const show = () => {
+        setDishId(null)
         setOpen(true)
     }
 
@@ -48,14 +49,13 @@ const Dishes = () => {
         setOpen(false);
     }
 
-
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Plats et desserts</h1>
-                {!open ? <DataTableDishes getDishId={handleGetDishId} open={show}/> : <NewDish id={dishId} setEmployeeId={setDishId}/>}
+                {!open ? <DataTableDishes getDishId={handleGetDishId} open={show}/> : <NewDish id={dishId} setDishId={setDishId}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

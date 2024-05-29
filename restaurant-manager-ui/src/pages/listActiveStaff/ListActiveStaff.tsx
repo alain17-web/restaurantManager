@@ -6,7 +6,7 @@ import NewEmployee from "../newEmployee/NewEmployee.tsx";
 import {employees as employeeData} from "../../tempData.ts";
 
 interface Employee {
-    id: number
+    id: number | null
     username: string;
     password: string;
     email: string;
@@ -25,6 +25,7 @@ const ListActiveStaff = () => {
 
     const getEmployees = () => {
         setEmployees(employeeData)
+
     }
 
     const[employeeId, setEmployeeId] = useState<number>(0);
@@ -32,16 +33,19 @@ const ListActiveStaff = () => {
 
     const handleGetEmployeeId = (id: number) => {
         setEmployeeId(id)
-        setOpen(true);
+        employees && setOpen(true);
     }
 
     const show = () => {
+        setEmployeeId(null)
         setOpen(true)
     }
 
     const close = () => {
         setOpen(false);
     }
+
+
 
     return (
         <div className={"w-full flex"}>

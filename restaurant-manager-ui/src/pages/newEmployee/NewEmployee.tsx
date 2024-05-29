@@ -2,7 +2,7 @@ import {FormEvent, useEffect, useState} from "react";
 import {employees} from "../../tempData.ts";
 
 interface Props {
-    id: number
+    id: number | null
     setEmployeeId: (id: number) => void
 }
 
@@ -20,21 +20,27 @@ const NewEmployee = (props: Props) => {
 
     const [add, setAdd] = useState<boolean>(true)
 
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (username === "" || password === "" || email === "" || tel === "" || role === "" || status === "") {
-            setMessage("Tous les champs sont obligatoires")
-            console.log(username, password, email, tel, role);
-        } else {
-            setSuccess(true)
-            console.log(username, password, email, tel, role, status);
-            setMessage("L'employé a bien été créé")
+    useEffect(() => {
+        if (props.id !== 0 && props.id !== undefined) {
+            handleEdit()
+        }else{
+            resetForm()
         }
+    }, [props.id]);
+
+    const resetForm = () => {
+        setAdd(true)
+        setUsername("")
+        setPassword("")
+        setRole("")
+        setEmail("")
+        setTel("")
+        setStatus("")
+        setMessage("")
+        setSuccess(false)
     }
 
     const handleEdit = () => {
-
         setMessage("")
         employees.map((employee) => {
             if (props.id === employee.id) {
@@ -50,13 +56,16 @@ const NewEmployee = (props: Props) => {
         })
     }
 
-
-    useEffect(() => {
-        if (props.id !== 0 && props.id !== undefined) {
-            handleEdit()
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (username === "" || password === "" || email === "" || tel === "" || role === "" || status === "") {
+            setMessage("Tous les champs sont obligatoires")
+            console.log(username, password, email, tel, role,status)
+        } else {
+            setSuccess(true)
+            setMessage(add ? "L'employé a bien été créé" : "Les modifications sont enregistrées")
         }
-    }, [props.id]);
-
+    }
 
     return (
         <div className={"w-full flex"}>
