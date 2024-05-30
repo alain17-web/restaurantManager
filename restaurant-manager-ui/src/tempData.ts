@@ -316,7 +316,7 @@ export const dishes = [
 export const drinks = [
     {
         id:1,
-        name:"Coca,Sprite,Fanta,Ice tea",
+        name:"Coca cola",
         price:1.5,
         cat:"Softs",
         cost:2.45,
@@ -325,42 +325,52 @@ export const drinks = [
     },
     {
         id:2,
-        name:"Thé à la menthe fraîche",
-        price:2,
-        cat:"Boissons chaudes",
+        name:"Sprite",
+        price:1.5,
+        cat:"Softs",
         cost:2.45,
         min:10,
         stock:20
     },
     {
         id:3,
-        name:"Thé à la Camomille",
-        price:1.7,
-        cat:"Boissons chaudes",
+        name:"Ice Tea",
+        price:1.5,
+        cat:"Softs",
         cost:2.45,
         min:10,
         stock:20
     },
     {
         id:4,
-        name:"Café",
-        price:1.6,
-        cat:"Boissons chaudes",
+        name:"Fanta",
+        price:1.5,
+        cat:"Softs",
         cost:2.45,
         min:10,
         stock:20
     },
     {
         id:5,
-        name:"Expresso",
+        name:"Schwepps tonic",
         price:1.5,
-        cat:"Boissons chaudes",
+        cat:"Softs",
         cost:2.45,
         min:10,
         stock:20
     },
     {
         id:6,
+        name:"Ayran",
+        price:1.5,
+        cat:"Softs",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+
+    {
+        id:7,
         name:"Château Kefraya - Syrah",
         price:75,
         cat:"Vins",
@@ -369,7 +379,16 @@ export const drinks = [
         stock:20
     },
     {
-        id:7,
+        id:8,
+        name:"Chardonnay",
+        price:75,
+        cat:"Vins",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:9,
         name:"Ksara - Syrah",
         price:36,
         cat:"Vins",
@@ -378,7 +397,7 @@ export const drinks = [
         stock:20
     },
     {
-        id:8,
+        id:10,
         name:"Château St Thomas",
         price:69,
         cat:"Vins",
@@ -387,7 +406,34 @@ export const drinks = [
         stock:20
     },
     {
-        id:9,
+        id:11,
+        name:"Château St Emilion",
+        price:84,
+        cat:"Vins",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:12,
+        name:"Château Latroun",
+        price:60,
+        cat:"Vins",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:13,
+        name:"Cabernet Sauvignon",
+        price:64,
+        cat:"Vins",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:14,
         name:"Taybeh Blonde",
         price:4.5,
         cat:"Bières",
@@ -396,10 +442,118 @@ export const drinks = [
         stock:20
     },
     {
-        id:10,
+        id:15,
         name:"Taybeh Blanche",
         price:4.5,
         cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:17,
+        name:"Taybeh Brune",
+        price:4.5,
+        cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:18,
+        name:"Leffe Blonde",
+        price:4.5,
+        cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:19,
+        name:"Rodenbach",
+        price:4.5,
+        cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:20,
+        name:"Stella Artois",
+        price:4.5,
+        cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:21,
+        name:"Jupiler",
+        price:4.5,
+        cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:22,
+        name:"Jupiler sans alcool",
+        price:4.5,
+        cat:"Bières",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:23,
+        name:"Thé à la menthe fraîche",
+        price:2,
+        cat:"Boissons chaudes",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:24,
+        name:"Thé à la Camomille",
+        price:1.7,
+        cat:"Boissons chaudes",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:25,
+        name:"Café",
+        price:1.6,
+        cat:"Boissons chaudes",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:26,
+        name:"Expresso",
+        price:1.5,
+        cat:"Boissons chaudes",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:27,
+        name:"Cappucino",
+        price:1.5,
+        cat:"Boissons chaudes",
+        cost:2.45,
+        min:10,
+        stock:20
+    },
+    {
+        id:28,
+        name:"Ristreto",
+        price:1.5,
+        cat:"Boissons chaudes",
         cost:2.45,
         min:10,
         stock:20
