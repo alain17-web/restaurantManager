@@ -8,9 +8,8 @@ export const Home = () => {
             <div className={"w-[80%] mt-5 flex justify-end"}>
                 <BookButton/>
             </div>
-            <h1 className={"font-inter text-6xl text-white text-center font-semibold italic pt-[20%]"}>La Branche d'Olivier</h1>
+            <h1 className={"font-inter text-6xl text-white text-center font-semibold italic pt-[10%] mb-12"}>La Branche d'Olivier</h1>
             <MenuButton/>
         </section>
-
     );
 };
