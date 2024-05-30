@@ -2,16 +2,8 @@ import {orders as orderData} from "../../tempData.ts";
 import {ordersColumns} from "../../dataTable.ts";
 import {DataGrid} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
+import { Order} from "../../types/types.ts";
 
-interface Order {
-    id:number
-    date:string
-    by:string
-    people:number
-    checked:boolean
-    checkedBy:string
-    total:number
-}
 
 const DataTableOrders = () => {
 

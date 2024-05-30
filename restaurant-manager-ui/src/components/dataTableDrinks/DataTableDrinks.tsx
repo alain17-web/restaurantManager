@@ -2,15 +2,8 @@ import { drinks as drinkData} from "../../tempData.ts";
 import {drinksColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState,useEffect} from "react"
+import {Drink} from "../../types/types.ts";
 
-interface Drink {
-    id: number;
-    name: string;
-    price: number;
-    cat: string;
-    cost: number;
-    min: number;
-}
 
 interface Props{
     open:() => void

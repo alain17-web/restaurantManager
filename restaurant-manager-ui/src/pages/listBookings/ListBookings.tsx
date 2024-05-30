@@ -4,19 +4,12 @@ import DataTableBookings from "../../components/dataTableBookings/DataTableBooki
 import {useState,useEffect} from "react";
 import NewBooking from "../newBooking/NewBooking.tsx";
 import { bookings as bookingData} from "../../tempData.ts";
+import {Booking} from "../../types/types.ts";
 
-interface Booking {
-    id: number;
-    date: string;
-    hour: string;
-    name: string;
-    email: string;
-    numberOfPeople: number;
-}
 
 const ListBookings = () => {
 
-    const [bookings, setBookings] = useState<Booking[]>([])
+    const [_bookings, setBookings] = useState<Booking[]>([])
     const [bookingId, setBookingId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
 
@@ -31,7 +24,7 @@ const ListBookings = () => {
 
     const handleGetBookingId = (id: number) => {
         setBookingId(id)
-        bookings && setOpen(true);
+        setOpen(true);
     }
 
     const show = () => {

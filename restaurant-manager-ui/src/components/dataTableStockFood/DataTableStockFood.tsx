@@ -2,14 +2,8 @@ import {dishes as dishesData} from "../../tempData.ts";
 import {stockFoodsColumns} from "../../dataTable.ts";
 import {DataGrid} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
+import { Food} from "../../types/types.ts";
 
-interface Food {
-    id: number;
-    name: string;
-    cat:string;
-    stock:number;
-    min:number;
-}
 
 const DataTableStockFood = () => {
 

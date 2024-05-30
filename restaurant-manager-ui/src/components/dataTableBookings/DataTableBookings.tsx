@@ -2,15 +2,8 @@ import { bookings as bookingData} from "../../tempData.ts";
 import {bookingsColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
+import {Booking} from "../../types/types.ts";
 
-interface Booking {
-    id:number
-    date:string
-    hour: string
-    name:string
-    email:string
-    numberOfPeople: number
-}
 
 interface Props{
     open:() => void

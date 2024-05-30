@@ -4,24 +4,12 @@ import DataTableDishes from "../../components/dataTableDishes/DataTableDishes.ts
 import {dishes as dishData} from "../../tempData.ts";
 import {useState,useEffect} from "react";
 import NewDish from "../newDish/NewDish.tsx";
-
-interface Dish {
-    id: number;
-    name: string;
-    desc: string;
-    img: string;
-    price: number;
-    cat: string;
-    allerg?: string;
-    cost:number;
-    min:number;
-}
-
+import {Dish} from "../../types/types.ts";
 
 
 const Dishes = () => {
 
-    const [dishes,setDishes]= useState<Dish[]>([])
+    const [_dishes,setDishes]= useState<Dish[]>([])
     const [dishId, setDishId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
 

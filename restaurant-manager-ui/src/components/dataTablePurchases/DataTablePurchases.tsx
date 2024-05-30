@@ -2,14 +2,8 @@ import {purchases as purchaseData} from "../../tempData.ts";
 import {purchaseColumns} from "../../dataTable.ts";
 import {DataGrid} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
+import { Purchase } from "../../types/types.ts";
 
-interface Purchase {
-    id:number
-    date:string
-    by:string
-    cost:number
-    status:string
-}
 
 const DataTablePurchases = () => {
 

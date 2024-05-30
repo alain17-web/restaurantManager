@@ -1,13 +1,6 @@
 import Logo from "../logo/Logo.tsx";
+import {Props} from "../../types/types.ts"
 
-interface Props {
-    dishName: string,
-    dishImg: string,
-    dishDesc: string
-    dishPrice: number
-    dishAllerg?: string
-    closePopup:() => void
-}
 
 
 const DishPopup = (props:Props) => {

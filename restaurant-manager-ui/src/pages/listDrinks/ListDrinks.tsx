@@ -4,19 +4,12 @@ import DataTableDrinks from "../../components/dataTableDrinks/DataTableDrinks.ts
 import {useEffect, useState} from "react";
 import NewDrink from "../newDrink/NewDrink.tsx";
 import {drinks as drinkData} from "../../tempData.ts";
+import {Drink} from "../../types/types.ts";
 
-interface Drink {
-    id: number;
-    name: string;
-    price: number;
-    cat: string;
-    cost: number;
-    min: number;
-}
 
 const ListDrinks = () => {
 
-    const [drinks, setDrinks] = useState<Drink[]>([])
+    const [_drinks, setDrinks] = useState<Drink[]>([])
     const [drinkId, setDrinkId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
 

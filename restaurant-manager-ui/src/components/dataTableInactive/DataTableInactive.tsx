@@ -2,16 +2,8 @@ import {formerEmployees as formerEmployeeData} from "../../tempData.ts";
 import {inactiveColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
+import {FormerEmployee} from "../../types/types.ts";
 
-interface ExEmployee {
-    id: number
-    username: string;
-    password: string;
-    email: string;
-    tel: string;
-    role: string;
-    status: string;
-}
 
 interface Props{
     open:() => void
@@ -20,7 +12,7 @@ interface Props{
 
 const DataTableInactive = (props:Props) => {
 
-    const [formerEmployees,setFormerEmployees] = useState<ExEmployee[]>([])
+    const [formerEmployees,setFormerEmployees] = useState<FormerEmployee[]>([])
 
     useEffect(() => {
         getFormerEmployees()

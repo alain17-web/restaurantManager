@@ -4,20 +4,12 @@ import DataTableActive from "../../components/dataTableActive/DataTableActive.ts
 import {useEffect, useState} from "react";
 import NewEmployee from "../newEmployee/NewEmployee.tsx";
 import {employees as employeeData} from "../../tempData.ts";
+import {Employee} from "../../types/types.ts";
 
-interface Employee {
-    id: number | null
-    username: string;
-    password: string;
-    email: string;
-    tel: string;
-    role: string;
-    status: string;
-}
 
 const ListActiveStaff = () => {
 
-    const [employees, setEmployees] = useState<Employee[]>([])
+    const [_employees, setEmployees] = useState<Employee[]>([])
 
     useEffect(() => {
         getEmployees()
@@ -28,12 +20,12 @@ const ListActiveStaff = () => {
 
     }
 
-    const[employeeId, setEmployeeId] = useState<number>(0);
+    const[employeeId, setEmployeeId] = useState<number | null>(0);
     const [open,setOpen] = useState<boolean>(false);
 
     const handleGetEmployeeId = (id: number) => {
         setEmployeeId(id)
-        employees && setOpen(true);
+        setOpen(true);
     }
 
     const show = () => {

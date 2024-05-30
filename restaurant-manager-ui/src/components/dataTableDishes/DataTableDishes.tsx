@@ -2,18 +2,7 @@ import {dishes as dishData} from "../../tempData.ts";
 import {dishColumns} from '../../dataTable.ts'
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState,useEffect} from "react";
-
-interface Dish {
-    id: number;
-    name: string;
-    desc: string;
-    img: string;
-    price: number;
-    cat: string;
-    allerg?: string;
-    cost:number;
-    min:number;
-}
+import { Dish } from "../../types/types.ts";
 
 interface Props{
     open:() => void

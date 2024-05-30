@@ -3,16 +3,8 @@ import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.ts
 import DataTableInactive from "../../components/dataTableInactive/DataTableInactive.tsx";
 import {useEffect, useState} from "react";
 import {formerEmployees as formerEmployeeData} from "../../tempData.ts";
+import {FormerEmployee} from "../../types/types.ts";
 
-interface FormerEmployee {
-    id: number
-    username: string;
-    password: string;
-    email: string;
-    tel: string;
-    role: string;
-    status: string;
-}
 
 const ListInactiveStaff = () => {
 
@@ -27,12 +19,12 @@ const ListInactiveStaff = () => {
 
     }
 
-    const[formerEmployeeId, setFormerEmployeeId] = useState<number>(0);
+    const[_formerEmployeeId, setFormerEmployeeId] = useState<number>(0);
     const [open,setOpen] = useState<boolean>(false);
 
     const handleGetFormerEmployeeId = (id: number) => {
         setFormerEmployeeId(id)
-        formerEmployeeId && setOpen(true);
+        setOpen(true);
     }
 
     const show = () => {

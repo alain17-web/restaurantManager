@@ -2,17 +2,12 @@ import {dishes, drinks} from "../../tempData.ts";
 import {getRandomItems} from "../../utils/functions.ts";
 import {FormEvent, useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion'
+import {Item} from "../../types/types.ts";
 
 interface Props {
     numberOfPeople: number
     username: string
     closeNewOrder: () => void;
-}
-
-interface Item {
-    name: string
-    price: number
-    cat: string
 }
 
 const NewOrder = (props: Props) => {

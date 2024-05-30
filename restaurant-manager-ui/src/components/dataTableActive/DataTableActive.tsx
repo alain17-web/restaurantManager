@@ -2,16 +2,8 @@ import {employees as employeeData} from "../../tempData.ts";
 import {employeeColumns} from "../../dataTable.ts";
 import {DataGrid, GridRenderCellParams,GridColDef} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
+import {Employee} from "../../types/types.ts";
 
-interface Employee {
-    id: number
-    username: string;
-    password: string;
-    email: string;
-    tel: string;
-    role: string;
-    status: string;
-}
 
 interface Props{
     open:() => void
