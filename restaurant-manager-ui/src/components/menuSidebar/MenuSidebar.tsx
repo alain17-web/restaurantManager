@@ -10,7 +10,7 @@ interface Props {
 const MenuSidebar = (props:Props) => {
 
     return (
-        <main className={"w-[15%] h-screen flex flex-col ml-12"}>
+        <main className={"w-[15%] h-screen flex flex-col ml-12 pt-14"}>
            <DishesSidebar onItemSelect={props.onItemSelect} selectedItem={props.selectedItem} />
             <DrinksSidebar onItemSelect={props.onItemSelect} selectedItem={props.selectedItem} />
         </main>

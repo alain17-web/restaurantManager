@@ -23,7 +23,7 @@ const DrinksSidebar = (props:Props) => {
             <h1 className={"text-2xl font-inter underline"}>Les boissons</h1>
             {categories.map(cat => (
                 <Link
-                    className={props.selectedItem === cat ? "font-inter font-semibold italic text-amber-100 underline text-xl mt-3" : "font-inter font-semibold italic text-[#013220] text-xl mt-3"}
+                    className={props.selectedItem === cat ? "w-[33%] font-inter font-semibold italic text-white bg-[#6B8E23] underline text-center text-lg mt-3 rounded-md p-1" : "w-[25%] font-inter font-semibold italic text-[#013220] hover:text-white text-lg text-center mt-3 no-underline"}
                     key={cat}
                     onClick={() =>handleClick(cat)}
                 >
