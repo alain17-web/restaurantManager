@@ -1,10 +1,9 @@
-//import {Link} from "react-router-dom"
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 import Widget from "../../components/widget/Widget.tsx";
 import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
-import {useState} from "react";
 import DateDisplay from "../../components/dateDisplay/DateDisplay.tsx";
+import RosterCard from "../../components/rosterCard/RosterCard.tsx";
 
 const Dashboard = () => {
 
@@ -23,8 +22,10 @@ const Dashboard = () => {
                     <TimeDisplay/>
                 </div>
                 <DateDisplay/>
-
-
+                <h2 className={"text-center text-gray-500 text-2xl font-inter font-bold my-5"}>Shift du jour</h2>
+                <div className={"flex p-5 gap-5"}>
+                    <RosterCard/>
+                </div>
             </div>
         </section>
     );

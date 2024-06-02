@@ -40,8 +40,11 @@ export interface Employee {
     tel: string;
     role: string;
     status: string;
+    roster?: string;
+    avatar: string;
 }
 
+//temporary
 export interface FormerEmployee {
     id: number
     username: string;
@@ -91,4 +94,11 @@ export interface Item {
     name: string
     price: number
     cat: string
+}
+
+export interface EmployeeCard {
+    username: string;
+    role: string;
+    avatar: string;
+    roster: string;
 }

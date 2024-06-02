@@ -569,7 +569,9 @@ export const employees = [
         email:"alain@gmail.com",
         tel:"0470/346523",
         role:"admin",
-        status:"actif"
+        status:"actif",
+        roster:"lundi a vendredi",
+        avatar:""
     },
     {
         id:2,
@@ -578,7 +580,9 @@ export const employees = [
         email:"helene@gmail.com",
         tel:"0460/346524",
         role:"waiter",
-        status:"actif"
+        status:"actif",
+        roster:"lundi a vendredi",
+        avatar:"./img/waitress.jpeg"
     },
     {
         id:3,
@@ -587,7 +591,9 @@ export const employees = [
         email:"lea@gmail.com",
         tel:"0471/345533",
         role:"waiter",
-        status:"actif"
+        status:"actif",
+        roster:"samedi a dimanche",
+        avatar:"./img/waitress.jpeg"
     },
     {
         id:4,
@@ -596,7 +602,9 @@ export const employees = [
         email:"liam@gmail.com",
         tel:"0430/386921",
         role:"waiter",
-        status:"actif"
+        status:"actif",
+        roster:"samedi a dimanche",
+        avatar:"./img/waiter.jpg"
     },
     {
         id:5,
@@ -605,7 +613,9 @@ export const employees = [
         email:"basile@gmail.com",
         tel:"0476/256576",
         role:"cook",
-        status:"actif"
+        status:"actif",
+        roster:"samedi a dimanche",
+        avatar:"./img/chef.jpg.avif"
     },
     {
         id:6,
@@ -614,7 +624,9 @@ export const employees = [
         email:"arnau@gmail.com",
         tel:"0475/344526",
         role:"cook",
-        status:"actif"
+        status:"actif",
+        roster:"samedi a dimanche",
+        avatar:"./img/chef.jpg.avif"
     },
     {
         id:7,
@@ -623,7 +635,9 @@ export const employees = [
         email:"julie@gmail.com",
         tel:"0453/846523",
         role:"cook",
-        status:"actif"
+        status:"actif",
+        roster:"lundi a vendredi",
+        avatar:"./img/cheffe.jpg"
     },
     {
         id:8,
@@ -632,7 +646,9 @@ export const employees = [
         email:"alicia@gmail.com",
         tel:"0483/347223",
         role:"cook",
-        status:"actif"
+        status:"actif",
+        roster:"lundi a vendredi",
+        avatar:"./img/cheffe.jpg"
     },
 
 ]
@@ -645,7 +661,8 @@ export const formerEmployees = [
         email:"jcn@gmail.com",
         tel:"0470/346525",
         role:"waiter",
-        status:"actif"
+        status:"actif",
+
     },
     {
         id:2,

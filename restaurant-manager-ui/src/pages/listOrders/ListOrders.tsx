@@ -1,6 +1,6 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableOrders from "../../components/DataTableOrders/DataTableOrders.tsx";
+import DataTableOrders from "../../components/dataTableOrders/DataTableOrders.tsx";
 
 const ListOrders = () => {
     return (
