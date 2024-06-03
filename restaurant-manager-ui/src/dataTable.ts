@@ -96,6 +96,11 @@ export const employeeColumns : GridColDef[]=[
         field: "role",
         headerName: "role",
         width: 180
+    },
+    {
+        field: "roster",
+        headerName: "horaire",
+        width: 180,
     }
 ]
 

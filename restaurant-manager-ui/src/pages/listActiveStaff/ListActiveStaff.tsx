@@ -49,7 +49,7 @@ const ListActiveStaff = () => {
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                            className={"mt-0 m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
                             onClick={close}
                         >
                             Retour à la liste

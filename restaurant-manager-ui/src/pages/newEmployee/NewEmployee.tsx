@@ -14,6 +14,7 @@ const NewEmployee = (props: Props) => {
     const [tel, setTel] = useState<string>('');
     const [role, setRole] = useState<string>('');
     const [status, setStatus] = useState<string>('');
+    const [roster, setRoster] = useState<string>('');
 
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
@@ -36,6 +37,7 @@ const NewEmployee = (props: Props) => {
         setEmail("")
         setTel("")
         setStatus("")
+        setRoster("")
         setMessage("")
         setSuccess(false)
     }
@@ -51,6 +53,7 @@ const NewEmployee = (props: Props) => {
                 setTel(employee.tel)
                 setRole(employee.role)
                 setStatus(employee.status)
+                setRoster(employee.roster)
             }
 
         })
@@ -58,9 +61,9 @@ const NewEmployee = (props: Props) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (username === "" || password === "" || email === "" || tel === "" || role === "" || status === "") {
+        if (username === "" || password === "" || email === "" || tel === "" || role === "" || status === "" || roster === "") {
             setMessage("Tous les champs sont obligatoires")
-            console.log(username, password, email, tel, role,status)
+            console.log(username, password, email, tel, role,status,roster)
         } else {
             setSuccess(true)
             setMessage(add ? "L'employé a bien été créé" : "Les modifications sont enregistrées")
@@ -153,6 +156,19 @@ const NewEmployee = (props: Props) => {
                                 <option>Choisir un statut</option>
                                 <option>actif</option>
                                 <option>inactif</option>
+                            </select>
+                        </div>
+                        <div className={"w-[75%]"}>
+                            <label className={"flex items-center gap-[10px]"}>Horaire*</label>
+                            <select
+                                className={"w-full p-[5px] border-b-[1px] border-gray-500"}
+                                required
+                                value={status}
+                                onChange={(e) => setRoster(e.target.value)}
+                            >
+                                <option>Choisir un horaire</option>
+                                <option>lundi a vendredi</option>
+                                <option>samedi a dimanche</option>
                             </select>
                         </div>
                         <button
