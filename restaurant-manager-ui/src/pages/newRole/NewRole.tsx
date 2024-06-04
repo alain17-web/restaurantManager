@@ -1,14 +1,14 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {categories} from "../../tempData.ts";
+import {roles} from "../../tempData.ts";
 
 interface Props {
     id: number | null
-    setCatId: (id: number) => void
+    setRoleId: (id: number) => void
 }
 
-const NewCategory = (props: Props) => {
+const NewRole = (props: Props) => {
 
-    const [cat_name, setCat_name] = useState<string>('');
+    const [role_name, setRole_name] = useState<string>('');
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
     const [add, setAdd] = useState<boolean>(true)
@@ -23,36 +23,37 @@ const NewCategory = (props: Props) => {
 
     const resetForm = () => {
         setAdd(true)
-        setCat_name("")
+        setRole_name("")
         setMessage("")
         setSuccess(false);
     }
 
     const handleEdit = () => {
         setMessage("")
-        categories.map((category) => {
-            if (props.id === category.id) {
+        roles.map((role) => {
+            if (props.id === role.id) {
                 setAdd(false)
-                setCat_name(category.cat_name)
+                setRole_name(role.role_name)
             }
         })
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (cat_name === "") {
-            setMessage("Un nom de catégorie est obligatoire")
+        if (role_name === "") {
+            setMessage("Un nom de rôle est obligatoire")
         } else {
             setSuccess(true)
-            setMessage(add ? "La catégorie a bien été créée" : "Les modifications sont enregistrées")
+            setMessage(add ? "Le rôle a bien été créée" : "Les modifications sont enregistrées")
         }
     }
+
 
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
                 <div className={"custom-shadow p-[10px] m-5"}>
-                    <h1 className={"text-[#808080B2] text-2xl text-center"}>{add ? "Ajouter une catégorie" : "Modifier une catégorie"}</h1>
+                    <h1 className={"text-[#808080B2] text-2xl text-center"}>{add ? "Ajouter un rôle" : "Modifier un rôle"}</h1>
                 </div>
                 {success ? (
                     <div className={"p-2 h-4 m-5 text-center text-green-600"}>
@@ -70,28 +71,25 @@ const NewCategory = (props: Props) => {
                         onSubmit={handleSubmit}
                     >
                         <div className={"w-[75%]"}>
-                            <label className={"flex items-center gap-[10px]"}>Catégorie*</label>
+                            <label className={"flex items-center gap-[10px]"}>Rôle*</label>
                             <input
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
                                 required
-                                value={cat_name}
-                                onChange={(e) => setCat_name(e.target.value)}
+                                value={role_name}
+                                onChange={(e) => setRole_name(e.target.value)}
                             />
                         </div>
                         <button
                             type={"submit"}
                             className={"w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer"}
                         >
-                            {add ? "Ajouter une catégorie" : "Modifier une catégorie"}
+                            {add ? "Ajouter un rôle" : "Modifier un rôle"}
                         </button>
                     </form>
                 </div>
             </div>
-
         </div>
-    )
-        ;
+    );
 };
-export default NewCategory;
-
+export default NewRole;

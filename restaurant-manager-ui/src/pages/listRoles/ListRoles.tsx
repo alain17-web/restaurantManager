@@ -1,32 +1,32 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
-import {useState, useEffect} from "react";
-import {categories as catData} from "../../tempData.ts";
-import {Category} from "../../types/types.ts";
-import DataTableCat from "../../components/dataTableCat/DataTableCat.tsx";
-import NewCategory from "../newCategory/NewCategory.tsx";
+import {useState,useEffect} from "react";
+import { roles} from "../../tempData.ts";
+import { Role} from "../../types/types.ts";
+import DataTableRoles from "../../components/dataTableRoles/DataTableRoles.tsx";
+import NewRole from "../newRole/NewRole.tsx";
 
-const ListCategories = () => {
+const ListRoles = () => {
 
-    const [_categories, setCategories] = useState<Category[]>([]);
-    const [categoryId, setCatId] = useState<number | null>(null);
+    const [_roles, setRoles] = useState<Roles[]>([]);
+    const [roleId, setRoleId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        getCategories()
+        getRoles()
     }, []);
 
-    const getCategories = () => {
-        setCategories(catData)
+    const getRoles = () => {
+        setRoles(roles)
     }
 
-    const handleGetCatId = (id: number) => {
-        setCatId(id)
+    const handleGetRoleId = (id: number) => {
+        setRoleId(id)
         setOpen(true);
     }
 
     const show = () => {
-        setCatId(null)
+        setRoleId(null)
         setOpen(true)
     }
 
@@ -38,9 +38,9 @@ const ListCategories = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Catégories</h1>
-                {!open ? <DataTableCat getCatId={handleGetCatId} open={show}/> :
-                    <NewCategory id={categoryId} setCatId={setCatId}/>}
+                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Rôles</h1>
+                {!open ? <DataTableRoles getRoleId={handleGetRoleId} open={show}/> :
+                    <NewRole id={roleId} setRoleId={setRoleId}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button
@@ -55,4 +55,4 @@ const ListCategories = () => {
         </div>
     );
 };
-export default ListCategories;
+export default ListRoles;

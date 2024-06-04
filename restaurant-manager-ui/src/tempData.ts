@@ -746,6 +746,19 @@ export const formerEmployees = [
     },
 ]
 
+export const roles = [
+    {
+        id:1,
+        role_name:"admin",
+    },{
+        id:2,
+        role_name:"waiter",
+    },{
+        id:3,
+        role_name:"cook",
+    },
+]
+
 export const orders = [
     {
         id:1,

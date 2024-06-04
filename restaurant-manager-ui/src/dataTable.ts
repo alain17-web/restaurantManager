@@ -145,6 +145,19 @@ export const inactiveColumns : GridColDef[]=[
     },
 ]
 
+export const roleColumns : GridColDef[]=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 150
+    },
+    {
+        field: "role_name",
+        headerName: "role",
+        width: 150
+    }
+]
+
 export const ordersColumns : GridColDef[] = [
     {
         field: "id",

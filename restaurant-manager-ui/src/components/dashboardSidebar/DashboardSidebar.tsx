@@ -66,6 +66,20 @@ const DashboardSidebar = () => {
                             Inactifs
                         </li>
                     </NavLink>
+                    <NavLink
+                        to={"/listRoles"}
+                        className={({isActive}: { isActive: boolean }) =>
+                            classNames('no-underline', {
+                                'text-gray-500': !isActive,
+                                'text-purple-600': isActive,
+                            })
+                        }
+                    >
+                        <li className={"flex items-center p-1.5 cursor-pointer"}>
+                            <img src={'./img/role.svg'} width={25} height={25} className={'mr-[10px]'}/>
+                            Rôles
+                        </li>
+                    </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>MENU</p>
                     <NavLink
                         to={'/listDishes'}
