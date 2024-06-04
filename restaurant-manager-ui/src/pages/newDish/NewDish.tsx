@@ -1,5 +1,7 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {dishes} from "../../tempData.ts";
+import CategorOptions from "../../components/categorOptions/CategorOptions.tsx";
+
 
 interface Props {
     id: number | null
@@ -18,8 +20,10 @@ const NewDish = (props: Props) => {
 
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
+    const [isDish] = useState<boolean>(true);
 
     const [add, setAdd] = useState<boolean>(true)
+
 
     useEffect(() => {
         if (props.id !== null && props.id !== undefined) {
@@ -135,13 +139,15 @@ const NewDish = (props: Props) => {
                     </div>
                     <div className={"w-[75%]"}>
                         <label className={"flex items-center gap-[10px]"}>Catégorie*</label>
-                        <input
+
+                        <select
                             className={"w-full p-[5px] border-b-[1px] border-gray-500"}
-                            type={"text"}
                             required
                             value={cat}
                             onChange={(e) => setCat(e.target.value)}
-                        />
+                        >
+                            <CategorOptions isDish={isDish}/>
+                        </select>
                     </div>
                     <div className={"w-[75%]"}>
                         <label className={"flex items-center gap-[10px]"}>Allergènes*</label>

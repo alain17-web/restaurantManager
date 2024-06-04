@@ -563,35 +563,43 @@ export const drinks = [
 export const categories = [
     {
         id:1,
-        cat_name: "Mezzes"
+        cat_name: "Mezzes",
+        type:"food"
     },
     {
         id:2,
-        cat_name: "Grillades"
+        cat_name: "Grillades",
+        type:"food"
     },
     {
         id:3,
-        cat_name: "Assiette froides"
-    },
-    {
-        id:3,
-        cat_name: "Desserts"
+        cat_name: "Assiette froides",
+        type:"food"
     },
     {
         id:4,
-        cat_name: "Softs"
+        cat_name: "Desserts",
+        type:"food"
     },
     {
         id:5,
-        cat_name: "Vins"
+        cat_name: "Softs",
+        type:"beverage"
     },
     {
         id:6,
-        cat_name: "Bières"
+        cat_name: "Vins",
+        type:"beverage"
     },
     {
         id:7,
-        cat_name: "Boissons chaudes"
+        cat_name: "Bières",
+        type:"beverage"
+    },
+    {
+        id:8,
+        cat_name: "Boissons chaudes",
+        type:"beverage"
     },
 ]
 

@@ -81,6 +81,11 @@ export const categoryColumns : GridColDef[]=[
         field: "cat_name",
         headerName: "catégorie",
         width: 200,
+    },
+    {
+        field: "type",
+        headerName: "type",
+        width: 150,
     }
 ]
 

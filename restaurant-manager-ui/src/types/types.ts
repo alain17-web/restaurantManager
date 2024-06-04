@@ -35,6 +35,7 @@ export interface Drink {
 export interface Category {
     id: number;
     cat_name:string;
+    type: string;
 }
 
 export interface Employee {

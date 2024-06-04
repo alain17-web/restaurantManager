@@ -8,7 +8,7 @@ import NewRole from "../newRole/NewRole.tsx";
 
 const ListRoles = () => {
 
-    const [_roles, setRoles] = useState<Roles[]>([]);
+    const [_roles, setRoles] = useState<Role[]>([]);
     const [roleId, setRoleId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
 
