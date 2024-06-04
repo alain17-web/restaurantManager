@@ -1,5 +1,6 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {drinks} from "../../tempData.ts";
+import CategorOptions from "../../components/categorOptions/CategorOptions.tsx";
 
 interface Props {
     id: number | null
@@ -16,6 +17,7 @@ const NewDrink = (props:Props) => {
 
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
+    const [isDish] = useState<boolean>(false);
 
     const [add, setAdd] = useState<boolean>(true)
 
@@ -124,13 +126,15 @@ const NewDrink = (props:Props) => {
                         </div>
                         <div className={"w-[75%]"}>
                             <label className={"flex items-center gap-[10px]"}>Catégorie*</label>
-                            <input
+
+                            <select
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
-                                type={"text"}
                                 required
                                 value={cat}
                                 onChange={(e) => setCat(e.target.value)}
-                            />
+                            >
+                                <CategorOptions isDish={isDish}/>
+                            </select>
                         </div>
                         <div className={"w-[75%]"}>
                             <label className={"flex items-center gap-[10px]"}>Prix de vente*</label>
