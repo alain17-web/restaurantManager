@@ -172,6 +172,7 @@ export const rosterColumns : GridColDef[]=[
     {
         field: "roster",
         headerName: "horaire",
+        width: 300
     }
 ]
 

@@ -17,6 +17,7 @@ import ListStockFood from "./pages/listStockFood/ListStockFood.tsx";
 import ListStockDrinks from "./pages/listStockDrinks/ListStockDrinks.tsx";
 import ListCategories from "./pages/listCategories/ListCategories.tsx";
 import ListRoles from "./pages/listRoles/ListRoles.tsx";
+import ListRosters from "./pages/listRosters/ListRosters.tsx";
 
 function App() {
 
@@ -72,6 +73,10 @@ function App() {
         {
             path: "/listRoles",
             element: <ListRoles/>
+        },
+        {
+            path: "/listRosters",
+            element: <ListRosters/>
         },
         {
             path: "/listOrders",
