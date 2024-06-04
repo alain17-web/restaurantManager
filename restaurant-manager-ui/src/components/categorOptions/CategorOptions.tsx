@@ -6,7 +6,7 @@ interface Props {
     isDish:boolean
 }
 
-export const CategorOptions = ({isDish}:Props) => {
+ const CategorOptions = ({isDish}:Props) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
 

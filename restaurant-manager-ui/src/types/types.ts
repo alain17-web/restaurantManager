@@ -66,6 +66,11 @@ export interface Role {
     role_name:string;
 }
 
+export interface Roster {
+    id:number;
+    roster: string;
+}
+
 export interface Order {
     id:number
     date:string

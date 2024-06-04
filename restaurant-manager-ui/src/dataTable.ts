@@ -163,6 +163,18 @@ export const roleColumns : GridColDef[]=[
     }
 ]
 
+export const rosterColumns : GridColDef[]=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 150
+    },
+    {
+        field: "roster",
+        headerName: "horaire",
+    }
+]
+
 export const ordersColumns : GridColDef[] = [
     {
         field: "id",

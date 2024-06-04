@@ -696,6 +696,17 @@ export const employees = [
 
 ]
 
+export const rosters = [
+    {
+        id:1,
+        roster: "lundi a vendredi"
+    },
+    {
+        id:2,
+        roster: "samedi a dimanche"
+    }
+]
+
 export const formerEmployees = [
     {
         id:1,

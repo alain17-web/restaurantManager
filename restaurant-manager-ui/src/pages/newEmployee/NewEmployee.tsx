@@ -1,5 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
 import {employees} from "../../tempData.ts";
+import RoleOption from "../../components/roleOptions/RoleOption.tsx";
+import RosterOptions from "../../components/rosterOptions/RosterOptions.tsx";
 
 interface Props {
     id: number | null
@@ -119,10 +121,7 @@ const NewEmployee = (props: Props) => {
                                 value={role}
                                 onChange={(e) => setRole(e.target.value)}
                             >
-                                <option>Choisir un rôle</option>
-                                <option>admin</option>
-                                <option>waiter</option>
-                                <option>cook</option>
+                                <RoleOption/>
                             </select>
                         </div>
                         <div className={"w-[75%]"}>
@@ -166,9 +165,7 @@ const NewEmployee = (props: Props) => {
                                 value={status}
                                 onChange={(e) => setRoster(e.target.value)}
                             >
-                                <option>Choisir un horaire</option>
-                                <option>lundi a vendredi</option>
-                                <option>samedi a dimanche</option>
+                                <RosterOptions/>
                             </select>
                         </div>
                         <button
