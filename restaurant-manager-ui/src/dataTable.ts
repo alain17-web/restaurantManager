@@ -71,6 +71,19 @@ export const drinksColumns : GridColDef[]=[
     },
 ]
 
+export const categoryColumns : GridColDef[]=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 150,
+    },
+    {
+        field: "cat_name",
+        headerName: "catégorie",
+        width: 200,
+    }
+]
+
 export const employeeColumns : GridColDef[]=[
     {
         field: "id",

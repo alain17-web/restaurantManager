@@ -32,6 +32,11 @@ export interface Drink {
     stock: number;
 }
 
+export interface Category {
+    id: number;
+    cat_name:string;
+}
+
 export interface Employee {
     id: number | null
     username: string;

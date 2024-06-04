@@ -1,4 +1,4 @@
-import {  RouterProvider, createBrowserRouter } from "react-router-dom"
+import {RouterProvider, createBrowserRouter} from "react-router-dom"
 import {Home} from "./pages/home/Home.tsx";
 import {Menu} from "./pages/menu/Menu.tsx";
 import About from "./pages/about/About.tsx";
@@ -15,78 +15,83 @@ import ListPurchases from "./pages/listPurchases/ListPurchases.tsx";
 import ListBookings from "./pages/listBookings/ListBookings.tsx";
 import ListStockFood from "./pages/listStockFood/ListStockFood.tsx";
 import ListStockDrinks from "./pages/listStockDrinks/ListStockDrinks.tsx";
+import ListCategories from "./pages/listCategories/ListCategories.tsx";
 
 function App() {
 
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Home />
+            element: <Home/>
         },
         {
             path: "/menu",
-            element: <Menu />
+            element: <Menu/>
         },
         {
             path: "/reservation-infos",
-            element: <About />
+            element: <About/>
         },
         {
             path: "/connexion",
-            element: <Login />
+            element: <Login/>
         },
         {
             path: "/dashboard",
-            element: <Dashboard />
+            element: <Dashboard/>
         },
         {
             path: "/restaurant",
-            element: <Restaurant />
+            element: <Restaurant/>
         },
         {
             path: "/kitchen",
-            element: <Kitchen />
+            element: <Kitchen/>
         },
         {
             path: "/listDishes",
-            element: <ListDishes />
+            element: <ListDishes/>
         },
         {
             path: "/listDrinks",
-            element: <ListDrinks />
+            element: <ListDrinks/>
+        },
+        {
+            path: "/listCategories",
+            element: <ListCategories/>
         },
         {
             path: "/listActive",
-            element: <ListActiveStaff />
+            element: <ListActiveStaff/>
         },
         {
             path: "/listInactive",
-            element: <ListInactiveStaff />
+            element: <ListInactiveStaff/>
         },
         {
             path: "/listOrders",
-            element: <ListOrders />
+            element: <ListOrders/>
         },
         {
             path: "/listStockFood",
-            element: <ListStockFood />
+            element: <ListStockFood/>
         },
         {
             path: "/listStockDrinks",
-            element: <ListStockDrinks />
+            element: <ListStockDrinks/>
         },
         {
             path: "/listPurchases",
-            element: <ListPurchases />
+            element: <ListPurchases/>
         },
         {
             path: "/listBookings",
-            element: <ListBookings />
+            element: <ListBookings/>
         },
 
 
     ])
-   return <RouterProvider router={router} />
+    return <RouterProvider router={router}/>
 }
 
 export default App
