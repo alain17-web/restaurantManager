@@ -305,3 +305,47 @@ export const stockFoodsColumns : GridColDef[]=[
         width: 120
     },
 ]
+
+export const financesColumns : GridColDef[]=[
+    {
+        field: "id",
+        headerName: "id",
+        width: 100
+    },
+    {
+        field: "month",
+        headerName: "mois",
+        width: 120
+    },
+    {
+        field: "orders",
+        headerName: "nbre de commandes",
+        width: 150
+
+    },
+    {
+        field: "income",
+        headerName: "revenu €",
+        width: 150
+    },
+    {
+        field: "purchases",
+        headerName: "nbre d'achats",
+        width: 150
+    },
+    {
+        field: "cost",
+        headerName: "coût €",
+        width: 150
+    },
+    {
+        field: "stock",
+        headerName: "coût stock €",
+        width: 150
+    },
+    {
+        field: "gain",
+        headerName:"bénéfice €",
+        width: 150
+    }
+]

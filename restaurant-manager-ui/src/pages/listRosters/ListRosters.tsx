@@ -6,7 +6,7 @@ import {Roster} from "../../types/types.ts";
 import DataTableRosters from "../../components/dataTableRosters/DataTableRosters.tsx";
 import NewRoster from "../newRoster/NewRoster.tsx";
 
-const ListRosters = (props: Props) => {
+const ListRosters = () => {
 
     const [_rosters,setRosters] = useState<Roster[]>([]);
     const [rosterId, setRosterId] = useState<number | null>(null);

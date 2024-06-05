@@ -1061,3 +1061,66 @@ export const bookings = [
         numberOfPeople: 3
     },
 ]
+
+export const finances = [
+    {
+        id:1,
+        month:"jan 24",
+        orders: 756,
+        income: 60480,
+        purchases: 25,
+        cost: 43000,
+        stock: 10000,
+        gain: 7480
+    },
+    {
+        id:2,
+        month:"fév 24",
+        orders: 692,
+        income: 55360,
+        purchases: 21,
+        cost: 35700,
+        stock: 10000,
+        gain: 9960
+    },
+    {
+        id:3,
+        month:"mar 24",
+        orders: 792,
+        income: 63360,
+        purchases: 28,
+        cost: 47600,
+        stock: 10000,
+        gain: 5760
+    },
+    {
+        id:4,
+        month:"avr 24",
+        orders: 778,
+        income: 62240,
+        purchases: 25,
+        cost: 42500,
+        stock: 10000,
+        gain: 9740
+    },
+    {
+        id:5,
+        month:"mai 24",
+        orders: 801,
+        income: 64080,
+        purchases: 28,
+        cost: 47600,
+        stock: 10000,
+        gain: 6480
+    },
+    {
+        id:6,
+        month:"juin 24",
+        orders: 795,
+        income: 63600,
+        purchases: 27,
+        cost: 45900,
+        stock: 10000,
+        gain: 7700
+    },
+]

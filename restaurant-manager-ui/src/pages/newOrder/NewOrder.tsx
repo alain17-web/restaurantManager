@@ -1,8 +1,10 @@
+
 import {dishes, drinks} from "../../tempData.ts";
 import {getRandomItems} from "../../utils/functions.ts";
 import {FormEvent, useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion'
 import {Item} from "../../types/types.ts";
+
 
 interface Props {
     numberOfPeople: number
@@ -130,3 +132,4 @@ const NewOrder = (props: Props) => {
     );
 };
 export default NewOrder;
+

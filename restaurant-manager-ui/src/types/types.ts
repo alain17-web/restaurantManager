@@ -118,3 +118,14 @@ export interface EmployeeCard {
     avatar: string;
     roster: string;
 }
+
+export interface Finance {
+    id:number;
+    month: string;
+    orders: number;
+    income: number;
+    purchases: number;
+    cost: number;
+    stock:number;
+    gain:number;
+}
