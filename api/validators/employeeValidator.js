@@ -1,6 +1,6 @@
 const yup = require('yup');
 
-const addEmployeeValidator = yup.object({
+const employeeValidator = yup.object({
     username: yup.string().required(),
     password: yup.string().required(),
     role: yup.string().required(),
@@ -10,4 +10,4 @@ const addEmployeeValidator = yup.object({
     roster: yup.string().required(),
 });
 
-module.exports = addEmployeeValidator;
+module.exports = employeeValidator;

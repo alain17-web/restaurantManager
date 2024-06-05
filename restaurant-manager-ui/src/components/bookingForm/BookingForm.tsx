@@ -22,6 +22,7 @@ const BookingForm = () => {
         e.preventDefault();
         validateDate()
         validateName()
+        console.log(typeof date)
         console.log(date, hour, name, email, people);
 
         if (date !== "") {

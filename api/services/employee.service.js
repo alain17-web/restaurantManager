@@ -1,4 +1,4 @@
-const createConnection = require('./database');
+const createConnection = require('../database/database');
 const bcrypt = require('bcrypt');
 const salt = 10;
 

@@ -1,5 +1,5 @@
 const employeeService = require('../services/employee.service');
-const addEmployeeValidator = require('../validators/addEmployeeValidator');
+const addEmployeeValidator = require('../validators/employeeValidator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();

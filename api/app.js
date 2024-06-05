@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const router = require('./routes/router');
+const createConnection = require('./database/database');
 require('dotenv').config();
 
 const PORT = process.env.PORT;
@@ -15,6 +16,12 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on ${PORT}`);
-});
+createConnection()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Server running on ${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Failed to connect to the database:', error);
+    });
