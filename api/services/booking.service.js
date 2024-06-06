@@ -20,3 +20,5 @@ const addBooking = async ({date,hour,name,email,people}) => {
 module.exports = {
     addBooking,
 }
+
+//READ

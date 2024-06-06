@@ -18,10 +18,10 @@ async function getEmployees() {
 }
 
 //CREATE - REGISTER
-const addEmployee = async ({ username, password, role, email, tel, status, roster }) => {
+const addEmployee = async ({ username, password, role_id, email, tel, status_id, roster_id }) => {
     const connection = await createConnection();
     try {
-        // Check if the username already exists
+
         const [existingUser] = await connection.execute(
             'SELECT * FROM employees WHERE username = ?',
             [username]
@@ -31,18 +31,19 @@ const addEmployee = async ({ username, password, role, email, tel, status, roste
             throw new Error('Cet identifiant existe déjà');
         }
 
-        // Hash the password
+
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Insert the new employee into the database
+
         const [result] = await connection.execute(
-            'INSERT INTO employees (username, password, role, email, tel, status, roster) VALUES (?, ?, ?, ?, ?, ?, ?)',
-            [username, hashedPassword, role, email, tel, status, roster]
+            `INSERT INTO employees (username, password, role_id, email, tel, status_id, roster_id) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [username, hashedPassword, role_id, email, tel, status_id, roster_id]
         );
 
-        return { id: result.insertId, username, role, email, tel, status, roster };
+        return { id: result.insertId, username, role_id, email, tel, status_id, roster_id };
     } catch (error) {
-        console.error('Erreur ajout employé:', error);
+        console.error('Erreur ajout service employé:', error);
         throw error;
     } finally {
         await connection.end();

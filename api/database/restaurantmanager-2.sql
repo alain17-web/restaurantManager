@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
 	`email` varchar(100) NOT NULL,
 	`tel` varchar(50) NOT NULL,
 	`status` tinyint NOT NULL,
-	`roster` varchar(50),
+	`roster_id` INT NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
@@ -80,8 +80,16 @@ CREATE TABLE IF NOT EXISTS `bookings` (
 	PRIMARY KEY (`id`)
 );
 
+CREATE TABLE IF NOT EXISTS `rosters` (
+	`id` int AUTO_INCREMENT NOT NULL UNIQUE,
+	`roster` varchar(100) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
 
 ALTER TABLE `employees` ADD CONSTRAINT `employees_fk3` FOREIGN KEY (`role_id`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `employees` ADD CONSTRAINT `employees_fk7` FOREIGN KEY (`roster_id`) REFERENCES `rosters`(`id`);
 
 ALTER TABLE `dishes` ADD CONSTRAINT `dishes_fk3` FOREIGN KEY (`cat_id`) REFERENCES `categories`(`id`);
 ALTER TABLE `drinks` ADD CONSTRAINT `drinks_fk2` FOREIGN KEY (`cat_id`) REFERENCES `categories`(`id`);
@@ -92,3 +100,4 @@ ALTER TABLE `order_dishes` ADD CONSTRAINT `order_dishes_fk1` FOREIGN KEY (`dish_
 ALTER TABLE `order_drinks` ADD CONSTRAINT `order_drinks_fk0` FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`);
 
 ALTER TABLE `order_drinks` ADD CONSTRAINT `order_drinks_fk1` FOREIGN KEY (`drink_id`) REFERENCES `drinks`(`id`);
+

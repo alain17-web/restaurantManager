@@ -11,13 +11,13 @@ const addEmployee = async (req, res) => {
             return res.status(400).json({ error: validationResult.error });
         }
 
-        const { username, password, role, email, tel, status, roster } = validationResult;
-        const registrationResult = await employeeService.addEmployee({ username, password, role, email, tel, status, roster });
+        const { username, password, role_id, email, tel, status_id, roster_id } = validationResult;
+        const registrationResult = await employeeService.addEmployee({ username, password, role_id, email, tel, status_id, roster_id });
 
         res.status(201).json({ message: "L'employé a bien été créé", registrationResult });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Erreur création employé' });
+        res.status(500).json({ message: 'Erreur création controller employé' });
     }
 };
 
