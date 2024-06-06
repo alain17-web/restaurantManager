@@ -18,16 +18,17 @@ const SuccessMsg = (props: Props) => {
             </p>
             {!props.error ?
                 <>
-                    (<p className={"text-center text-3xl text-[#6B8E23] font-inter"}>Merci {props.name}!</p>
+                    <p className={"text-center text-3xl text-[#6B8E23] font-inter"}>Merci {props.name}!</p>
                     <p className={"text-center text-2xl text-[#6B8E23] font-inter mt-8"}>Votre réservation
                         pour {props.people} {props.people > 1 ? "personnes" : "personne"} est confirmée. Nous vous
                         accueillons
-                        le {props.formatedDate} à {props.hour}.</p>)
-                </> : (
+                        le {props.formatedDate} à {props.hour}.</p>
+                </> :
                     <>
                         <p className={"text-center text-3xl text-red-500 font-inter"}>La réservation a échouée</p>
+                        <p className={"text-center text-xl text-red-500 font-inter"}>Veuillez réessayer plus tard ou contactez-nous au 012/345 67 89</p>
                     </>
-                )}
+                }
 
 
         </article>

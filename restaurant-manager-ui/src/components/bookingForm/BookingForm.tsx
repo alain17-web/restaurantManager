@@ -25,6 +25,7 @@ const BookingForm = () => {
         e.preventDefault();
         validateDate()
         validateName()
+        validateEmail()
 
         if (date !== "") {
             const dateArr: string[] = date.split("-").reverse();
@@ -51,6 +52,7 @@ const BookingForm = () => {
         setEmail("")
         setPeople(1)
         setSuccess(false);
+        setError(false);
     }
 
 
@@ -77,7 +79,7 @@ const BookingForm = () => {
 
     const validateEmail = () => {
         setErrorEmail('')
-        if (email && !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+        if (email === "" || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
             setErrorEmail("Email non valide");
 
         } else {
@@ -90,7 +92,7 @@ const BookingForm = () => {
             date !== "" &&
             hour !== "" &&
             name !== "" && /^[A-Za-z]{2,25}$/.test(name) &&
-            (email === "" || /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email))
+            email !== "" && /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
         );
     }, [date,hour,name,email]);
 
@@ -109,7 +111,7 @@ const BookingForm = () => {
     return (
         <section className={"flex-1 h-full flex flex-col items-center"}>
             <h1 className={"text-2xl font-inter italic mt-4"}>Réserver une table</h1>
-            {!success || !error ? (
+            {!success && !error ? (
                 <form
                     className={"w-[55%] h-auto flex flex-col items-center"}
                     noValidate
@@ -117,7 +119,7 @@ const BookingForm = () => {
                 >
                     <div className={"w-full flex items-center justify-between"}>
                         <div className={"input-group mt-5 flex flex-col items-center"}>
-                            <label htmlFor="date" className={!errorDate ? "self-start block" : "self-start block text-red-500"}>{!errorDate ? "Date" : errorDate}</label>
+                            <label htmlFor="date*" className={!errorDate ? "self-start block" : "self-start block text-red-500"}>{!errorDate ? "Date*" : errorDate}</label>
                             <input
                                 type="date"
                                 id="date"
@@ -141,7 +143,7 @@ const BookingForm = () => {
                         </div>
                     </div>
                     <div className={"w-[40%] input-group mt-8 flex flex-col items-center"}>
-                        <label htmlFor="name" className={!errorName ? "self-start block" : "self-start block text-red-500" }>{!errorName ? "Nom" : errorName}</label>
+                        <label htmlFor="name" className={!errorName ? "self-start block" : "self-start block text-red-500" }>{!errorName ? "Nom*" : errorName}</label>
                         <input
                             type="text"
                             id="name"
@@ -156,12 +158,12 @@ const BookingForm = () => {
                         />
                     </div>
                     <div className={"w-[40%] input-group mt-8 flex flex-col items-center"}>
-                        <label htmlFor="email" className={!errorEmail ? "self-start block" : "self-start block text-red-500"}>{!errorEmail ? "Email" : errorEmail} <span
-                            className={"font-inter font-thin italic"}>(facultatif)</span></label>
+                        <label htmlFor="email" className={!errorEmail ? "self-start block" : "self-start block text-red-500"}>{!errorEmail ? "Email*" : errorEmail} </label>
                         <input
                             type="email"
                             id="email"
                             className={"w-full h-10 text-start pl-3 border border-[#008080]"}
+                            required
                             value={email}
                             onChange={(e) => {
                                 setEmail(e.target.value)
@@ -171,7 +173,7 @@ const BookingForm = () => {
                         />
                     </div>
                     <div className={"w-[40%] input-group mt-8 flex flex-col items-center"}>
-                        <label htmlFor="numberOfPeople" className={"self-start block"}>Nombre de pers (6
+                        <label htmlFor="numberOfPeople*" className={"self-start block"}>Nombre de pers* (6
                             max)</label>
                         <input
                             type="number"
