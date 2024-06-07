@@ -21,32 +21,32 @@ const addEmployee = async (req, res) => {
     }
 };
 
-/*const login = async (req, res) => {
-    const { username, password } = req.body;
-    const connection = await createConnection();
+const { loginEmployee } = require('../services/auth.service');
+const authValidator = require('../validators/authValidator');
+
+const login = async (req, res) => {
     try {
-        const [user] = await connection.execute('SELECT * FROM employees WHERE username = ?', [username]);
+        await authValidator.validate(req.body); // Validate the request body
 
-        if (user.length === 0) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
+        const { username, password } = req.body;
+        const { token, employee } = await loginEmployee({ username, password });
 
-        const validPassword = await bcrypt.compare(password, user[0].password);
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production'
+        });
 
-        if (!validPassword) {
-            return res.status(401).json({ message: 'Invalid username or password' });
-        }
-
-        const token = jwt.sign({ id: user[0].id, username: user[0].username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        res.json({ message: 'Login successful', token });
+        res.json({ message: 'Login successful', employee });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error logging in' });
-    } finally {
-        await connection.end();
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ message: error.message });
+        }
+        res.status(401).json({ message: error.message });
     }
-};*/
+};
+
+module.exports = { login };
+
 
 module.exports = {
     addEmployee,
