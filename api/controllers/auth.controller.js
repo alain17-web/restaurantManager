@@ -21,6 +21,12 @@ const authController = {
             }
             res.status(401).json({message: error.message});
         }
+    },
+
+    logout :  (req, res) => {
+        authService.logout();
+        res.clearCookie('token');
+        res.json({message: 'Déconnecté'});
     }
 }
 module.exports = authController;

@@ -33,15 +33,21 @@ const authService = {
 
             const token = jwt.sign(payload, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN}
             );
-            return {token, employee: {...employee,password:undefined}};
+            return {token, employee: {...employee, password: undefined}};
         } catch (error) {
             console.error('Login error:', error);
             throw error;
         } finally {
             await connection.end();
         }
+    },
+
+    //LOGOUT
+    logout: async () => {
+        return {message: 'Déconnexion réussie'}
     }
 
 }
+
 
 module.exports = authService

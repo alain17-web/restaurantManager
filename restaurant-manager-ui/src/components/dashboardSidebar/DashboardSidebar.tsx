@@ -1,16 +1,19 @@
 import {Link, NavLink, useLocation, useNavigate} from "react-router-dom"
 import classNames from 'classnames'
+import useLogout from "../../hooks/useLogout.tsx";
 
 const DashboardSidebar = () => {
 
     const location = useLocation()
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
-    const handleLogout = () => {
+    const { handleLogout } = useLogout();
+
+    /*const handleLogout = () => {
         localStorage.removeItem("username")
         navigate("/connexion");
-    }
+    }*/
 
     return (
         <div className={"flex-1 min-h-screen border-r-[0.5px] border-[#D3D3D3]"}>

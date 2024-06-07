@@ -129,3 +129,7 @@ export interface Finance {
     stock:number;
     gain:number;
 }
+
+export interface LogoutService {
+    logout: () => Promise<{ success: boolean; message: string }>;
+}
