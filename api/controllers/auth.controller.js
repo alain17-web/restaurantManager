@@ -14,11 +14,6 @@ const authController = {
                 secure: process.env.NODE_ENV === 'production'
             });
 
-            let redirectUrl = null;
-            if (employee.role_id === 1) {
-                redirectUrl = 'http://localhost:5173/dashboard';
-            }
-
             res.json({message: 'Login successful', employee});
         } catch (error) {
             if (error.name === 'ValidationError') {

@@ -18,19 +18,22 @@ const authService = {
             }
 
             const employee = rows[0];
+
             const passwordMatch = await bcrypt.compare(password, employee.password);
 
             if (!passwordMatch) {
-                throw new Error('Invalid username or password');
+                throw new Error('Identifiant ou mot de passe incorrect');
             }
 
-            const token = jwt.sign(
-                {id: employee.id, role_id: employee.role_id},
-                JWT_SECRET,
-                {expiresIn: JWT_EXPIRES_IN}
-            );
+            const payload = {
+                employeeId: employee.id,
+                username: employee.username,
+                role_id: employee.role_id,
+            }
 
-            return {token, employee: {id: employee.id, username: employee.username, role_id: employee.role_id}};
+            const token = jwt.sign(payload, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN}
+            );
+            return {token, employee: {...employee,password:undefined}};
         } catch (error) {
             console.error('Login error:', error);
             throw error;

@@ -1,39 +1,19 @@
 import Logo from "../../components/logo/Logo.tsx";
-import {Link,useNavigate} from "react-router-dom"
-import {useEffect, useState} from "react";
-import {employees} from '../../tempData.ts'
+import {Link} from "react-router-dom"
+import {FormEvent, useEffect, useState} from "react";
+import axios from "axios"
 
 const Login = () => {
 
-    const navigate = useNavigate();
-
-    const adminsArray:string[] = []
-    const waitersArray:string[] = []
-    const cooksArray:string[] = []
-
-
-        employees.map((employee) => {
-            if(employee.role === "admin"){
-                adminsArray.push(employee.username,employee.password)
-            }
-            if(employee.role === "waiter"){
-                waitersArray.push(employee.username,employee.password)
-            }
-            if(employee.role === "cook"){
-                cooksArray.push(employee.username,employee.password)
-            }
-        })
-
-
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-     const [error, setError] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [failed, setFailed] = useState<boolean>(false);
     const [usernameError, setUsernameError] = useState<string>("");
     const [passwordError, setPasswordError] = useState<string>("");
     const [allFieldsValid, setAllFieldsValid] = useState<boolean>(false)
 
     const validateUsername = () => {
-        setUsernameError('')
         if (username === "" || !/^[A-Za-z0-9 ]{4,25}$/.test(username)) {
             setUsernameError("identifiant requis");
         } else {
@@ -42,7 +22,6 @@ const Login = () => {
     }
 
     const validatePassword = () => {
-        setPasswordError('')
         if (password === "" || !/^[A-Za-z0-9 ]{4,25}$/.test(password)) {
             setPasswordError("mdp requis");
         } else {
@@ -63,36 +42,39 @@ const Login = () => {
             username !== "" && /^[A-Za-z]{3,25}$/.test(username) &&
             password !== "" && /^[A-Za-z]{4,25}$/.test(password)
         )
-    },[username, password])
+    }, [username, password])
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(false)
+        setFailed(false)
         validateUsername()
         validatePassword()
-        if(adminsArray.includes(username.toLowerCase()) && adminsArray.includes(password.toLowerCase())){
-            localStorage.setItem("username",username)
-            navigate("/dashboard");
-        } else {
-            setError(true)
-        }
 
-        if(waitersArray.includes(username.toLowerCase()) && waitersArray.includes(password.toLowerCase())){
-            localStorage.setItem("username",username)
-            navigate("/restaurant");
-        } else {
-            setError(true)
-        }
+        try {
+            const res = await axios.post('http://localhost:3000/api/auth/login', {
+                username,
+                password
+            }, {
+                withCredentials: true
+            })
 
-        if(cooksArray.includes(username.toLowerCase()) && cooksArray.includes(password.toLowerCase())){
-            localStorage.setItem("username",username)
-            navigate("/kitchen");
-        } else {
+            const {role_id} = res.data.employee
+
+            if (role_id === 1) {
+                window.location.href = 'http://localhost:5173/dashboard'
+            } else if (role_id === 2) {
+                window.location.href = 'http://localhost:5173/restaurant'
+            } else if (role_id === 3) {
+                window.location.href = 'http://localhost:5173/kitchen'
+            } else {
+                setFailed(true)
+            }
+        } catch (error) {
             setError(true)
+            console.error(error)
         }
     }
-
-    console.log(waitersArray)
 
     return (
         <section
@@ -102,8 +84,12 @@ const Login = () => {
                     <Logo/>
                     <p className={"font-inter text-center text-[#013220] hover:text-[#6B8E23] hover:underline text-base italic mt-12 ml-4"}>Accueil</p>
                 </Link>
-            <h3 className={"text-5xl text-[#013220] text-center font-inter font-medium italic mt-12"}>La Branche d'Olivier</h3>
-                {error && <p className={"text-red-500 text-xl text-center font-inter mt-5"}>Identifiant ou mot de passe incorrect</p>}
+                <h3 className={"text-5xl text-[#013220] text-center font-inter font-medium italic mt-12"}>La Branche
+                    d'Olivier</h3>
+                {error && <p className={"text-red-500 text-xl text-center font-inter mt-5"}> Identifiant ou mot de passe
+                    incorrect</p>}
+                {failed &&
+                    <p className={"text-red-500 text-xl text-center font-inter mt-5"}> La connexion a échouée</p>}
             </header>
             <main
                 className={"w-[40%] h-[40vh] mx-auto mt-[20vh] bg-[url('./img/logo.png')] bg-top bg-no-repeat bg-cover rounded-full"}
@@ -128,7 +114,6 @@ const Login = () => {
                         placeholder={!passwordError ? "mot de passe" : passwordError}
                         className={passwordError ? "h-10 bg-white placeholder:text-red-500  placeholder:pl-2 rounded-md pl-2 border border-red-500" : "h-10 bg-white placeholder:pl-2 rounded-md pl-2"}
                         required
-                        autoComplete={"new-password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         onBlur={validatePassword}
