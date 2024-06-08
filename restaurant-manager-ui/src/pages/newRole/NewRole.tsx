@@ -1,5 +1,6 @@
 import {FormEvent, useEffect, useState} from "react";
 import {NewRoleData} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
 const NewRole = (props: NewRoleData) => {
@@ -35,14 +36,24 @@ const NewRole = (props: NewRoleData) => {
     }
 
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (role_name === "") {
             setMessage("Un nom de rôle est obligatoire")
         } else {
-            setSuccess(true)
-            setMessage(add ? "Le rôle a bien été créée" : "Les modifications sont enregistrées")
-            //logic to updateRole
+            try{
+                if(add){
+                    await axiosInstance.post('/roles/addRole',{role_name})
+                    setSuccess(true)
+                    setMessage("Le rôle a bien été créée" )
+                } else {
+                    //updateRole
+                }
+
+            }catch(error){
+                console.error(error)
+                setMessage("L'ajout du rôle a échoué")
+            }
         }
     }
 

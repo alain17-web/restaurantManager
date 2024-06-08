@@ -26,7 +26,7 @@ const roleService = {
     getAllRoles: async () => {
         const connection = await createConnection();
         try {
-            const [existingRoles] = await connection.execute('SELECT * FROM roles');
+            const [existingRoles] = await connection.execute('SELECT * FROM roles ORDER BY id ASC');
             return existingRoles;
         } catch (error) {
             console.error('Erreur getAllRoles service', error)
