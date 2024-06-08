@@ -8,5 +8,8 @@ roleRouter.route("/addRole")
 roleRouter.route("/")
     .get(authenticate,authorize([1]),roleController.getAllRoles)
 
+roleRouter.route("/:id")
+    .get(authenticate,authorize([1]),roleController.getRoleById)
+
 module.exports = roleRouter;
 

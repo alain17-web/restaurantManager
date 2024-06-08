@@ -29,6 +29,22 @@ const roleController = {
             console.error('Erreur getAllRoles controller',error)
             res.status(500).json({message: 'Erreur getAllRoles controller'});
         }
+    },
+
+    getRoleById: async(req,res)=>{
+        try{
+            const roleId = req.params.id;
+            const role = await roleService.getRoleById(roleId);
+
+            if(role){
+                res.status(201).json(role);
+            } else {
+                res.status(404).json({error: 'Role not Found'});
+            }
+        } catch (error){
+            console.error('Erreur getRoleById controller',error)
+            res.status(500).json({message: 'Erreur getRoleById controller'});
+        }
     }
 }
 
