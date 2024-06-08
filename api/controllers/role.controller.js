@@ -19,6 +19,16 @@ const roleController = {
             }
             res.status(500).json({message: "Error controller creating the role."});
         }
+    },
+    //READ
+    getAllRoles: async(req,res)=>{
+        try{
+            const roles = await roleService.getAllRoles();
+            res.status(201).json(roles);
+        } catch (error){
+            console.error('Erreur getAllRoles controller',error)
+            res.status(500).json({message: 'Erreur getAllRoles controller'});
+        }
     }
 }
 

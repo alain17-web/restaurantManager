@@ -15,10 +15,22 @@ const roleService = {
             return {id:result.insertId,role_name}
 
         } catch (error) {
-            console.error('Erreur ajout role service')
+            console.error('Erreur ajout role service',error)
             throw error;
         } finally{
             await connection.end();
+        }
+    },
+
+    //READ
+    getAllRoles: async() => {
+        const connection = await createConnection();
+        try{
+            const [existingRoles] = await connection.execute('SELECT * FROM roles' );
+            return existingRoles;
+        } catch(error){
+            console.error('Erreur getAllRoles service',error)
+            throw error;
         }
     }
 }
