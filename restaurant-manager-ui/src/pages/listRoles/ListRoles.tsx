@@ -1,10 +1,11 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
-import {useState,useEffect} from "react";
-import { roles} from "../../tempData.ts";
-import { Role} from "../../types/types.ts";
+import {useState, useEffect} from "react";
+//import { roles} from "../../tempData.ts";
+import {Role} from "../../types/types.ts";
 import DataTableRoles from "../../components/dataTableRoles/DataTableRoles.tsx";
 import NewRole from "../newRole/NewRole.tsx";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 const ListRoles = () => {
 
@@ -13,12 +14,18 @@ const ListRoles = () => {
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
+        const getRoles = async () => {
+            try {
+                const res = await axiosInstance.get('/roles/')
+                setRoles(res.data)
+            } catch (error) {
+                console.error('Error in getRoles', error);
+            }
+        }
         getRoles()
     }, []);
 
-    const getRoles = () => {
-        setRoles(roles)
-    }
+
 
     const handleGetRoleId = (id: number) => {
         setRoleId(id)

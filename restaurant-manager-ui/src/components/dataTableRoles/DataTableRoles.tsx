@@ -1,8 +1,9 @@
-import {roles as roleData} from "../../tempData.ts";
+//import {roles as roleData} from "../../tempData.ts";
 import {roleColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState,useEffect} from "react";
 import {Role} from "../../types/types.ts";
+import axiosInstance from '../../axios/axiosInstance'
 
 interface Props{
     open:() => void
@@ -14,12 +15,18 @@ const DataTableRoles = (props:Props) => {
     const [roles, setRoles] = useState<Role[]>([])
 
     useEffect(() => {
+        const getRoles = async () => {
+            try {
+                const res = await axiosInstance.get('/roles/')
+                setRoles(res.data)
+            } catch (error) {
+                console.error('Error in getRoles', error);
+            }
+        }
         getRoles()
-    }, [])
+    }, []);
 
-    const getRoles = () => {
-        setRoles(roleData);
-    }
+
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
