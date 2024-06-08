@@ -2,30 +2,16 @@
 import {roleColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState,useEffect} from "react";
-import {Role} from "../../types/types.ts";
-import axiosInstance from '../../axios/axiosInstance'
+import {DataTableRoleData, Role} from "../../types/types.ts";
 
-interface Props{
-    open:() => void
-    getRoleId:(id:number) => void
-}
 
-const DataTableRoles = (props:Props) => {
+const DataTableRoles = (props: DataTableRoleData) => {
 
-    const [roles, setRoles] = useState<Role[]>([])
+    const [roles,setRoles] = useState<Role[]>([])
 
     useEffect(() => {
-        const getRoles = async () => {
-            try {
-                const res = await axiosInstance.get('/roles/')
-                setRoles(res.data)
-            } catch (error) {
-                console.error('Error in getRoles', error);
-            }
-        }
-        getRoles()
-    }, []);
-
+        setRoles(props.roles)
+    }, [props.roles]);
 
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });

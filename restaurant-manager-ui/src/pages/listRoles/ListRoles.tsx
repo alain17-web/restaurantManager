@@ -9,7 +9,7 @@ import axiosInstance from "../../axios/axiosInstance.tsx";
 
 const ListRoles = () => {
 
-    const [_roles, setRoles] = useState<Role[]>([]);
+    const [roles, setRoles] = useState<Role[]>([]);
     const [roleId, setRoleId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
 
@@ -40,14 +40,17 @@ const ListRoles = () => {
     const close = () => {
         setOpen(false);
     }
+
+
+
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Rôles</h1>
-                {!open ? <DataTableRoles getRoleId={handleGetRoleId} open={show}/> :
-                    <NewRole id={roleId} setRoleId={setRoleId}/>}
+                {!open ? <DataTableRoles roles={roles} getRoleId={handleGetRoleId} open={show}/> :
+                    <NewRole setRoleId={setRoleId} roles={roles} id={roleId}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

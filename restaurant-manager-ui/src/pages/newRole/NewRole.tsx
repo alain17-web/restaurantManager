@@ -1,14 +1,9 @@
 import {FormEvent, useEffect, useState} from "react";
-import {roles} from "../../tempData.ts";
-//import axios from "axios"
+import {NewRoleData} from "../../types/types.ts";
 
 
-interface Props {
-    id: number | null
-    setRoleId: (id: number) => void
-}
+const NewRole = (props: NewRoleData) => {
 
-const NewRole = (props: Props) => {
 
     const [role_name, setRole_name] = useState<string>('');
     const [message, setMessage] = useState<string>("")
@@ -17,11 +12,11 @@ const NewRole = (props: Props) => {
 
     useEffect(() => {
         if (props.id !== null && props.id !== undefined) {
-            handleEdit()
+            handleEdit();
         } else {
-            resetForm()
+            resetForm();
         }
-    }, [props.id]);
+    }, [props.id, props.roles]);
 
     const resetForm = () => {
         setAdd(true)
@@ -30,15 +25,15 @@ const NewRole = (props: Props) => {
         setSuccess(false);
     }
 
-    const handleEdit = () => {
-        setMessage("")
-        roles.map((role) => {
-            if (props.id === role.id) {
-                setAdd(false)
-                setRole_name(role.role_name)
-            }
-        })
+    const handleEdit = async () => {
+        setMessage("");
+        const role = props.roles.find((role) => role.id === props.id)
+        if(role){
+            setAdd(false)
+            setRole_name(role.role_name)
+        }
     }
+
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -47,6 +42,7 @@ const NewRole = (props: Props) => {
         } else {
             setSuccess(true)
             setMessage(add ? "Le rôle a bien été créée" : "Les modifications sont enregistrées")
+            //logic to updateRole
         }
     }
 
