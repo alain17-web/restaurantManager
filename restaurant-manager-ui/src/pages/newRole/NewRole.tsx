@@ -43,12 +43,13 @@ const NewRole = (props: NewRoleData) => {
         } else {
             try{
                 if(add){
-                    const res = await axiosInstance.post('/roles/addRole',{role_name})
-                    console.log(res.data)
+                    await axiosInstance.post('/roles/addRole',{role_name})
                     setSuccess(true)
                     setMessage("Le rôle a bien été créée" )
                 } else {
-                    //updateRole
+                    await axiosInstance.patch(`/roles/${props.id}`,{role_name})
+                    setSuccess(true)
+                    setMessage("Le rôle a bien été mis à jour")
                 }
 
             }catch(error){
