@@ -17,7 +17,7 @@ const employeeService = {
             );
 
             if (existingUser.length > 0) {
-                throw new Error('Cet identifiant existe déjà');
+                throw new Error('This username is already in use');
             }
 
             const hashedPassword = await bcrypt.hash(password, salt);
@@ -30,26 +30,15 @@ const employeeService = {
 
             return {id: result.insertId, username, role_id, email, tel, status_id, roster_id};
         } catch (error) {
-            console.error('Erreur ajout service employé:', error);
+            console.error('Error addEmployee service:', error);
             throw error;
         } finally {
             await connection.end();
         }
-    }
+    },
 
 //READ
-    /*async function getEmployees() {
-        const connection = await createConnection();
-        try {
-            const [rows, fields] = await connection.execute('SELECT * FROM employees');
-            return rows;
-        } catch (error) {
-            console.error('Error fetching roles:', error);
-            throw error;
-        } finally {
-            await connection.end();
-        }
-    }*/
+
 }
 module.exports = employeeService
 

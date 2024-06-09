@@ -14,7 +14,7 @@ const authService = {
             );
 
             if (rows.length === 0) {
-                throw new Error('Identifiant ou mot de passe incorrect');
+                throw new Error('Username or password is empty');
             }
 
             const employee = rows[0];
@@ -22,7 +22,7 @@ const authService = {
             const passwordMatch = await bcrypt.compare(password, employee.password);
 
             if (!passwordMatch) {
-                throw new Error('Identifiant ou mot de passe incorrect');
+                throw new Error('Invalid username or password');
             }
 
             const payload = {
@@ -44,7 +44,7 @@ const authService = {
 
     //LOGOUT
     logout: async () => {
-        return {message: 'Déconnexion réussie'}
+        return {message: 'Logout successfull'}
     }
 
 }

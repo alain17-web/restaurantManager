@@ -15,7 +15,7 @@ const roleService = {
             return {id: result.insertId, role_name}
 
         } catch (error) {
-            console.error('Erreur ajout role service', error)
+            console.error('Error addRole service', error)
             throw error;
         } finally {
             await connection.end();
@@ -29,7 +29,7 @@ const roleService = {
             const [existingRoles] = await connection.execute('SELECT * FROM roles ORDER BY id ASC');
             return existingRoles;
         } catch (error) {
-            console.error('Erreur getAllRoles service', error)
+            console.error('Error getAllRoles service', error)
             throw error;
         } finally {
             await connection.end();
@@ -42,7 +42,21 @@ const roleService = {
             const [role] = await connection.execute('SELECT * FROM roles WHERE id = ?', [id]);
             return role
         } catch (error) {
-            console.error('Erreur getRoleById service', error)
+            console.error('Error getRoleById service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
+    //DELETE
+    deleteRole: async (id) => {
+        const connection = await createConnection();
+        try{
+            const [result] = await connection.execute('DELETE FROM roles WHERE id = ?', [id]);
+            return result.affectedRows;
+        } catch  (error){
+            console.error('Error deleteRole service', error)
             throw error;
         } finally {
             await connection.end();

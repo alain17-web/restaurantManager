@@ -1,7 +1,6 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 import {useState, useEffect} from "react";
-//import { roles} from "../../tempData.ts";
 import {Role} from "../../types/types.ts";
 import DataTableRoles from "../../components/dataTableRoles/DataTableRoles.tsx";
 import NewRole from "../newRole/NewRole.tsx";
@@ -42,7 +41,6 @@ const ListRoles = () => {
     }
 
 
-
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
@@ -50,7 +48,7 @@ const ListRoles = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Rôles</h1>
                 {!open ? <DataTableRoles roles={roles} getRoleId={handleGetRoleId} open={show}/> :
-                    <NewRole setRoleId={setRoleId} roles={roles} id={roleId}/>}
+                    <NewRole setRoleId={setRoleId} roles={roles} id={roleId} />}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

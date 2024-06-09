@@ -23,34 +23,15 @@ const employeeController = {
                 roster_id
             });
 
-            res.status(201).json({message: "L'employé a bien été créé", registrationResult});
+            res.status(201).json({message: "Employee created successfully", registrationResult});
         } catch (error) {
             console.error(error);
-            res.status(500).json({message: 'Erreur création controller employé'});
+            res.status(500).json({message: 'Error addEmployee controller employé'});
         }
     },
 
 
-    /*login: async (req, res) => {
-        try {
-            await authValidator.validate(req.body); // Validate the request body
 
-            const {username, password} = req.body;
-            const {token, employee} = await loginEmployee({username, password});
-
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production'
-            });
-
-            res.json({message: 'Login successful', employee});
-        } catch (error) {
-            if (error.name === 'ValidationError') {
-                return res.status(400).json({message: error.message});
-            }
-            res.status(401).json({message: error.message});
-        }
-    }*/
 }
 
 

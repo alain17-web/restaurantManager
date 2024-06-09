@@ -11,5 +11,8 @@ roleRouter.route("/")
 roleRouter.route("/:id")
     .get(authenticate,authorize([1]),roleController.getRoleById)
 
+roleRouter.route("/:id")
+    .delete(authenticate,authorize([1]),roleController.deleteRole)
+
 module.exports = roleRouter;
 

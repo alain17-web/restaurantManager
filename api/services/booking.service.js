@@ -13,7 +13,7 @@ const bookingService = {
 
             return {id: result.insertId, date, hour, name, people};
         } catch (error) {
-            console.error("Error service creating booking", error);
+            console.error("Error addBooking service", error);
         }
     }
 }

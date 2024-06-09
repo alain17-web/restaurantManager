@@ -27,7 +27,7 @@ const roleController = {
             res.status(201).json(roles);
         } catch (error){
             console.error('Erreur getAllRoles controller',error)
-            res.status(500).json({message: 'Erreur getAllRoles controller'});
+            res.status(500).json({message: 'Error getAllRoles controller'});
         }
     },
 
@@ -43,7 +43,25 @@ const roleController = {
             }
         } catch (error){
             console.error('Erreur getRoleById controller',error)
-            res.status(500).json({message: 'Erreur getRoleById controller'});
+            res.status(500).json({message: 'Error getRoleById controller'});
+        }
+    },
+
+    //DELETE
+    deleteRole: async(req,res)=>{
+        try{
+            const roleId = req.params.id;
+
+            const deletedRole = await roleService.deleteRole(roleId);
+
+            if(deletedRole > 0){
+                res.status(200).json({message: "Role deleted successfully."});
+            } else {
+                res.status(404).json({error: 'Role not Found'});
+            }
+        } catch (error){
+            console.error('Error deleteRole controller',error)
+            res.status(500).json({message: 'Error deleteRole controller'});
         }
     }
 }

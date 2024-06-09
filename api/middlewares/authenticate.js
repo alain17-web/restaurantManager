@@ -5,7 +5,7 @@ const authenticate = (req, res, next) => {
     const token = req.cookies.token;
 
     if(!token){
-        return res.status(401).json({message:"Pas de token"});
+        return res.status(401).json({message:"No token"});
     }
 
     try{
@@ -19,7 +19,7 @@ const authenticate = (req, res, next) => {
 
 const authorize = (roles) => (req, res, next) => {
     if(!roles.includes(req.employee.role_id)){
-        return res.status(403).json({message:"Accès refusé"});
+        return res.status(403).json({message:"Access denied"});
     }
     next()
 }
