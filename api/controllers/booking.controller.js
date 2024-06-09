@@ -3,6 +3,7 @@ const bookingService = require("../services/booking.service");
 const bookingValidator = require("../validators/bookingValidator");
 
 const bookingController = {
+    //CREATE
     addBooking: async (req, res) => {
         try {
 
@@ -20,6 +21,22 @@ const bookingController = {
             }
 
             res.status(500).json({message: "Error controller creating the booking."});
+        }
+    },
+
+    //READ
+    getAllBookings: async(req,res)=>{
+        try{
+            const bookings = await bookingService.getAllBookings();
+
+            if(bookings.length > 0){
+                res.status(200).json(bookings);
+            } else {
+                res.status(404).json({message: "No booking found"});
+            }
+        } catch (error){
+            console.error('Error getAllBookings controller',error)
+            res.status(500).json({message: 'Error getAllBookings controller'});
         }
     }
 }

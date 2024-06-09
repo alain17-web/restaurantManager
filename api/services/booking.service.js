@@ -1,7 +1,7 @@
 const createConnection = require('../database/database');
 
 const bookingService = {
-//CREATE
+    //CREATE
     addBooking: async ({date, hour, name, email, people}) => {
         const connection = await createConnection();
 
@@ -14,10 +14,29 @@ const bookingService = {
             return {id: result.insertId, date, hour, name, people};
         } catch (error) {
             console.error("Error addBooking service", error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
+    //READ
+    getAllBookings: async () => {
+        const connection = await createConnection();
+
+        try {
+            const [bookings] = await connection.execute('SELECT * FROM bookings');
+            return bookings;
+        } catch (error) {
+            console.error("Error getAllBookings service", error);
+            throw error;
+        } finally {
+            await connection.end();
         }
     }
+
 }
 
 module.exports = bookingService;
 
-//READ
+
