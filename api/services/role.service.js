@@ -49,6 +49,20 @@ const roleService = {
         }
     },
 
+    //UPDATE
+    updateRole: async (id,role_name) => {
+        const connection = await createConnection();
+        try{
+            const [updatedRole] = await connection.execute('UPDATE roles SET role_name = ? WHERE id = ?', [role_name,id]);
+            return updatedRole.affectedRows > 0;
+        } catch (error){
+            console.error('Error updateRole service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
     //DELETE
     deleteRole: async (id) => {
         const connection = await createConnection();
