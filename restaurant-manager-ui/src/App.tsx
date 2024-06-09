@@ -1,3 +1,4 @@
+import 'react-confirm-alert/src/react-confirm-alert.css'
 import {RouterProvider, createBrowserRouter} from "react-router-dom"
 import {Home} from "./pages/home/Home.tsx";
 import {Menu} from "./pages/menu/Menu.tsx";
