@@ -12,4 +12,7 @@ rosterRouter.route("/")
 rosterRouter.route("/:id")
     .patch(authenticate,authorize([1]),rosterController.updateRoster)
 
+rosterRouter.route("/:id")
+    .delete(authenticate,authorize([1]),rosterController.deleteRoster)
+
 module.exports = rosterRouter;

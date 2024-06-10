@@ -68,7 +68,7 @@ const roleService = {
         const connection = await createConnection();
         try{
             const [result] = await connection.execute('DELETE FROM roles WHERE id = ?', [id]);
-            return result.affectedRows;
+            return result.affectedRows > 0;
         } catch  (error){
             console.error('Error deleteRole service', error)
             throw error;

@@ -48,6 +48,20 @@ const rosterService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //DELETE
+    deleteRoster: async (id) => {
+        const connection = await createConnection();
+        try{
+            const [result] = await connection.execute('DELETE FROM rosters WHERE id = ?', [id]);
+            return result.affectedRows > 0;
+        } catch(error){
+            console.error('Error deleteRoster service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 

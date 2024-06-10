@@ -51,6 +51,24 @@ const rosterController = {
             console.error('Error updateRoster controller',error)
             res.status(500).json({message: 'Error updateRoster controller'});
         }
+    },
+
+    //DELETE
+    deleteRoster: async (req, res) => {
+        try{
+           const rosterId = req.params.id;
+
+           const deletedRoster = await rosterService.deleteRoster(rosterId);
+
+           if(deletedRoster > 0){
+               res.status(200).json({message:"Roster deleted successfully."});
+           } else {
+               res.status(404).json({error: 'Roster not found'});
+           }
+        } catch(error){
+            console.error('Error deleteRoster controller',error)
+            res.status(500).json({message: 'Error deleteRoster controller'});
+        }
     }
 }
 
