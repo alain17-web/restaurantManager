@@ -7,20 +7,23 @@ const bookingController = {
     addBooking: async (req, res) => {
         try {
 
-            const validatedData = await bookingValidator.validate(req.body, {abortEarly: false});
+            const validatedData = await bookingValidator.validate(req.body, { abortEarly: false });
 
-            const {date, hour, name, email, people} = validatedData;
+            const [day, month, year] = validatedData.date.split("/");
+            const formattedDate = `${year}-${month}-${day}`;
 
-            const bookingResult = await bookingService.addBooking({date, hour, name, email, people});
+            const { hour, name, email, people } = validatedData;
 
-            res.status(201).json({message: "Booking created successfully.", bookingResult});
+            const bookingResult = await bookingService.addBooking({ date: formattedDate, hour, name, email, people });
+
+            res.status(201).json({ message: "Booking created successfully.", bookingResult });
         } catch (error) {
             if (error.name === 'ValidationError') {
-
-                return res.status(400).json({errors: error.errors});
+                console.error("Validation Error:", error.errors);
+                return res.status(400).json({ errors: error.errors });
             }
-
-            res.status(500).json({message: "Error controller creating the booking."});
+            console.error("Error in addBooking controller:", error);
+            res.status(500).json({ message: "Error creating the booking." });
         }
     },
 

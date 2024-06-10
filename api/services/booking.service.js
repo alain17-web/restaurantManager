@@ -11,7 +11,7 @@ const bookingService = {
                 [date, hour, name, email, people]
             );
 
-            return {id: result.insertId, date, hour, name, people};
+            return {id: result.insertId, date, hour,email, name, people};
         } catch (error) {
             console.error("Error addBooking service", error);
             throw error;

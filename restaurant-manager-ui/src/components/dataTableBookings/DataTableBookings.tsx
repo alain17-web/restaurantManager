@@ -1,28 +1,17 @@
-import { bookings as bookingData} from "../../tempData.ts";
 import {bookingsColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
-import {Booking} from "../../types/types.ts";
+import {DataTableBookingData,Booking} from "../../types/types.ts";
 
 
-interface Props{
-    open:() => void
-    getBookingId:(id:number) => void
-}
 
-
-const DataTableBookings = (props:Props) => {
+const DataTableBookings = (props:DataTableBookingData) => {
 
     const [bookings, setBookings] = useState<Booking[]>([])
 
     useEffect(() => {
-        getBookings()
-    }, []);
-
-
-    const getBookings = () => {
-        setBookings(bookingData);
-    }
+        setBookings(props.bookings)
+    }, [props.bookings]);
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 

@@ -2,7 +2,7 @@ type Props = {
     closeSuccessMsg: () => void;
     name: string
     people: number
-    formatedDate: string
+    date: string
     hour: string
     error: boolean
 };
@@ -22,7 +22,7 @@ const SuccessMsg = (props: Props) => {
                     <p className={"text-center text-2xl text-[#6B8E23] font-inter mt-8"}>Votre réservation
                         pour {props.people} {props.people > 1 ? "personnes" : "personne"} est confirmée. Nous vous
                         accueillons
-                        le {props.formatedDate} à {props.hour}.</p>
+                        le {props.date} à {props.hour}.</p>
                 </> :
                     <>
                         <p className={"text-center text-3xl text-red-500 font-inter"}>La réservation a échouée</p>

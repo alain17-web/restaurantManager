@@ -115,7 +115,19 @@ export interface Booking {
     hour: string;
     name: string;
     email: string;
-    numberOfPeople: number;
+    people: number;
+}
+
+export interface DataTableBookingData {
+    bookings:Booking[]
+    getBookingId:(id:number) => void
+    open:() => void
+}
+
+export interface NewBookingData {
+    setBookingId: (id: number | null) => void;
+    bookings:Booking[]
+    id:number | null
 }
 
 export interface Item {

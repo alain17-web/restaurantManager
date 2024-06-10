@@ -3,23 +3,27 @@ import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.ts
 import DataTableBookings from "../../components/dataTableBookings/DataTableBookings.tsx";
 import {useState,useEffect} from "react";
 import NewBooking from "../newBooking/NewBooking.tsx";
-import { bookings as bookingData} from "../../tempData.ts";
 import {Booking} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
 const ListBookings = () => {
 
-    const [_bookings, setBookings] = useState<Booking[]>([])
+    const [bookings, setBookings] = useState<Booking[]>([])
     const [bookingId, setBookingId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        getBookings();
+        const getBookings = async () => {
+            try {
+                const res = await axiosInstance.get('/bookings/')
+                setBookings(res.data)
+            } catch (error) {
+                console.error('Error in getBookings', error);
+            }
+        }
+        getBookings()
     }, []);
-
-    const getBookings = () => {
-        setBookings(bookingData);
-    };
 
 
     const handleGetBookingId = (id: number) => {
@@ -42,7 +46,8 @@ const ListBookings = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Réservations</h1>
-                {!open ? <DataTableBookings getBookingId={handleGetBookingId} open={show}/> : <NewBooking id={bookingId} setBookingId={setBookingId}/>}
+                {!open ? <DataTableBookings bookings={bookings} getBookingId={handleGetBookingId} open={show}/> :
+                    <NewBooking id={bookingId} setBookingId={setBookingId} bookings={bookings} />}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button
