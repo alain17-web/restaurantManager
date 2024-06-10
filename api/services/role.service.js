@@ -8,7 +8,7 @@ const roleService = {
             const [existingRole] = await connection.execute('SELECT * FROM roles WHERE role_name = ?', [role_name]);
 
             if (existingRole.length > 0) {
-                throw new Error('Ce rôle existe déjà');
+                throw new Error('This role already exists');
             }
             const [result] = await connection.execute('INSERT INTO roles (role_name) VALUES (?)', [role_name]);
 
