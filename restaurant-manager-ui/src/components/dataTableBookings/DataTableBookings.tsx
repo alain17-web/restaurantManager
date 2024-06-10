@@ -2,7 +2,9 @@ import {bookingsColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
 import {DataTableBookingData,Booking} from "../../types/types.ts";
-
+import {confirmAlert} from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
 const DataTableBookings = (props:DataTableBookingData) => {
@@ -16,7 +18,27 @@ const DataTableBookings = (props:DataTableBookingData) => {
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
     const handleDelete = (id:number) => {
-
+        confirmAlert({
+            title: 'Confirmation',
+            message:'Etes-vous sûr de vouloir supprimer cette réservation ?',
+            buttons: [
+                {
+                    label: 'Oui',
+                    onClick: async () => {
+                        try{
+                            await axiosInstance.delete(`/bookings/${id}`)
+                            setBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== id))
+                        } catch (error){
+                            console.error("deletion failed", error)
+                        }
+                    }
+                },
+                {
+                    label: 'Non',
+                    onClick: () => console.log("deletion cancelled")
+                }
+            ]
+        })
     }
 
     const actionColumn: GridColDef[] = [{
