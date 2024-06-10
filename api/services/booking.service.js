@@ -1,4 +1,5 @@
 const createConnection = require('../database/database');
+const moment = require("moment");
 
 const bookingService = {
     //CREATE
@@ -21,7 +22,7 @@ const bookingService = {
     },
 
     //READ
-    getAllBookings: async () => {
+    /*getAllBookings: async () => {
         const connection = await createConnection();
 
         try {
@@ -29,6 +30,23 @@ const bookingService = {
             return bookings;
         } catch (error) {
             console.error("Error getAllBookings service", error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    }*/
+    getAllBookings: async () => {
+        const connection = await createConnection();
+
+        try {
+            const [bookings] = await connection.execute('SELECT * FROM bookings');
+
+            bookings.forEach(booking => {
+                booking.date = moment(booking.date).format('DD/MM/YYYY');
+            });
+            return bookings;
+        } catch (error) {
+            console.error("Error in getAllBookings service:", error);
             throw error;
         } finally {
             await connection.end();

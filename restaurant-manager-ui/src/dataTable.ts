@@ -271,7 +271,7 @@ export const bookingsColumns : GridColDef[]=[
         width: 220
     },
     {
-        field: "numberOfPeople",
+        field: "people",
         headerName: "pers",
         width: 120
     },
