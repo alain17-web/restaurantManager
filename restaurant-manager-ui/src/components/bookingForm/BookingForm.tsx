@@ -123,7 +123,7 @@ const BookingForm = () => {
                                 id="currentDate"
                                 required
                                 className={"w-[70%] h-10 px-3 border border-[#008080]"}
-                                value={currentDate} // Update the value to currentDate
+                                value={currentDate}
                                 onChange={(e) => {
                                     setCurrentDate(e.target.value);
                                 }}

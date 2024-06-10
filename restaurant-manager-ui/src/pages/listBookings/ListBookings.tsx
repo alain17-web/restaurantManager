@@ -5,7 +5,7 @@ import {useState,useEffect} from "react";
 import NewBooking from "../newBooking/NewBooking.tsx";
 import {Booking} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
-import moment from "moment";
+import dayjs from "dayjs";
 
 
 const ListBookings = () => {
@@ -21,7 +21,7 @@ const ListBookings = () => {
                 console.log(res.data)
                 const formattedBookings = res.data.map((booking:Booking)  => ({
                     ...booking,
-                    date: moment(booking.date).format('DD/MM/YYYY')
+                    date: dayjs(booking.date).format('DD/MM/YYYY')
                 }));
                 setBookings(formattedBookings);
                 setBookings(res.data)

@@ -1,4 +1,3 @@
-
 const bookingService = require("../services/booking.service");
 const bookingValidator = require("../validators/bookingValidator");
 
