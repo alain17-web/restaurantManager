@@ -44,7 +44,6 @@ const bookingService = {
     updateBooking: async (id, date, hour, name, email, people) => {
         const connection = await createConnection();
         try {
-            // Convert date from 'DD/MM/YYYY' to 'YYYY-MM-DD'
             const [day, month, year] = date.split('/');
             const formattedDate = `${year}-${month}-${day}`;
 

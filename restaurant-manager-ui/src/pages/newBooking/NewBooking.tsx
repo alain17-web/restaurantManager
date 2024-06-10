@@ -73,7 +73,15 @@ const NewBooking = (props: NewBookingData) => {
                         setSuccess(true)
                         setMessage("La réservation a bien été créée")
                     } else {
-                        //update booking
+                        await axiosInstance.patch(`/bookings/${props.id}`, {
+                            date: formattedDate,
+                            hour,
+                            name,
+                            email,
+                            people
+                        })
+                        setSuccess(true)
+                        setMessage("La réservation a bien été mise à jour")
                     }
 
                 } catch (error) {
