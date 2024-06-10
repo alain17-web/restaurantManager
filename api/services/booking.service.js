@@ -12,7 +12,7 @@ const bookingService = {
                 [date, hour, name, email, people]
             );
 
-            return {id: result.insertId, date, hour,email, name, people};
+            return {id: result.insertId, date, hour, email, name, people};
         } catch (error) {
             console.error("Error addBooking service", error);
             throw error;
@@ -34,6 +34,27 @@ const bookingService = {
             return bookings;
         } catch (error) {
             console.error("Error in getAllBookings service:", error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
+    //UPDATE
+    updateBooking: async (id, date, hour, name, email, people) => {
+        const connection = await createConnection();
+        try {
+            // Convert date from 'DD/MM/YYYY' to 'YYYY-MM-DD'
+            const [day, month, year] = date.split('/');
+            const formattedDate = `${year}-${month}-${day}`;
+
+            const [updatedBooking] = await connection.execute(
+                'UPDATE bookings SET date = ?, hour = ?, name = ?, email = ?, people = ? WHERE id = ?',
+                [formattedDate, hour, name, email, people, id]
+            );
+            return updatedBooking.affectedRows > 0;
+        } catch (error) {
+            console.error("Error updatingBooking service:", error);
             throw error;
         } finally {
             await connection.end();

@@ -11,5 +11,8 @@ bookingRouter.route("/admin/addBooking")
 bookingRouter.route("/")
     .get(authenticate,authorize([1]),bookingController.getAllBookings)
 
+bookingRouter.route("/:id")
+    .patch(authenticate,authorize([1]),bookingController.updateBooking)
+
 
 module.exports = bookingRouter;

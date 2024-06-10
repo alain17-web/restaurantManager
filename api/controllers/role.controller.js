@@ -54,9 +54,9 @@ const roleController = {
 
             const {role_name} = validateRoleName;
 
-            const updateRole = await roleService.updateRole(req.params.id, role_name);
+            const updatedRole = await roleService.updateRole(req.params.id, role_name);
 
-            if(updateRole){
+            if(updatedRole){
                 res.status(201).json({message: "Role updated successfully."});
             } else {
                 res.status(404).json({error: 'Role not Found or no change made'});
