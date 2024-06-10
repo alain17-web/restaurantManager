@@ -34,6 +34,20 @@ const rosterService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //UPDATE
+    updateRoster: async (id,roster) => {
+        const connection = await createConnection();
+        try{
+           const [updatedRoster] = await connection.execute('UPDATE rosters SET roster = ? WHERE id = ?', [roster,id]);
+           return updatedRoster.affectedRows > 0;
+        } catch(error){
+            console.error('Error updateRoster service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 
