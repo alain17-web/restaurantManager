@@ -62,6 +62,24 @@ const bookingController = {
             console.error('Error updateBooking controller:', error.message);
             res.status(500).json({message: 'Error updateBooking controller', error: error.message});
         }
+    },
+
+    //DELETE
+    deleteBooking: async (req, res) => {
+        try{
+            const bookingId = req.params.id;
+
+            const deletedBooking = await bookingService.deleteBooking(bookingId);
+
+            if (deletedBooking > 0) {
+                res.status(200).json({message: "Booking deleted successfully."});
+            } else {
+                res.status(404).json({error: 'Booking not found'});
+            }
+        } catch (error){
+            console.error('Error deleting booking controller', error);
+            res.status(500).json({message: 'Error deleting booking controller'});
+        }
     }
 }
 

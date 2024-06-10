@@ -58,8 +58,21 @@ const bookingService = {
         } finally {
             await connection.end();
         }
-    }
+    },
 
+    //DELETE
+    deleteBooking: async (id) => {
+        const connection = await createConnection();
+        try{
+            const [result] = await connection.execute('DELETE FROM bookings WHERE id = ?', [id]);
+            return result.affectedRows > 0;
+        } catch (error){
+            console.error("Error deletingBooking service", error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    }
 }
 
 module.exports = bookingService;

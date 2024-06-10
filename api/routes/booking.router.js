@@ -14,5 +14,8 @@ bookingRouter.route("/")
 bookingRouter.route("/:id")
     .patch(authenticate,authorize([1]),bookingController.updateBooking)
 
+bookingRouter.route("/:id")
+    .delete(authenticate,authorize([1]),bookingController.deleteBooking)
+
 
 module.exports = bookingRouter;
