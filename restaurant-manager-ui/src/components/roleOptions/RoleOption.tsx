@@ -17,7 +17,7 @@ const RoleOption = () => {
         <>
             <option>Choisir un rôle</option>
             {roles.map((role) => (
-                <option key={role.id}>{role.role_name}</option>
+                <option key={role.id} value={role.id}>{role.role_name}</option>
             ))}
         </>
     );

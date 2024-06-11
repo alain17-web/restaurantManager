@@ -17,7 +17,7 @@ const RosterOptions = () => {
         <>
             <option>Choisir un horaire</option>
             {rosters.map((roster) => (
-                <option key={roster.id}>{roster.roster}</option>
+                <option key={roster.id} value={roster.id}>{roster.roster}</option>
             ))}
         </>
     );

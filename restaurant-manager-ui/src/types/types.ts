@@ -44,10 +44,22 @@ export interface Employee {
     password: string;
     email: string;
     tel: string;
-    role: string;
-    status: string;
-    roster: string;
+    role_id: number;
+    status_id: number;
+    roster_id: number;
     avatar?: string;
+}
+
+export interface DataTableEmployeeData {
+    employees:Employee[]
+    getEmployeeId:(id:number) => void
+    open:() => void
+}
+
+export interface NewEmployeeData {
+    setEmployeeId: (id: number | null) => void;
+    employees:Employee[]
+    id:number | null
 }
 
 //temporary

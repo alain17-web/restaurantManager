@@ -101,6 +101,11 @@ export const employeeColumns : GridColDef[]=[
         width: 120
     },
     {
+        field: "role_id",
+        headerName: "role_id",
+        width: 180
+    },
+    {
         field: "email",
         headerName: "email",
         width: 220
@@ -111,13 +116,13 @@ export const employeeColumns : GridColDef[]=[
         width: 220
     },
     {
-        field: "role",
-        headerName: "role",
+        field: "status_id",
+        headerName: "status_id",
         width: 180
     },
     {
-        field: "roster",
-        headerName: "horaire",
+        field: "roster_id",
+        headerName: "horaire_id",
         width: 180,
     }
 ]

@@ -1,26 +1,16 @@
-import {employees as employeeData} from "../../tempData.ts";
 import {employeeColumns} from "../../dataTable.ts";
 import {DataGrid, GridRenderCellParams,GridColDef} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
-import {Employee} from "../../types/types.ts";
+import { DataTableEmployeeData,Employee} from "../../types/types.ts";
 
 
-interface Props{
-    open:() => void
-    getEmployeeId:(id:number) => void
-}
-
-const DataTableActive = (props:Props) => {
+const DataTableActive = (props:DataTableEmployeeData) => {
 
     const [employees, setEmployees] = useState<Employee[]>([])
 
     useEffect(() => {
-        getEmployees()
-    }, []);
-
-    const getEmployees = () => {
-        setEmployees(employeeData)
-    }
+        setEmployees(props.employees)
+    }, [props.employees]);
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
