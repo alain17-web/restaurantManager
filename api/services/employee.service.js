@@ -6,7 +6,7 @@ const {JWT_SECRET, JWT_EXPIRES_IN} = process.env
 
 
 const employeeService = {
-//CREATE - REGISTER
+    //CREATE - REGISTER
     addEmployee: async ({username, password, role_id, email, tel, status_id, roster_id}) => {
         const connection = await createConnection();
         try {
@@ -37,7 +37,7 @@ const employeeService = {
         }
     },
 
-//READ
+    //READ
     getAllEmployees: async () => {
         const connection = await createConnection();
 
@@ -50,7 +50,27 @@ const employeeService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //UPDATE
+    updateEmployee: async (id,username, password, role_id,email, tel, status_id, roster_id) => {
+        const connection = await createConnection();
+
+        try{
+            const newHashedPassword = await bcrypt.hash(password, salt);
+
+            const [updatedEmployee] = await connection.execute('UPDATE employees SET username = ?, password = ?, role_id = ?, email = ?, tel = ?, status_id = ?, roster_id = ?  WHERE id = ?', [username, newHashedPassword, role_id,email, tel, status_id, roster_id,id]);
+
+            return updatedEmployee.affectedRows > 0;
+        } catch(error){
+            console.error('Error updateEmployee service:', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
+
+
 }
 module.exports = employeeService
 

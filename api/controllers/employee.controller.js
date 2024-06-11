@@ -1,5 +1,6 @@
 const employeeService = require('../services/employee.service');
 const addEmployeeValidator = require('../validators/employeeValidator');
+const employeeValidator = require("../validators/employeeValidator");
 //const bcrypt = require('bcrypt');
 //const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -38,6 +39,26 @@ const employeeController = {
         } catch (error) {
             console.error('Error getAllRoles controller',error);
             res.status(500).json({message: 'Error getAllRoles controller'});
+        }
+    },
+
+    //UPDATE
+    updateEmployee: async (req, res) => {
+        try{
+            const validateEmployee = await employeeValidator.validate(req.body);
+
+            const {username, password, role_id, email, tel, status_id,roster_id} = validateEmployee;
+
+            const updatedEmployee = await employeeService.updateEmployee(req.params.id,username,password,role_id,email,tel,status_id,roster_id)
+
+            if(updatedEmployee){
+                res.status(201).json({message: "Employee updated successfully."});
+            } else {
+                res.status(404).json({error: 'Employee not found or no change made'});
+            }
+        } catch(error){
+            console.error('Error updateEmployee controller',error)
+            res.status(500).json({message: 'Error updateEmployee controller'});
         }
     }
 
