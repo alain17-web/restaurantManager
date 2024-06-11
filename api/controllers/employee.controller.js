@@ -33,37 +33,52 @@ const employeeController = {
 
     //READ
     getAllemployees: async (req, res) => {
-        try{
+        try {
             const employees = await employeeService.getAllEmployees();
             res.status(200).json(employees);
         } catch (error) {
-            console.error('Error getAllRoles controller',error);
+            console.error('Error getAllRoles controller', error);
             res.status(500).json({message: 'Error getAllRoles controller'});
         }
     },
 
     //UPDATE
     updateEmployee: async (req, res) => {
-        try{
+        try {
             const validateEmployee = await employeeValidator.validate(req.body);
 
-            const {username, password, role_id, email, tel, status_id,roster_id} = validateEmployee;
+            const {username, password, role_id, email, tel, status_id, roster_id} = validateEmployee;
 
-            const updatedEmployee = await employeeService.updateEmployee(req.params.id,username,password,role_id,email,tel,status_id,roster_id)
+            const updatedEmployee = await employeeService.updateEmployee(req.params.id, username, password, role_id, email, tel, status_id, roster_id)
 
-            if(updatedEmployee){
+            if (updatedEmployee) {
                 res.status(201).json({message: "Employee updated successfully."});
             } else {
                 res.status(404).json({error: 'Employee not found or no change made'});
             }
-        } catch(error){
-            console.error('Error updateEmployee controller',error)
+        } catch (error) {
+            console.error('Error updateEmployee controller', error)
             res.status(500).json({message: 'Error updateEmployee controller'});
         }
+    },
+
+    //DELETE
+    deleteEmployee: async (req, res) => {
+        try {
+            const employeeId = req.params.id;
+
+            const deletedEmployee = await employeeService.deleteEmployee(employeeId);
+
+            if (deletedEmployee > 0) {
+                res.status(200).json({message: "Employee deleted successfully."});
+            } else {
+                res.status(404).json({error: 'Employee not found'});
+            }
+        } catch (error) {
+            console.error('Error deleteEmployee controller', error);
+            res.status(500).json({message: 'Error deleteEmployee controller'});
+        }
     }
-
-
-
 }
 
 

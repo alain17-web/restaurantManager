@@ -68,6 +68,21 @@ const employeeService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //DELETE
+    deleteEmployee: async (id) => {
+        const connection = await createConnection();
+
+        try{
+            const [result] = await connection.execute('DELETE FROM employees WHERE id = ?', [id]);
+            return result.affectedRows > 0;
+        } catch (error){
+            console.error('Error deleteEmployee service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 
 
