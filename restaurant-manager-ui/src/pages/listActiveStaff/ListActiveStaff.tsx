@@ -3,25 +3,28 @@ import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.ts
 import DataTableActive from "../../components/dataTableActive/DataTableActive.tsx";
 import {useEffect, useState} from "react";
 import NewEmployee from "../newEmployee/NewEmployee.tsx";
-import {employees as employeeData} from "../../tempData.ts";
 import {Employee} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
 const ListActiveStaff = () => {
 
-    const [_employees, setEmployees] = useState<Employee[]>([])
+    const [employees, setEmployees] = useState<Employee[]>([])
+    const[employeeId, setEmployeeId] = useState<number | null>(0);
+    const [open,setOpen] = useState<boolean>(false);
 
     useEffect(() => {
+        const getEmployees = async () => {
+            try {
+                const res = await axiosInstance.get('/employees/')
+                setEmployees(res.data)
+            } catch (error) {
+                console.error('Error in getEmployees', error);
+            }
+        }
         getEmployees()
     }, []);
 
-    const getEmployees = () => {
-        setEmployees(employeeData)
-
-    }
-
-    const[employeeId, setEmployeeId] = useState<number | null>(0);
-    const [open,setOpen] = useState<boolean>(false);
 
     const handleGetEmployeeId = (id: number) => {
         setEmployeeId(id)
@@ -45,7 +48,7 @@ const ListActiveStaff = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Employés</h1>
-                {!open ? <DataTableActive getEmployeeId={handleGetEmployeeId} open={show} /> : <NewEmployee id={employeeId} setEmployeeId={setEmployeeId} />}
+                {!open ? <DataTableActive employees={employees} getEmployeeId={handleGetEmployeeId} open={show} /> : <NewEmployee id={employeeId} setEmployeeId={setEmployeeId} employees={employees} />}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

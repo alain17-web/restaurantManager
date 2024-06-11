@@ -38,14 +38,27 @@ const employeeService = {
     },
 
     //READ
-    getAllEmployees: async () => {
+    getAllActiveEmployees: async () => {
         const connection = await createConnection();
 
         try{
-            const [employees] = await connection.execute('SELECT * FROM employees');
+            const [employees] = await connection.execute('SELECT * FROM employees WHERE status_id = 1');
             return employees;
         } catch(error){
-            console.error('Error getAllEmployees service', error);
+            console.error('Error getAllActiveEmployees service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+    getAllInactiveEmployees: async () => {
+        const connection = await createConnection();
+
+        try{
+            const [employees] = await connection.execute('SELECT * FROM employees WHERE status_id = 2');
+            return employees;
+        } catch(error){
+            console.error('Error getAllInactiveEmployees service', error);
             throw error;
         } finally {
             await connection.end();

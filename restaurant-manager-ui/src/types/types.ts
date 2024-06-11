@@ -46,8 +46,8 @@ export interface Employee {
     tel: string;
     role: string;
     status: string;
-    roster?: string;
-    avatar: string;
+    roster: string;
+    avatar?: string;
 }
 
 //temporary

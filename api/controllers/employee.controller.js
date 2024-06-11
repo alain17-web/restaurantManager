@@ -32,13 +32,23 @@ const employeeController = {
     },
 
     //READ
-    getAllemployees: async (req, res) => {
+    getAllActiveEmployees: async (req, res) => {
         try {
-            const employees = await employeeService.getAllEmployees();
+            const employees = await employeeService.getAllActiveEmployees();
             res.status(200).json(employees);
         } catch (error) {
-            console.error('Error getAllRoles controller', error);
-            res.status(500).json({message: 'Error getAllRoles controller'});
+            console.error('Error getAllActiveEmployees controller', error);
+            res.status(500).json({message: 'Error getAllActiveEmployees controller'});
+        }
+    },
+
+    getAllInactiveEmployees: async (req, res) => {
+        try {
+            const employees = await employeeService.getAllInactiveEmployees();
+            res.status(200).json(employees);
+        } catch (error) {
+            console.error('Error getAllInactiveEmployees controller', error);
+            res.status(500).json({message: 'Error getAllInactiveEmployees controller'});
         }
     },
 
