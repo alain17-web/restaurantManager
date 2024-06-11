@@ -1,7 +1,7 @@
-import {FormEvent, useEffect, useState} from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import RoleOption from "../../components/roleOptions/RoleOption.tsx";
 import RosterOptions from "../../components/rosterOptions/RosterOptions.tsx";
-import {NewEmployeeData} from "../../types/types.ts";
+import { NewEmployeeData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
@@ -15,6 +15,7 @@ const NewEmployee = (props: NewEmployeeData) => {
     const [status_id, setStatus_id] = useState<number>(0);
     const [roster_id, setRoster_id] = useState<number>(0);
 
+    const [usernameMessage, setUsernameMessage] = useState<string>('');
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
 
@@ -39,6 +40,7 @@ const NewEmployee = (props: NewEmployeeData) => {
         setRoster_id(0)
         setMessage("")
         setSuccess(false)
+        setUsernameMessage("")
     }
 
     const handleEdit = () => {
@@ -55,6 +57,27 @@ const NewEmployee = (props: NewEmployeeData) => {
             setRoster_id(employee.roster_id)
         }
     }
+
+    const validateUsername = (username: string) => {
+        const existingUsernames = props.employees
+            .filter(employee => employee.status_id === 1)
+            .map(employee => employee.username);
+
+        if (existingUsernames.includes(username)) {
+            setUsernameMessage("Cet identifiant existe déjà");
+        } else {
+            setUsernameMessage("");
+        }
+    };
+
+    const handleUsername = (e: ChangeEvent<HTMLInputElement>) => {
+        const newUsername = e.target.value;
+        setUsername(newUsername);
+        validateUsername(newUsername);
+    };
+
+
+
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -104,13 +127,15 @@ const NewEmployee = (props: NewEmployeeData) => {
                         <div className={"w-[75%]"}>
                             <label className={"flex items-center gap-[10px]"}>Identifiant*</label>
                             <input
-                                className={"w-full p-[5px] border-b-[1px] border-gray-500"}
+                                className={"w-full p-[5px] border-b-[1px] border-gray-500 placeholder:text-red-500"}
                                 type={"text"}
                                 required
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={handleUsername}
                             />
                         </div>
+                        {usernameMessage && (<p className={'text-red-500 text-base'}>{usernameMessage}</p>)}
+
                         <div className={"w-[75%]"}>
                             <label className={"flex items-center gap-[10px]"}>Mot de passe*</label>
                             <input
@@ -119,6 +144,7 @@ const NewEmployee = (props: NewEmployeeData) => {
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+
                             />
                         </div>
                         <div className={"w-[75%]"}>
