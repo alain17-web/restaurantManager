@@ -56,22 +56,18 @@ export interface DataTableEmployeeData {
     open:() => void
 }
 
+export interface DataTableInactiveData {
+    inactives:Employee[]
+    getInactiveId:(id:number) => void
+    open:() => void
+}
+
 export interface NewEmployeeData {
     setEmployeeId: (id: number | null) => void;
     employees:Employee[]
     id:number | null
 }
 
-//temporary
-export interface FormerEmployee {
-    id: number
-    username: string;
-    password: string;
-    email: string;
-    tel: string;
-    role: string;
-    status: string;
-}
 
 export interface Role {
     id:number;

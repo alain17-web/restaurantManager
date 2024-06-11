@@ -1,31 +1,50 @@
-import {formerEmployees as formerEmployeeData} from "../../tempData.ts";
 import {inactiveColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
-import {FormerEmployee} from "../../types/types.ts";
+import {DataTableInactiveData,Employee} from "../../types/types.ts";
+import {confirmAlert} from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
-interface Props{
-    open:() => void
-    getFormerEmployeeId:(id:number) => void
-}
 
-const DataTableInactive = (props:Props) => {
 
-    const [formerEmployees,setFormerEmployees] = useState<FormerEmployee[]>([])
+const DataTableInactive = (props:DataTableInactiveData) => {
+
+    const [inactives,setInactives] = useState<Employee[]>([])
 
     useEffect(() => {
-        getFormerEmployees()
-    }, []);
+        setInactives(props.inactives)
+    }, [props.inactives]);
 
-    const getFormerEmployees = () => {
-        setFormerEmployees(formerEmployeeData)
-    }
+
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
     const handleDelete = (id:number) => {
+        confirmAlert({
+            title: 'Confirmation',
+            message: 'Etes-vous sûr de vouloir supprimer cet ex-employé ?',
+            buttons: [
+                {
+                    label: 'Oui',
+                    onClick: async () => {
+                        try {
+                            await axiosInstance.delete(`/employees/${id}`)
+                            setInactives((prevInactives) => prevInactives.filter((inactive) => inactive.id !== id))
+                        } catch (error) {
+                            console.error("deletion failed", error)
+                        }
 
+                    }
+                },
+                {
+                    label: 'Non',
+                    onClick:  () => console.log("deletion cancelled")
+                }
+
+            ]
+        })
     }
 
     const actionColumn: GridColDef[] = [{
@@ -37,7 +56,7 @@ const DataTableInactive = (props:Props) => {
                 <div className={"flex items-center mt-3"}>
                     <div
                         className={"py-[2px] px-[5px] mr-2 text-[00008B] border-[1px] border-gray-200 rounded-md cursor-pointer"}
-                        onClick={() => props.getFormerEmployeeId(params.row.id)} data-bs-toggle="tooltip"
+                        onClick={() => props.getInactiveId(params.row.id)} data-bs-toggle="tooltip"
                         data-bs-placement="top" title="VOIR DETAIL OU MODIFIER">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffa500"
                              className="bi bi-pencil-fill cursor-pointer" viewBox="0 0 16 16">
@@ -62,7 +81,7 @@ const DataTableInactive = (props:Props) => {
     return (
         <div className={"h-[950px] p-4"}>
             <DataGrid
-                rows={formerEmployees}
+                rows={inactives}
                 columns={inactiveColumns.concat(actionColumn)}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
