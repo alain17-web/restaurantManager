@@ -38,7 +38,19 @@ const employeeService = {
     },
 
 //READ
+    getAllEmployees: async () => {
+        const connection = await createConnection();
 
+        try{
+            const [employees] = await connection.execute('SELECT * FROM employees');
+            return employees;
+        } catch(error){
+            console.error('Error getAllEmployees service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    }
 }
 module.exports = employeeService
 

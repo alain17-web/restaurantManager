@@ -5,5 +5,8 @@ const {authenticate, authorize} = require("../middlewares/authenticate");
 employeeRouter.route("/addEmployee")
     .post(authenticate,authorize([1]), employeeController.addEmployee);
 
+employeeRouter.route("/")
+    .get(authenticate,authorize([1]),employeeController.getAllemployees)
+
 
 module.exports = employeeRouter;

@@ -30,6 +30,17 @@ const employeeController = {
         }
     },
 
+    //READ
+    getAllemployees: async (req, res) => {
+        try{
+            const employees = await employeeService.getAllEmployees();
+            res.status(200).json(employees);
+        } catch (error) {
+            console.error('Error getAllRoles controller',error);
+            res.status(500).json({message: 'Error getAllRoles controller'});
+        }
+    }
+
 
 
 }
