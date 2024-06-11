@@ -32,6 +32,20 @@ const categoryService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //UPDATE
+    updateCategory: async (id, cat_name, type) => {
+        const connection = await createConnection({})
+        try{
+            const [updatedCat] = await connection.execute('UPDATE categories SET cat_name = ?,type= ?  WHERE id = ?', [cat_name,type, id]);
+            return updatedCat.affectedRows > 0;
+        }catch (error){
+            console.error('Error updating category service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 module.exports = categoryService;

@@ -8,4 +8,7 @@ categoryRouter.route("/addCategory")
 categoryRouter.route("/")
     .get(authenticate,authorize([1]),categoryController.getAllCategories)
 
+categoryRouter.route("/:id")
+    .patch(authenticate,authorize([1]),categoryController.updateCategory)
+
 module.exports = categoryRouter;
