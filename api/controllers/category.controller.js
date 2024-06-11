@@ -19,6 +19,17 @@ const categoryController = {
             }
             res.status(500).json({message: 'Error controller creating the category'});
         }
+    },
+
+    //READ
+    getAllCategories: async(req,res)=>{
+        try{
+            const categories = await categoryService.getAllCategories();
+            res.status(201).json(categories);
+        }catch(error){
+            console.error('Error getAllCategories controller',error)
+            res.status(500).json({message: 'Error getAllCategories controller'});
+        }
     }
 };
 

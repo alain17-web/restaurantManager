@@ -18,6 +18,20 @@ const categoryService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //READ
+    getAllCategories: async () => {
+        const connection = await createConnection();
+        try{
+            const [categories] = await connection.execute('SELECT * FROM categories ORDER BY id ASC');
+            return categories;
+        } catch(error){
+            console.error('Error getAllCategories service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 module.exports = categoryService;

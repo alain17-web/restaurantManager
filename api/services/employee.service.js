@@ -42,7 +42,7 @@ const employeeService = {
         const connection = await createConnection();
 
         try{
-            const [employees] = await connection.execute('SELECT * FROM employees WHERE status_id = 1');
+            const [employees] = await connection.execute('SELECT * FROM employees WHERE status_id = 1 ORDER BY role_id ASC');
             return employees;
         } catch(error){
             console.error('Error getAllActiveEmployees service', error);

@@ -5,5 +5,7 @@ const { authenticate, authorize } = require('../middlewares/authenticate');
 categoryRouter.route("/addCategory")
     .post(authenticate, authorize([1]), categoryController.addCategory)
 
+categoryRouter.route("/")
+    .get(authenticate,authorize([1]),categoryController.getAllCategories)
 
 module.exports = categoryRouter;
