@@ -46,6 +46,20 @@ const categoryService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //DELETE
+    deleteCategory: async (id) => {
+        const connection = await createConnection();
+        try{
+            const [result] = await connection.execute('DELETE FROM categories WHERE id = ?', [id]);
+            return result.affectedRows > 0;
+        } catch(error){
+            console.error('Error deleting category service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 module.exports = categoryService;

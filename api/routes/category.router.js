@@ -11,4 +11,7 @@ categoryRouter.route("/")
 categoryRouter.route("/:id")
     .patch(authenticate,authorize([1]),categoryController.updateCategory)
 
+categoryRouter.route("/:id")
+    .delete(authenticate,authorize([1]),categoryController.deleteCategory)
+
 module.exports = categoryRouter;

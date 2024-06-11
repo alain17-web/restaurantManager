@@ -50,6 +50,22 @@ const categoryController = {
             console.error('Error updating category',error)
             res.status(500).json({message: 'Error updating category'});
         }
+    },
+
+    //DELETE
+    deleteCategory: async (req, res) => {
+         try{
+             const catId = req.params.id;
+             const deletedCategory = await categoryService.deleteCategory(catId);
+             if (deletedCategory > 0){
+                 res.status(200).json({message: "Category deleted successfully."});
+             } else {
+                 res.status(404).json({error: 'Category not found'});
+             }
+         } catch(error){
+             console.error('Error deleting category',error)
+             res.status(500).json({message: 'Error deleting category'});
+         }
     }
 };
 
