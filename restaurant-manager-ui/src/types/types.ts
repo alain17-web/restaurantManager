@@ -72,9 +72,21 @@ export interface DataTableRoleData {
     open:() => void
 }
 
+export interface DataTableRosterData {
+    rosters:Roster[]
+    getRosterId:(id:number) => void
+    open:() => void
+}
+
 export interface NewRoleData {
     setRoleId: (id: number | null) => void;
     roles:Role[]
+    id:number | null
+}
+
+export interface NewRosterData {
+    setRosterId: (id: number | null) => void;
+    rosters:Roster[]
     id:number | null
 }
 

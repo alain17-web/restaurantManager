@@ -1,24 +1,28 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 import {useState,useEffect} from "react";
-import {rosters as rosterData} from "../../tempData.ts";
 import {Roster} from "../../types/types.ts";
 import DataTableRosters from "../../components/dataTableRosters/DataTableRosters.tsx";
 import NewRoster from "../newRoster/NewRoster.tsx";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 const ListRosters = () => {
 
-    const [_rosters,setRosters] = useState<Roster[]>([]);
+    const [rosters,setRosters] = useState<Roster[]>([]);
     const [rosterId, setRosterId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
+        const getRosters = async () => {
+            try {
+                const res = await axiosInstance.get('/rosters/')
+                setRosters(res.data)
+            } catch (error) {
+                console.error('Error in getRosters', error);
+            }
+        }
         getRosters()
     }, []);
-
-    const getRosters = () => {
-        setRosters(rosterData)
-    }
 
     const handleGetRosterId = (id: number) => {
         setRosterId(id)
@@ -40,8 +44,8 @@ const ListRosters = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Horaires staff</h1>
-                {!open ? <DataTableRosters getRosterId={handleGetRosterId} open={show}/> :
-                    <NewRoster id={rosterId} setRosterId={setRosterId}/>}
+                {!open ? <DataTableRosters rosters={rosters} getRosterId={handleGetRosterId} open={show}/> :
+                    <NewRoster id={rosterId} setRosterId={setRosterId} rosters={rosters}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

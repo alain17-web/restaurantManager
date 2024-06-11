@@ -1,12 +1,10 @@
 import { FormEvent, useEffect, useState} from "react";
-import {rosters} from "../../tempData.ts";
+import { NewRosterData} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
-interface Props {
-    id: number | null
-    setRosterId: (id: number) => void
-}
 
-const NewRoster = (props: Props) => {
+
+const NewRoster = (props: NewRosterData) => {
 
     const [roster, setRoster] = useState<string>("");
     const [message, setMessage] = useState<string>("")
@@ -19,7 +17,7 @@ const NewRoster = (props: Props) => {
         } else {
             resetForm()
         }
-    }, [props.id]);
+    }, [props.id,props.rosters]);
 
     const resetForm = () => {
         setAdd(true)
@@ -28,23 +26,35 @@ const NewRoster = (props: Props) => {
         setSuccess(false);
     }
 
-    const handleEdit = () => {
-        setMessage("")
-        rosters.map((roster) => {
-            if (props.id === roster.id) {
-                setAdd(false)
-                setRoster(roster.roster)
-            }
-        })
+    const handleEdit = async () => {
+        setMessage("");
+        const roster = props.rosters.find((roster) => roster.id === props.id)
+        if(roster){
+            setAdd(false)
+            setRoster(roster.roster)
+        }
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (roster === "") {
             setMessage("Un horaire est obligatoire")
         } else {
-            setSuccess(true)
-            setMessage(add ? "L'horaire' a bien été créé" : "Les modifications sont enregistrées")
+            try{
+                if(add){
+                    await axiosInstance.post('/rosters/addRoster',{roster})
+                    setSuccess(true)
+                    setMessage("L'horaire a bien été créé" )
+                } else {
+                    await axiosInstance.patch(`/rosters/${props.id}`,{roster})
+                    setSuccess(true)
+                    setMessage("L'horaire a bien été mis à jour")
+                }
+
+            }catch(error){
+                console.error(error)
+                setMessage("L'ajout de l'horaire a échoué")
+            }
         }
     }
 

@@ -1,30 +1,44 @@
-import { rosters as rosterData } from "../../tempData.ts";
-import { rosterColumns } from "../../dataTable.ts";
+import {rosterColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
-import {useState,useEffect} from "react";
-import {Roster} from "../../types/types.ts";
+import {useState, useEffect} from "react";
+import {DataTableRosterData, Roster} from "../../types/types.ts";
+import {confirmAlert} from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
-interface Props{
-    open:() => void
-    getRosterId:(id:number) => void
-}
 
-const DataTableRosters = (props: Props) => {
+const DataTableRosters = (props: DataTableRosterData) => {
 
     const [rosters, setRosters] = useState<Roster[]>([])
 
     useEffect(() => {
-        getRosters()
-    }, []);
+        setRosters(props.rosters)
+    }, [props.rosters]);
 
-    const getRosters = () => {
-        setRosters(rosterData);
-    }
+    const [paginationModel, setPaginationModel] = useState({page: 0, pageSize: 10});
 
-    const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
-
-    const handleDelete = (id:number): void => {
-
+    const handleDelete = (id: number): void => {
+        confirmAlert({
+            title: 'Confirmation',
+            message: 'Etes-vous sûr de vouloir supprimer cet horaire ?',
+            buttons: [
+                {
+                    label: 'Oui',
+                    onClick: async () => {
+                        try {
+                            await axiosInstance.delete(`/roles/${id}`)
+                            setRosters((prevRosters) => prevRosters.filter((roster) => roster.id !== id))
+                        } catch (error) {
+                            console.error("deletion failed", error)
+                        }
+                    }
+                },
+                {
+                    label: 'Non',
+                    onClick: () => console.log("deletion cancelled")
+                }
+            ]
+        })
     }
 
     const actionColumn: GridColDef[] = [{
@@ -44,7 +58,8 @@ const DataTableRosters = (props: Props) => {
                                 d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                         </svg>
                     </div>
-                    <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"} onClick={() => handleDelete(params.row.id)} data-bs-toggle="tooltip"
+                    <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"}
+                         onClick={() => handleDelete(params.row.id)} data-bs-toggle="tooltip"
                          data-bs-placement="top" title="SUPPRIMER">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000"
                              className="bi bi-trash3-fill cursor-pointer" viewBox="0 0 16 16">
