@@ -1,14 +1,14 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {categories} from "../../tempData.ts";
+import {FormEvent, useEffect, useState} from "react";
+import axiosInstance from "../../axios/axiosInstance.tsx";
+import {NewCatData} from "../../types/types.ts";
 
-interface Props {
-    id: number | null
-    setCatId: (id: number) => void
-}
 
-const NewCategory = (props: Props) => {
+
+
+const NewCategory = (props: NewCatData) => {
 
     const [cat_name, setCat_name] = useState<string>('');
+    const [type, setType] = useState<string>('');
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
     const [add, setAdd] = useState<boolean>(true)
@@ -19,32 +19,47 @@ const NewCategory = (props: Props) => {
         } else {
             resetForm()
         }
-    }, [props.id]);
+    }, [props.id,props.categories]);
 
     const resetForm = () => {
         setAdd(true)
         setCat_name("")
+        setType("")
         setMessage("")
         setSuccess(false);
     }
 
     const handleEdit = () => {
         setMessage("")
-        categories.map((category) => {
-            if (props.id === category.id) {
+        const category = props.categories.find((category) => category.id === props.id)
+            if (category) {
                 setAdd(false)
                 setCat_name(category.cat_name)
+                setType(category.type)
             }
-        })
+
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (cat_name === "") {
+        if (cat_name === "" || type === " ") {
             setMessage("Un nom de catégorie est obligatoire")
         } else {
-            setSuccess(true)
-            setMessage(add ? "La catégorie a bien été créée" : "Les modifications sont enregistrées")
+            try {
+                if (add) {
+                    await axiosInstance.post('/categories/addCategory', {cat_name,type})
+                    setSuccess(true)
+                    setMessage("La catégorie a bien été créée")
+                } else {
+                    await axiosInstance.patch(`/categories/${props.id}`, {cat_name,type})
+                    setSuccess(true)
+                    setMessage("La catégorie a bien été mise à jour")
+                }
+
+            } catch (error) {
+                console.error(error)
+                setMessage("L'ajout de la catégorie a échoué")
+            }
         }
     }
 
@@ -78,6 +93,19 @@ const NewCategory = (props: Props) => {
                                 value={cat_name}
                                 onChange={(e) => setCat_name(e.target.value)}
                             />
+                        </div>
+                        <div className={"w-[75%]"}>
+                            <label className={"flex items-center gap-[10px]"}>Type*</label>
+                            <select
+                                className={"w-full p-[5px] border-b-[1px] border-gray-500"}
+                                required
+                                value={type}
+                                onChange={(e) => setType(e.target.value)}
+                            >
+                               <option>Choisir un type</option>
+                               <option value={"food"}>food</option>
+                               <option value={"beverage"}>beverage</option>
+                            </select>
                         </div>
                         <button
                             type={"submit"}

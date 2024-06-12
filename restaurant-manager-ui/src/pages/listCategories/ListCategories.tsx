@@ -1,24 +1,28 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
 import {useState, useEffect} from "react";
-import {categories as catData} from "../../tempData.ts";
 import {Category} from "../../types/types.ts";
 import DataTableCat from "../../components/dataTableCat/DataTableCat.tsx";
 import NewCategory from "../newCategory/NewCategory.tsx";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 const ListCategories = () => {
 
-    const [_categories, setCategories] = useState<Category[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [categoryId, setCatId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
 
     useEffect(() => {
+        const getCategories = async () => {
+            try {
+                const res = await axiosInstance.get('/categories/')
+                setCategories(res.data)
+            } catch (error) {
+                console.error('Error in getCategories', error);
+            }
+        }
         getCategories()
     }, []);
-
-    const getCategories = () => {
-        setCategories(catData)
-    }
 
     const handleGetCatId = (id: number) => {
         setCatId(id)
@@ -39,8 +43,8 @@ const ListCategories = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Catégories</h1>
-                {!open ? <DataTableCat getCatId={handleGetCatId} open={show}/> :
-                    <NewCategory id={categoryId} setCatId={setCatId}/>}
+                {!open ? <DataTableCat categories={categories} getCategoryId={handleGetCatId} open={show}/> :
+                    <NewCategory id={categoryId} setCategoryId={setCatId} categories={categories}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

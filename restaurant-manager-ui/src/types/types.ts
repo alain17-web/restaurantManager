@@ -38,6 +38,18 @@ export interface Category {
     type: string;
 }
 
+export interface DataTableCatData {
+    categories:Category[]
+    getCategoryId:(id:number) => void
+    open:() => void
+}
+
+export interface NewCatData {
+    setCategoryId: (id: number | null) => void;
+    categories:Category[]
+    id:number | null
+}
+
 export interface Employee {
     id: number | null
     username: string;

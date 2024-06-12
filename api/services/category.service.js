@@ -24,7 +24,7 @@ const categoryService = {
     getAllCategories: async () => {
         const connection = await createConnection();
         try{
-            const [categories] = await connection.execute('SELECT * FROM categories ORDER BY id ASC');
+            const [categories] = await connection.execute('SELECT * FROM categories ORDER BY type ASC');
             return categories;
         } catch(error){
             console.error('Error getAllCategories service', error)
