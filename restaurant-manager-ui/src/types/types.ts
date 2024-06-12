@@ -48,6 +48,7 @@ export interface NewCatData {
     setCategoryId: (id: number | null) => void;
     categories:Category[]
     id:number | null
+    onUpdate: (category: Category) => void;
 }
 
 export interface Employee {

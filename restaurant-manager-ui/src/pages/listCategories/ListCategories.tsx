@@ -16,7 +16,8 @@ const ListCategories = () => {
         const getCategories = async () => {
             try {
                 const res = await axiosInstance.get('/categories/')
-                setCategories(res.data)
+                const sortedCatsByType = res.data.sort((a:Category, b:Category) => a.type.localeCompare(b.type));
+                setCategories(sortedCatsByType)
             } catch (error) {
                 console.error('Error in getCategories', error);
             }
@@ -37,6 +38,35 @@ const ListCategories = () => {
     const close = () => {
         setOpen(false);
     }
+
+    /*const handleCategoryUpdate = (updatedCategory: Category) => {
+        setCategories((prevCategories) => {
+            if(updatedCategory && ) {}
+            const index = prevCategories.findIndex(category => category.id === updatedCategory.id);
+            if (index > -1) {
+                const newCategories = [...prevCategories];
+                newCategories[index] = updatedCategory;
+                return newCategories;
+            }
+            console.log(updatedCategory);
+            return [...prevCategories, updatedCategory];
+        });
+    };*/
+
+    const handleCategoryUpdate = (updatedCategory: Category) => {
+        setCategories((prevCategories) => {
+            if (updatedCategory && updatedCategory.id) {
+                const index = prevCategories.findIndex(category => category.id === updatedCategory.id);
+                if (index > -1) {
+                    const newCategories = [...prevCategories];
+                    newCategories[index] = updatedCategory;
+                    return newCategories;
+                }
+            }
+            return prevCategories;
+        });
+    };
+
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
@@ -44,7 +74,7 @@ const ListCategories = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Catégories</h1>
                 {!open ? <DataTableCat categories={categories} getCategoryId={handleGetCatId} open={show}/> :
-                    <NewCategory id={categoryId} setCategoryId={setCatId} categories={categories}/>}
+                    <NewCategory id={categoryId} setCategoryId={setCatId} categories={categories} onUpdate={handleCategoryUpdate}/>}
                 {open ?
                     <div className={"mb-2 pl-6"}>
                         <button

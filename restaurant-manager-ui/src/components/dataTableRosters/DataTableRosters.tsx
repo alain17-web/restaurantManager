@@ -26,7 +26,7 @@ const DataTableRosters = (props: DataTableRosterData) => {
                     label: 'Oui',
                     onClick: async () => {
                         try {
-                            await axiosInstance.delete(`/roles/${id}`)
+                            await axiosInstance.delete(`/rosters/${id}`)
                             setRosters((prevRosters) => prevRosters.filter((roster) => roster.id !== id))
                         } catch (error) {
                             console.error("deletion failed", error)

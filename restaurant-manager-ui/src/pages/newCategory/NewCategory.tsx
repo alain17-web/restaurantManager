@@ -1,6 +1,6 @@
 import {FormEvent, useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance.tsx";
-import {NewCatData} from "../../types/types.ts";
+import {Category, NewCatData} from "../../types/types.ts";
 
 
 
@@ -42,19 +42,26 @@ const NewCategory = (props: NewCatData) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (cat_name === "" || type === " ") {
+        if (cat_name === "" || type === "") {
             setMessage("Un nom de catégorie est obligatoire")
         } else {
             try {
+                let updatedCategory: Category;
                 if (add) {
-                    await axiosInstance.post('/categories/addCategory', {cat_name,type})
+                    const res = await axiosInstance.post('/categories/addCategory', {cat_name,type})
+                    updatedCategory = res.data.catResult
                     setSuccess(true)
                     setMessage("La catégorie a bien été créée")
+                    props.onUpdate(updatedCategory)
                 } else {
-                    await axiosInstance.patch(`/categories/${props.id}`, {cat_name,type})
+                    const res = await axiosInstance.patch(`/categories/${props.id}`, {cat_name,type})
+                    console.log(res.data.catResult)
+                    updatedCategory = res.data.catResult
                     setSuccess(true)
                     setMessage("La catégorie a bien été mise à jour")
+                    props.onUpdate(updatedCategory)
                 }
+
 
             } catch (error) {
                 console.error(error)

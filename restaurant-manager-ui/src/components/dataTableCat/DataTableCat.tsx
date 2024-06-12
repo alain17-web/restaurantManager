@@ -84,6 +84,7 @@ const DataTableCat = (props: DataTableCatData) => {
             </div>
             <DataGrid
                 rows={categories}
+                //getRowId={(row)=> row.id}
                 columns={categoryColumns.concat(actionColumn)}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
