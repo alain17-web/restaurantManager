@@ -20,6 +20,20 @@ const drinkService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //READ
+    getAllDrinks: async () => {
+        const connection = await createConnection();
+        try{
+           const  [drinks] = await connection.execute('SELECT * FROM drinks ORDER BY cat_id ASC');
+           return drinks;
+        } catch(error){
+            console.error('Error getAllDrinks service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 module.exports = drinkService;

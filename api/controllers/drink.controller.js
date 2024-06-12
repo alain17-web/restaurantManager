@@ -19,6 +19,17 @@ const drinkController =  {
             }
              res.status(500).json({message: "Error controller creating the drink"});
         }
+    },
+
+    //READ
+    getAllDrinks: async(req,res)=>{
+        try{
+           const drinks = await drinkService.getAllDrinks();
+           res.status(201).json(drinks);
+        } catch(error){
+            console.error('Error getAllDrinks controller',error)
+            res.status(500).json({message:"Error getAllDrinks controller"});
+        }
     }
 }
 module.exports = drinkController;

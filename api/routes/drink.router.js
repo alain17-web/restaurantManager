@@ -5,4 +5,7 @@ const {authenticate,authorize} = require("../middlewares/authenticate");
 drinkRouter.route("/addDrink")
     .post(authenticate, authorize([1]), drinkController.addDrink)
 
+drinkRouter.route("/")
+    .get(authenticate,authorize([1]),drinkController.getAllDrinks)
+
 module.exports = drinkRouter;
