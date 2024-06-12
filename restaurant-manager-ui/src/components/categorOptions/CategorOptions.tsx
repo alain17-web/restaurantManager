@@ -1,6 +1,6 @@
-import {categories as catData} from "../../tempData.ts";
 import {useEffect, useState} from "react";
 import {Category} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 interface Props {
     isDish:boolean
@@ -11,12 +11,16 @@ interface Props {
     const [categories, setCategories] = useState<Category[]>([]);
 
     useEffect(() => {
-        getCategories()
-    }, []);
-
-    const getCategories = () => {
-        setCategories(catData);
-    }
+         const getCategories = async () => {
+             try {
+                 const res = await axiosInstance.get('/categories/')
+                 setCategories(res.data)
+             } catch (error) {
+                 console.error('Error in getCategories', error);
+             }
+         }
+         getCategories()
+     }, []);
 
     return (
         <>
