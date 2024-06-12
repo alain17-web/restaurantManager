@@ -50,7 +50,7 @@ export const drinksColumns : GridColDef[]=[
         width: 220,
     },
     {
-        field: "cat",
+        field: "cat_id",
         headerName: "Cat",
         width: 220,
     },

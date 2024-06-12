@@ -1,6 +1,6 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {dishes} from "../../tempData.ts";
-import CategorOptions from "../../components/categorOptions/CategorOptions.tsx";
+import CategoryOptions from "../../components/categoryOptions/CategoryOptions.tsx";
 
 
 interface Props {
@@ -146,7 +146,7 @@ const NewDish = (props: Props) => {
                             value={cat}
                             onChange={(e) => setCat(e.target.value)}
                         >
-                            <CategorOptions isDish={isDish}/>
+                            <CategoryOptions isDish={isDish}/>
                         </select>
                     </div>
                     <div className={"w-[75%]"}>

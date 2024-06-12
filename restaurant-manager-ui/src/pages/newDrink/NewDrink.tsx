@@ -1,16 +1,12 @@
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {drinks} from "../../tempData.ts";
-import CategorOptions from "../../components/categorOptions/CategorOptions.tsx";
+import CategoryOptions from "../../components/categoryOptions/CategoryOptions.tsx";
+import {NewDrinkData} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
-interface Props {
-    id: number | null
-    setDrinkId: (id: number) => void
-}
-
-const NewDrink = (props:Props) => {
+const NewDrink = (props:NewDrinkData) => {
 
     const [name, setName] = useState<string>('');
-    const [cat, setCat] = useState<string>('');
+    const [cat_id, setCat_id] = useState<number>(0);
     const [price, setPrice] = useState<number>(0);
     const [cost, setCost] = useState<number>(0);
     const [min, setMin] = useState<number>(0);
@@ -27,12 +23,12 @@ const NewDrink = (props:Props) => {
         } else {
             resetForm()
         }
-    }, [props.id]);
+    }, [props.id,props.drinks]);
 
     const resetForm = () => {
         setAdd(true)
         setName("")
-        setCat("")
+        setCat_id(0)
         setPrice(0)
         setCost(0)
         setMin(0)
@@ -42,26 +38,38 @@ const NewDrink = (props:Props) => {
 
     const handleEdit = () => {
         setMessage("")
-        drinks.map((drink) => {
-            if (props.id === drink.id) {
+        const drink = props.drinks.find((drink) => drink.id === props.id)
+            if (drink) {
                 setAdd(false)
                 setName(drink.name)
-                setCat(drink.cat)
+                setCat_id(drink.cat_id)
                 setPrice(drink.price)
                 setCost(drink.cost)
                 setMin(drink.min)
             }
-        })
+
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (name === "" || cat === "" || price === 0 || cost === 0 || min === 0) {
+        if (name === "" || cat_id === 0 || price === 0 || cost === 0 || min === 0) {
             setMessage("Tous les champs sont obligatoires")
-            console.log(name,cat,price,cost,min)
         } else {
-            setSuccess(true)
-            setMessage(add ? "La boisson a bien été créée" : "Les modifications sont enregistrées")
+            try{
+                if(add){
+                    await axiosInstance.post('/drinks/addDrink',{name,cat_id,price,cost,min})
+                    setSuccess(true)
+                    setMessage("La boisson a bien été créée" )
+                } else {
+                    await axiosInstance.patch(`/drinks/${props.id}`,{name,cat_id,price,cost,min})
+                    setSuccess(true)
+                    setMessage("La boisson a bien été mise à jour")
+                }
+
+            }catch(error){
+                console.error(error)
+                setMessage("L'ajout de la boisson a échoué")
+            }
         }
     }
 
@@ -83,14 +91,7 @@ const NewDrink = (props:Props) => {
         }
     }
 
-    const handleMin = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(e.target.value)
-        if(!isNaN(value)){
-            setMin(value)
-        } else {
-            setMin(0)
-        }
-    }
+
 
 
     return (
@@ -130,10 +131,10 @@ const NewDrink = (props:Props) => {
                             <select
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 required
-                                value={cat}
-                                onChange={(e) => setCat(e.target.value)}
+                                value={cat_id}
+                                onChange={(e) => setCat_id(parseInt(e.target.value))}
                             >
-                                <CategorOptions isDish={isDish}/>
+                                <CategoryOptions isDish={isDish}/>
                             </select>
                         </div>
                         <div className={"w-[75%]"}>
@@ -168,7 +169,7 @@ const NewDrink = (props:Props) => {
                                 min="0"
                                 required
                                 value={min}
-                                onChange={handleMin}
+                                onChange={(e) => setMin(parseInt(e.target.value))}
                             />
                         </div>
                         <button

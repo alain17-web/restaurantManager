@@ -1,32 +1,45 @@
-import { drinks as drinkData} from "../../tempData.ts";
 import {drinksColumns} from "../../dataTable.ts";
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState,useEffect} from "react"
-import {Drink} from "../../types/types.ts";
+import {DataTableDrinkData, Drink} from "../../types/types.ts";
+import {confirmAlert} from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
-interface Props{
-    open:() => void
-    getDrinkId:(id:number) => void
-}
-
-
-const DataTableDrinks = (props:Props) => {
+const DataTableDrinks = (props:DataTableDrinkData) => {
 
     const [drinks, setDrinks] = useState<Drink[]>([])
 
     useEffect(() => {
-        getDrinks()
-    }, [])
+        setDrinks(props.drinks)
+    }, [props.drinks]);
 
-    const getDrinks = () => {
-        setDrinks(drinkData);
-    }
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
     const handleDelete = (id:number): void => {
-
+        confirmAlert({
+            title: 'Confirmation',
+            message: 'Etes-vous sûr de vouloir supprimer cette boisson ?',
+            buttons: [
+                {
+                    label: 'Oui',
+                    onClick: async () => {
+                        try{
+                            await axiosInstance.delete(`/drinks/${id}`)
+                            setDrinks((prevDrinks) => prevDrinks.filter((drink) => drink.id !== id))
+                        } catch(error){
+                            console.error("deletion failed", error)
+                        }
+                    }
+                },
+                {
+                    label: 'Non',
+                    onClick:  () => console.log("deletion cancelled")
+                }
+            ]
+        })
     }
 
     const actionColumn: GridColDef[] = [{

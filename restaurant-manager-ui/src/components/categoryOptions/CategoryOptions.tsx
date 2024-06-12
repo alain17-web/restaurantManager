@@ -6,7 +6,7 @@ interface Props {
     isDish:boolean
 }
 
- const CategorOptions = ({isDish}:Props) => {
+ const CategoryOptions = ({isDish}:Props) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
 
@@ -27,9 +27,9 @@ interface Props {
             <option>Choisir une catégorie</option>
             {categories.map((category) =>
                 category.type === (isDish ? "food" : "beverage") ? (
-                    <option key={category.id}>{category.cat_name}</option>) : null
+                    <option key={category.id} value={category.id}>{category.cat_name}</option>) : null
             )}
         </>
     );
 };
-export default CategorOptions;
+export default CategoryOptions;
