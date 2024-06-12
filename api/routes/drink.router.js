@@ -11,4 +11,7 @@ drinkRouter.route("/")
 drinkRouter.route("/:id")
     .patch(authenticate,authorize([1]),drinkController.updateDrink)
 
+drinkRouter.route("/:id")
+    .delete(authenticate,authorize([1]),drinkController.deleteDrink)
+
 module.exports = drinkRouter;

@@ -48,6 +48,24 @@ const drinkController =  {
             console.error('Error updateDrink controller',error)
             res.status(500).json({message: 'Error updateDrink controller', error,});
         }
+    },
+
+    //DELETE
+    deleteDrink: async (req, res) => {
+        try{
+            const drinkId = req.params.id;
+
+            const deletedDrink = await drinkService.deleteDrink(drinkId);
+
+            if (deletedDrink > 0){
+                res.status(200).json({message:"Drink deleted successfully."});
+            } else {
+                res.status(404).json({error: 'Drink not found'});
+            }
+        } catch(error){
+            console.error('Error deleteDrink controller',error)
+            res.status(500).json({message:"Error deleteDrink controller",error,});
+        }
     }
 }
 module.exports = drinkController;

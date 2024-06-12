@@ -48,8 +48,21 @@ const drinkService = {
         } finally {
             await connection.end();
         }
-    }
+    },
 
+    //DELETE
+    deleteDrink: async (id) => {
+        const connection = await createConnection();
+        try{
+            const [result] = await connection.execute('DELETE FROM drinks WHERE id = ?', [id]);
+            return result.affectedRows > 0;
+        } catch(error){
+            console.error('Error deleteDrink service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    }
 
 }
 module.exports = drinkService;
