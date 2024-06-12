@@ -8,4 +8,7 @@ drinkRouter.route("/addDrink")
 drinkRouter.route("/")
     .get(authenticate,authorize([1]),drinkController.getAllDrinks)
 
+drinkRouter.route("/:id")
+    .patch(authenticate,authorize([1]),drinkController.updateDrink)
+
 module.exports = drinkRouter;

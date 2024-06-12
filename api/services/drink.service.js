@@ -34,6 +34,22 @@ const drinkService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //UPDATE
+    updateDrink: async (id, name, cat_id,price,cost,min) => {
+        const connection = await createConnection();
+        try{
+            const [updatedDrink] = await connection.execute('UPDATE drinks SET name = ?, cat_id = ?, price = ?, cost = ?, min = ? WHERE id = ?',[name,cat_id,price,cost,min,id]);
+            return updatedDrink.affectedRows > 0;
+        } catch (error){
+            console.error('Error updateDrink service', error.message);
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
+
+
 }
 module.exports = drinkService;

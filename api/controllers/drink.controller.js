@@ -30,6 +30,24 @@ const drinkController =  {
             console.error('Error getAllDrinks controller',error)
             res.status(500).json({message:"Error getAllDrinks controller"});
         }
+    },
+
+    //UPDATE
+    updateDrink: async (req, res) => {
+        try{
+            const validateDrink = await drinkValidator.validate(req.body);
+            const {name,cat_id,price,cost,min} = validateDrink;
+
+            const updatedDrink = await drinkService.updateDrink(req.params.id,name,cat_id,price,cost,min);
+            if (updatedDrink) {
+                res.status(201).json({message:"Drink updated successfully."});
+            } else {
+                res.status(404).json({error: "Drink not found or no change made"});
+            }
+        } catch(error){
+            console.error('Error updateDrink controller',error)
+            res.status(500).json({message: 'Error updateDrink controller', error,});
+        }
     }
 }
 module.exports = drinkController;
