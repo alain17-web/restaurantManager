@@ -5,8 +5,11 @@ const {authenticate,authorize} = require("../middlewares/authenticate");
 drinkRouter.route("/addDrink")
     .post(authenticate, authorize([1]), drinkController.addDrink)
 
-drinkRouter.route("/")
+drinkRouter.route("/admin/getDrinks")
     .get(authenticate,authorize([1]),drinkController.getAllDrinks)
+
+drinkRouter.route("/")
+    .get(drinkController.getAllDrinks)
 
 drinkRouter.route("/:id")
     .patch(authenticate,authorize([1]),drinkController.updateDrink)
