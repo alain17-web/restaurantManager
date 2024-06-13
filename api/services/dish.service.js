@@ -18,6 +18,20 @@ const dishService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //READ
+    getAllDishes: async () => {
+        const connection = await createConnection();
+        try{
+            const  [dishes] = await connection.execute('SELECT * FROM dishes ORDER BY cat_id ASC');
+            return dishes;
+        } catch(error){
+            console.error('Error getAllDishes service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
     }
 }
 module.exports = dishService

@@ -33,6 +33,17 @@ const dishController = {
             }
             res.status(500).json({message: "Error controller creating the dish",error});
         }
+    },
+
+    //READ
+    getAllDishes: async(req,res)=>{
+        try{
+            const dishes = await dishService.getAllDishes();
+            res.status(201).json(dishes);
+        } catch(error){
+            console.error('Error getAllDishes controller',error)
+            res.status(500).json({message:"Error getAllDishes controller",error});
+        }
     }
 }
 module.exports = dishController;
