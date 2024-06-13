@@ -6,6 +6,7 @@ const roleRouter = require("./role.router");
 const rosterRouter = require("./roster.router");
 const categoryRouter = require("./category.router");
 const drinkRouter = require("./drink.router");
+const dishRouter = require("./dish.router");
 
 const router = express.Router();
 
@@ -16,5 +17,7 @@ router.use('/roles',roleRouter);
 router.use('/rosters',rosterRouter)
 router.use('/categories',categoryRouter)
 router.use('/drinks',drinkRouter)
+router.use('/dishes',dishRouter)
+
 
 module.exports = router;

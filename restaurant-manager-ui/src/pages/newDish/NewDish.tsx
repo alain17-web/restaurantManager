@@ -10,6 +10,7 @@ interface Props {
 
 const NewDish = (props: Props) => {
 
+    const [img, setImg] = useState<string>('')
     const [name, setName] = useState<string>('');
     const [desc, setDesc] = useState<string>('');
     const [cat, setCat] = useState<string>('');
@@ -35,6 +36,7 @@ const NewDish = (props: Props) => {
 
     const resetForm = () => {
         setAdd(true)
+        setImg("")
         setName("")
         setDesc("")
         setCat("")
@@ -50,6 +52,7 @@ const NewDish = (props: Props) => {
         dishes.map((dish) => {
             if (props.id === dish.id) {
                 setAdd(false)
+                setImg(dish.img)
                 setName(dish.name)
                 setDesc(dish.desc)
                 setCat(dish.cat)
@@ -62,9 +65,9 @@ const NewDish = (props: Props) => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (name === "" || desc === "" || cat === "" || price === 0 || cost === 0 || min === 0) {
+        if (img ==="" || name === "" || desc === "" || cat === "" || price === 0 || cost === 0 || min === 0) {
             setMessage("Tous les champs sont obligatoires")
-            console.log(name,desc,cat,price,cost,min)
+
         } else {
             setSuccess(true)
             setMessage(add ? "Le plat a bien été créé" : "Les modifications sont enregistrées")
@@ -89,14 +92,7 @@ const NewDish = (props: Props) => {
         }
     }
 
-    const handleMin = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = parseFloat(e.target.value)
-        if(!isNaN(value)){
-            setMin(value)
-        } else {
-            setMin(0)
-        }
-    }
+
 
     return (
     <div className={"w-full flex"}>
@@ -118,6 +114,16 @@ const NewDish = (props: Props) => {
                     className={"w-[40%] flex flex-col mx-auto gap-8"} noValidate
                     onSubmit={handleSubmit}
                 >
+                    <div className={"w-[75%]"}>
+                        <label className={"flex items-center gap-[10px]"}>Photo*</label>
+                        <input
+                            className={"w-full p-[5px] border-b-[1px] border-gray-500"}
+                            type={"file"}
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
                     <div className={"w-[75%]"}>
                         <label className={"flex items-center gap-[10px]"}>Nom*</label>
                         <input
@@ -154,7 +160,6 @@ const NewDish = (props: Props) => {
                         <input
                             className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                             type={"text"}
-                            required
                             value={allerg}
                             onChange={(e) => setAllerg(e.target.value)}
                         />
@@ -191,7 +196,7 @@ const NewDish = (props: Props) => {
                             min="0"
                             required
                             value={min}
-                            onChange={handleMin}
+                            onChange={(e) => setMin(parseInt(e.target.value))}
                         />
                     </div>
                     <button
@@ -205,6 +210,6 @@ const NewDish = (props: Props) => {
         </div>
     </div>
 
-);
+    );
 }
 export default NewDish;
