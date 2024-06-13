@@ -9,7 +9,7 @@ const dishService = {
             if(existingDish.length > 0){
                 throw new Error('This dish already exists');
             }
-            const [dish] = await connection.execute('INSERT INTO dishes (name,\`desc\`,cat_id,allerg,price,cost,min,img) VALUES (?,?,?,?,?,?,?,?)',[name, desc, cat_id, allerg, price, cost, min, img])
+            const [dish] = await connection.execute('INSERT INTO dishes (name,`desc`,cat_id,allerg,price,cost,min,img) VALUES (?,?,?,?,?,?,?,?)',[name, desc, cat_id, allerg, price, cost, min, img])
 
             return {id:dish.insertId, name,desc,cat_id,allerg,price,cost,min,img};
         } catch(error){
@@ -28,6 +28,21 @@ const dishService = {
             return dishes;
         } catch(error){
             console.error('Error getAllDishes service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
+    //UPDATE
+    updateDish: async (id,name,desc,cat_id,allerg,price,cost,min,img) => {
+        const connection = await createConnection();
+        try{
+            const [updatedDish] = await connection.execute('UPDATE dishes SET name = ?, `desc` = ?, cat_id= ?, allerg = ?, price = ?, cost = ?, min = ?, img = ? WHERE id = ? ',[name, desc,cat_id,allerg,price,cost,min,img,id]);
+
+            return updatedDish.affectedRows > 0;
+        } catch(error){
+            console.error('Error updateDish service', error)
             throw error;
         } finally {
             await connection.end();

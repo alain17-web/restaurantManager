@@ -18,5 +18,13 @@ dishRouter.route("/admin/getDishes")
 dishRouter.route('/')
     .get(dishController.getAllDishes)
 
+dishRouter.route("/:id")
+    .patch(
+        authenticate,
+        authorize([1]),
+        upload.single('img'),
+        dishController.updateDish
+    )
+
 
 module.exports = dishRouter
