@@ -19,12 +19,18 @@ dishRouter.route('/')
     .get(dishController.getAllDishes)
 
 dishRouter.route("/:id")
+    .get(authenticate,authorize([1]),dishController.getDishById)
+
+dishRouter.route("/:id")
     .patch(
         authenticate,
         authorize([1]),
         upload.single('img'),
         dishController.updateDish
     )
+
+dishRouter.route("/:id")
+    .delete(authenticate,authorize([1]),dishController.deleteDish)
 
 
 module.exports = dishRouter

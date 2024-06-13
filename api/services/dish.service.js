@@ -34,6 +34,19 @@ const dishService = {
         }
     },
 
+    getDishById : async (id) => {
+        const connection = await createConnection();
+        try {
+            const [dishes] = await connection.execute('SELECT * FROM dishes WHERE id = ?', [id]);
+            return dishes[0];
+        } catch (error) {
+            console.error('Error getDishById service', error);
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
     //UPDATE
     updateDish: async (id,name,desc,cat_id,allerg,price,cost,min,img) => {
         const connection = await createConnection();
@@ -43,6 +56,20 @@ const dishService = {
             return updatedDish.affectedRows > 0;
         } catch(error){
             console.error('Error updateDish service', error)
+            throw error;
+        } finally {
+            await connection.end();
+        }
+    },
+
+    //DELETE
+    deleteDish: async (id) => {
+        const connection = await createConnection();
+        try{
+            const [result] = await connection.execute('DELETE FROM dishes WHERE id = ?', [id]);
+            return result.affectedRows > 0;
+        } catch(error){
+            console.error('Error deleteDish service', error);
             throw error;
         } finally {
             await connection.end();

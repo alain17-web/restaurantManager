@@ -46,6 +46,20 @@ const dishController = {
         }
     },
 
+    getDishById: async (req, res) => {
+        try{
+            const dishId = req.params.id;
+            const dish = await dishService.getDishById(dishId);
+
+            if(dish){
+                res.status(200).json(dish);
+            }
+        }catch(error){
+            console.error('Error getDishById controller', error)
+            res.status(500).json({message: "Error getDishById controller", error});
+        }
+    },
+
     //UPDATE
     updateDish: async (req, res) => {
         try {
@@ -65,6 +79,24 @@ const dishController = {
                 return res.status(400).json({errors: error.errors});
             }
             res.status(500).json({message: "Error controller updateDish", error});
+        }
+    },
+
+    //DELETE
+    deleteDish: async (req, res) => {
+        try{
+            const dishId = req.params.id;
+
+            const deletedDish = await dishService.deleteDish(dishId);
+
+            if (deletedDish > 0){
+                res.status(200).json({message:"Dish deleted successfully."});
+            } else {
+                res.status(404).json({error: 'Dish not found'});
+            }
+        } catch(error){
+            console.error('Error deleteDish controller',error)
+            res.status(500).json({message:"Error deleteDish controller",error,});
         }
     }
 }
