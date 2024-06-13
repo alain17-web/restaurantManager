@@ -1,5 +1,7 @@
 const dishService = require('../services/dish.service');
 const dishValidator = require('../validators/dishValidator');
+const path = require('node:path');
+const fs = require('fs');
 
 const dishController = {
     //CREATE
@@ -9,9 +11,9 @@ const dishController = {
 
             const {name, desc, cat_id, allerg, price, cost, min} = validateDish;
 
-            const imgPath = req.file ? `/uploads/img/${req.file.filename}` : null;
+            const img = req.file ? req.file.filename : null;
 
-            if (!imgPath) {
+            if (!img) {
                 return res.status(400).json({errors: ["Image is required"]});
             }
 
@@ -23,7 +25,7 @@ const dishController = {
                 price,
                 cost,
                 min,
-                img: imgPath
+                img
             })
 
             res.status(201).json({message: 'Dish created successfully.', dish: dishResult});
@@ -87,9 +89,22 @@ const dishController = {
         try{
             const dishId = req.params.id;
 
+            const dish = await dishService.getDishById(dishId);
+
+            if (!dish) {
+                return res.status(404).json({ message: 'Dish not found' });
+            }
+
+            const imagePath = path.join(__dirname, '../uploads/img', dish.img);
+
             const deletedDish = await dishService.deleteDish(dishId);
 
             if (deletedDish > 0){
+                fs.unlink(imagePath, (error) => {
+                    if (error) {
+                        console.error('Error deleting image file:', error);
+                    }
+                });
                 res.status(200).json({message:"Dish deleted successfully."});
             } else {
                 res.status(404).json({error: 'Dish not found'});
