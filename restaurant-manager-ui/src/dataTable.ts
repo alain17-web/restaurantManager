@@ -15,7 +15,7 @@ export const dishColumns : GridColDef[] = [
     },
 
     {
-        field: "cat",
+        field: "cat_id",
         headerName: "cat",
         width: 180,
     },

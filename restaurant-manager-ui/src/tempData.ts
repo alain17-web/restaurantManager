@@ -54,6 +54,7 @@ export const dishes = [
         img:"./img/baba_ghanouj.jpg",
         price:6.50,
         cat:"Mezzes",
+        allerg:"",
         cost:4.55,
         min:10,
         stock:20

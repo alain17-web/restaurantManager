@@ -1,30 +1,47 @@
-import {dishes as dishData} from "../../tempData.ts";
 import {dishColumns} from '../../dataTable.ts'
 import {DataGrid, GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState,useEffect} from "react";
-import { Dish } from "../../types/types.ts";
+import {DataTableDishData, Dish} from "../../types/types.ts";
+import {confirmAlert} from 'react-confirm-alert'
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
-interface Props{
-    open:() => void
-    getDishId:(id:number) => void
-}
 
-const DataTableDishes = (props:Props) => {
+
+const DataTableDishes = (props:DataTableDishData) => {
 
     const [dishes, setDishes] = useState<Dish[]>([])
 
     useEffect(() => {
-        getDishes()
-    }, [])
+        setDishes(props.dishes)
+    }, [props.dishes]);
 
-    const getDishes = () => {
-        setDishes(dishData);
-    }
+
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
     const handleDelete = (id:number): void => {
-
+        confirmAlert({
+            title: 'Confirmation',
+            message: 'Etes-vous sûr de vouloir supprimer ce plat ?',
+            buttons: [
+                {
+                    label: 'Oui',
+                    onClick: async () => {
+                        try{
+                            await axiosInstance.delete(`/dishes/${id}`)
+                            setDishes((prevDishes) => prevDishes.filter((dish) => dish.id !== id))
+                        } catch(error){
+                            console.error("deletion failed", error)
+                        }
+                    }
+                },
+                {
+                    label: 'Non',
+                    onClick:  () => console.log("deletion cancelled")
+                }
+            ]
+        })
     }
 
     const actionColumn: GridColDef[] = [{

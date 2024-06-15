@@ -28,13 +28,25 @@ export interface Dish {
     id: number;
     name: string;
     price: number;
-    cat: string;
+    cat_id: number;
     cost: number;
     min: number;
     stock: number;
     desc: string;
     img: string;
     allerg?: string;
+}
+
+export interface DataTableDishData {
+    dishes:Dish[]
+    getDishId:(id:number) => void
+    open:() => void
+}
+
+export interface NewDishData {
+    setDishId: (id: number | null) => void;
+    dishes:Dish[]
+    id:number | null
 }
 
 export interface Props {
