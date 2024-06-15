@@ -86,7 +86,7 @@ const NewBooking = (props: NewBookingData) => {
 
                 } catch (error) {
                     console.log(error)
-                    setMessage("L'ajout de la réservationa échoué")
+                    setMessage(add ? "L'ajout de la réservationa échoué" : "la mise à jour a échouée")
                 }
                 setSuccess(true)
                 setMessage(add ? "La réservation a bien été créée" : "Les modifications sont enregistrées")

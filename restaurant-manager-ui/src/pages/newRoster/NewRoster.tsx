@@ -53,7 +53,7 @@ const NewRoster = (props: NewRosterData) => {
 
             }catch(error){
                 console.error(error)
-                setMessage("L'ajout de l'horaire a échoué")
+                setMessage(add ? "L'ajout de l'horaire a échoué" : "la mise à jour a échouée")
             }
         }
     }

@@ -68,7 +68,7 @@ const NewDrink = (props:NewDrinkData) => {
 
             }catch(error){
                 console.error(error)
-                setMessage("L'ajout de la boisson a échoué")
+                setMessage(add ? "L'ajout de la boisson a échoué"  : "la mise à jour a échouée")
             }
         }
     }

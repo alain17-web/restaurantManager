@@ -98,7 +98,7 @@ const NewEmployee = (props: NewEmployeeData) => {
 
             } catch (error) {
                 console.error(error)
-                setMessage("L'ajout de l'employé a échoué")
+                setMessage(add ? "L'ajout de l'employé a échoué" : "la mise à jour a échouée")
             }
         }
     }

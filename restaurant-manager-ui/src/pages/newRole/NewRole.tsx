@@ -54,7 +54,7 @@ const NewRole = (props: NewRoleData) => {
 
             }catch(error){
                 console.error(error)
-                setMessage("L'ajout du rôle a échoué")
+                setMessage(add ? "L'ajout du rôle a échoué" : "la mise à jour a échouée")
             }
         }
     }

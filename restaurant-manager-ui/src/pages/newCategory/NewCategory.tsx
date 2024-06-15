@@ -65,7 +65,7 @@ const NewCategory = (props: NewCatData) => {
 
             } catch (error) {
                 console.error(error)
-                setMessage("L'ajout de la catégorie a échoué")
+                setMessage(add ? "L'ajout de la catégorie a échoué" : "la mise à jour a échouée")
             }
         }
     }
