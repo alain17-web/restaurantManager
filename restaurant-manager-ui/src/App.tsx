@@ -20,94 +20,162 @@ import ListCategories from "./pages/listCategories/ListCategories.tsx";
 import ListRoles from "./pages/listRoles/ListRoles.tsx";
 import ListRosters from "./pages/listRosters/ListRosters.tsx";
 import ListFinances from "./pages/listFinances/ListFinances.tsx";
-
-function App() {
-
-    const router = createBrowserRouter([
-        {
-            path: "/",
-            element: <Home/>
-        },
-        {
-            path: "/menu",
-            element: <Menu/>
-        },
-        {
-            path: "/reservation-infos",
-            element: <About/>
-        },
-        {
-            path: "/connexion",
-            element: <Login/>
-        },
-        {
-            path: "/dashboard",
-            element: <Dashboard/>
-        },
-        {
-            path: "/restaurant",
-            element: <Restaurant/>
-        },
-        {
-            path: "/kitchen",
-            element: <Kitchen/>
-        },
-        {
-            path: "/listDishes",
-            element: <ListDishes/>
-        },
-        {
-            path: "/listDrinks",
-            element: <ListDrinks/>
-        },
-        {
-            path: "/listCategories",
-            element: <ListCategories/>
-        },
-        {
-            path: "/listActive",
-            element: <ListActiveStaff/>
-        },
-        {
-            path: "/listInactive",
-            element: <ListInactiveStaff/>
-        },
-        {
-            path: "/listRoles",
-            element: <ListRoles/>
-        },
-        {
-            path: "/listRosters",
-            element: <ListRosters/>
-        },
-        {
-            path: "/listOrders",
-            element: <ListOrders/>
-        },
-        {
-            path: "/listStockFood",
-            element: <ListStockFood/>
-        },
-        {
-            path: "/listStockDrinks",
-            element: <ListStockDrinks/>
-        },
-        {
-            path: "/listPurchases",
-            element: <ListPurchases/>
-        },
-        {
-            path: "/listFinances",
-            element: <ListFinances/>
-        },
-        {
-            path: "/listBookings",
-            element: <ListBookings/>
-        },
+import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes.tsx";
+import {AuthProvider} from "./context/AuthContext.tsx";
 
 
-    ])
-    return <RouterProvider router={router}/>
-}
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <Home/>
+    },
+    {
+        path: "/menu",
+        element: <Menu/>
+    },
+    {
+        path: "/reservation-infos",
+        element: <About/>
+    },
+    {
+        path: "/connexion",
+        element: <Login/>
+    },
+    {
+
+        path: "/dashboard",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <Dashboard/>
+            </ProtectedRoutes>
+    },
+    {
+        path: "/restaurant",
+        element:
+            <ProtectedRoutes rolesAllowed={[1, 2]}>
+                <Restaurant/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/kitchen",
+        element:
+            <ProtectedRoutes rolesAllowed={[1, 9]}>
+                <Kitchen/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listDishes",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListDishes/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listDrinks",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListDrinks/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listCategories",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListCategories/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listActive",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListActiveStaff/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listInactive",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListInactiveStaff/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listRoles",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListRoles/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listRosters",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListRosters/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listOrders",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListOrders/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listStockFood",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListStockFood/>
+            </ProtectedRoutes>
+    },
+    {
+        path: "/listStockDrinks",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListStockDrinks/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listPurchases",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListPurchases/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listFinances",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListFinances/>
+            </ProtectedRoutes>
+
+    },
+    {
+        path: "/listBookings",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListBookings/>
+            </ProtectedRoutes>
+
+    },
+
+
+])
+const App = () => (
+    <AuthProvider>
+        <RouterProvider router={router}/>
+    </AuthProvider>
+)
+
 
 export default App

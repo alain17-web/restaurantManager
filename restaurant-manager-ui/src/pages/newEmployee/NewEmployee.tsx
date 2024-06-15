@@ -93,7 +93,7 @@ const NewEmployee = (props: NewEmployeeData) => {
                 } else {
                     await axiosInstance.patch(`/employees/${props.id}`, {username, password, email, tel, role_id, status_id,roster_id})
                     setSuccess(true)
-                    setMessage("L'employé' a bien été mis à jour")
+                    setMessage("L'employé a bien été mis à jour")
                 }
 
             } catch (error) {

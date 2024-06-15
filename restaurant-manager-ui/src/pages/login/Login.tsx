@@ -1,9 +1,15 @@
+
 import Logo from "../../components/logo/Logo.tsx";
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import {FormEvent, useEffect, useState} from "react";
 import axios from "axios"
+import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
+
+    const navigate = useNavigate();
+
+    const { dispatch } = useAuth();
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -55,20 +61,32 @@ const Login = () => {
             const res = await axios.post('http://localhost:3000/api/auth/login', {
                 username,
                 password
-            }, {
+            },{
                 withCredentials: true
             })
 
-            const {role_id} = res.data.employee
+            const { token, employee } = res.data;
 
-            if (role_id === 1) {
-                window.location.href = 'http://localhost:5173/dashboard'
-            } else if (role_id === 2) {
-                window.location.href = 'http://localhost:5173/restaurant'
-            } else if (role_id === 3) {
-                window.location.href = 'http://localhost:5173/kitchen'
+
+            if (token) {
+                dispatch({ type: 'LOGIN', payload: token });
+                localStorage.setItem("token", token);
             } else {
-                setFailed(true)
+                console.error('No token found in response');
+            }
+
+            if (employee && employee.role_id) {
+                if (employee.role_id === 1) {
+                    navigate("/dashboard")
+                } else if (employee.role_id === 2) {
+                    navigate('/restaurant')
+                } else if (employee.role_id === 9) {
+                    navigate("/kitchen")
+                } else {
+                    setFailed(true)
+                }
+            } else {
+                setFailed(true);
             }
         } catch (error) {
             setError(true)

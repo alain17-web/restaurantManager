@@ -1,4 +1,28 @@
+import React from "react";
 
+export interface ProtectedRouteProps {
+    children: React.ReactNode;
+    rolesAllowed: number[];
+}
+
+export interface AuthState {
+    token: string | null;
+    decodedToken: DecodedToken | null;
+}
+
+export interface AuthAction {
+    type: 'LOGIN' | 'LOGOUT';
+    payload?: string;
+}
+
+
+export interface DecodedToken {
+    employeeId: number;
+    username: string;
+    role_id: number;
+    iat: number;
+    exp: number;
+}
 
 export interface Dish {
     id: number;

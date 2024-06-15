@@ -14,7 +14,7 @@ const authController = {
                 secure: process.env.NODE_ENV === 'production'
             });
 
-            res.json({message: 'Login successful', employee});
+            res.json({message: 'Login successful', employee,token});
         } catch (error) {
             if (error.name === 'ValidationError') {
                 return res.status(400).json({message: error.message});
