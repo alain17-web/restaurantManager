@@ -19,7 +19,15 @@ const orderService = {
     //READ
     getAllOrders: async () => {
         const connection = await createConnection({})
-
+        try{
+            const [orders] = await connection.execute('SELECT * FROM orders ORDER BY order_id DESC');
+            return orders
+        } catch(error){
+            console.error('Error getAllOrders service', error)
+            throw error;
+        } finally {
+            await connection.end()
+        }
     }
 }
 module.exports = orderService;

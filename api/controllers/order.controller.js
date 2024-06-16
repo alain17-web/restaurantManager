@@ -19,6 +19,17 @@ const orderController = {
             }
             res.status(500).json({message: 'Error creating order controller',error});
         }
+    },
+
+    //READ
+    getAllOrders: async(req,res)=>{
+        try{
+           const orders = await orderService.getAllOrders();
+           res.status(201).json(orders);
+        } catch(error){
+            console.error('Error getAllOrders controller',error)
+            res.status(500).json({message: 'Error getAllOrders controller',error});
+        }
     }
 };
 module.exports = orderController;
