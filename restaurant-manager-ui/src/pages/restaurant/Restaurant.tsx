@@ -4,6 +4,7 @@ import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
 import NewOrder from "../newOrder/NewOrder.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import useUsername from "../../hooks/useUsername.tsx";
+import DateDisplay from "../../components/dateDisplay/DateDisplay.tsx";
 
 
 const Restaurant = () => {
@@ -71,6 +72,7 @@ const Restaurant = () => {
                     {showNewOrder === false ? (
                         <>
                             <TimeDisplay />
+                            <DateDisplay />
                             <Avatar username={username}/>
                             <h2 className={"text-center text-white text-2xl font-inter italic"}>Bienvenue {username}</h2>
                             <button

@@ -4,6 +4,7 @@ import {FormEvent, useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion'
 import {Dish, Drink, NewOrderData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useCurrentDate from "../../hooks/useCurrentDate.tsx";
 
 
 const NewOrder = (props: NewOrderData) => {
@@ -14,8 +15,14 @@ const NewOrder = (props: NewOrderData) => {
     const [desserts, setDesserts] = useState<Dish[]>([])
     const [coldDrinks, setColdDrinks] = useState<Drink[]>([])
     const [warmDrinks, setWarmDrinks] = useState<Drink[]>([])
-
+    const [date, setDate] = useState<string>("")
+    const [username,setUsername] = useState<string>("")
+    const [people,setPeople] = useState<number>(0)
+    const validated = false
+    const validatedBy = ""
     const [total, setTotal] = useState<number>(0)
+
+    const { formattedDate} = useCurrentDate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -94,11 +101,44 @@ const NewOrder = (props: NewOrderData) => {
             const totalAmount = totalCourses + totalDesserts + totalColds + totalWarms
 
             setTotal(parseFloat(totalAmount.toFixed(2)))
+
+
+
+            setPeople(props.people)
+            setUsername(props.username as string)
+            setDate(formattedDate)
         }
     }, [dishes,drinks,props.people])
 
+    const extractNameAndPrice = (items: { name: string; price: string | number }[]) => {
+        return items.map(item => ({
+            name: item.name,
+            price: item.price
+        }));
+    };
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault()
+
+        const transformedMainCourses = extractNameAndPrice(mainCourses);
+        const transformedDesserts = extractNameAndPrice(desserts);
+        const transformedColdDrinks = extractNameAndPrice(coldDrinks);
+        const transformedWarmDrinks = extractNameAndPrice(warmDrinks);
+
+        const order = {
+            mainCourses: transformedMainCourses,
+            desserts: transformedDesserts,
+            coldDrinks: transformedColdDrinks,
+            warmDrinks: transformedWarmDrinks,
+            people,
+            username,
+            date,
+            total,
+            validated,
+            validatedBy
+
+        }
+        console.log(order)
         props.closeNewOrder()
     }
 
