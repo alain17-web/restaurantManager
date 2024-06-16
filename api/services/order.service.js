@@ -1,0 +1,25 @@
+const createConnection = require('../database/database');
+
+const orderService = {
+    //CREATE
+    addOrder: async ({username, order_date, total, validated, validatedBy}) => {
+        const connection = await createConnection({})
+        try {
+            const [order] = await connection.execute('INSERT INTO orders (username,order_date,total,validated,validatedBy) VALUES (?,?,?,?,?)', [username, order_date, total, validated, validatedBy]);
+
+            return {order_id:order.insertId,username,order_date,total,validated,validatedBy}
+        } catch (error) {
+            console.error('Error addOrder service', error)
+            throw error;
+        } finally {
+            await connection.end()
+        }
+    },
+
+    //READ
+    getAllOrders: async () => {
+        const connection = await createConnection({})
+
+    }
+}
+module.exports = orderService;

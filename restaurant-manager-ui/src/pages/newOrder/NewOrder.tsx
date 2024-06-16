@@ -18,7 +18,7 @@ const NewOrder = (props: NewOrderData) => {
     const [date, setDate] = useState<string>("")
     const [username,setUsername] = useState<string>("")
     const [people,setPeople] = useState<number>(0)
-    const validated = false
+    const validated = "en attente"
     const validatedBy = ""
     const [total, setTotal] = useState<number>(0)
 
