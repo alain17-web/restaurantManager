@@ -1,5 +1,7 @@
 import {Link} from "react-router-dom"
 import {useEffect, useState} from "react";
+import {jwtDecode} from 'jwt-decode';
+import {DecodedToken} from "../../types/types.ts";
 
 const DashboardNavbar = () => {
 
@@ -8,11 +10,16 @@ const DashboardNavbar = () => {
     const [username, setUsername] = useState<string>("");
 
     useEffect(() => {
-        const storedUsername = localStorage.getItem("username");
-        if (storedUsername) {
-            setUsername(storedUsername);
+        const token = localStorage.getItem('token');
+
+        if(!token){
+            console.log("Navbar: No token found")
+            return
+        } else {
+            const decodedToken = jwtDecode<DecodedToken>(token);
+            setUsername(decodedToken.username)
         }
-    }, [])
+    }, [username])
 
 
 
