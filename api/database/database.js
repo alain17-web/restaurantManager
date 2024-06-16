@@ -11,6 +11,7 @@ async function createConnection() {
             password: DB_PWD,
             database: DB_NAME,
             port: DB_PORT,
+            decimalNumbers: true,
             connectTimeout: 10000
         });
         console.log('Database connection successful');

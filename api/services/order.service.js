@@ -28,6 +28,35 @@ const orderService = {
         } finally {
             await connection.end()
         }
+    },
+
+    //UPDATE
+    updateOrder: async ({order_id,username, order_date, total, validated, validatedBy}) => {
+        const connection = await createConnection({})
+        try{
+           const [updatedOrder] = await connection.execute('UPDATE orders SET username = ?, order_date = ?, total = ?, validated = ?, validatedBy = ? WHERE order_id = ?', [username, order_date, parseFloat(total), validated, validatedBy,order_id]);
+           return updatedOrder.affectedRows > 0;
+        } catch(error){
+            console.error('Error updateOrder service', error)
+            throw error;
+        } finally {
+            await connection.end()
+        }
+    },
+
+    //DELETE
+    deleteOrder: async (order_id) => {
+        const connection = await createConnection({})
+        try{
+            const [result] = await connection.execute('DELETE FROM orders WHERE order_id = ?', [order_id]);
+            return result.affectedRows > 0;
+        } catch(error){
+            console.error('Error deleteOrder service', error)
+            throw error;
+        } finally {
+            await connection.end()
+        }
     }
+
 }
 module.exports = orderService;
