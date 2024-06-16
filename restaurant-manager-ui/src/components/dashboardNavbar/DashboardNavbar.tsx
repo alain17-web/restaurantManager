@@ -1,27 +1,11 @@
 import {Link} from "react-router-dom"
-import {useEffect, useState} from "react";
-import {jwtDecode} from 'jwt-decode';
-import {DecodedToken} from "../../types/types.ts";
+import useUsername from "../../hooks/useUsername.tsx";
+
 
 const DashboardNavbar = () => {
 
 
-
-    const [username, setUsername] = useState<string>("");
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-
-        if(!token){
-            console.log("Navbar: No token found")
-            return
-        } else {
-            const decodedToken = jwtDecode<DecodedToken>(token);
-            setUsername(decodedToken.username)
-        }
-    }, [username])
-
-
+    const { username } = useUsername()
 
     return (
         <div className={"h-16 flex items-center text-[#555] text-base bg-[#ADD8E6] border border-[#D3D3D3]"}>
