@@ -1,11 +1,10 @@
 import {useNavigate} from "react-router-dom"
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
 import NewOrder from "../newOrder/NewOrder.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import useUsername from "../../hooks/useUsername.tsx";
-// import {jwtDecode} from 'jwt-decode';
-// import {DecodedToken} from "../../types/types.ts";
+
 
 const Restaurant = () => {
 
@@ -82,7 +81,7 @@ const Restaurant = () => {
                             </button>
                         </>
                     ) : (
-                        <NewOrder numberOfPeople={people} username={username} closeNewOrder={closeNewOrder}/>
+                        <NewOrder people={people} username={username} closeNewOrder={closeNewOrder}/>
                     )}
                     <div className={"w-auto flex items-center justify-end gap-3 px-4"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"

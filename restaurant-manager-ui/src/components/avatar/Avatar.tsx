@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 
 interface Prop {
-    username: string
+    username: string | null
 }
 
+//TEMPORARY
 const Avatar = (prop:Prop) => {
 
     const [src, setSrc] = useState<string>('./img/waitress.jpeg')

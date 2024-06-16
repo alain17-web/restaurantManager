@@ -27,7 +27,7 @@ export interface DecodedToken {
 export interface Dish {
     id: number;
     name: string;
-    price: number;
+    price: number | string;
     cat_id: number;
     cost: number;
     min: number;
@@ -61,7 +61,7 @@ export interface Props {
 export interface Drink {
     id: number;
     name: string;
-    price: number;
+    price: number | string;
     cat_id: number;
     cost: number;
     min: number;
@@ -174,6 +174,12 @@ export interface Order {
     total:number
 }
 
+export interface NewOrderData {
+    people: number
+    username: string | null
+    closeNewOrder: () => void;
+}
+
 export interface Purchase {
     id:number
     date:string
@@ -185,7 +191,7 @@ export interface Purchase {
 export interface Food {
     id: number;
     name: string;
-    cat:string;
+    cat_id:number;
     stock:number;
     min:number;
 }
@@ -211,11 +217,11 @@ export interface NewBookingData {
     id:number | null
 }
 
-export interface Item {
+/*export interface Item {
     name: string
     price: number
     cat: string
-}
+}*/
 
 export interface EmployeeCard {
     username: string;
