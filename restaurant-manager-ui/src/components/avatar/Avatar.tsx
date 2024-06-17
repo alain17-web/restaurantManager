@@ -30,7 +30,7 @@ const Avatar = (prop:Prop) => {
 
     return (
         <div className={'flex items-center justify-center'}>
-            <img src={src} alt={`avatar ${prop.username}`} className={!isKitchen ? "w-[150px] h-[150px] rounded-full" : "w-[80px] h-[80px] rounded-full"}/>
+            <img src={src} alt={`avatar ${prop.username}`} className={!isKitchen ? "w-[150px] h-[150px] rounded-full" : "w-[120px] h-[120px] rounded-full "}/>
         </div>
     );
 };

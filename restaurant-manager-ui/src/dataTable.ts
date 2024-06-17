@@ -183,17 +183,17 @@ export const rosterColumns : GridColDef[]=[
 
 export const ordersColumns : GridColDef[] = [
     {
-        field: "id",
+        field: "order_id",
         headerName: "id",
         width: 120
     },
     {
-        field: "date",
+        field: "order_date",
         headerName: "date",
         width: 180
     },
     {
-        field: "by",
+        field: "username",
         headerName: "staff",
         width: 180
     },
@@ -204,20 +204,21 @@ export const ordersColumns : GridColDef[] = [
         width: 180
     },
     {
-        field: "checked",
-        headerName: "validée",
-        width: 180
-    },
-    {
-        field: "checkedBy",
-        headerName: "cuisinier",
-        width: 180
-    },
-    {
         field: "total",
         headerName: "total €",
         width: 180
     },
+    {
+        field: "validated",
+        headerName: "validée",
+        width: 180
+    },
+    {
+        field: "validatedBy",
+        headerName: "par",
+        width: 180
+    }
+
 ]
 
 export const purchaseColumns : GridColDef[]=[

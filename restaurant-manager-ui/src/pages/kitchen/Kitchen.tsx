@@ -1,24 +1,17 @@
 import Logo from "../../components/logo/Logo.tsx";
-import {useEffect, useState} from "react";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import Notepad from "../../components/notepad/Notepad.tsx";
 import useLogout from "../../hooks/useLogout.tsx";
+import useUsername from "../../hooks/useUsername.tsx";
+
 
 
 const Kitchen = () => {
 
     const {handleLogout} = useLogout()
 
-    const [username, setUsername] = useState<string>("");
 
-
-    useEffect(() => {
-        const storedUsername = localStorage.getItem("username");
-        if (storedUsername) {
-            setUsername(storedUsername);
-        }
-    }, [])
-
+    const { username } = useUsername()
 
 
     return (

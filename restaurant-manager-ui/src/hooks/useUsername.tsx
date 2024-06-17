@@ -15,7 +15,7 @@ const useUsername = () => {
             return;
         } else {
             const decodedToken = jwtDecode<DecodedToken>(token);
-            setUsername(decodedToken.username);
+            setUsername(decodedToken.username.toLowerCase());
         }
     }, []);
 

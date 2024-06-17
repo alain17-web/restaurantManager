@@ -135,17 +135,41 @@ const NewOrder = (props: NewOrderData) => {
 
         try {
             const orderRes = await axiosInstance.post('/orders/addOrder', order)
-            console.log('Order Response:', orderRes.data);
+
             const orderId = orderRes.data.orderResult.order_id
-            console.log("orderId:",orderId)
+
 
             const orderItems = [
-                ...transformedMainCourses.map(item => ({...item, order_id: orderId, type: 'maineCourse',})),
-                ...transformedDesserts.map(item => ({...item, order_id: orderId, type: 'desserts',})),
-                ...transformedColdDrinks.map(item => ({...item, order_id: orderId, type: 'coldDrinks',})),
-                ...transformedWarmDrinks.map(item => ({...item, order_id: orderId, type: 'warmDrinks',})),
+                ...transformedMainCourses.map(item => ({
+                    ...item,
+                    order_id: orderId,
+                    type: 'maineCourse',
+                    validated,
+                    validatedBy
+                })),
+                ...transformedDesserts.map(item => ({
+                    ...item,
+                    order_id: orderId,
+                    type: 'desserts',
+                    validated,
+                    validatedBy
+                })),
+                ...transformedColdDrinks.map(item => ({
+                    ...item,
+                    order_id: orderId,
+                    type: 'coldDrinks',
+                    validated,
+                    validatedBy
+                })),
+                ...transformedWarmDrinks.map(item => ({
+                    ...item,
+                    order_id: orderId,
+                    type: 'warmDrinks',
+                    validated,
+                    validatedBy
+                })),
             ]
-            console.log(orderItems)
+
 
 
             for(const orderItem of orderItems) {

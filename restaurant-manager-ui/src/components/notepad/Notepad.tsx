@@ -1,31 +1,58 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import { OrderItems} from "../../types/types.ts";
+import axiosInstance from "../../axios/axiosInstance.tsx";
+import DateDisplay from "../dateDisplay/DateDisplay.tsx";
+
+
 
 const Notepad = () => {
 
+
+    const [orderItems, setOrderItems] = useState<OrderItems[]>([]);
     const [isValidated, setIsValidated] = useState<boolean>(false);
+    const [orderNumber, setOrderNumber] = useState<number>(0);
+
+
+    useEffect(() => {
+        const getOrderItems = async () => {
+            try{
+                const res = await axiosInstance.get('/orderItems')
+                setOrderItems(res.data)
+                setOrderNumber(Math.floor(Math.random() * orderItems.length +1));
+            } catch(error){
+                console.error('Error in getOrderItems', error);
+            }
+        }
+        getOrderItems();
+    }, []);
 
     const handleValidate = () => {
         setIsValidated(!isValidated);
     }
+
+
     return (
         <main
             className={"w-[500px] h-[900px] bg-[url('./img/bloc-notes.png')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center ml-20"}>
 
             {!isValidated ? (
                 <div className={"w-full h-auto mt-3 flex flex-col items-center justify-center"}>
-                    <h1 className={"text-xl font-inter mt-22"}>Commande n°22 : 6 pers</h1>
+                    <DateDisplay/>
+                    <h1 className={"text-xl font-inter mt-22"}>Commande n°{orderNumber} : {orderItems.length / 4} pers</h1>
                     <h2 className={"text-lg font-inter font-semibold italic"}>Plats :</h2>
-                    <p className={'text-base font-inter'}>1 Assiette Artichauts</p>
-                    <p className={'text-base font-inter'}>1 Assortiment Mixte Grill</p>
-                    <p className={'text-base font-inter'}>1 Plateau végétarien</p>
-                    <p className={'text-base font-inter'}>1 Assiette Falafel d'Akko</p>
-                    <p className={'text-base font-inter'}>1 Assiette Kebbeh d'Arraba</p>
-                    <p className={'text-base font-inter'}>1 Assiette Chich Taouk</p>
+                    {orderItems.map((item):any => {
+                       if (item.type === "maineCourse") {
+                          return <p key={item.order_item_id}>{item.name}</p>
+                       }
+                    })}
+
                     <h2 className={"text-lg font-inter font-semibold italic"}>Desserts :</h2>
-                    <p className={'text-base font-inter'}>2 Aish el saraya</p>
-                    <p className={'text-base font-inter'}>2 Baklava</p>
-                    <p className={'text-base font-inter'}>1 Namoura</p>
-                    <p className={'text-base font-inter'}>1 Chyabat achta</p>
+                    {orderItems.map((item):any => {
+                        if (item.type === "desserts") {
+                            return <p key={item.order_item_id}>{item.name}</p>
+                        }
+                    })}
+
                 </div>
             ) : (
                 <div className={"w-full h-auto mt-3 flex flex-col items-center justify-center"}>
@@ -42,6 +69,6 @@ const Notepad = () => {
 
             </button>
         </main>
-    );
+    )
 };
-export default Notepad;
+export default Notepad

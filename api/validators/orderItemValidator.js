@@ -5,6 +5,8 @@ const orderItemValidator = yup.object({
     type: yup.string().required(),
     name: yup.string().required(),
     price: yup.number().required(),
+    validated: yup.string(),
+    validatedBy: yup.string()
 })
 
 module.exports = orderItemValidator;

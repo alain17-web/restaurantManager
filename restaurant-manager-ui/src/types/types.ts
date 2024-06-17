@@ -165,13 +165,28 @@ export interface Roster {
 }
 
 export interface Order {
-    id:number
-    date:string
-    by:string
+    order_id:number
+    order_date:string
+    username:string
     people:number
-    checked:boolean
-    checkedBy:string
+    validated:string
+    validatedBy?:string
     total:number
+}
+
+export interface DataTableOrderData {
+    orders:Order[]
+    getOrderId:(id:number) => void
+}
+
+export interface OrderItems {
+    order_item_id:number
+    order_id:number
+    type:string
+    name:string
+    price:number
+    validated?:string
+    validatedBy?:string
 }
 
 export interface NewOrderData {
@@ -216,12 +231,6 @@ export interface NewBookingData {
     bookings:Booking[]
     id:number | null
 }
-
-/*export interface Item {
-    name: string
-    price: number
-    cat: string
-}*/
 
 export interface EmployeeCard {
     username: string;
