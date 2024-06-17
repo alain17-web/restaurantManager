@@ -2,12 +2,12 @@ const createConnection = require('../database/database');
 
 const orderService = {
     //CREATE
-    addOrder: async ({username, order_date, total, validated, validatedBy}) => {
+    addOrder: async ({people,username, order_date, total, validated, validatedBy}) => {
         const connection = await createConnection({})
         try {
-            const [order] = await connection.execute('INSERT INTO orders (username,order_date,total,validated,validatedBy) VALUES (?,?,?,?,?)', [username, order_date, total, validated, validatedBy]);
+            const [order] = await connection.execute('INSERT INTO orders (people,username,order_date,total,validated,validatedBy) VALUES (?,?,?,?,?,?)', [people,username, order_date, total, validated, validatedBy]);
 
-            return {order_id:order.insertId,username,order_date,total,validated,validatedBy}
+            return {order_id:order.insertId,people,username,order_date,total,validated,validatedBy}
         } catch (error) {
             console.error('Error addOrder service', error)
             throw error;
@@ -31,10 +31,10 @@ const orderService = {
     },
 
     //UPDATE
-    updateOrder: async ({order_id,username, order_date, total, validated, validatedBy}) => {
+    updateOrder: async ({order_id,people,username, order_date, total, validated, validatedBy}) => {
         const connection = await createConnection({})
         try{
-           const [updatedOrder] = await connection.execute('UPDATE orders SET username = ?, order_date = ?, total = ?, validated = ?, validatedBy = ? WHERE order_id = ?', [username, order_date, parseFloat(total), validated, validatedBy,order_id]);
+           const [updatedOrder] = await connection.execute('UPDATE orders SET people = ?, username = ?, order_date = ?, total = ?, validated = ?, validatedBy = ? WHERE order_id = ?', [people,username, order_date, parseFloat(total), validated, validatedBy,order_id]);
            return updatedOrder.affectedRows > 0;
         } catch(error){
             console.error('Error updateOrder service', error)

@@ -7,9 +7,9 @@ const orderController = {
         try {
             const validateOrder = await orderValidator.validate(req.body, {abortEarly: false});
 
-            const {username, order_date, total, validated, validatedBy} = validateOrder;
+            const {people,username, order_date, total, validated, validatedBy} = validateOrder;
 
-            const orderResult = await orderService.addOrder({username, order_date, total, validated, validatedBy});
+            const orderResult = await orderService.addOrder({people,username, order_date, total, validated, validatedBy});
 
             res.status(201).json({message: 'Order created successfully', orderResult});
 
@@ -37,10 +37,11 @@ const orderController = {
         try {
             const validateOrder = await orderValidator.validate(req.body);
 
-            const {order_id, username, order_date, total, validated, validatedBy} = validateOrder;
+            const {order_id, people, username, order_date, total, validated, validatedBy} = validateOrder;
 
             const updatedOrder = await orderService.updateOrder({
                 order_id,
+                people,
                 username,
                 order_date,
                 total,

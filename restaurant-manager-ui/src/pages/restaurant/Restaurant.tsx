@@ -1,25 +1,23 @@
-import {useNavigate} from "react-router-dom"
 import { useState} from "react";
 import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
 import NewOrder from "../newOrder/NewOrder.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import useUsername from "../../hooks/useUsername.tsx";
 import DateDisplay from "../../components/dateDisplay/DateDisplay.tsx";
+import useLogout from "../../hooks/useLogout.tsx";
 
 
 const Restaurant = () => {
 
-    const navigate = useNavigate()
+
+    const {handleLogout} = useLogout()
 
     const { username } = useUsername()
     const [showNewOrder, setShowNewOrder] = useState<boolean>(false);
     const [people,setPeople] = useState<number>(0)
 
 
-    const handleLogout = () => {
-         localStorage.removeItem("username")
-        navigate("/connexion");
-     }
+
 
     const handleNewOrder = () => {
         setPeople(Math.floor(Math.random() * 6)+1)

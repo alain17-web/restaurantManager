@@ -1,13 +1,13 @@
-import {useNavigate} from "react-router-dom"
 import Logo from "../../components/logo/Logo.tsx";
 import {useEffect, useState} from "react";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import Notepad from "../../components/notepad/Notepad.tsx";
+import useLogout from "../../hooks/useLogout.tsx";
 
 
 const Kitchen = () => {
 
-    const navigate = useNavigate();
+    const {handleLogout} = useLogout()
 
     const [username, setUsername] = useState<string>("");
 
@@ -19,10 +19,7 @@ const Kitchen = () => {
         }
     }, [])
 
-    const handleLogout = () => {
-        localStorage.removeItem("username")
-        navigate("/connexion");
-    }
+
 
     return (
         <section

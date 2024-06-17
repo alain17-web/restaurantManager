@@ -12,7 +12,7 @@ orderRouter.route("/:id")
     .patch(authenticate,authorize([9]),orderController.updateOrder);
 
 orderRouter.route("/:id")
-    .delete(authenticate,authorize([2]),orderController.deleteOrder);
+    .delete(authenticate,authorize([1]),orderController.deleteOrder);
 
 
 module.exports = orderRouter;
