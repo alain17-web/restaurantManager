@@ -8,6 +8,7 @@ const categoryRouter = require("./category.router");
 const drinkRouter = require("./drink.router");
 const dishRouter = require("./dish.router");
 const orderRouter = require("./order.router");
+const orderItemRouter = require("./orderItem.router");
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.use('/categories',categoryRouter)
 router.use('/drinks',drinkRouter)
 router.use('/dishes',dishRouter)
 router.use('/orders',orderRouter)
+router.use('/orderItems',orderItemRouter)
 
 
 module.exports = router;

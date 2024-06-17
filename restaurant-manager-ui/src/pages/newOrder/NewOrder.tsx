@@ -1,4 +1,3 @@
-
 import {getRandomItems} from "../../utils/functions.ts";
 import {FormEvent, useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion'
@@ -9,20 +8,22 @@ import useCurrentDate from "../../hooks/useCurrentDate.tsx";
 
 const NewOrder = (props: NewOrderData) => {
 
-    const [dishes,setDishes]= useState<Dish[]>([])
-    const [drinks,setDrinks]= useState<Drink[]>([])
+    const [dishes, setDishes] = useState<Dish[]>([])
+    const [drinks, setDrinks] = useState<Drink[]>([])
     const [mainCourses, setMainCourses] = useState<Dish[]>([])
     const [desserts, setDesserts] = useState<Dish[]>([])
     const [coldDrinks, setColdDrinks] = useState<Drink[]>([])
     const [warmDrinks, setWarmDrinks] = useState<Drink[]>([])
-    const [date, setDate] = useState<string>("")
-    const [username,setUsername] = useState<string>("")
-    const [people,setPeople] = useState<number>(0)
+    const [order_date, setOrder_date] = useState<string>("")
+    const [username, setUsername] = useState<string>("")
+    const [people, setPeople] = useState<number>(0)
     const validated = "en attente"
     const validatedBy = ""
     const [total, setTotal] = useState<number>(0)
+    const [message, setMessage] = useState<string>("")
+    const [success, setSuccess] = useState<boolean>(false)
 
-    const { formattedDate} = useCurrentDate()
+    const {formattedDate} = useCurrentDate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -32,12 +33,12 @@ const NewOrder = (props: NewOrderData) => {
                     axiosInstance.get('/drinks/')
                 ]);
 
-                const dishesWithNumPrices = dishesRes.data.map((dish:Dish) => ({
+                const dishesWithNumPrices = dishesRes.data.map((dish: Dish) => ({
                     ...dish,
                     price: parseFloat(dish.price as string)
                 }))
 
-                const drinksWithNumPrices = drinksRes.data.map((drink:Drink) => ({
+                const drinksWithNumPrices = drinksRes.data.map((drink: Drink) => ({
                     ...drink,
                     price: parseFloat(drink.price as string)
                 }))
@@ -62,7 +63,7 @@ const NewOrder = (props: NewOrderData) => {
             const warmDrinksArray: Drink[] = []
 
 
-            dishes.forEach((dish:Dish) => {
+            dishes.forEach((dish: Dish) => {
                 if (dish.cat_id !== 5) {
                     mainCoursesArray.push(dish)
                 } else {
@@ -70,7 +71,7 @@ const NewOrder = (props: NewOrderData) => {
                 }
             })
 
-            drinks.forEach((drink:Drink) => {
+            drinks.forEach((drink: Drink) => {
                 if (drink.cat_id !== 9) {
                     coldDrinksArray.push(drink)
                 } else {
@@ -79,17 +80,15 @@ const NewOrder = (props: NewOrderData) => {
             })
 
 
-
-            const selectedMainCourses:Dish[] = getRandomItems(mainCoursesArray, props.people)
-            const selectedDesserts:Dish[] = getRandomItems(dessertsArray, props.people)
-            const selectedColdDrinks:Drink[] = getRandomItems(coldDrinksArray, props.people)
-            const selectedWarmDrinks:Drink[] = getRandomItems(warmDrinksArray, props.people)
+            const selectedMainCourses: Dish[] = getRandomItems(mainCoursesArray, props.people)
+            const selectedDesserts: Dish[] = getRandomItems(dessertsArray, props.people)
+            const selectedColdDrinks: Drink[] = getRandomItems(coldDrinksArray, props.people)
+            const selectedWarmDrinks: Drink[] = getRandomItems(warmDrinksArray, props.people)
 
             setMainCourses(selectedMainCourses)
             setDesserts(selectedDesserts)
             setColdDrinks(selectedColdDrinks)
             setWarmDrinks(selectedWarmDrinks)
-
 
 
             const totalCourses = selectedMainCourses.reduce((acc, dish) => acc + (parseFloat(dish.price as string)), 0)
@@ -103,12 +102,11 @@ const NewOrder = (props: NewOrderData) => {
             setTotal(parseFloat(totalAmount.toFixed(2)))
 
 
-
             setPeople(props.people)
             setUsername(props.username as string)
-            setDate(formattedDate)
+            setOrder_date(formattedDate)
         }
-    }, [dishes,drinks,props.people])
+    }, [dishes, drinks, props.people])
 
     const extractNameAndPrice = (items: { name: string; price: string | number }[]) => {
         return items.map(item => ({
@@ -117,7 +115,7 @@ const NewOrder = (props: NewOrderData) => {
         }));
     };
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
 
         const transformedMainCourses = extractNameAndPrice(mainCourses);
@@ -126,84 +124,122 @@ const NewOrder = (props: NewOrderData) => {
         const transformedWarmDrinks = extractNameAndPrice(warmDrinks);
 
         const order = {
-            mainCourses: transformedMainCourses,
-            desserts: transformedDesserts,
-            coldDrinks: transformedColdDrinks,
-            warmDrinks: transformedWarmDrinks,
             people,
             username,
-            date,
+            order_date,
             total,
             validated,
             validatedBy
-
         }
-        console.log(order)
-        props.closeNewOrder()
+
+
+        try {
+            const orderRes = await axiosInstance.post('/orders/addOrder', order)
+            console.log('Order Response:', orderRes.data);
+            const orderId = orderRes.data.orderResult.order_id
+            console.log("orderId:",orderId)
+
+            const orderItems = [
+                ...transformedMainCourses.map(item => ({...item, order_id: orderId, type: 'maineCourse',})),
+                ...transformedDesserts.map(item => ({...item, order_id: orderId, type: 'desserts',})),
+                ...transformedColdDrinks.map(item => ({...item, order_id: orderId, type: 'coldDrinks',})),
+                ...transformedWarmDrinks.map(item => ({...item, order_id: orderId, type: 'warmDrinks',})),
+            ]
+            console.log(orderItems)
+
+
+            for(const orderItem of orderItems) {
+                await axiosInstance.post('/orderItems/addOrderItem', orderItem)
+            }
+            setSuccess(true)
+            setMessage('La commande a été envoyée')
+
+        } catch (error) {
+            console.error('Error in posting order', error)
+            setMessage("L'envoi de la commande a échoué")
+        }
+
     }
 
     return (
-        <form
-            className={"w-full h-auto flex flex-col items-center justify-around gap-3"}
-            onSubmit={handleSubmit}
-        >
-            <h1 className={"text-center text-[#013220] text-xl font-inter"}>Commande
-                pour {props.people} - <span
-                    className={"text-[#013220] text-xl font-inter italic"}>{props.username} </span> - {total}€</h1>
-            <Accordion defaultActiveKey="0">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Plats - Desserts</Accordion.Header>
-                    <Accordion.Body>
-                        <div className={"w-full"}>
-                            <h2 className={"text-lg text-center font-inter underline"}>Plats</h2>
-                            <ul>
-                                {mainCourses.map((course, index) => (
-                                    <li className={"text-base text-center font-inter"}
-                                        key={index}>{course.name} - {course.price} €</li>
-                                ))}
-                            </ul>
-                        </div>
-                        <div className={"w-full"}>
-                            <h2 className={"text-lg text-center font-inter underline"}>Desserts</h2>
-                            <ul>
-                                {desserts.map((dessert, index) => (
-                                    <li className={"text-base text-center font-inter"}
-                                        key={index}>{dessert.name} - {dessert.price} €</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Boissons</Accordion.Header>
-                    <Accordion.Body>
-                        <div className={"w-full"}>
-                            <h2 className={"text-lg text-center font-inter underline"}>Boissons froides</h2>
-                            <ul>
-                                {coldDrinks.map((cold, index) => (
-                                    <li className={"text-base text-center font-inter"}
-                                        key={index}>{cold.name} - {cold.price} €</li>
-                                ))}
-                            </ul>
-                            <h2 className={"text-lg text-center font-inter underline"}>Boissons chaudes</h2>
-                            <ul>
-                                {warmDrinks.map((warm, index) => (
-                                    <li className={"text-lg text-center font-inter"}
-                                        key={index}>{warm.name} - {warm.price} €</li>
-                                ))}
-                            </ul>
-                        </div>
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-            <button
-                className={"w-[50%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
-                type={"submit"}
+        <>
+            {success ? (
+                <div className={"p-2 h-4 m-4 text-center text-green-600"}>
+                    <p className={"text-green-600 text-base"}>{message} <span
+                        className={"ml-3 text-2xl cursor-pointer px-1 border-1 border-green-600"}
+                        onClick={props.closeNewOrder}>X</span></p>
+
+                </div>
+            ) : (
+                <div className={"px-2 h-9 m-3 mb-3 text-center text-green-600 flex items center justify-center gap-3 "}>
+                    {message !== "" && (<p className={"text-red-600 text-lg"}>{message} <span
+                        className={"ml-3 text-2xl cursor-pointer px-1 border-1 border-red-600"}
+                        onClick={props.closeNewOrder}>X</span></p>)}
+                </div>
+            )}
+            <form
+                className={"w-full h-auto flex flex-col items-center justify-around gap-3"}
+                onSubmit={handleSubmit}
             >
-                Valider
-            </button>
-        </form>
+                <h1 className={"text-center text-[#013220] text-xl font-inter"}>Commande
+                    pour {props.people} - <span
+                        className={"text-[#013220] text-xl font-inter italic"}>{props.username} </span> - {total}€</h1>
+                <Accordion defaultActiveKey="0">
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header>Plats - Desserts</Accordion.Header>
+                        <Accordion.Body>
+                            <div className={"w-full"}>
+                                <h2 className={"text-lg text-center font-inter underline"}>Plats</h2>
+                                <ul>
+                                    {mainCourses.map((course, index) => (
+                                        <li className={"text-base text-center font-inter"}
+                                            key={index}>{course.name} - {course.price} €</li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className={"w-full"}>
+                                <h2 className={"text-lg text-center font-inter underline"}>Desserts</h2>
+                                <ul>
+                                    {desserts.map((dessert, index) => (
+                                        <li className={"text-base text-center font-inter"}
+                                            key={index}>{dessert.name} - {dessert.price} €</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                        <Accordion.Header>Boissons</Accordion.Header>
+                        <Accordion.Body>
+                            <div className={"w-full"}>
+                                <h2 className={"text-lg text-center font-inter underline"}>Boissons froides</h2>
+                                <ul>
+                                    {coldDrinks.map((cold, index) => (
+                                        <li className={"text-base text-center font-inter"}
+                                            key={index}>{cold.name} - {cold.price} €</li>
+                                    ))}
+                                </ul>
+                                <h2 className={"text-lg text-center font-inter underline"}>Boissons chaudes</h2>
+                                <ul>
+                                    {warmDrinks.map((warm, index) => (
+                                        <li className={"text-lg text-center font-inter"}
+                                            key={index}>{warm.name} - {warm.price} €</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+                <button
+                    className={"w-[50%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
+                    type={"submit"}
+                >
+                    Valider
+                </button>
+            </form>
+        </>
     );
+
 };
 export default NewOrder;
 
