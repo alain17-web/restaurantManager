@@ -17,6 +17,7 @@ const Notepad = () => {
         const getOrderItems = async () => {
             try{
                 const res = await axiosInstance.get('/orderItems')
+                console.log(res.data)
                 setOrderItems(res.data)
                 setOrderNumber(Math.floor(Math.random() * orderItems.length +1));
             } catch(error){
@@ -30,7 +31,7 @@ const Notepad = () => {
         setIsValidated(!isValidated);
     }
 
-
+    console.log(orderItems)
     return (
         <main
             className={"w-[500px] h-[900px] bg-[url('./img/bloc-notes.png')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center ml-20"}>

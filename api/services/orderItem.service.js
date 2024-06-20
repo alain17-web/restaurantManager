@@ -17,13 +17,15 @@ const orderItemService = {
     },
 
     //READ
-    getAllUnvalidatedOrderItems: async () => {
+    getFirstUnvalidatedOrderItems: async () => {
         const connection = await createConnection({})
         try{
-            const [unvalidatedOrderItems] = await connection.execute('SELECT * FROM orderItems WHERE validated = "en attente"')
-            return unvalidatedOrderItems
+            const [firstUnvalidatedOrderItems] = await connection.execute(
+                "SELECT * FROM orderItems WHERE validated = 'en attente' AND order_id = (SELECT MIN(order_id) FROM orderItems WHERE validated = 'en attente')"
+            );
+            return firstUnvalidatedOrderItems
         }catch(error){
-            console.error('Error getting unvalidatedOrderItems service', error)
+            console.error('Error getting firstUnvalidatedOrderItems service', error)
             throw error;
         } finally {
             await connection.end()

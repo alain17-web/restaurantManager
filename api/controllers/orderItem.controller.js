@@ -29,13 +29,13 @@ const orderItemController = {
     },
 
     //READ
-    getAllUnvalidatedOrderItems: async (req, res) => {
+    getFirstUnvalidatedOrderItems: async (req, res) => {
         try {
-            const orderItems = await orderItemService.getAllUnvalidatedOrderItems()
-            res.status(201).json(orderItems);
+            const orderItems = await orderItemService.getFirstUnvalidatedOrderItems()
+            res.status(200).json(orderItems);
         } catch (error) {
-            console.error('Error getAllUnvalidatedOrderItems controller', error)
-            res.status(500).json({message: "Error getAllUnvalidatedOrderItems controller", error});
+            console.error('Error getFirstUnvalidatedOrderItems controller', error)
+            res.status(500).json({message: "Error getFirstUnvalidatedOrderItems controller", error});
         }
     },
 
