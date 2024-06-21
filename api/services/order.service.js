@@ -31,7 +31,7 @@ const orderService = {
     },
 
     //UPDATE
-    updateOrder: async ({order_id,people,username, order_date, total, validated, validatedBy}) => {
+    /*updateOrder: async ({order_id,people,username, order_date, total, validated, validatedBy}) => {
         const connection = await createConnection({})
         try{
            const [updatedOrder] = await connection.execute('UPDATE orders SET people = ?, username = ?, order_date = ?, total = ?, validated = ?, validatedBy = ? WHERE order_id = ?', [people,username, order_date, parseFloat(total), validated, validatedBy,order_id]);
@@ -42,7 +42,25 @@ const orderService = {
         } finally {
             await connection.end()
         }
+    },*/
+
+    updateOrder: async (order_id, validated, validatedBy) => {
+        if (order_id === undefined || validated === undefined || validatedBy === undefined) {
+            throw new Error('One or more parameters are undefined');
+        }
+        const connection = await createConnection({})
+        try{
+           const [updatedOrder] = await connection.execute('UPDATE orders SET validated = ?, validatedBy = ? WHERE order_id = ?', [ validated, validatedBy,order_id]);
+           return updatedOrder.affectedRows > 0;
+        } catch(error){
+            console.error('Error updateOrder service', error)
+            throw error;
+        } finally {
+            await connection.end()
+        }
     },
+
+
 
     //DELETE
     deleteOrder: async (order_id) => {

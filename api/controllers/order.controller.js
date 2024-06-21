@@ -1,5 +1,6 @@
 const orderService = require('../services/order.service');
 const orderValidator = require('../validators/orderValidator');
+const updateFromKitchenValidator = require('../validators/updateFromKitchenValidator');
 
 const orderController = {
     //CREATE
@@ -35,7 +36,7 @@ const orderController = {
     //UPDATE
     updateOrder: async (req, res) => {
         try {
-            const validateOrder = await orderValidator.validate(req.body);
+            /*const validateOrder = await orderValidator.validate(req.body);
 
             const {order_id, people, username, order_date, total, validated, validatedBy} = validateOrder;
 
@@ -47,7 +48,13 @@ const orderController = {
                 total,
                 validated,
                 validatedBy
-            });
+            });*/
+
+            const validateOrder = await updateFromKitchenValidator.validate(req.body);
+
+            const {order_id,validated,validatedBy} = validateOrder;
+
+            const updatedOrder = await orderService.updateOrder(order_id,validated,validatedBy);
 
             if (updatedOrder) {
                 res.status(201).json({message: 'Order updated successfully.'});

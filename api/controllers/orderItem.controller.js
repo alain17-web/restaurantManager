@@ -1,6 +1,7 @@
 const orderItemService = require("../services/orderItem.service");
 const orderItemValidator = require("../validators/orderItemValidator");
-const orderService = require("../services/order.service");
+const updateFromKitchenValidator = require("../validators/updateFromKitchenValidator");
+
 
 const orderItemController = {
     //CREATE
@@ -50,6 +51,27 @@ const orderItemController = {
         } catch (error) {
             console.error('Error getOrderItemByOrderId controller', error)
             res.status(500).json({message: 'Error getOrderItemByOrderId controller', error});
+        }
+    },
+
+    //UPDATE
+    updateOrderItemFromKitchen: async (req, res) => {
+        try{
+
+            const validateOrderItem = await updateFromKitchenValidator.validate(req.body);
+
+           const {order_id,validated,validatedBy} = validateOrderItem;
+
+           const updatedItems = await orderItemService.updateOrderItemFromKitchen(order_id, validated, validatedBy);
+
+           if(updatedItems){
+               res.status(201).json({message:"OrderItems validated successfully."});
+           } else {
+               res.status(404).json({error: 'OrderItems not found or no change made'});
+           }
+        } catch(error){
+            console.error('Error updateOrderItemFromKitchen controller', error)
+            res.status(500).json({message: 'Error updateOrderItemFromKitchen controller', error});
         }
     }
 }

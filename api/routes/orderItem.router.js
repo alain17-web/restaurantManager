@@ -9,6 +9,9 @@ orderItemRouter.route("/")
     .get(authenticate,authorize([9]),orderItemController.getFirstUnvalidatedOrderItems)
 
 orderItemRouter.route("/:order_id")
-    .get(authenticate, authorize([1,9]),orderItemController.getOrderItemByOrderId)
+    .get(authenticate, authorize([1]),orderItemController.getOrderItemByOrderId)
+
+orderItemRouter.route("/:order_id")
+    .patch(authenticate,authorize([9]),orderItemController.updateOrderItemFromKitchen)
 
 module.exports = orderItemRouter;
