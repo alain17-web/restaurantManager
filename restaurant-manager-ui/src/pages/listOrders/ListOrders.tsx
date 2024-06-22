@@ -4,11 +4,13 @@ import DataTableOrders from "../../components/dataTableOrders/DataTableOrders.ts
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import {useEffect, useState} from "react";
 import {Order} from "../../types/types.ts";
+import OrderDetail from "../orderDetail/OrderDetail.tsx";
 
 const ListOrders = () => {
 
     const [orders, setOrders] = useState<Order[]>([]);
-    const [_orderId, setOrderId] = useState<number | null>(null);
+    const [orderId, setOrderId] = useState<number | null>(null);
+    const [open, setOpen] = useState<boolean>(false);
 
 
     useEffect(() => {
@@ -25,10 +27,18 @@ const ListOrders = () => {
 
     const handleGetOrderId = (order_id: number) => {
         setOrderId(order_id)
+        setOpen(true);
     }
 
+    const show = () => {
+        setOrderId(null)
+        setOpen(true)
+    }
 
-    console.log('orders',orders)
+    const close = () => {
+        setOpen(false);
+    }
+
 
     return (
         <div className={"w-full flex"}>
@@ -36,7 +46,19 @@ const ListOrders = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Commandes clients</h1>
-                <DataTableOrders orders={orders} getOrderId={handleGetOrderId} />
+                { !open ? <DataTableOrders orders={orders} getOrderId={handleGetOrderId} open={show}/> :
+                    <OrderDetail order_id={orderId} setOrderId={setOrderId} />
+                }
+                {open ?
+                    <div className={"mb-2 pl-6"}>
+                        <button
+                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                            onClick={close}
+                        >
+                            Retour à la liste
+                        </button>
+                    </div> : ""
+                }
             </div>
         </div>
     );

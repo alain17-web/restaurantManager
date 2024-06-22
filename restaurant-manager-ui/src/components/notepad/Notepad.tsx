@@ -25,10 +25,9 @@ const Notepad = () => {
             if (res.data.length === 0) {
                 setMessage('Pas de commande en attente');
             } else {
-                console.log(res.data);
                 setOrderItems(res.data);
                 setOrderId(res.data[0].order_id);
-                setMessage(''); // Clear the message if there are order items
+                setMessage('');
             }
         } catch (error) {
             console.error('Error in getOrderItems', error);

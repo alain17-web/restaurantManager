@@ -177,6 +177,12 @@ export interface Order {
 export interface DataTableOrderData {
     orders:Order[]
     getOrderId:(id:number) => void
+    open:() => void
+}
+
+export interface OrderId  {
+    setOrderId: (order_id: number) => void
+    order_id:number | null;
 }
 
 export interface OrderItems {
