@@ -77,11 +77,11 @@ const NewCategory = (props: NewCatData) => {
                     <h1 className={"text-[#808080B2] text-2xl text-center"}>{add ? "Ajouter une catégorie" : "Modifier une catégorie"}</h1>
                 </div>
                 {success ? (
-                    <div className={"p-2 h-4 m-5 text-center text-green-600"}>
+                    <div className={"p-2 h-4 m-5 text-center"}>
                         <p className={"text-green-600 text-2xl"}>{message}</p>
                     </div>
                 ) : (
-                    <div className={"p-2 h-4 m-5 text-center text-green-600"}>
+                    <div className={"p-2 h-4 m-5 text-center"}>
                         <p className={"text-red-600 text-2xl"}>{message}</p>
                     </div>
                 )}

@@ -101,11 +101,11 @@ const NewBooking = (props: NewBookingData) => {
                     <h1 className={"text-[#808080B2] text-2xl text-center"}>{add ? "Ajouter une réservation" : "Modifier une réservation"}</h1>
                 </div>
                 {success ? (
-                    <div className={"p-2 h-4 m-5 text-center text-green-600"}>
+                    <div className={"p-2 h-4 m-5 text-center"}>
                         <p className={"text-green-600 text-2xl"}>{message}</p>
                     </div>
                 ) : (
-                    <div className={"p-2 h-4 m-5 text-center text-green-600"}>
+                    <div className={"p-2 h-4 m-5 text-center"}>
                         <p className={"text-red-600 text-2xl"}>{message}</p>
                     </div>
                 )}
