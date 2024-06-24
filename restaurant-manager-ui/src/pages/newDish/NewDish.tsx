@@ -12,7 +12,7 @@ const NewDish = (props: NewDishData) => {
     const [desc, setDesc] = useState<string>('');
     const [cat_id, setCat_id] = useState<number>(0);
     const [allerg, setAllerg] = useState<string>("");
-    const [price, setPrice] = useState<number>(0);
+    const [price, setPrice] = useState<string | number>(0);
     const [cost, setCost] = useState<number>(0);
     const [min, setMin] = useState<number>(0);
 

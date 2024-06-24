@@ -14,4 +14,7 @@ orderItemRouter.route("/:order_id")
 orderItemRouter.route("/:order_id")
     .patch(authenticate,authorize([9]),orderItemController.updateOrderItemFromKitchen)
 
+orderItemRouter.route("/:order_id")
+    .delete(authenticate,authorize([1]),orderItemController.deleteOrderItemByOrderId)
+
 module.exports = orderItemRouter;

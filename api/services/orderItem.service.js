@@ -64,6 +64,20 @@ const orderItemService = {
         } finally {
             await connection.end()
         }
+    },
+
+    //DELETE
+    deleteOrderItemByOrderId: async (order_id) => {
+        const connection = await createConnection({})
+        try{
+            const [result] = await connection.execute('DELETE FROM orderItems WHERE order_id = ?', [order_id]);
+            return result.affectedRows > 0;
+        } catch(error){
+            console.error('Error in deleteOrderItemByOrderId service', error)
+            throw error;
+        } finally {
+            await connection.end()
+        }
     }
 }
 module.exports = orderItemService;

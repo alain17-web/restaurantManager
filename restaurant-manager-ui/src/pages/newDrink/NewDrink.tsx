@@ -7,7 +7,7 @@ const NewDrink = (props:NewDrinkData) => {
 
     const [name, setName] = useState<string>('');
     const [cat_id, setCat_id] = useState<number>(0);
-    const [price, setPrice] = useState<number>(0);
+    const [price, setPrice] = useState<string | number>(0);
     const [cost, setCost] = useState<number>(0);
     const [min, setMin] = useState<number>(0);
 

@@ -2,6 +2,8 @@ import {ordersColumns} from "../../dataTable.ts";
 import {DataGrid,GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
 import {DataTableOrderData, Order} from "../../types/types.ts";
+import {confirmAlert} from "react-confirm-alert";
+import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
 
@@ -13,12 +15,33 @@ const DataTableOrders = (props:DataTableOrderData) => {
         setOrders(props.orders)
     }, [props.orders]);
 
-    console.log(orders)
+
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
-    const handleDelete = (order_id): void => {
-        //TODO
+    const handleDelete = (order_id:number): void => {
+        confirmAlert({
+            title: 'Confirmation',
+            message: 'Etes-vous sûr de vouloir supprimer cette commande ?',
+            buttons: [
+                {
+                    label: 'Oui',
+                    onClick: async () => {
+                        try{
+                            await axiosInstance.delete(`/orderItems/${order_id}`)
+                            await axiosInstance.delete(`/orders/${order_id}`)
+                            setOrders((prevOrders) => prevOrders.filter((order) => order.order_id !== order_id))
+                        } catch(error){
+                            console.error("deletion failed", error)
+                        }
+                    }
+                },
+                {
+                    label: 'Non',
+                    onClick:  () => console.log("deletion cancelled")
+                }
+            ]
+        })
     }
 
     const actionColumn: GridColDef[] = [{
@@ -39,7 +62,7 @@ const DataTableOrders = (props:DataTableOrderData) => {
                         </svg>
                     </div>
                     <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"}
-                         onClick={() => handleDelete(params.row.id)} data-bs-toggle="tooltip"
+                         onClick={() => handleDelete(params.row.order_id)} data-bs-toggle="tooltip"
                          data-bs-placement="top" title="SUPPRIMER">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000"
                              className="bi bi-trash3-fill cursor-pointer" viewBox="0 0 16 16">

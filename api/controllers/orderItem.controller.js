@@ -73,6 +73,22 @@ const orderItemController = {
             console.error('Error updateOrderItemFromKitchen controller', error)
             res.status(500).json({message: 'Error updateOrderItemFromKitchen controller', error});
         }
+    },
+
+    //DELETE
+    deleteOrderItemByOrderId: async (req, res) => {
+        try{
+            const orderId = req.params.order_id;
+            const deletedOrderItem = await orderItemService.deleteOrderItemByOrderId(orderId);
+            if(deletedOrderItem){
+                res.status(200).json({message: "OrderItem deleted successfully."});
+            }else{
+                res.status(404).json({error: 'OrderItem not found'});
+            }
+        }catch(error){
+            console.error('Error deleteOrderItemByOrderId controller', error)
+            res.status(500).json({message: 'Error deleteOrderItemByOrderId controller', error});
+        }
     }
 }
 module.exports = orderItemController;
