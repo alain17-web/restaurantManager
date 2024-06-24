@@ -1,6 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import {Category, NewCatData} from "../../types/types.ts";
+import {Alert} from "react-bootstrap";
 
 
 
@@ -78,7 +79,8 @@ const NewCategory = (props: NewCatData) => {
                 </div>
                 {success ? (
                     <div className={"p-2 h-4 m-5 text-center"}>
-                        <p className={"text-green-600 text-2xl"}>{message}</p>
+                        {/*<p className={"text-green-600 text-2xl"}>{message}</p>*/}
+                        <Alert variant={"success"} dismissible onClose={() => setMessage("")}>{message}</Alert>
                     </div>
                 ) : (
                     <div className={"p-2 h-4 m-5 text-center"}>

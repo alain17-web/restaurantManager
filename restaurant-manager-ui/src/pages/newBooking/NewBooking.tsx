@@ -2,9 +2,13 @@ import TimeOptions from "../../components/timeOptions/TimeOptions.tsx";
 import {FormEvent, useEffect, useState} from "react";
 import {NewBookingData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import { Alert } from 'react-bootstrap'
 
 
 const NewBooking = (props: NewBookingData) => {
+
+
+
 
     const [currentDate, setCurrentDate] = useState<string>("")
     const [hour, setHour] = useState<string>("")
@@ -58,7 +62,7 @@ const NewBooking = (props: NewBookingData) => {
 
         } else {
             if (currentDate !== "") {
-                // Convert 'YYYY-MM-DD' to 'DD/MM/YYYY'
+
                 const formattedDate = currentDate.split("-").reverse().join("/");
                 try {
                     if (add) {
@@ -69,9 +73,9 @@ const NewBooking = (props: NewBookingData) => {
                             email,
                             people
                         })
-
                         setSuccess(true)
                         setMessage("La réservation a bien été créée")
+
                     } else {
                         await axiosInstance.patch(`/bookings/${props.id}`, {
                             date: formattedDate,
@@ -82,6 +86,7 @@ const NewBooking = (props: NewBookingData) => {
                         })
                         setSuccess(true)
                         setMessage("La réservation a bien été mise à jour")
+
                     }
 
                 } catch (error) {
@@ -94,6 +99,12 @@ const NewBooking = (props: NewBookingData) => {
             }
         }
     }
+
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
+    }
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -102,14 +113,14 @@ const NewBooking = (props: NewBookingData) => {
                 </div>
                 {success ? (
                     <div className={"p-2 h-4 m-5 text-center"}>
-                        <p className={"text-green-600 text-2xl"}>{message}</p>
+                        <Alert variant={"success"} dismissible onClose={() => setMessage("")}>{message}</Alert>
                     </div>
                 ) : (
                     <div className={"p-2 h-4 m-5 text-center"}>
                         <p className={"text-red-600 text-2xl"}>{message}</p>
                     </div>
                 )}
-                <div className={"custom-shadow p-[10px] m-5"}>
+                <div className={"custom-shadow p-[10px] m-5 flex flex-col"}>
                     <form
                         className={"w-[40%] flex flex-col mx-auto gap-8"}
                         noValidate
@@ -168,7 +179,6 @@ const NewBooking = (props: NewBookingData) => {
                                 onChange={(e) => {
                                     setPeople(parseInt(e.target.value, 10));
                                 }}
-                                //onChange={handlePeople}
                             />
                         </div>
                         <button
@@ -178,6 +188,14 @@ const NewBooking = (props: NewBookingData) => {
                             {add ? "Ajouter une réservation" : "Modifier une réservation"}
                         </button>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
         </div>

@@ -234,6 +234,8 @@ export interface DataTableBookingData {
 
 export interface NewBookingData {
     setBookingId: (id: number | null) => void;
+    onAddOrEdit:() => void;
+    close:()=> void;
     bookings:Booking[]
     id:number | null
 }
