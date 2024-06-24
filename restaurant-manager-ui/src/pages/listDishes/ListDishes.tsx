@@ -12,6 +12,7 @@ const Dishes = () => {
     const [dishes,setDishes]= useState<Dish[]>([])
     const [dishId, setDishId] = useState<number | null>(null)
     const [open,setOpen] = useState<boolean>(false);
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(1);
 
 
     useEffect(() => {
@@ -24,7 +25,11 @@ const Dishes = () => {
             }
         }
         getDishes()
-    }, []);
+    }, [refetchTrigger]);
+
+    const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    };
 
     const handleGetDishId = (id: number) => {
         setDishId(id)
@@ -47,17 +52,7 @@ const Dishes = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Plats et desserts</h1>
                 {!open ? <DataTableDishes dishes={dishes} getDishId={handleGetDishId} open={show}/> :
-                    <NewDish id={dishId} setDishId={setDishId} dishes={dishes}/>}
-                {open ?
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div> : ""
-                }
+                    <NewDish id={dishId} setDishId={setDishId} dishes={dishes} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );

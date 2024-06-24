@@ -1,7 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance.tsx";
-import {Category, NewCatData} from "../../types/types.ts";
-import {Alert} from "react-bootstrap";
+import {NewCatData} from "../../types/types.ts";
+
 
 
 
@@ -47,28 +47,28 @@ const NewCategory = (props: NewCatData) => {
             setMessage("Un nom de catégorie est obligatoire")
         } else {
             try {
-                let updatedCategory: Category;
+
                 if (add) {
-                    const res = await axiosInstance.post('/categories/addCategory', {cat_name,type})
-                    updatedCategory = res.data.catResult
+                    await axiosInstance.post('/categories/addCategory', {cat_name,type})
                     setSuccess(true)
                     setMessage("La catégorie a bien été créée")
-                    props.onUpdate(updatedCategory)
+
                 } else {
-                    const res = await axiosInstance.patch(`/categories/${props.id}`, {cat_name,type})
-                    console.log(res.data.catResult)
-                    updatedCategory = res.data.catResult
+                    await axiosInstance.patch(`/categories/${props.id}`, {cat_name,type})
                     setSuccess(true)
                     setMessage("La catégorie a bien été mise à jour")
-                    props.onUpdate(updatedCategory)
                 }
-
 
             } catch (error) {
                 console.error(error)
                 setMessage(add ? "L'ajout de la catégorie a échoué" : "la mise à jour a échouée")
             }
         }
+    }
+
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
     }
 
     return (
@@ -79,15 +79,14 @@ const NewCategory = (props: NewCatData) => {
                 </div>
                 {success ? (
                     <div className={"p-2 h-4 m-5 text-center"}>
-                        {/*<p className={"text-green-600 text-2xl"}>{message}</p>*/}
-                        <Alert variant={"success"} dismissible onClose={() => setMessage("")}>{message}</Alert>
+                        <p className={"text-green-600 text-2xl"}>{message}</p>
                     </div>
                 ) : (
                     <div className={"p-2 h-4 m-5 text-center"}>
                         <p className={"text-red-600 text-2xl"}>{message}</p>
                     </div>
                 )}
-                <div className={"custom-shadow p-[10px] m-5"}>
+                <div className={"custom-shadow p-[10px] m-5 flex flex-col"}>
                     <form
                         className={"w-[40%] flex flex-col mx-auto gap-8"}
                         noValidate
@@ -123,6 +122,14 @@ const NewCategory = (props: NewCatData) => {
                             {add ? "Ajouter une catégorie" : "Modifier une catégorie"}
                         </button>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
 

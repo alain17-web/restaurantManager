@@ -46,6 +46,8 @@ export interface DataTableDishData {
 export interface NewDishData {
     setDishId: (id: number | null) => void;
     dishes:Dish[]
+    onAddOrEdit:() => void;
+    close:()=> void;
     id:number | null
 }
 
@@ -77,6 +79,8 @@ export interface DataTableDrinkData {
 export interface NewDrinkData {
     setDrinkId: (id: number | null) => void;
     drinks:Drink[]
+    onAddOrEdit:() => void;
+    close:()=> void;
     id:number | null
 }
 
@@ -96,7 +100,8 @@ export interface NewCatData {
     setCategoryId: (id: number | null) => void;
     categories:Category[]
     id:number | null
-    onUpdate: (category: Category) => void;
+    onAddOrEdit:() => void;
+    close:()=> void;
 }
 
 export interface Employee {
@@ -126,6 +131,8 @@ export interface DataTableInactiveData {
 export interface NewEmployeeData {
     setEmployeeId: (id: number | null) => void;
     employees:Employee[]
+    onAddOrEdit:() => void;
+    close:()=> void;
     id:number | null
 }
 
@@ -150,12 +157,16 @@ export interface DataTableRosterData {
 export interface NewRoleData {
     setRoleId: (id: number | null) => void;
     roles:Role[]
+    onAddOrEdit:() => void;
+    close:()=> void;
     id:number | null
 }
 
 export interface NewRosterData {
     setRosterId: (id: number | null) => void;
     rosters:Roster[]
+    onAddOrEdit:() => void;
+    close:()=> void;
     id:number | null
 }
 
@@ -198,6 +209,8 @@ export interface OrderItems {
 export interface NewOrderData {
     people: number
     username: string | null
+    onAddOrEdit:() => void;
+    close:()=> void;
     closeNewOrder: () => void;
 }
 

@@ -91,7 +91,10 @@ const NewDrink = (props:NewDrinkData) => {
         }
     }
 
-
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
+    }
 
 
     return (
@@ -109,7 +112,7 @@ const NewDrink = (props:NewDrinkData) => {
                         <p className={"text-red-600 text-2xl"}>{message}</p>
                     </div>
                 )}
-                <div className={"custom-shadow p-[10px] m-5"}>
+                <div className={"custom-shadow p-[10px] m-5 flex flex-col"}>
                     <form
                         className={"w-[40%] flex flex-col mx-auto gap-8"}
                         noValidate
@@ -179,6 +182,14 @@ const NewDrink = (props:NewDrinkData) => {
                             {add ? "Ajouter une boisson" : "Modifier une boisson"}
                         </button>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
         </div>

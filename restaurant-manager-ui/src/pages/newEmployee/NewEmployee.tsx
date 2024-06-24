@@ -103,6 +103,12 @@ const NewEmployee = (props: NewEmployeeData) => {
         }
     }
 
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
+    }
+
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -118,7 +124,7 @@ const NewEmployee = (props: NewEmployeeData) => {
                         <p className={"text-red-600 text-2xl"}>{message}</p>
                     </div>
                 )}
-                <div className={"custom-shadow p-[10px] m-5"}>
+                <div className={"custom-shadow p-[10px] m-5 flex flex-col"}>
                     <form
                         className={"w-[40%] flex flex-col mx-auto gap-8"}
                         noValidate
@@ -209,6 +215,14 @@ const NewEmployee = (props: NewEmployeeData) => {
                             {add ? "Ajouter un employé" : "Modifier un employé"}
                         </button>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"mt-0 m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
         </div>

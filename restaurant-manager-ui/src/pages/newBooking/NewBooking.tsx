@@ -2,7 +2,7 @@ import TimeOptions from "../../components/timeOptions/TimeOptions.tsx";
 import {FormEvent, useEffect, useState} from "react";
 import {NewBookingData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
-import { Alert } from 'react-bootstrap'
+
 
 
 const NewBooking = (props: NewBookingData) => {
@@ -113,7 +113,7 @@ const NewBooking = (props: NewBookingData) => {
                 </div>
                 {success ? (
                     <div className={"p-2 h-4 m-5 text-center"}>
-                        <Alert variant={"success"} dismissible onClose={() => setMessage("")}>{message}</Alert>
+                        <p className={"text-green-600 text-2xl"}>{message}</p>
                     </div>
                 ) : (
                     <div className={"p-2 h-4 m-5 text-center"}>

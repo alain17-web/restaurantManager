@@ -13,6 +13,7 @@ const ListOrders = () => {
     const [open, setOpen] = useState<boolean>(false);
 
 
+
     useEffect(() => {
         const getOrders = async () => {
             try {
@@ -24,6 +25,7 @@ const ListOrders = () => {
         }
         getOrders()
     }, []);
+
 
     const handleGetOrderId = (order_id: number) => {
         setOrderId(order_id)

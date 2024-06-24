@@ -12,6 +12,7 @@ const ListInactiveStaff = () => {
     const [inactives, setInactives] = useState<Employee[]>([])
     const[_inactiveId, setInactiveId] = useState<number | null>(0);
     const [open,setOpen] = useState<boolean>(false);
+    //const [refetchTrigger, setRefetchTrigger] = useState<number>(0)
 
     useEffect(() => {
         const getInactives = async () => {
@@ -25,6 +26,9 @@ const ListInactiveStaff = () => {
         getInactives()
     }, []);
 
+    /*const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    };*/
 
 
     const handleGetInactiveId = (id: number) => {

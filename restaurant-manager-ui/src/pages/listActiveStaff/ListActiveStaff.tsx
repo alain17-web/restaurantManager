@@ -12,6 +12,7 @@ const ListActiveStaff = () => {
     const [employees, setEmployees] = useState<Employee[]>([])
     const[employeeId, setEmployeeId] = useState<number | null>(0);
     const [open,setOpen] = useState<boolean>(false);
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(1);
 
     useEffect(() => {
         const getEmployees = async () => {
@@ -23,8 +24,11 @@ const ListActiveStaff = () => {
             }
         }
         getEmployees()
-    }, []);
+    }, [refetchTrigger]);
 
+    const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    };
 
     const handleGetEmployeeId = (id: number) => {
         setEmployeeId(id)
@@ -41,24 +45,13 @@ const ListActiveStaff = () => {
     }
 
 
-
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Employés</h1>
-                {!open ? <DataTableActive employees={employees} getEmployeeId={handleGetEmployeeId} open={show} /> : <NewEmployee id={employeeId} setEmployeeId={setEmployeeId} employees={employees} />}
-                {open ?
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"mt-0 m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div> : ""
-                }
+                {!open ? <DataTableActive employees={employees} getEmployeeId={handleGetEmployeeId} open={show} /> : <NewEmployee id={employeeId} setEmployeeId={setEmployeeId} employees={employees} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );
