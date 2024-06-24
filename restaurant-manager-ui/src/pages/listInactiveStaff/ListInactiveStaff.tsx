@@ -4,15 +4,16 @@ import DataTableInactive from "../../components/dataTableInactive/DataTableInact
 import {useEffect, useState} from "react";
 import {Employee} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import NewEmployee from "../newEmployee/NewEmployee.tsx";
 
 
 
 const ListInactiveStaff = () => {
 
     const [inactives, setInactives] = useState<Employee[]>([])
-    const[_inactiveId, setInactiveId] = useState<number | null>(0);
+    const[inactiveId, setInactiveId] = useState<number | null>(0);
     const [open,setOpen] = useState<boolean>(false);
-    //const [refetchTrigger, setRefetchTrigger] = useState<number>(0)
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(0)
 
     useEffect(() => {
         const getInactives = async () => {
@@ -24,11 +25,11 @@ const ListInactiveStaff = () => {
             }
         }
         getInactives()
-    }, []);
+    }, [refetchTrigger]);
 
-    /*const handleAddedOrEdited = () => {
+    const handleAddedOrEdited = () => {
         setRefetchTrigger(prev => prev + 1);
-    };*/
+    };
 
 
     const handleGetInactiveId = (id: number) => {
@@ -52,15 +53,7 @@ const ListInactiveStaff = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Anciens employés</h1>
-                {!open ? <DataTableInactive getInactiveId={handleGetInactiveId} open={show} inactives={inactives}/> :
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div>
+                {!open ? <DataTableInactive getInactiveId={handleGetInactiveId} open={show} inactives={inactives}/> : <NewEmployee id={inactiveId} setEmployeeId={setInactiveId} employees={inactives} onAddOrEdit={handleAddedOrEdited} close={close}/>
                 }
             </div>
         </div>
