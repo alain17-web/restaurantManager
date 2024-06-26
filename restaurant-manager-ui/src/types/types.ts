@@ -55,7 +55,7 @@ export interface Props {
     dishName: string,
     dishImg: string,
     dishDesc: string
-    dishPrice: number
+    dishPrice: number | string
     dishAllerg?: string
     closePopup:() => void
 }

@@ -1,35 +1,67 @@
 import Navbar from "../../components/navbar/Navbar.tsx";
-import {dishes} from '../../tempData.ts';
-import {drinks} from "../../tempData.ts";
 import MenuSidebar from "../../components/menuSidebar/MenuSidebar.tsx";
-import {useState, useEffect} from "react";
+import {useState, useEffect, ChangeEvent} from "react";
 import DishPopup from "../../components/dishPopup/DishPopup.tsx";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-import {Dish, Drink} from '../../types/types.ts'
+import {Category, Dish, Drink} from '../../types/types.ts'
+import axios from "axios";
 
 //TS guard
 const isDish = (item: Dish | Drink): item is Dish => {
     return (item as Dish).desc !== undefined;
 };
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
 
 export const Menu = () => {
     const [selectedItem, setSelectedItem] = useState("Mezzes");
+    const [dishes, setDishes] = useState<Dish[]>([])
+    const [drinks, setDrinks] = useState<Drink[]>([])
+    const [categories, setCategories] = useState<Category[]>([])
+    const [catId, setCatId] = useState<number>(1)
+    const [catType, setCatType] = useState<string>("")
+
+    useEffect(() => {
+        getDishes()
+        getDrinks()
+        getCategories()
+    }, []);
+
+    const getDishes = async () => {
+        const res = await axios.get(`${apiBaseUrl}/dishes`)
+        setDishes(res.data)
+    }
+
+    const getDrinks = async () => {
+        const res = await axios.get(`${apiBaseUrl}/drinks`)
+        setDrinks(res.data)
+    }
+
+    const getCategories = async () => {
+        const res = await axios.get(`${apiBaseUrl}/categories`)
+        setCategories(res.data)
+        const initialCat = res.data.find((cat:Category) => cat.cat_name === selectedItem);
+        if (initialCat) {
+            setCatId(initialCat.id);
+            setCatType(initialCat.type);
+        }
+    }
 
     // Handle Popup Single Product
     const [dishName, setDishName] = useState<string>("");
     const [dishImg, setDishImg] = useState<string>("");
     const [dishDesc, setDishDesc] = useState<string>("");
-    const [dishPrice, setDishPrice] = useState<number>(0);
+    const [dishPrice, setDishPrice] = useState<number | string>(0);
     const [dishAllerg, setDishAllerg] = useState<string>("");
 
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
-    const handlePopup = (dishName: string, dishImg: string, dishDesc: string, dishPrice: number, dishAllerg: string) => {
+    const handlePopup = (dishName: string, dishImg: string, dishDesc: string, dishPrice: number | string, dishAllerg: string) => {
         setShowPopup(true);
         setDishName(dishName);
-        setDishImg(dishImg);
+        setDishImg(dishImg)
         setDishDesc(dishDesc);
         setDishPrice(dishPrice);
         setDishAllerg(dishAllerg);
@@ -42,19 +74,33 @@ export const Menu = () => {
     const [page, setPage] = useState(1);
     const itemsPerPage = 5;
 
-    const handleChangePage = (_event:React.ChangeEvent<unknown>,value: number) => {
+    const handleChangePage = (_event: ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
 
     useEffect(() => {
-        setPage(1);
+        if (categories.length > 0) {
+            setPage(1);
+            getCatId()
+        }
     }, [selectedItem]);
 
-    const filteredItems = selectedItem !== "Softs" && selectedItem !== "Boissons chaudes" && selectedItem !== "Vins" && selectedItem !== "Bières"
-        ? dishes.filter(dish => dish.cat === selectedItem)
-        : drinks.filter(drink => drink.cat === selectedItem);
+    const getCatId = () => {
+        const cat = categories.find(cat => cat.cat_name === selectedItem);
+        if (cat) {
+            setCatId(cat.id);
+            setCatType(cat.type);
+        }
+    }
+
+    const filteredItems = catType === "food"
+        ? dishes.filter(dish => dish.cat_id === catId)
+        : drinks.filter(drink => drink.cat_id === catId);
+
 
     const paginatedItems = filteredItems.slice((page - 1) * itemsPerPage, page * itemsPerPage);
+
+    console.log(dishImg)
 
     return (
         <div className={"w-full h-screen bg-no-repeat bg-center bg-cover overflow-hidden"}
@@ -78,8 +124,8 @@ export const Menu = () => {
                     }
                     <ul className={"w-[60%] mx-auto"}>
                         <h3 className={"font-inter italic text-2xl text-[#013220] underline mb-3"}>Les {selectedItem}</h3>
-                        {paginatedItems.map((item) => (
-                            item.cat === `${selectedItem}` && (
+                        {paginatedItems.map(item => (
+                            item.cat_id === catId && (
                                 <div key={item.id}>
                                     <li className={!isDish(item) ? "list-none" : "list-none bg-[#F5F5F5] rounded-md px-4 py-2"}>
                                         <h3 className={"font-inter italic text-xl text-[#013220] font-bold mb-[4px]"}>
@@ -115,7 +161,11 @@ export const Menu = () => {
                         />
                     </Stack>
                 </div>
-                <MenuSidebar onItemSelect={setSelectedItem} selectedItem={selectedItem}/>
+                <MenuSidebar
+                    onItemSelect={setSelectedItem}
+                    selectedItem={selectedItem}
+                    categories={categories}
+                />
             </div>
         </div>
     );
