@@ -67,10 +67,24 @@ const dishController = {
         try {
             const validateDish = await dishValidator.validate(req.body);
 
-            const {name, desc, cat_id, allerg, price, cost, min, img} = validateDish;
+            const {name, desc, cat_id, allerg, price, cost, min} = validateDish;
+
+            const img = req.file ? req.file.filename : null;
+
+            const prevDish = await dishService.getDishById(req.params.id)
 
             const updatedDish = await dishService.updateDish(req.params.id, name, desc, cat_id, allerg, price, cost, min, img);
             if (updatedDish) {
+                if(img && prevDish && prevDish.img){
+                    const imagePath = path.join(__dirname,'../uploads/img', prevDish.img);
+                    fs.unlink(imagePath, (error) => {
+                        if (error) {
+                            console.error('Error deleting previous image file:', error);
+                        } else {
+                            console.log('Old image file deleted successfully');
+                        }
+                    });
+                }
                 res.status(200).json({message: "Dish updated successfully."});
             } else {
                 res.status(404).json({message: "Dish not found or no change made."});

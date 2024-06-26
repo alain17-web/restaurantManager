@@ -3,8 +3,11 @@ import CategoryOptions from "../../components/categoryOptions/CategoryOptions.ts
 import {NewDishData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 
+const apiBaseUrl = import.meta.env.VITE_API_IMG_URL;
 
 const NewDish = (props: NewDishData) => {
+
+
 
     const [img, setImg] = useState<File | null>(null)
     const [imgUrl, setImgUrl] = useState<string>('');
@@ -46,13 +49,15 @@ const NewDish = (props: NewDishData) => {
         setSuccess(false)
     }
 
+
+
     const handleEdit = () => {
         setMessage("")
         const dish = props.dishes.find((dish) => dish.id === props.id)
         if (dish) {
-            console.log(dish.img)
+            const imgUrl:string = `${apiBaseUrl}/uploads/img/${dish.img}`
             setAdd(false)
-            setImgUrl(dish.img ? `/api/uploads/img/${dish.img}` : '')
+            setImgUrl(dish.img ? `${imgUrl}` : '')
             setName(dish.name)
             setDesc(dish.desc)
             setCat_id(dish.cat_id)

@@ -51,6 +51,9 @@ const dishService = {
     updateDish: async (id,name,desc,cat_id,allerg,price,cost,min,img) => {
         const connection = await createConnection();
         try{
+            allerg = allerg !== undefined ? allerg : null;
+            img = img !== undefined ? img : null;
+            console.log('UpdateDish parameters:', { id, name, desc, cat_id, allerg, price, cost, min, img });
             const [updatedDish] = await connection.execute('UPDATE dishes SET name = ?, `desc` = ?, cat_id= ?, allerg = ?, price = ?, cost = ?, min = ?, img = ? WHERE id = ? ',[name, desc,cat_id,allerg,price,cost,min,img,id]);
 
             return updatedDish.affectedRows > 0;
