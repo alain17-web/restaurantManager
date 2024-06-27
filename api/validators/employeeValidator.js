@@ -8,6 +8,7 @@ const employeeValidator = yup.object({
     tel: yup.string().required(),
     status_id: yup.number().required(),
     roster_id: yup.number().required(),
+    gender: yup.string().required(),
 });
 
 module.exports = employeeValidator;

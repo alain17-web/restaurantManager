@@ -6,6 +6,8 @@ import {DecodedToken} from "../../types/types.ts";
 
 const useUsername = () => {
     const [username, setUsername] = useState<string | null>(null);
+    const [gender, setGender] = useState<string | null>(null);
+    const [roleId, setRoleId] = useState<number | null>(null);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -15,11 +17,14 @@ const useUsername = () => {
             return;
         } else {
             const decodedToken = jwtDecode<DecodedToken>(token);
+            console.log(decodedToken);
             setUsername(decodedToken.username.toLowerCase());
+            setGender(decodedToken.gender)
+            setRoleId(decodedToken.role_id)
         }
     }, []);
 
-    return { username };
+    return { username,gender,roleId };
 };
 
 export default useUsername;

@@ -14,6 +14,7 @@ const NewEmployee = (props: NewEmployeeData) => {
     const [role_id, setRole_id] = useState<number>(0);
     const [status_id, setStatus_id] = useState<number>(0);
     const [roster_id, setRoster_id] = useState<number>(0);
+    const [gender,setGender] = useState<string>("");
 
     const [usernameMessage, setUsernameMessage] = useState<string>('');
     const [message, setMessage] = useState<string>("")
@@ -38,6 +39,7 @@ const NewEmployee = (props: NewEmployeeData) => {
         setTel("")
         setStatus_id(0)
         setRoster_id(0)
+        setGender("")
         setMessage("")
         setSuccess(false)
         setUsernameMessage("")
@@ -55,6 +57,7 @@ const NewEmployee = (props: NewEmployeeData) => {
             setRole_id(employee.role_id)
             setStatus_id(employee.status_id)
             setRoster_id(employee.roster_id)
+            setGender(employee.gender)
         }
     }
 
@@ -81,17 +84,17 @@ const NewEmployee = (props: NewEmployeeData) => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (username === "" || password === "" || email === "" || tel === "" || role_id === 0 || status_id === 0 || roster_id === 0) {
+        if (username === "" || password === "" || email === "" || tel === "" || role_id === 0 || status_id === 0 || roster_id === 0 || gender === "") {
             setMessage("Tous les champs sont obligatoires")
 
         } else {
             try {
                 if (add) {
-                    await axiosInstance.post('/employees/addEmployee', {username, password, email, tel, role_id, status_id,roster_id})
+                    await axiosInstance.post('/employees/addEmployee', {username, password, email, tel, role_id, status_id,roster_id,gender})
                     setSuccess(true)
                     setMessage("L'employé a bien été créé")
                 } else {
-                    await axiosInstance.patch(`/employees/${props.id}`, {username, password, email, tel, role_id, status_id,roster_id})
+                    await axiosInstance.patch(`/employees/${props.id}`, {username, password, email, tel, role_id, status_id,roster_id,gender})
                     setSuccess(true)
                     setMessage("L'employé a bien été mis à jour")
                 }
@@ -141,6 +144,21 @@ const NewEmployee = (props: NewEmployeeData) => {
                             />
                         </div>
                         {usernameMessage && (<p className={'text-red-500 text-base'}>{usernameMessage}</p>)}
+
+                        <div className={"w-[75%]"}>
+                            <label className={"flex items-center gap-[10px]"}>Genre*</label>
+                            <select
+                                className={"w-full p-[5px] border-b-[1px] border-gray-500"}
+                                required
+                                value={gender}
+                                onChange={(e) => setGender(e.target.value)}
+                            >
+                                <option>Choisir un genre</option>
+                                <option value={"M"}>M</option>
+                                <option value={"F"}>F</option>
+                                <option value={"autre"}>autre</option>
+                            </select>
+                        </div>
 
                         <div className={"w-[75%]"}>
                             <label className={"flex items-center gap-[10px]"}>Mot de passe*</label>

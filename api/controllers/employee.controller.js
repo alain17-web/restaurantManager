@@ -13,7 +13,7 @@ const employeeController = {
                 return res.status(400).json({error: validationResult.error});
             }
 
-            const {username, password, role_id, email, tel, status_id, roster_id} = validationResult;
+            const {username, password, role_id, email, tel, status_id, roster_id,gender} = validationResult;
             const registrationResult = await employeeService.addEmployee({
                 username,
                 password,
@@ -21,7 +21,8 @@ const employeeController = {
                 email,
                 tel,
                 status_id,
-                roster_id
+                roster_id,
+                gender
             });
 
             res.status(201).json({message: "Employee created successfully", registrationResult});
@@ -57,9 +58,9 @@ const employeeController = {
         try {
             const validateEmployee = await employeeValidator.validate(req.body);
 
-            const {username, password, role_id, email, tel, status_id, roster_id} = validateEmployee;
+            const {username, password, role_id, email, tel, status_id, roster_id,gender} = validateEmployee;
 
-            const updatedEmployee = await employeeService.updateEmployee(req.params.id, username, password, role_id, email, tel, status_id, roster_id)
+            const updatedEmployee = await employeeService.updateEmployee(req.params.id, username, password, role_id, email, tel, status_id, roster_id,gender)
 
             if (updatedEmployee) {
                 res.status(201).json({message: "Employee updated successfully."});

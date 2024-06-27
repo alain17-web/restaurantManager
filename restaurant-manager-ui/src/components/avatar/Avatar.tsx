@@ -2,31 +2,38 @@ import {useEffect, useState} from "react";
 
 interface Prop {
     username: string | null
+    gender: string | null
+    roleId: number | null
 }
 
-//TEMPORARY
+
 const Avatar = (prop:Prop) => {
 
-    const [src, setSrc] = useState<string>('./img/waitress.jpeg')
+    const [src, setSrc] = useState<string>('')
     const [isKitchen,setKitchen] = useState<boolean>(false)
 
     useEffect(() => {
-        if(prop.username === "liam"){
+        if(prop.roleId === 2 && prop.gender === "F"){
+            setSrc('./img/waitress.jpeg')
+        }
+
+        if(prop.roleId === 2 && prop.gender === "M"){
             setSrc('./img/waiter.jpg')
         }
 
-        if(prop.username === "basile" || prop.username === "arnaud"){
+        if(prop.roleId === 9 && prop.gender === "M"){
             setSrc('./img/chef.jpg.avif')
             setKitchen(true)
         }
 
-        if(prop.username === "julie" || prop.username === "alicia"){
+        if(prop.roleId === 9 && prop.gender === "F"){
             setSrc('./img/cheffe.jpg')
             setKitchen(true)
         }
 
+    },[prop.roleId, prop.gender])
 
-    })
+
 
     return (
         <div className={'flex items-center justify-center'}>

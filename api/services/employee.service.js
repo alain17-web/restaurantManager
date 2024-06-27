@@ -7,7 +7,7 @@ const {JWT_SECRET, JWT_EXPIRES_IN} = process.env
 
 const employeeService = {
     //CREATE - REGISTER
-    addEmployee: async ({username, password, role_id, email, tel, status_id, roster_id}) => {
+    addEmployee: async ({username, password, role_id, email, tel, status_id, roster_id,gender}) => {
         const connection = await createConnection();
         try {
 
@@ -23,12 +23,12 @@ const employeeService = {
             const hashedPassword = await bcrypt.hash(password, salt);
 
             const [result] = await connection.execute(
-                `INSERT INTO employees (username, password, role_id, email, tel, status_id, roster_id) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)`,
-                [username, hashedPassword, role_id, email, tel, status_id, roster_id]
+                `INSERT INTO employees (username, password, role_id, email, tel, status_id, roster_id,gender) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+                [username, hashedPassword, role_id, email, tel, status_id, roster_id,gender]
             );
 
-            return {id: result.insertId, username, role_id, email, tel, status_id, roster_id};
+            return {id: result.insertId, username, role_id, email, tel, status_id, roster_id,gender};
         } catch (error) {
             console.error('Error addEmployee service:', error);
             throw error;
@@ -66,13 +66,13 @@ const employeeService = {
     },
 
     //UPDATE
-    updateEmployee: async (id,username, password, role_id,email, tel, status_id, roster_id) => {
+    updateEmployee: async (id,username, password, role_id,email, tel, status_id, roster_id,gender) => {
         const connection = await createConnection();
 
         try{
             const newHashedPassword = await bcrypt.hash(password, salt);
 
-            const [updatedEmployee] = await connection.execute('UPDATE employees SET username = ?, password = ?, role_id = ?, email = ?, tel = ?, status_id = ?, roster_id = ?  WHERE id = ?', [username, newHashedPassword, role_id,email, tel, status_id, roster_id,id]);
+            const [updatedEmployee] = await connection.execute('UPDATE employees SET username = ?, password = ?, role_id = ?, email = ?, tel = ?, status_id = ?, roster_id = ?, gender = ?  WHERE id = ?', [username, newHashedPassword, role_id,email, tel, status_id, roster_id,gender,id]);
 
             return updatedEmployee.affectedRows > 0;
         } catch(error){

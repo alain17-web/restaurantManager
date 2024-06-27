@@ -29,6 +29,7 @@ const authService = {
                 employeeId: employee.id,
                 username: employee.username,
                 role_id: employee.role_id,
+                gender: employee.gender
             }
 
             const token = jwt.sign(payload, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN}

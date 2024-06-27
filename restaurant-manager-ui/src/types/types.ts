@@ -37,6 +37,7 @@ export interface DecodedToken {
     employeeId: number;
     username: string;
     role_id: number;
+    gender: string;
     iat: number;
     exp: number;
 }
@@ -130,7 +131,7 @@ export interface Employee {
     role_id: number;
     status_id: number;
     roster_id: number;
-    avatar?: string;
+    gender: string;
 }
 
 export interface DataTableEmployeeData {
@@ -226,8 +227,8 @@ export interface OrderItems {
 export interface NewOrderData {
     people: number
     username: string | null
-    onAddOrEdit:() => void;
-    close:()=> void;
+    //onAddOrEdit:() => void;
+    //close:()=> void;
     closeNewOrder: () => void;
 }
 

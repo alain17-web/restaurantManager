@@ -13,7 +13,7 @@ const Restaurant = () => {
 
     const {handleLogout} = useLogout()
 
-    const { username } = useUsername()
+    const { username,gender,roleId } = useUsername()
     const [showNewOrder, setShowNewOrder] = useState<boolean>(false);
     const [people,setPeople] = useState<number>(0)
 
@@ -72,7 +72,7 @@ const Restaurant = () => {
                         <>
                             <TimeDisplay />
                             <DateDisplay />
-                            <Avatar username={username}/>
+                            <Avatar username={username} gender={gender} roleId={roleId}/>
                             <h2 className={"text-center text-white text-2xl font-inter italic"}>Bienvenue {username}</h2>
                             <button
                                 className={"w-[50%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}

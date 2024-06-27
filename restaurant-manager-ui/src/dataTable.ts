@@ -125,6 +125,7 @@ export const employeeColumns : GridColDef[]=[
         headerName: "horaire_id",
         width: 180,
     }
+
 ]
 
 export const inactiveColumns : GridColDef[]=[
