@@ -1,6 +1,7 @@
 import {Link, NavLink, useLocation} from "react-router-dom"
 import classNames from 'classnames'
 import useLogout from "../../hooks/logout/useLogout.tsx";
+import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
 const DashboardSidebar = () => {
 
@@ -8,6 +9,7 @@ const DashboardSidebar = () => {
 
     const { handleLogout } = useLogout();
 
+    const dispatch = useNotifDispatch()
 
     return (
         <div className={"flex-1 min-h-screen border-r-[0.5px] border-[#D3D3D3]"}>
@@ -136,6 +138,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>COMMANDES</p>
                     <NavLink
+                        onClick={()=> dispatch({type:'RESET_ORDER_NOTIF'})}
                         to={"/listOrders"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
@@ -150,6 +153,7 @@ const DashboardSidebar = () => {
                         </li>
                     </NavLink>
                     <NavLink
+                        onClick={()=> dispatch({type:'RESET_PURCHASE_NOTIF'})}
                         to={"/listPurchases"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
@@ -194,6 +198,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>RESERVATIONS</p>
                     <NavLink
+                        onClick={()=> dispatch({type:'RESET_BOOKING_NOTIF'})}
                         to={"/listBookings"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {

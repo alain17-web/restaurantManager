@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom"
 import {useNotifState} from "../../hooks/notifications/useNotifState.tsx";
+import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
 interface Props {
     type: string
@@ -14,6 +15,8 @@ type Data = {
 const Widget = (props: Props) => {
 
     const {orderCount, purchaseCount, bookingCount} = useNotifState()
+
+    const dispatch = useNotifDispatch()
 
     let data: Data = {title: "", link: ""};
 
@@ -45,6 +48,11 @@ const Widget = (props: Props) => {
             break;
     }
 
+    const handleReset = () => {
+       data.title === "COMMANDES CLIENTS" ? dispatch({ type: 'RESET_ORDER_NOTIF'}) :
+           data.title === "REAPPROS FOURNISSEURS" ? dispatch({ type: 'RESET_PURCHASE_NOTIF' }) :
+               dispatch({ type: 'RESET_BOOKING_NOTIF'})
+    }
 
     return (
         <div className={"flex justify-between flex-1 h-[100px] p-[10px] custom-shadow rounded-[10px]"}>
@@ -93,6 +101,7 @@ const Widget = (props: Props) => {
                         </span>}
                         <span>
                             <Link
+                                onClick={handleReset}
                                 className={"text-gray-500 hover:text-purple-600 text-sm font-inter"}
                                 to={
                                     data.title === "COMMANDES CLIENTS" ? "/listOrders"

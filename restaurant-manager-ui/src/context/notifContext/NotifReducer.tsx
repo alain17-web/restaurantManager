@@ -16,11 +16,11 @@ const notifReducer = (state: NotifState, action: NotifAction): NotifState => {
         case 'ADD_BOOKING_NOTIF':
             return {...state, bookingCount:state.bookingCount + 1};
         case 'RESET_ORDER_NOTIF':
-            return {...state, orderCount: state.orderCount - 1};
+            return {...state, orderCount: 0};
         case 'RESET_PURCHASE_NOTIF':
-            return {...state, purchaseCount: state.purchaseCount - 1};
+            return {...state, purchaseCount: 0};
         case 'RESET_BOOKING_NOTIF' :
-            return {...state, bookingCount: state.bookingCount - 1};
+            return {...state, bookingCount: 0};
         default:
             return state;
     }

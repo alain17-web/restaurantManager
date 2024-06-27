@@ -20,7 +20,7 @@ const ListBookings = () => {
         const getBookings = async () => {
             try {
                 const res = await axiosInstance.get('/bookings/')
-                console.log(res.data)
+
                 const formattedBookings = res.data.map((booking:Booking)  => ({
                     ...booking,
                     date: dayjs(booking.date).format('DD/MM/YYYY')

@@ -1,3 +1,4 @@
+
 type Props = {
     closeSuccessMsg: () => void;
     name: string
@@ -7,6 +8,7 @@ type Props = {
     error: boolean
 };
 const SuccessMsg = (props: Props) => {
+
     return (
         <article className={"w-[60%] h-auto border-2 border-[#6B8E23] rounded-xl mt-20 p-5"}>
 

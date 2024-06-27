@@ -5,6 +5,7 @@ import SuccessMsg from "../successMsg/SuccessMsg.tsx";
 import axios from "axios"
 import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
+
 const BookingForm = () => {
 
     const dispatch = useNotifDispatch()
@@ -42,8 +43,7 @@ const BookingForm = () => {
                         email,
                         people
                     });
-                    dispatch({ type: 'ADD_BOOKING_NOTIF'})
-                    setSuccess(true);
+                     setSuccess(true);
                 } catch (err) {
                     console.log("Booking error:", err);
                     setError(true);
@@ -60,6 +60,7 @@ const BookingForm = () => {
         setPeople(1);
         setSuccess(false);
         setError(false);
+        dispatch({ type: 'ADD_BOOKING_NOTIF'})
     };
 
     const validateName = () => {
