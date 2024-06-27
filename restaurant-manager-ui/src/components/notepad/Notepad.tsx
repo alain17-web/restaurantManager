@@ -2,7 +2,7 @@ import {MouseEvent, useEffect, useState} from "react";
 import { OrderItems} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import DateDisplay from "../dateDisplay/DateDisplay.tsx";
-import useUsername from "../../hooks/useUsername.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 

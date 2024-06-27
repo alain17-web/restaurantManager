@@ -3,10 +3,13 @@ import {FormEvent, useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion'
 import {Dish, Drink, NewOrderData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
-import useCurrentDate from "../../hooks/useCurrentDate.tsx";
+import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
+import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
 
 const NewOrder = (props: NewOrderData) => {
+
+    const dispatch = useNotifDispatch()
 
     const [dishes, setDishes] = useState<Dish[]>([])
     const [drinks, setDrinks] = useState<Drink[]>([])
@@ -177,6 +180,7 @@ const NewOrder = (props: NewOrderData) => {
             }
             setSuccess(true)
             setMessage('La commande a été envoyée')
+            dispatch({ type: 'ADD_ORDER_NOTIF'})
 
         } catch (error) {
             console.error('Error in posting order', error)
@@ -189,7 +193,7 @@ const NewOrder = (props: NewOrderData) => {
         <>
             {success ? (
                 <div className={"p-2 h-4 m-4 text-center text-green-600"}>
-                    <p className={"text-green-600 text-base"}>{message} <span
+                    <p className={"text-green-800 text-lg font-bold"}>{message} <span
                         className={"ml-3 text-2xl cursor-pointer px-1 border-1 border-green-600"}
                         onClick={props.closeNewOrder}>X</span></p>
 

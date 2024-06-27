@@ -7,7 +7,7 @@ import { CardActionArea } from '@mui/material';
 import { employees } from '../../tempData.ts';
 import { Employee } from '../../types/types.ts';
 import { EmployeeCard } from '../../types/types.ts';
-import useCurrentWeekDay from '../../hooks/useCurrentWeekDay.tsx';
+import useCurrentWeekDay from '../../hooks/date/useCurrentWeekDay.tsx';
 
 const RosterCard = () => {
     const currentDay = useCurrentWeekDay();

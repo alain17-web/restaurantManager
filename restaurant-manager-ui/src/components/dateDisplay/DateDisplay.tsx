@@ -1,5 +1,5 @@
-import useCurrentWeekDay from "../../hooks/useCurrentWeekDay.tsx";
-import useCurrentDate from "../../hooks/useCurrentDate.tsx";
+import useCurrentWeekDay from "../../hooks/date/useCurrentWeekDay.tsx";
+import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
 
 
 const CurrentDate = () => {

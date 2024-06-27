@@ -1,8 +1,8 @@
 import Logo from "../../components/logo/Logo.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
 import Notepad from "../../components/notepad/Notepad.tsx";
-import useLogout from "../../hooks/useLogout.tsx";
-import useUsername from "../../hooks/useUsername.tsx";
+import useLogout from "../../hooks/logout/useLogout.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 

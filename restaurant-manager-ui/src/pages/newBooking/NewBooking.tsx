@@ -2,12 +2,13 @@ import TimeOptions from "../../components/timeOptions/TimeOptions.tsx";
 import {FormEvent, useEffect, useState} from "react";
 import {NewBookingData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
 
 
 const NewBooking = (props: NewBookingData) => {
 
-
+    const dispatch = useNotifDispatch()
 
 
     const [currentDate, setCurrentDate] = useState<string>("")
@@ -75,7 +76,7 @@ const NewBooking = (props: NewBookingData) => {
                         })
                         setSuccess(true)
                         setMessage("La réservation a bien été créée")
-
+                        dispatch({ type: 'ADD_BOOKING_NOTIF'})
                     } else {
                         await axiosInstance.patch(`/bookings/${props.id}`, {
                             date: formattedDate,

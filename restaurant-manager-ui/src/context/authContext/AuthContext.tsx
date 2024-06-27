@@ -1,8 +1,8 @@
 
 import React, { createContext, useReducer, useContext, useEffect, ReactNode } from 'react';
 import Cookies from 'js-cookie';
-import { authReducer, initialState } from './AuthReducer';
-import {AuthAction, AuthState} from "../types/types.ts";
+import { authReducer, initialState } from './AuthReducer.tsx';
+import {AuthAction, AuthState} from "../../types/types.ts";
 
 const AuthContext = createContext<{
     state: AuthState;

@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom"
-import useUsername from "../../hooks/useUsername.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const DashboardNavbar = () => {

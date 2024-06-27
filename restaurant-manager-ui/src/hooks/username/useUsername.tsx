@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {jwtDecode} from 'jwt-decode';
-import {DecodedToken} from "../types/types.ts";
+import {DecodedToken} from "../../types/types.ts";
 
 
 

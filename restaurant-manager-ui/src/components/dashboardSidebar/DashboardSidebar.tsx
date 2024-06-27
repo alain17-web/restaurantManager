@@ -1,6 +1,6 @@
 import {Link, NavLink, useLocation} from "react-router-dom"
 import classNames from 'classnames'
-import useLogout from "../../hooks/useLogout.tsx";
+import useLogout from "../../hooks/logout/useLogout.tsx";
 
 const DashboardSidebar = () => {
 

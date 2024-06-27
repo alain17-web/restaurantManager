@@ -1,6 +1,6 @@
 
 import {jwtDecode} from 'jwt-decode';
-import {AuthAction, AuthState, DecodedToken} from "../types/types.ts";
+import {AuthAction, AuthState, DecodedToken} from "../../types/types.ts";
 
 
 const initialState: AuthState = {

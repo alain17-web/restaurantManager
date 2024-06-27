@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom"
 import useLogoutService from "./useLogoutService.tsx";
-import {LogoutService} from "../types/types.ts";
-import {useAuth} from "../context/AuthContext.tsx";
+import {LogoutService} from "../../types/types.ts";
+import {useAuth} from "../../context/authContext/AuthContext.tsx";
 
 const useLogout = () => {
     const navigate = useNavigate();

@@ -21,7 +21,8 @@ import ListRoles from "./pages/listRoles/ListRoles.tsx";
 import ListRosters from "./pages/listRosters/ListRosters.tsx";
 import ListFinances from "./pages/listFinances/ListFinances.tsx";
 import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes.tsx";
-import {AuthProvider} from "./context/AuthContext.tsx";
+import {AuthProvider} from "./context/authContext/AuthContext.tsx";
+import {NotifProvider} from "./context/notifContext/NotifContext.tsx";
 
 
 const router = createBrowserRouter([
@@ -173,7 +174,9 @@ const router = createBrowserRouter([
 ])
 const App = () => (
     <AuthProvider>
-        <RouterProvider router={router}/>
+        <NotifProvider>
+            <RouterProvider router={router}/>
+        </NotifProvider>
     </AuthProvider>
 )
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import {LogoutService} from "../types/types.ts";
+import {LogoutService} from "../../types/types.ts";
 
 
 const useLogoutService : () => LogoutService = () => {

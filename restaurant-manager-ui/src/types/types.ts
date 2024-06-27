@@ -15,6 +15,23 @@ export interface AuthAction {
     payload?: string;
 }
 
+export interface NotifState {
+    orderCount:number
+    purchaseCount:number
+    bookingCount:number
+}
+
+export interface NotifAction {
+    type: 'ADD_ORDER_NOTIF' |
+        'ADD_PURCHASE_NOTIF' |
+        'ADD_BOOKING_NOTIF' |
+        'RESET_ORDER_NOTIF' |
+        'RESET_PURCHASE_NOTIF' |
+        'RESET_BOOKING_NOTIF'
+}
+
+
+
 
 export interface DecodedToken {
     employeeId: number;

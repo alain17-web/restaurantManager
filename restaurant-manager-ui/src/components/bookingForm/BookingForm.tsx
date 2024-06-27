@@ -3,8 +3,11 @@ import TimeOptions from "../timeOptions/TimeOptions.tsx";
 import {FormEvent, useEffect, useState} from "react";
 import SuccessMsg from "../successMsg/SuccessMsg.tsx";
 import axios from "axios"
+import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
 const BookingForm = () => {
+
+    const dispatch = useNotifDispatch()
 
     const [success, setSuccess] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
@@ -39,6 +42,7 @@ const BookingForm = () => {
                         email,
                         people
                     });
+                    dispatch({ type: 'ADD_BOOKING_NOTIF'})
                     setSuccess(true);
                 } catch (err) {
                     console.log("Booking error:", err);

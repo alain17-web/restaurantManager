@@ -2,9 +2,9 @@ import { useState} from "react";
 import TimeDisplay from "../../components/timeDisplay/TimeDisplay.tsx";
 import NewOrder from "../newOrder/NewOrder.tsx";
 import Avatar from "../../components/avatar/Avatar.tsx";
-import useUsername from "../../hooks/useUsername.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 import DateDisplay from "../../components/dateDisplay/DateDisplay.tsx";
-import useLogout from "../../hooks/useLogout.tsx";
+import useLogout from "../../hooks/logout/useLogout.tsx";
 
 
 
