@@ -259,7 +259,7 @@ const NewOrder = (props: NewOrderData) => {
                     </Accordion.Item>
                 </Accordion>
                 {!success && <button
-                    className={"w-[50%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
+                    className={"w-[50%] mx-auto h-8 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
                     type={"submit"}
                 >
                     Valider
