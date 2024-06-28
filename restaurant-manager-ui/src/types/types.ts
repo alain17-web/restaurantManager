@@ -227,8 +227,6 @@ export interface OrderItems {
 export interface NewOrderData {
     people: number
     username: string | null
-    //onAddOrEdit:() => void;
-    //close:()=> void;
     closeNewOrder: () => void;
 }
 
@@ -273,9 +271,8 @@ export interface NewBookingData {
 
 export interface EmployeeCard {
     username: string;
-    role: string;
-    avatar: string;
     roster: string;
+    avatar: string;
 }
 
 export interface Finance {
