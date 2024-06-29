@@ -270,6 +270,7 @@ export interface NewBookingData {
 }
 
 export interface EmployeeCard {
+    id:number | null
     username: string;
     roster: string;
     avatar: string;

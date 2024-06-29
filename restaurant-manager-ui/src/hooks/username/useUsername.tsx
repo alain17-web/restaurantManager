@@ -17,7 +17,7 @@ const useUsername = () => {
             return;
         } else {
             const decodedToken = jwtDecode<DecodedToken>(token);
-            console.log(decodedToken);
+
             setUsername(decodedToken.username.toLowerCase());
             setGender(decodedToken.gender)
             setRoleId(decodedToken.role_id)
