@@ -240,7 +240,10 @@ export interface Purchase {
 
 export interface DataTableStockFoodData {
     dishes:Dish[]
+}
 
+export interface DataTableStockDrinkData {
+    drinks:Drink[]
 }
 
 export interface Food {

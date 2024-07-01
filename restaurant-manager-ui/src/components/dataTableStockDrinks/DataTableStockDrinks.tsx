@@ -1,22 +1,16 @@
- import {drinks as drinkData} from "../../tempData.ts";
- import {stockFoodsColumns} from "../../dataTable.ts";
+import {stockFoodsColumns} from "../../dataTable.ts";
  import {DataGrid} from "@mui/x-data-grid";
  import {useState, useEffect} from "react"
- import { Drink } from "../../types/types.ts";
+ import { DataTableStockDrinkData, Drink} from "../../types/types.ts";
 
 
- const DataTableStockDrinks = () => {
+ const DataTableStockDrinks = (props:DataTableStockDrinkData) => {
 
      const [drinks, setDrinks] = useState<Drink[]>([])
 
      useEffect(() => {
-         getDrinks()
-     }, []);
-
-
-     const getDrinks = () => {
-         setDrinks(drinkData);
-     }
+         setDrinks(props.drinks)
+     }, [props.drinks]);
 
      const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
