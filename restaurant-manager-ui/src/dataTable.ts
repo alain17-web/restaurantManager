@@ -295,12 +295,6 @@ export const stockFoodsColumns : GridColDef[]=[
         headerName: "Plat",
         width: 220,
     },
-
-    {
-        field: "cat",
-        headerName: "cat",
-        width: 180,
-    },
     {
         field: "stock",
         headerName: "stock",

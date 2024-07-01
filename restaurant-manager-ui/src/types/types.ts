@@ -238,6 +238,11 @@ export interface Purchase {
     status:string
 }
 
+export interface DataTableStockFoodData {
+    dishes:Dish[]
+
+}
+
 export interface Food {
     id: number;
     name: string;

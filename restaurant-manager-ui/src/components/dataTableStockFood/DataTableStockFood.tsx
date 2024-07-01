@@ -1,23 +1,20 @@
-import {dishes as dishesData} from "../../tempData.ts";
 import {stockFoodsColumns} from "../../dataTable.ts";
 import {DataGrid} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
-import { Food} from "../../types/types.ts";
+import { DataTableStockFoodData, Dish} from "../../types/types.ts";
 
 
-const DataTableStockFood = () => {
 
-    const [dishes,setDishes] = useState<Food[]>([])
+const DataTableStockFood = (props:DataTableStockFoodData) => {
+
+    const [dishes,setDishes] = useState<Dish[]>([])
 
     useEffect(() => {
-        getDishes()
-    }, []);
-
-    const getDishes =  () => {
-        setDishes(dishesData);
-    }
+        setDishes(props.dishes)
+    }, [props.dishes]);
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
+
 
     return (
         <div className={"h-[950px] p-4"}>
