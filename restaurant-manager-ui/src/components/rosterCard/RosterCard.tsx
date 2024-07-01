@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { Employee, EmployeeCard } from '../../types/types.ts';
+import {CardActionArea} from '@mui/material';
+import {Employee, EmployeeCard} from '../../types/types.ts';
 import useCurrentWeekDay from '../../hooks/date/useCurrentWeekDay.tsx';
 import axiosInstance from "../../axios/axiosInstance.tsx";
 
@@ -26,9 +26,9 @@ const RosterCard = () => {
         }
     };
 
-    const getStaff = (employeesData:Employee[]) => {
-        const mondaysStaff:any[] = [];
-        const weekendStaff:any[] = [];
+    const getStaff = (employeesData: Employee[]) => {
+        const mondaysStaff: any[] = [];
+        const weekendStaff: any[] = [];
 
         employeesData.forEach((employee) => {
             if (employee.roster_id) {
@@ -65,8 +65,15 @@ const RosterCard = () => {
     };
 
     useEffect(() => {
-        getEmployees();
+        if (currentDay) {
+            getEmployees();
+        }
     }, [currentDay]);
+
+    useEffect(() => {
+        console.log(dayShiftStaff);
+    }, [dayShiftStaff]);
+
 
     return (
         <div className="w-full h-auto flex items-center justify-around gap-5 bg-amber-100">
