@@ -19,6 +19,17 @@ const purchaseController = {
             }
             res.status(500).json({message:'Error creating purchase controller',error});
         }
+    },
+
+    //READ
+    getAllPurchases: async(req,res)=>{
+        try{
+            const purchases = await purchaseService.getAllPurchases();
+            res.status(201).json(purchases);
+        }catch(error){
+            console.error('Error getAllPurchases controller',error)
+            res.status(500).json({message:"Error getAllPurchases controller",error});
+        }
     }
 }
 module.exports = purchaseController;

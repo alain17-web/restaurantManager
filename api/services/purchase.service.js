@@ -14,6 +14,20 @@ const purchaseService = {
         }finally {
             await connection.end()
         }
+    },
+
+    //READ
+    getAllPurchases: async () => {
+        const connection = await createConnection({})
+        try{
+            const [purchases] = await connection.execute('SELECT * FROM purchases ORDER BY id DESC')
+            return purchases
+        }catch(error){
+            console.error('Error in getAllPurchases service', error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
     }
 }
 
