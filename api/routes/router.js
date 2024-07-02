@@ -9,6 +9,7 @@ const drinkRouter = require("./drink.router");
 const dishRouter = require("./dish.router");
 const orderRouter = require("./order.router");
 const orderItemRouter = require("./orderItem.router");
+const purchaseRouter = require("./purchase.router");
 
 const router = express.Router();
 
@@ -22,6 +23,8 @@ router.use('/drinks',drinkRouter)
 router.use('/dishes',dishRouter)
 router.use('/orders',orderRouter)
 router.use('/orderItems',orderItemRouter)
+router.use('/purchases',purchaseRouter)
 
 
 module.exports = router;
+
