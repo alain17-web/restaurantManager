@@ -8,5 +8,8 @@ purchaseRouter.route("/addPurchase")
 purchaseRouter.route("/")
     .get(authenticate,authorize([1]),purchaseController.getAllPurchases)
 
+purchaseRouter.route("/:id")
+    .patch(authenticate,authorize([1]),purchaseController.updatePurchase)
+
 
 module.exports = purchaseRouter;

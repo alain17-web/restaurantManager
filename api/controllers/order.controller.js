@@ -36,19 +36,6 @@ const orderController = {
     //UPDATE
     updateOrder: async (req, res) => {
         try {
-            /*const validateOrder = await orderValidator.validate(req.body);
-
-            const {order_id, people, username, order_date, total, validated, validatedBy} = validateOrder;
-
-            const updatedOrder = await orderService.updateOrder({
-                order_id,
-                people,
-                username,
-                order_date,
-                total,
-                validated,
-                validatedBy
-            });*/
 
             const validateOrder = await updateFromKitchenValidator.validate(req.body);
 
