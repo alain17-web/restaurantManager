@@ -52,6 +52,22 @@ const purchaseController = {
             console.error('Error updatePurchase controller', error)
             res.status(500).json({message:"Error updatePurchase controller",error});
         }
+    },
+
+    //DELETE
+    deletePurchase: async (req, res) => {
+        try{
+            const id = req.params.id;
+            const deletedPurchase = await purchaseService.deletePurchase(id);
+            if (deletedPurchase > 0) {
+                res.status(200).json({message: 'Purchase deleted successfully.'});
+            } else {
+                res.status(404).json({error: 'Purchase not found'});
+            }
+        }catch(error){
+            console.error('Error deletePurchase controller',error)
+            res.status(500).json({message: 'Error deleting Purchase Controller',error});
+        }
     }
 }
 module.exports = purchaseController;

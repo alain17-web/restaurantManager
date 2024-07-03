@@ -11,5 +11,8 @@ purchaseRouter.route("/")
 purchaseRouter.route("/:id")
     .patch(authenticate,authorize([1]),purchaseController.updatePurchase)
 
+purchaseRouter.route("/:id")
+    .delete(authenticate,authorize([1]),purchaseController.deletePurchase)
+
 
 module.exports = purchaseRouter;

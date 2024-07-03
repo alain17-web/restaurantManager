@@ -47,7 +47,22 @@ const purchaseService = {
         }finally {
             await connection.end()
         }
+    },
+
+    //DELETE
+    deletePurchase: async (id) => {
+        const connection = await createConnection({})
+        try{
+           const [deletedOrder] = await connection.execute('DELETE FROM purchases WHERE id = ?', [id]);
+           return deletedOrder.affectedRows > 0;
+        }catch(error){
+            console.error('Error deletePurchase service',error);
+            throw error;
+        }finally {
+            await connection.end()
+        }
     }
+
 }
 
 module.exports = purchaseService;
