@@ -16,9 +16,9 @@ export interface AuthAction {
 }
 
 export interface NotifState {
-    orderCount:number
-    purchaseCount:number
-    bookingCount:number
+    orderCount: number
+    purchaseCount: number
+    bookingCount: number
 }
 
 export interface NotifAction {
@@ -29,8 +29,6 @@ export interface NotifAction {
         'RESET_PURCHASE_NOTIF' |
         'RESET_BOOKING_NOTIF'
 }
-
-
 
 
 export interface DecodedToken {
@@ -56,17 +54,17 @@ export interface Dish {
 }
 
 export interface DataTableDishData {
-    dishes:Dish[]
-    getDishId:(id:number) => void
-    open:() => void
+    dishes: Dish[]
+    getDishId: (id: number) => void
+    open: () => void
 }
 
 export interface NewDishData {
     setDishId: (id: number | null) => void;
-    dishes:Dish[]
-    onAddOrEdit:() => void;
-    close:()=> void;
-    id:number | null
+    dishes: Dish[]
+    onAddOrEdit: () => void;
+    close: () => void;
+    id: number | null
 }
 
 export interface Props {
@@ -75,7 +73,7 @@ export interface Props {
     dishDesc: string
     dishPrice: number | string
     dishAllerg?: string
-    closePopup:() => void
+    closePopup: () => void
 }
 
 export interface Drink {
@@ -89,37 +87,37 @@ export interface Drink {
 }
 
 export interface DataTableDrinkData {
-    drinks:Drink[]
-    getDrinkId:(id:number) => void
-    open:() => void
+    drinks: Drink[]
+    getDrinkId: (id: number) => void
+    open: () => void
 }
 
 export interface NewDrinkData {
     setDrinkId: (id: number | null) => void;
-    drinks:Drink[]
-    onAddOrEdit:() => void;
-    close:()=> void;
-    id:number | null
+    drinks: Drink[]
+    onAddOrEdit: () => void;
+    close: () => void;
+    id: number | null
 }
 
 export interface Category {
     id: number;
-    cat_name:string;
+    cat_name: string;
     type: string;
 }
 
 export interface DataTableCatData {
-    categories:Category[]
-    getCategoryId:(id:number) => void
-    open:() => void
+    categories: Category[]
+    getCategoryId: (id: number) => void
+    open: () => void
 }
 
 export interface NewCatData {
     setCategoryId: (id: number | null) => void;
-    categories:Category[]
-    id:number | null
-    onAddOrEdit:() => void;
-    close:()=> void;
+    categories: Category[]
+    id: number | null
+    onAddOrEdit: () => void;
+    close: () => void;
 }
 
 export interface Employee {
@@ -135,93 +133,93 @@ export interface Employee {
 }
 
 export interface DataTableEmployeeData {
-    employees:Employee[]
-    getEmployeeId:(id:number) => void
-    open:() => void
+    employees: Employee[]
+    getEmployeeId: (id: number) => void
+    open: () => void
 }
 
 export interface DataTableInactiveData {
-    inactives:Employee[]
-    getInactiveId:(id:number) => void
-    open:() => void
+    inactives: Employee[]
+    getInactiveId: (id: number) => void
+    open: () => void
 }
 
 export interface NewEmployeeData {
     setEmployeeId: (id: number | null) => void;
-    employees:Employee[]
-    onAddOrEdit:() => void;
-    close:()=> void;
-    id:number | null
+    employees: Employee[]
+    onAddOrEdit: () => void;
+    close: () => void;
+    id: number | null
 }
 
 
 export interface Role {
-    id:number;
-    role_name:string;
+    id: number;
+    role_name: string;
 }
 
 export interface DataTableRoleData {
-    roles:Role[]
-    getRoleId:(id:number) => void
-    open:() => void
+    roles: Role[]
+    getRoleId: (id: number) => void
+    open: () => void
 }
 
 export interface DataTableRosterData {
-    rosters:Roster[]
-    getRosterId:(id:number) => void
-    open:() => void
+    rosters: Roster[]
+    getRosterId: (id: number) => void
+    open: () => void
 }
 
 export interface NewRoleData {
     setRoleId: (id: number | null) => void;
-    roles:Role[]
-    onAddOrEdit:() => void;
-    close:()=> void;
-    id:number | null
+    roles: Role[]
+    onAddOrEdit: () => void;
+    close: () => void;
+    id: number | null
 }
 
 export interface NewRosterData {
     setRosterId: (id: number | null) => void;
-    rosters:Roster[]
-    onAddOrEdit:() => void;
-    close:()=> void;
-    id:number | null
+    rosters: Roster[]
+    onAddOrEdit: () => void;
+    close: () => void;
+    id: number | null
 }
 
 export interface Roster {
-    id:number;
+    id: number;
     roster: string;
 }
 
 export interface Order {
-    order_id:number
-    order_date:string
-    username:string
-    people:number
-    validated:string
-    validatedBy?:string
-    total:number
+    order_id: number
+    order_date: string
+    username: string
+    people: number
+    validated: string
+    validatedBy?: string
+    total: number
 }
 
 export interface DataTableOrderData {
-    orders:Order[]
-    getOrderId:(id:number) => void
-    open:() => void
+    orders: Order[]
+    getOrderId: (id: number) => void
+    open: () => void
 }
 
-export interface OrderId  {
+export interface OrderId {
     setOrderId: (order_id: number) => void
-    order_id:number | null;
+    order_id: number | null;
 }
 
 export interface OrderItems {
-    order_item_id:number
-    order_id:number
-    type:string
-    name:string
-    price:number
-    validated?:string
-    validatedBy?:string
+    order_item_id: number
+    order_id: number
+    type: string
+    name: string
+    price: number
+    validated?: string
+    validatedBy?: string
 }
 
 export interface NewOrderData {
@@ -231,27 +229,32 @@ export interface NewOrderData {
 }
 
 export interface Purchase {
-    id:number
-    date:string
-    by:string
-    cost:number
-    status:string
+    id: number | null
+    purchase_date: string
+    cost: number
+    delivery_date: string
+}
+
+export interface DataTablePurchaseData {
+    purchases: Purchase[]
+    getPurchaseId: (id: number) => void
+    //open: () => void
 }
 
 export interface DataTableStockFoodData {
-    dishes:Dish[]
+    dishes: Dish[]
 }
 
 export interface DataTableStockDrinkData {
-    drinks:Drink[]
+    drinks: Drink[]
 }
 
 export interface Food {
     id: number;
     name: string;
-    cat_id:number;
-    stock:number;
-    min:number;
+    cat_id: number;
+    stock: number;
+    min: number;
 }
 
 export interface Booking {
@@ -264,35 +267,35 @@ export interface Booking {
 }
 
 export interface DataTableBookingData {
-    bookings:Booking[]
-    getBookingId:(id:number) => void
-    open:() => void
+    bookings: Booking[]
+    getBookingId: (id: number) => void
+    open: () => void
 }
 
 export interface NewBookingData {
     setBookingId: (id: number | null) => void;
-    onAddOrEdit:() => void;
-    close:()=> void;
-    bookings:Booking[]
-    id:number | null
+    onAddOrEdit: () => void;
+    close: () => void;
+    bookings: Booking[]
+    id: number | null
 }
 
 export interface EmployeeCard {
-    id:number | null
+    id: number | null
     username: string;
     roster: string;
     avatar: string;
 }
 
 export interface Finance {
-    id:number;
+    id: number;
     month: string;
     orders: number;
     income: number;
     purchases: number;
     cost: number;
-    stock:number;
-    gain:number;
+    stock: number;
+    gain: number;
 }
 
 export interface LogoutService {

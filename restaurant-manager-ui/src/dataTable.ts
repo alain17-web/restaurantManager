@@ -229,23 +229,18 @@ export const purchaseColumns : GridColDef[]=[
         width: 120
     },
     {
-        field: "date",
+        field: "purchase_date",
         headerName: "date",
         width: 180
     },
     {
-        field: "by",
-        headerName: "acheteur",
-        width: 180
-    },
-    {
-        field: "cost",
+        field: "total",
         headerName: "Coût €",
         width: 120
     },
     {
-        field: "status",
-        headerName: "statut",
+        field: "delivery_date",
+        headerName: "livraison",
         width: 180
     },
 
