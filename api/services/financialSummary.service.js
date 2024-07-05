@@ -35,6 +35,21 @@ const financialSummaryService = {
         } finally {
             await connection.end()
         }
+    },
+
+    //READ
+    getAllFinancialSummaries: async () => {
+        const connection = await createConnection();
+
+        try{
+            const [summaries] = await connection.execute('SELECT * FROM finances ORDER BY id DESC')
+            return summaries;
+        }catch(error){
+            console.error('Error getAllFinancialSummaries service', error)
+            throw error;
+        }finally {
+            await connection.end();
+        }
     }
 }
 module.exports = financialSummaryService;

@@ -20,6 +20,17 @@ const financialSummaryController = {
             console.error('Error controller creating the finacialSummary', error);
             res.status(500).json({message:'Error controller creating the financialSummary', error});
         }
+    },
+
+    //READ
+    getAllFinancialSummaries: async (req, res) => {
+        try {
+            const summaries = await financialSummaryService.getAllFinancialSummaries()
+            return res.status(200).json(summaries);
+        }catch (error) {
+            console.error('Error controller getAllFinancialSummaries', error);
+            return res.status(500).json({message: 'Error controller getAllFinancialSummaries', error});
+        }
     }
 }
 module.exports = financialSummaryController

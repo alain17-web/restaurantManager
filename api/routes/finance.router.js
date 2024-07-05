@@ -5,5 +5,8 @@ const { authenticate, authorize } = require('../middlewares/authenticate');
 financeRouter.route('/addFinanceSummary')
     .post(authenticate,authorize([1]),financialSummaryController.addFinancialSummary)
 
+financeRouter.route('/')
+    .get(authenticate,authorize([1]),financialSummaryController.getAllFinancialSummaries)
+
 
 module.exports = financeRouter;
