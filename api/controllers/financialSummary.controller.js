@@ -1,5 +1,6 @@
 const financialSummaryService = require('../services/financialSummary.service');
 const financeValidator = require('../validators/financeValidator');
+const demployeeService = require("./financialSummary.controller");
 
 const financialSummaryController = {
     //CREATE
@@ -70,6 +71,22 @@ const financialSummaryController = {
         }catch (error) {
             console.error('Error updateFinancialSummary', error);
             res.status(500).json({message: 'Error updateFinancialSummary', error});
+        }
+    },
+
+    //DELETE
+    deleteFinancialSummary: async (req, res) => {
+        try{
+            const id = req.params.id;
+            const deletedSummary = await financialSummaryService.deleteFinancialSummary(id);
+            if(deletedSummary > 0) {
+                res.status(200).json({message: 'Financial Summary deleted successfully.'});
+            }else{
+                res.status(404).json({message: 'Financial Summary not found '});
+            }
+        }catch (error) {
+            console.error('Error deleteFinancialSummary', error);
+            res.status(500).json({message: 'Error deleteFinancialSummary', error});
         }
     }
 }

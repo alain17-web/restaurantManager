@@ -84,6 +84,20 @@ const financialSummaryService = {
         } finally {
             await connection.end();
         }
+    },
+
+    //DELETE
+    deleteFinancialSummary: async (id) => {
+        const connection = await createConnection();
+        try{
+           const [deletedSummary] = await connection.execute('DELETE FROM finances WHERE id = ?', [id]);
+           return deletedSummary.affectedRows > 0;
+        }catch  (error){
+            console.error('Error deleteFinancialSummary service', error);
+            throw error;
+        }finally {
+            await connection.end();
+        }
     }
 }
 module.exports = financialSummaryService;

@@ -11,5 +11,8 @@ financeRouter.route('/')
 financeRouter.route("/:id")
     .patch(authenticate,authorize([1]),financialSummaryController.updateFinancialSummary)
 
+financeRouter.route("/:id")
+    .delete(authenticate,authorize([1]),financialSummaryController.deleteFinancialSummary)
+
 
 module.exports = financeRouter;
