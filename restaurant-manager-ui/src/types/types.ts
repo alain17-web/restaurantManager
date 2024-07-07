@@ -291,12 +291,20 @@ export interface Finance {
     id: number;
     income_date: string;
     income: number;
-    comments?: string;
+    comments?: string | null;
     spendings: number;
-    spending_date:number;
-    remarks?:string;
+    spending_date:string;
+    remarks?:string | null;
     total_on_hand: number;
     profits: number;
+}
+
+export interface NewFinanceData {
+    setFinanceSummaryId: (id: number | null) => void;
+    financeSummaries: Finance[]
+    id: number | null
+    //onAddOrEdit: () => void;
+    //close: () => void;
 }
 
 export interface DataTableFinanceData {

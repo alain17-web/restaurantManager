@@ -38,7 +38,7 @@ const ListFinances = () => {
         setOpen(false);
     }
 
-    console.log(financeSummaries)
+
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
@@ -51,7 +51,7 @@ const ListFinances = () => {
                         getFinanceSummaryId={handleGetFinanceSummaryId}
                         open={show}
                     /> :
-                    <NewFinanceSummary/>
+                    <NewFinanceSummary setFinanceSummaryId={setFinanceSummaryId} id={financeSummaryId} financeSummaries={financeSummaries}/>
                 }
                 {open ?
                     <div className={"mb-2 pl-6"}>

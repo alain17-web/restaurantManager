@@ -73,6 +73,13 @@ const DataTableFinances = (props: DataTableFinanceData) => {
 
     return (
         <div className={"h-[950px] p-4"}>
+            <div className={"w-full flex items-center justify-between text-[24px] mb-[10px]"}>
+                <button
+                    onClick={props.open}
+                    className={"no-underline text-green-600 text-xl font-normal bg-[#F0F8FF p-[5px] border-1 border-green-600 rounded-md cursor-pointer"}>
+                    Ajouter un rapport
+                </button>
+            </div>
             <DataGrid
                 rows={financeSummaries}
                 columns={financesColumns.concat(actionColumn)}
