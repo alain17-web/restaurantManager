@@ -1,5 +1,5 @@
 const createConnection = require('../database/database');
-const {date} = require("yup");
+
 
 const financialSummaryService = {
     //CREATE
@@ -41,13 +41,47 @@ const financialSummaryService = {
     getAllFinancialSummaries: async () => {
         const connection = await createConnection();
 
-        try{
+        try {
             const [summaries] = await connection.execute('SELECT * FROM finances ORDER BY id DESC')
             return summaries;
-        }catch(error){
+        } catch (error) {
             console.error('Error getAllFinancialSummaries service', error)
             throw error;
-        }finally {
+        } finally {
+            await connection.end();
+        }
+    },
+
+    //UPDATE
+    updateFinancialSummary: async (
+        id,
+        income,
+        income_date,
+        comments,
+        spendings,
+        spending_date,
+        remarks,
+        total_on_hand,
+        profits) => {
+        const connection = await createConnection();
+
+        try {
+            const [updatedSummary] = await connection.execute('UPDATE finances SET income = ?,income_date = ?,comments = ?,spendings = ?,spending_date = ?,remarks = ?,total_on_hand = ?,profits = ? WHERE id = ?',[
+                income,
+                income_date,
+                comments,
+                spendings,
+                spending_date,
+                remarks,
+                total_on_hand,
+                profits,
+                id
+            ])
+            return updatedSummary.affectedRows > 0;
+        } catch (error) {
+            console.error('Error updateFinancialSummary service', error);
+            throw error;
+        } finally {
             await connection.end();
         }
     }

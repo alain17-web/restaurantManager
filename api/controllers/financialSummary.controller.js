@@ -31,6 +31,46 @@ const financialSummaryController = {
             console.error('Error controller getAllFinancialSummaries', error);
             return res.status(500).json({message: 'Error controller getAllFinancialSummaries', error});
         }
+    },
+
+    //UPDATE
+    updateFinancialSummary: async (req, res) => {
+        try{
+            const id = req.params.id;
+            const validateSummary = await financeValidator.validate(req.body, {abortEarly: false});
+
+            const {
+                income,
+                income_date,
+                comments,
+                spendings,
+                spending_date,
+                remarks,
+                total_on_hand,
+                profits,
+
+            } = validateSummary;
+
+            const updatedSummary = await financialSummaryService.updateFinancialSummary(
+                id,
+                income,
+                income_date,
+                comments,
+                spendings,
+                spending_date,
+                remarks,
+                total_on_hand,
+                profits
+            )
+            if (updatedSummary) {
+                res.status(200).json({message: 'Financial Summary updated Successfully'});
+            }else{
+                res.status(404).json({message: 'Financial Summary not found or no change made'});
+            }
+        }catch (error) {
+            console.error('Error updateFinancialSummary', error);
+            res.status(500).json({message: 'Error updateFinancialSummary', error});
+        }
     }
 }
 module.exports = financialSummaryController

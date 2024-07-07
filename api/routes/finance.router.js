@@ -8,5 +8,8 @@ financeRouter.route('/addFinanceSummary')
 financeRouter.route('/')
     .get(authenticate,authorize([1]),financialSummaryController.getAllFinancialSummaries)
 
+financeRouter.route("/:id")
+    .patch(authenticate,authorize([1]),financialSummaryController.updateFinancialSummary)
+
 
 module.exports = financeRouter;
