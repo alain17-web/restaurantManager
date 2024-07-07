@@ -311,25 +311,41 @@ export const financesColumns : GridColDef[]=[
     {
         field: "income",
         headerName: "revenus €",
+        width: 100
+    },
+    {
+        field: "income_date",
+        headerName: "date entrée",
+        width: 100
+    },
+    {
+        field: "comments",
+        headerName: "remarques",
         width: 150
     },
+
     {
-        field: "date",
-        headerName: "date",
-        width: 120
-    },
-    {
-        field: "cost",
+        field: "spendings",
         headerName: "dépenses €",
+        width: 100
+    },
+    {
+        field: "spending_date",
+        headerName: "date dépense",
+        width: 100
+    },
+    {
+        field: "remarks",
+        headerName: "remarques",
         width: 150
     },
     {
-        field: "total",
-        headerName:"total € disponible",
-        width: 180
+        field: "total_on_hand",
+        headerName:"total € dispo",
+        width: 150
     },
     {
-        field: "gain",
+        field: "profits",
         headerName:"bénéfice €",
         width: 150
     }

@@ -289,13 +289,20 @@ export interface EmployeeCard {
 
 export interface Finance {
     id: number;
-    month: string;
-    orders: number;
+    income_date: string;
     income: number;
-    purchases: number;
-    cost: number;
-    stock: number;
-    gain: number;
+    comments?: string;
+    spendings: number;
+    spending_date:number;
+    remarks?:string;
+    total_on_hand: number;
+    profits: number;
+}
+
+export interface DataTableFinanceData {
+    financeSummaries: Finance[]
+    getFinanceSummaryId: (id: number) => void
+    open: () => void
 }
 
 export interface LogoutService {
