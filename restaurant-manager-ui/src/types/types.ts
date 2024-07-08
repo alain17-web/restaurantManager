@@ -238,7 +238,7 @@ export interface Purchase {
 export interface DataTablePurchaseData {
     purchases: Purchase[]
     getPurchaseId: (id: number) => void
-    //open: () => void
+    open: () => void
 }
 
 export interface DataTableStockFoodData {

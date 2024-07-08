@@ -28,7 +28,7 @@ const ListStockDrinks = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Stock nourriture</h1>
+                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Stock boissons</h1>
                 <DataTableStockDrinks drinks={drinks}/>
             </div>
         </div>
