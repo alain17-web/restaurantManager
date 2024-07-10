@@ -52,6 +52,20 @@ const financialSummaryService = {
         }
     },
 
+    getLastTotal_on_hand: async (id) => {
+        const connection = await createConnection();
+        try{
+           const [total] = await connection.execute('SELECT total_on_hand FROM finances ORDER BY id DESC LIMIT 1')
+
+            return total;
+        }catch(error){
+            console.error('Error getLastTotal_on_hand service', error);
+            throw error;
+        }finally {
+            await connection.end();
+        }
+    },
+
     //UPDATE
     updateFinancialSummary: async (
         id,

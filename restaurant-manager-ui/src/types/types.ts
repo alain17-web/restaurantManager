@@ -173,8 +173,8 @@ export interface DataTableRosterData {
 export interface NewRoleData {
     setRoleId: (id: number | null) => void;
     roles: Role[]
-    onAddOrEdit: () => void;
-    close: () => void;
+    //onAddOrEdit: () => void;
+    //close: () => void;
     id: number | null
 }
 
@@ -239,6 +239,12 @@ export interface DataTablePurchaseData {
     purchases: Purchase[]
     getPurchaseId: (id: number) => void
     open: () => void
+}
+
+export interface NewPurchaseData {
+    setPurchaseId: (id: number | null) => void;
+    purchases: Purchase[]
+    id: number | null
 }
 
 export interface DataTableStockFoodData {

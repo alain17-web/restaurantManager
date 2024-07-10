@@ -34,6 +34,17 @@ const financialSummaryController = {
         }
     },
 
+    getLastTotal_on_hand: async (req, res) => {
+        try{
+            const id = req.params.id;
+            const totalById = await financialSummaryService.getLastTotal_on_hand(id)
+            return res.status(200).json(totalById);
+        }catch(error){
+            console.error('Error getLastTotal_on_hand controller', error);
+            res.status(500).json({message: 'Error getLastTotal_on_hand', error});
+        }
+    },
+
     //UPDATE
     updateFinancialSummary: async (req, res) => {
         try{

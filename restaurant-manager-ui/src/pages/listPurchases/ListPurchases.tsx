@@ -9,7 +9,7 @@ import NewPurchase from "../newPurchase/NewPurchase.tsx";
 const ListPurchases = () => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([]);
-    const [_purchaseId, setPurchaseId] = useState<number | null>(null);
+    const [purchaseId, setPurchaseId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
 
     const handleGetPurchaseId = (id: number) => {
@@ -45,7 +45,7 @@ const ListPurchases = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats</h1>
                 {!open ? <DataTablePurchases purchases={purchases} getPurchaseId={handleGetPurchaseId} open={show}/> :
-                    <NewPurchase/>
+                    <NewPurchase setPurchaseId={setPurchaseId} purchases={purchases} id={purchaseId} />
                 }
                 {open ?
                     <div className={"mb-2 pl-6"}>
