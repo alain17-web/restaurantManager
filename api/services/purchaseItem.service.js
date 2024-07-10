@@ -13,6 +13,20 @@ const purchaseItemService = {
         }finally {
             await connection.end()
         }
+    },
+
+    //READ
+    getPurchaseItemByPurchaseId: async (purchase_id) => {
+        const connection = await createConnection({})
+        try{
+           const [purchaseItem] = await connection.execute('SELECT * FROM purchaseItems WHERE purchase_id=?',[purchase_id])
+            return purchaseItem
+        }catch(error){
+            console.error('Error getPurchaseItemByPurchaseId service',error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
     }
 }
 module.exports = purchaseItemService;
