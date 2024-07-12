@@ -4,7 +4,6 @@ import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
 const OrderDetail = (props: OrderId) => {
-    //const [orderId, setOrderId] = useState<number | null>(null);
     const [orderItems, setOrderItems] = useState<OrderItems[]>([]);
     const [message, setMessage] = useState<string>("");
 
