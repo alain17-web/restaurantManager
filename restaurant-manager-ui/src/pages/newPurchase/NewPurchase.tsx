@@ -3,16 +3,21 @@ import {useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
 import Accordion from 'react-bootstrap/Accordion'
+//import QtyOption from "../../components/qtyOption/QtyOption.tsx";
 
 const NewPurchase = (props: NewPurchaseData) => {
 
     const [max, setMax] = useState<number>(0);
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [drinks, setDrinks] = useState<Drink[]>([]);
-    const [mainCourses, setMainCourses] = useState<Dish[]>([])
+    const [dishQty, setDishQty] = useState<number>(0);
+    const [drinkQty, setDrinkQty] = useState<number>(0);
+
+    /*const [mainCourses, setMainCourses] = useState<Dish[]>([])
     const [desserts, setDesserts] = useState<Dish[]>([])
     const [coldDrinks, setColdDrinks] = useState<Drink[]>([])
-    const [warmDrinks, setWarmDrinks] = useState<Drink[]>([])
+    const [warmDrinks, setWarmDrinks] = useState<Drink[]>*/
+    ([])
     const [purchase_date, setPurchase_date] = useState<string>("")
     const [total, setTotal] = useState<number>(0)
     const delivery_date = "en attente"
@@ -47,7 +52,13 @@ const NewPurchase = (props: NewPurchaseData) => {
         fetchData()
     }, []);
 
+    const handleDishQty = () => {
 
+    }
+
+    const handleDrinkQty = () => {
+
+    }
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -78,9 +89,20 @@ const NewPurchase = (props: NewPurchaseData) => {
                                             <div className={"w-full h-full"}>
                                                 <ul>
                                                     {dishes.map((dish) => (
-                                                        dish.cat_id !== 5 &&
-                                                        <li className={"text-base text-center font-inter"}
-                                                            key={dish.id}>{dish.name} - {dish.cost} €</li>
+                                                        dish.cat_id !== 5 && (
+                                                            <div key={dish.id}>
+                                                                <li className={"text-base flex items center justify-between font-inter"}
+                                                                >{dish.name} - {dish.cost} €
+                                                                    <input
+                                                                        type={"number"}
+                                                                        min={"0"}
+                                                                        value={drinkQty}
+                                                                        className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                        onChange={handleDishQty}
+                                                                    />
+                                                                </li>
+                                                                <hr/>
+                                                            </div>)
                                                     ))}
                                                 </ul>
                                             </div>
@@ -94,9 +116,20 @@ const NewPurchase = (props: NewPurchaseData) => {
                                             <div className={"w-full h-full"}>
                                                 <ul>
                                                     {dishes.map((dish) => (
-                                                        dish.cat_id === 5 &&
-                                                        <li className={"text-base text-center font-inter"}
-                                                            key={dish.id}>{dish.name} - {dish.cost} €</li>
+                                                        dish.cat_id === 5 && (
+                                                            <div key={dish.id}>
+                                                                <li className={"text-base flex items center justify-between font-inter"}
+                                                                >{dish.name} - {dish.cost} €
+                                                                    <input
+                                                                        type={"number"}
+                                                                        min={"0"}
+                                                                        value={drinkQty}
+                                                                        className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                        onChange={handleDishQty}
+                                                                    />
+                                                                </li>
+                                                                <hr/>
+                                                            </div>)
                                                     ))}
                                                 </ul>
                                             </div>
@@ -112,9 +145,20 @@ const NewPurchase = (props: NewPurchaseData) => {
                                             <div className={"w-full h-full"}>
                                                 <ul>
                                                     {drinks.map((drink) => (
-                                                        drink.cat_id !== 9 &&
-                                                        <li className={"text-base text-center font-inter"}
-                                                            key={drink.id}>{drink.name} - {drink.cost} €</li>
+                                                        drink.cat_id !== 9 && (
+                                                            <div key={drink.id}>
+                                                                <li className={"text-base flex items center justify-between font-inter"}
+                                                                >{drink.name} - {drink.cost} €
+                                                                    <input
+                                                                        type={"number"}
+                                                                        min={"0"}
+                                                                        value={drinkQty}
+                                                                        className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                        onChange={handleDrinkQty}
+                                                                    />
+                                                                </li>
+                                                                <hr/>
+                                                            </div>)
                                                     ))}
                                                 </ul>
                                             </div>
@@ -128,9 +172,20 @@ const NewPurchase = (props: NewPurchaseData) => {
                                             <div className={"w-full h-full"}>
                                                 <ul>
                                                     {drinks.map((drink) => (
-                                                        drink.cat_id === 9 &&
-                                                        <li className={"text-base text-center font-inter"}
-                                                            key={drink.id}>{drink.name} - {drink.cost} €</li>
+                                                        drink.cat_id === 9 && (
+                                                            <div key={drink.id}>
+                                                                <li className={"text-base flex items center justify-between font-inter"}
+                                                                >{drink.name} - {drink.cost} €
+                                                                    <input
+                                                                        type={"number"}
+                                                                        min={"0"}
+                                                                        value={drinkQty}
+                                                                        className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                        onChange={handleDrinkQty}
+                                                                    />
+                                                                </li>
+                                                                <hr/>
+                                                            </div>)
                                                     ))}
                                                 </ul>
                                             </div>
@@ -138,6 +193,13 @@ const NewPurchase = (props: NewPurchaseData) => {
                                     </Accordion.Item>
                                 </Accordion>
                             </div>
+                        </div>
+                        <div className={"w-full flex justify-center mt-3"}>
+                            <button
+                                className={"w-[10%] text-center text-base text-white bg-[#008080] hover:text-amber-50 hover:bg-[#013220] font-inter py-2 rounded-md"}
+                            >
+                                Envoyer
+                            </button>
                         </div>
                     </form>
                 </div>
