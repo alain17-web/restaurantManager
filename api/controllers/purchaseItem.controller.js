@@ -1,6 +1,6 @@
 const purchaseItemService = require('../services/purchaseItem.service');
 const purchaseItemValidator = require('../validators/purchaseItemValidator');
-const purchaseService = require("../services/purchase.service");
+
 
 const purchaseItemController = {
     //CREATE
@@ -8,9 +8,9 @@ const purchaseItemController = {
         try{
             const validatedPurchaseItem = await purchaseItemValidator.validate(req.body);
 
-            const {purchase_id,name,type,cost} = validatedPurchaseItem;
+            const {purchase_id,name,type,cost,qty,delivery_date} = validatedPurchaseItem;
 
-            const purchaseItemResult = await purchaseItemService.addOrderItem({purchase_id,name,type,cost});
+            const purchaseItemResult = await purchaseItemService.addOrderItem({purchase_id,name,type,cost,qty,delivery_date});
 
             res.status(201).json({message:"PurchaseItem Successfully added",purchaseItemResult});
         }catch(error){

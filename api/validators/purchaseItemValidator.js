@@ -5,6 +5,8 @@ const purchaseItemValidator = yup.object({
     type: yup.string().required(),
     name: yup.string().required(),
     cost: yup.number().required(),
+    qty: yup.number(),
+    delivery_date: yup.string().required(),
 })
 
 module.exports = purchaseItemValidator;
