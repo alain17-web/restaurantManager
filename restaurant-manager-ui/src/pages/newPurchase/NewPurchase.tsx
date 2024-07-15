@@ -130,12 +130,13 @@ const NewPurchase = () => {
 
             for (const purchaseItem of purchaseItems) {
                 await axiosInstance.post('/purchaseItems/addPurchaseItem', purchaseItem)
+            }
                 setDishQty({});
                 setDrinkQty({});
                 setSuccess(true)
                 setMessage("Le réappro a été envoyé")
                 dispatch({type: 'ADD_PURCHASE_NOTIF'})
-            }
+
         } catch (error) {
             console.error("Error creating new purchase", error)
             setMessage("La création du réappro a échoué")
