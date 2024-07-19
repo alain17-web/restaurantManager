@@ -10,10 +10,25 @@ const ListPurchases = () => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([]);
     const [purchaseId, setPurchaseId] = useState<number | null>(null);
+    const [delivery_date, setDelivery_date] = useState<string >("");
     const [open, setOpen] = useState<boolean>(false);
 
-    const handleGetPurchaseId = (id: number) => {
-        setPurchaseId(id)
+    useEffect(() => {
+        const getPurchases = async () => {
+            try {
+                const res = await axiosInstance.get('/purchases/')
+                setPurchases(res.data)
+
+            } catch (error) {
+                console.error('Error in getPurchases', error);
+            }
+        }
+        getPurchases();
+    }, []);
+
+    const handleGetPurchaseIdAndDeliveryDate = (purchase_id: number,delivery_date:string) => {
+        setPurchaseId(purchase_id)
+        setDelivery_date(delivery_date)
         setOpen(true);
     }
 
@@ -26,17 +41,7 @@ const ListPurchases = () => {
         setOpen(false);
     }
 
-    useEffect(() => {
-        const getPurchases = async () => {
-            try {
-                const res = await axiosInstance.get('/purchases/')
-                setPurchases(res.data)
-            } catch (error) {
-                console.error('Error in getPurchases', error);
-            }
-        }
-        getPurchases();
-    }, []);
+
 
     return (
         <div className={"w-full flex"}>
@@ -44,8 +49,8 @@ const ListPurchases = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats</h1>
-                {!open ? <DataTablePurchases purchases={purchases} getPurchaseId={handleGetPurchaseId} open={show}/> :
-                    <NewPurchase setPurchaseId={setPurchaseId} purchases={purchases} id={purchaseId} />
+                {!open ? <DataTablePurchases purchases={purchases} getPurchaseIdAndDeliveryDate={handleGetPurchaseIdAndDeliveryDate} open={show}/> :
+                    <NewPurchase  purchases={purchases} purchase_id={purchaseId} delivery_date={delivery_date}/>
                 }
                 {open ?
                     <div className={"mb-2 pl-6"}>

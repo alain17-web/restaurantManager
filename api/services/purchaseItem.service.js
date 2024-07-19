@@ -27,6 +27,55 @@ const purchaseItemService = {
         }finally {
             await connection.end()
         }
+    },
+
+    //UPDATE
+    updateDeliveryDate: async (purchase_id,delivery_date) => {
+        if (purchase_id === undefined || delivery_date === undefined ) {
+            throw new Error('One or more parameters are undefined');
+        }
+        const connection = await createConnection({})
+        try{
+            const [updatedDelDate] = await connection.execute('UPDATE purchaseItems SET delivery_date = ? WHERE purchase_id=?',[delivery_date,purchase_id]);
+
+            return updatedDelDate.affectedRows > 0;
+        }catch(error){
+            console.error('Error updateDeliveryDate service',error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
+
+    },
+
+    updateQtyByIdAndPurchaseId: async (purchase_id,id,qty) => {
+        if (purchase_id === undefined || id === undefined  || qty === undefined ) {
+            throw new Error('One or more parameters are undefined');
+        }
+        const connection = await createConnection({})
+        try{
+            const [updatedQty] = await connection.execute('UPDATE purchaseItems SET qty = ? WHERE id=? AND purchase_id=?',[qty,id,purchase_id]);
+            return updatedQty.affectedRows > 0;
+        }catch(error){
+            console.error('Error updateQtyByPurchaseId service',error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
+    },
+
+    //DELETE
+    deletePurchaseItem: async (purchase_id) => {
+        const connection = await createConnection({})
+        try{
+            const [deletedItem] = await connection.execute('DELETE FROM purchaseItems WHERE purchase_id=?', [purchase_id])
+            return deletedItem.affectedRows > 0;
+        }catch(error){
+            console.error('Error deletePurchaseItem service',error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
     }
 }
 module.exports = purchaseItemService;

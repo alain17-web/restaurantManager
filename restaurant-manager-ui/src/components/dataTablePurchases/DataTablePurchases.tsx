@@ -16,7 +16,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
-    const handleDelete = (id:number): void => {
+    const handleDelete = (purchase_id:number): void => {
         confirmAlert({
             title: 'Confirmation',
             message: 'Etes-vous sûr de vouloir supprimer ce réappro ?',
@@ -25,9 +25,9 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
                     label: 'Oui',
                     onClick: async () => {
                         try{
-                            //await axiosInstance.delete(`/purchaseItems/${purchase_id}`)
-                            await axiosInstance.delete(`/purchases/${id}`)
-                            setPurchases((prevPurchases) => prevPurchases.filter((purchase) => purchase.id !== id))
+                            await axiosInstance.delete(`/purchaseItems/${purchase_id}`)
+                            await axiosInstance.delete(`/purchases/${purchase_id}`)
+                            setPurchases((prevPurchases) => prevPurchases.filter((purchase) => purchase.purchase_id !== purchase_id))
                         } catch(error){
                             console.error("deletion failed", error)
                         }
@@ -50,7 +50,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
                 <div className={"flex items-center mt-3"}>
                     <div
                         className={"py-[2px] px-[5px] mr-2 text-[00008B] border-[1px] border-gray-200 rounded-md cursor-pointer"}
-                        onClick={() => props.getPurchaseId(params.row.id)} data-bs-toggle="tooltip"
+                        onClick={() => props.getPurchaseIdAndDeliveryDate(params.row.purchase_id,params.row.delivery_date)} data-bs-toggle="tooltip"
                         data-bs-placement="top" title="VOIR DETAIL">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                              className="bi bi-search" viewBox="0 0 16 16">
@@ -59,7 +59,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
                         </svg>
                     </div>
                     <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"}
-                         onClick={() => handleDelete(params.row.id)} data-bs-toggle="tooltip"
+                         onClick={() => handleDelete(params.row.purchase_id)} data-bs-toggle="tooltip"
                          data-bs-placement="top" title="SUPPRIMER">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000"
                              className="bi bi-trash3-fill cursor-pointer" viewBox="0 0 16 16">
@@ -83,6 +83,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
             </div>
             <DataGrid
                 rows={purchases}
+                getRowId={() => crypto.randomUUID()}
                 columns={purchaseColumns.concat(actionColumn)}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}

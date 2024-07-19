@@ -7,7 +7,7 @@ const purchaseService = {
         try{
             const [purchase] = await connection.execute('INSERT into purchases (purchase_date,total,delivery_date)VALUES (?,?,?)',[purchase_date,total,delivery_date]);
 
-            return {id:purchase.insertId,purchase_date,total,delivery_date}
+            return {purchase_id:purchase.insertId,purchase_date,total,delivery_date}
         }catch(error){
             console.error('Error addPurchase service',error);
             throw error;
@@ -20,7 +20,7 @@ const purchaseService = {
     getAllPurchases: async () => {
         const connection = await createConnection({})
         try{
-            const [purchases] = await connection.execute('SELECT * FROM purchases ORDER BY id DESC')
+            const [purchases] = await connection.execute('SELECT * FROM purchases ORDER BY purchase_id DESC')
             return purchases
         }catch(error){
             console.error('Error in getAllPurchases service', error)
@@ -31,13 +31,13 @@ const purchaseService = {
     },
 
     //UPDATE
-    updatePurchase: async (id,delivery_date) => {
-        if (!id || delivery_date === undefined) {
+    updatePurchase: async (purchase_id,delivery_date) => {
+        if (!purchase_id || delivery_date === undefined) {
             throw new Error('One or more parameters are undefined')
         }
         const connection = await createConnection({})
         try{
-            const [updatedPurchase] = await connection.execute('UPDATE purchases SET delivery_date = ? WHERE id = ?',[delivery_date,id]);
+            const [updatedPurchase] = await connection.execute('UPDATE purchases SET delivery_date = ? WHERE purchase_id = ?',[delivery_date,purchase_id]);
 
             return updatedPurchase.affectedRows > 0;
 
@@ -50,10 +50,10 @@ const purchaseService = {
     },
 
     //DELETE
-    deletePurchase: async (id) => {
+    deletePurchase: async (purchase_id) => {
         const connection = await createConnection({})
         try{
-           const [deletedOrder] = await connection.execute('DELETE FROM purchases WHERE id = ?', [id]);
+           const [deletedOrder] = await connection.execute('DELETE FROM purchases WHERE purchase_id = ?', [purchase_id]);
            return deletedOrder.affectedRows > 0;
         }catch(error){
             console.error('Error deletePurchase service',error);

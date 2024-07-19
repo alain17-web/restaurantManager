@@ -229,7 +229,7 @@ export interface NewOrderData {
 }
 
 export interface Purchase {
-    id: number | null
+    purchase_id: number | null
     purchase_date: string
     cost: number
     delivery_date: string
@@ -237,14 +237,14 @@ export interface Purchase {
 
 export interface DataTablePurchaseData {
     purchases: Purchase[]
-    getPurchaseId: (id: number) => void
+    getPurchaseIdAndDeliveryDate: (purchase_id: number,delivery_date:string) => void
     open: () => void
 }
 
 export interface NewPurchaseData {
-    setPurchaseId: (id: number | null) => void;
     purchases: Purchase[]
-    id: number | null
+    purchase_id: number | null
+    delivery_date: string
 }
 
 export interface DataTableStockFoodData {

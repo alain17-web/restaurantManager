@@ -224,7 +224,7 @@ export const ordersColumns : GridColDef[] = [
 
 export const purchaseColumns : GridColDef[]=[
     {
-        field: "id",
+        field: "purchase_id",
         headerName: "id",
         width: 120
     },

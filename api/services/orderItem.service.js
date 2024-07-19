@@ -54,9 +54,9 @@ const orderItemService = {
         }
         const connection = await createConnection({})
         try {
-            const [validatedOrderItem] = await connection.execute("UPDATE orderItems SET validated = ?, validatedBy = ? WHERE order_id = ?", [validated, validatedBy, order_id]);
+            const [updatedOrderItem] = await connection.execute("UPDATE orderItems SET validated = ?, validatedBy = ? WHERE order_id = ?", [validated, validatedBy, order_id]);
 
-            return validatedOrderItem.affectedRows > 0;
+            return updatedOrderItem.affectedRows > 0;
 
         } catch (error) {
             console.error('Error in updateOrderItemFromKitchen service', error)

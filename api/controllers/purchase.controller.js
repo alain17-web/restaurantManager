@@ -36,12 +36,12 @@ const purchaseController = {
     //UPDATE
     updatePurchase: async (req, res) => {
         try {
-            const id = req.params.id;
+            const purchase_id = req.params.purchase_id;
             const validatePurchase = await updatePurchaseValidator.validate(req.body);
 
             const {delivery_date} = validatePurchase;
 
-            const updatedPurchase = await purchaseService.updatePurchase(id, delivery_date);
+            const updatedPurchase = await purchaseService.updatePurchase(purchase_id, delivery_date);
 
             if (updatedPurchase) {
                 res.status(201).json({message: 'Purchase updated successfully.'});
@@ -57,8 +57,8 @@ const purchaseController = {
     //DELETE
     deletePurchase: async (req, res) => {
         try{
-            const id = req.params.id;
-            const deletedPurchase = await purchaseService.deletePurchase(id);
+            const purchase_id = req.params.purchase_id;
+            const deletedPurchase = await purchaseService.deletePurchase(purchase_id);
             if (deletedPurchase > 0) {
                 res.status(200).json({message: 'Purchase deleted successfully.'});
             } else {

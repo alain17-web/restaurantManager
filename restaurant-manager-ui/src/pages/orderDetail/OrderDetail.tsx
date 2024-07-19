@@ -28,8 +28,6 @@ const OrderDetail = (props: OrderId) => {
         }
     }
 
-    console.log(orderItems)
-
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
