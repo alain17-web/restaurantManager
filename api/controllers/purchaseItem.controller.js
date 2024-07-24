@@ -1,6 +1,6 @@
 const purchaseItemService = require('../services/purchaseItem.service');
 const purchaseItemValidator = require('../validators/purchaseItemValidator');
-const updatePurchaseValidator = require('../validators/updatePurchaseValidator');
+const updatePurchaseValidator = require('../validators/updateTotalValidator');
 const updateQtyValidator = require('../validators/updateQtyValidator');
 
 

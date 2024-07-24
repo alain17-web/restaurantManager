@@ -8,8 +8,8 @@ purchaseRouter.route("/addPurchase")
 purchaseRouter.route("/")
     .get(authenticate,authorize([1]),purchaseController.getAllPurchases)
 
-purchaseRouter.route("/:purchase_id")
-    .patch(authenticate,authorize([1]),purchaseController.updatePurchase)
+purchaseRouter.route("/updateTotal/:purchase_id")
+    .patch(authenticate,authorize([1]),purchaseController.updateTotalPurchase)
 
 purchaseRouter.route("/:purchase_id")
     .delete(authenticate,authorize([1]),purchaseController.deletePurchase)

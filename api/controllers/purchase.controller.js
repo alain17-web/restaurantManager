@@ -1,6 +1,6 @@
 const purchaseService = require('../services/purchase.service');
 const purchaseValidator = require('../validators/purchaseValidator');
-const updatePurchaseValidator = require('../validators/updatePurchaseValidator');
+const updateTotalValidator = require('../validators/updateTotalValidator');
 
 const purchaseController = {
     //CREATE
@@ -34,23 +34,23 @@ const purchaseController = {
     },
 
     //UPDATE
-    updatePurchase: async (req, res) => {
+    updateTotalPurchase: async (req, res) => {
         try {
             const purchase_id = req.params.purchase_id;
-            const validatePurchase = await updatePurchaseValidator.validate(req.body);
+            const validatePurchase = await updateTotalValidator.validate(req.body);
 
-            const {total,delivery_date} = validatePurchase;
+            const {total} = validatePurchase;
 
-            const updatedPurchase = await purchaseService.updatePurchase(purchase_id, total, delivery_date);
+            const updatedPurchase = await purchaseService.updateTotalPurchase(purchase_id, total);
 
             if (updatedPurchase) {
-                res.status(201).json({message: 'Purchase updated successfully.'});
+                res.status(201).json({message: 'Purchase total updated successfully.'});
             } else {
                 res.status(404).json({error: 'Purchase not found or no change made'});
             }
         }catch(error){
-            console.error('Error updatePurchase controller', error)
-            res.status(500).json({message:"Error updatePurchase controller",error});
+            console.error('Error updateTotalPurchase controller', error)
+            res.status(500).json({message:"Error updateTotalPurchase controller",error});
         }
     },
 

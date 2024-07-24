@@ -205,10 +205,11 @@ const NewPurchase = (props: NewPurchaseData) => {
                     for (const item of updateData) {
                         await axiosInstance.patch(`/purchaseItems/updateQty/${purchase_id}/${item.id}`, { qty: item.qty });
                     }
+                    await axiosInstance.patch(`/purchases/updateTotal/${purchase_id}`, { total });
                     setSuccess(true);
-                    setMessage("Les quantités ont été modifiées");
+                    setMessage("Les quantités et le total ont été modifiées");
                 } catch (error) {
-                    console.error('Error updating quantities:', error);
+                    console.error('Error updating quantities or total:', error);
                     setMessage("La modification du réappro a échoué");
                     setSuccess(false);
                 }
