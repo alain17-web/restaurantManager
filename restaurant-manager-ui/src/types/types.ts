@@ -247,6 +247,14 @@ export interface NewPurchaseData {
     delivery_date: string
 }
 
+export type ItemData = {
+    id: number;
+    name: string;
+    qty: number;
+    type: string;
+    cost: number;
+};
+
 export interface DataTableStockFoodData {
     dishes: Dish[]
 }

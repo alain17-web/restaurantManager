@@ -39,9 +39,9 @@ const purchaseController = {
             const purchase_id = req.params.purchase_id;
             const validatePurchase = await updatePurchaseValidator.validate(req.body);
 
-            const {delivery_date} = validatePurchase;
+            const {total,delivery_date} = validatePurchase;
 
-            const updatedPurchase = await purchaseService.updatePurchase(purchase_id, delivery_date);
+            const updatedPurchase = await purchaseService.updatePurchase(purchase_id, total, delivery_date);
 
             if (updatedPurchase) {
                 res.status(201).json({message: 'Purchase updated successfully.'});

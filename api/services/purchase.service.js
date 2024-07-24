@@ -31,13 +31,13 @@ const purchaseService = {
     },
 
     //UPDATE
-    updatePurchase: async (purchase_id,delivery_date) => {
-        if (!purchase_id || delivery_date === undefined) {
+    updatePurchase: async (purchase_id,total,delivery_date) => {
+        if (!purchase_id || total === undefined || delivery_date === undefined) {
             throw new Error('One or more parameters are undefined')
         }
         const connection = await createConnection({})
         try{
-            const [updatedPurchase] = await connection.execute('UPDATE purchases SET delivery_date = ? WHERE purchase_id = ?',[delivery_date,purchase_id]);
+            const [updatedPurchase] = await connection.execute('UPDATE purchases SET total = ?, delivery_date = ? WHERE purchase_id = ?',[total,delivery_date,purchase_id]);
 
             return updatedPurchase.affectedRows > 0;
 

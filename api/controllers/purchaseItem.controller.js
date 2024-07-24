@@ -59,21 +59,25 @@ const purchaseItemController = {
 
     updateQtyByIdAndPurchaseId: async(req,res)=>{
         try{
+            const purchase_id = req.params.purchase_id
             const id = req.params.id;
             const validatedItem = await updateQtyValidator.validate(req.body);
-            const {purchase_id,qty} = validatedItem;
+            const {qty} = validatedItem;
 
             const updatedItem = await purchaseItemService.updateQtyByIdAndPurchaseId(purchase_id,id,qty);
+
             if(updatedItem){
                 res.status(201).json({message:"Qty updated successfully."});
-            }else{
-                res.status(404).json({error:'Qty not found'});
+            }else {
+                res.status(404).json({error:'PurchaseItem not found'});
             }
+
         }catch(error){
             console.error('Error updateQtyByIdAndPurchaseId controller',error)
             res.status(500).json({errors:error.errors});
         }
     },
+
 
     //DELETE
     deletePurchaseItem: async(req,res)=>{

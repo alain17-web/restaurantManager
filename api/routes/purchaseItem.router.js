@@ -12,7 +12,7 @@ purchaseItemRouter.route('/:purchase_id')
 purchaseItemRouter.route("/updateDelivery_date/:purchase_id")
     .patch(authenticate,authorize([1]),purchaseItemController.updateDeliveryDate)
 
-purchaseItemRouter.route("/updateQty/:purchase_id/:item_id")
+purchaseItemRouter.route("/updateQty/:purchase_id/:id")
     .patch(authenticate,authorize([1]),purchaseItemController.updateQtyByIdAndPurchaseId)
 
 purchaseItemRouter.route("/:purchase_id")

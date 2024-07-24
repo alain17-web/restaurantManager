@@ -1,34 +1,34 @@
-import {Dish, Drink, Finance, NewPurchaseData} from "../../types/types.ts";
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import axiosInstance from "../../axios/axiosInstance.tsx";
-import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
-import Accordion from 'react-bootstrap/Accordion'
-import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
-import Form from 'react-bootstrap/Form'
 
+import {Dish, Drink, ItemData, NewPurchaseData} from "../../types/types";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import axiosInstance from "../../axios/axiosInstance";
+import useCurrentDate from "../../hooks/date/useCurrentDate";
+import Accordion from 'react-bootstrap/Accordion';
+import { useNotifDispatch } from "../../hooks/notifications/useNotifDispatch";
+import Form from 'react-bootstrap/Form';
 
 const NewPurchase = (props: NewPurchaseData) => {
-
-    const dispatch = useNotifDispatch()
+    const dispatch = useNotifDispatch();
 
     const [max, setMax] = useState<number>(0);
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [drinks, setDrinks] = useState<Drink[]>([]);
+    const [items, setItems] = useState<any[]>([]);
+
     const [dishQty, setDishQty] = useState<{ [key: number]: number }>({});
     const [drinkQty, setDrinkQty] = useState<{ [key: number]: number }>({});
 
 
-    const [purchase_date, setPurchase_date] = useState<string>("")
-    const [purchase_id, setPurchase_id] = useState<number | null>(null)
-    const [total, setTotal] = useState<number>(0)
-    const [delivery_date, setDelivery_date] = useState<string>("")
-    const [delivered, setDelivered] = useState<boolean>(false)
-    const [message, setMessage] = useState<string>("")
-    const [success, setSuccess] = useState<boolean>(false)
-    const [add, setAdd] = useState<boolean>(true)
+    const [purchase_date, setPurchase_date] = useState<string>("");
+    const [purchase_id, setPurchase_id] = useState<number | null>(null);
+    const [total, setTotal] = useState<number>(0);
+    const [delivery_date, setDelivery_date] = useState<string>("");
 
-    const {formattedDate} = useCurrentDate()
+    const [message, setMessage] = useState<string>("");
+    const [success, setSuccess] = useState<boolean>(false);
+    const [add, setAdd] = useState<boolean>(true);
 
+    const { formattedDate } = useCurrentDate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,35 +37,32 @@ const NewPurchase = (props: NewPurchaseData) => {
                     axiosInstance.get('/finances/'),
                     axiosInstance.get('/dishes/'),
                     axiosInstance.get('/drinks/')
-                ])
-                const allMaxesAndIds: number[] = []
-                financeRes.data.forEach((summary: Finance) => {
-                    allMaxesAndIds.push(summary.id, summary.total_on_hand)
-                })
-                setMax(allMaxesAndIds[1])
-                setDishes(dishesRes.data)
-                setDrinks(drinksRes.data)
+                ]);
 
-
+                setMax(financeRes.data[0]?.total_on_hand || 0);
+                setDishes(dishesRes.data);
+                setDrinks(drinksRes.data);
             } catch (error) {
-                console.error("Error fetching data", error)
+                console.error("Error fetching data", error);
             }
-        }
-        fetchData()
+        };
+        fetchData();
     }, []);
 
-    const handleDishQty = (id: number, event: ChangeEvent<HTMLInputElement>) => {
+    const handleQtyChange = (id: number, type: 'dish' | 'drink', event: ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.target.value, 10);
         if (!isNaN(value)) {
-            setDishQty((prevDishQty) => ({...prevDishQty, [id]: value}));
-        }
-    }
-
-
-    const handleDrinkQty = (id: number, event: ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(event.target.value, 10);
-        if (!isNaN(value)) {
-            setDrinkQty((prevDrinkQty) => ({...prevDrinkQty, [id]: value}));
+            if (type === 'dish') {
+                setDishQty((prevDishQty) => ({ ...prevDishQty, [id]: value }));
+                if (!add) {
+                    setItems(items.map(item => item.id === id ? { ...item, qty: value } : item));
+                }
+            } else if (type === 'drink') {
+                setDrinkQty((prevDrinkQty) => ({ ...prevDrinkQty, [id]: value }));
+                if (!add) {
+                    setItems(items.map(item => item.id === id ? { ...item, qty: value } : item));
+                }
+            }
         }
     };
 
@@ -85,64 +82,52 @@ const NewPurchase = (props: NewPurchaseData) => {
                 return sum + (drink ? drink.cost * drinkQuantity : 0);
             }, 0);
 
-            const newTotal = dishTotal + drinkTotal
+            const newTotal = dishTotal + drinkTotal;
             setTotal(parseFloat(newTotal.toFixed(2)));
-            setPurchase_date(formattedDate)
-            setDelivery_date("en attente")
+            setPurchase_date(formattedDate);
+            setDelivery_date("en attente");
         };
 
         calculateTotal();
     }, [dishQty, drinkQty, dishes, drinks]);
 
-
     useEffect(() => {
         const handleEdit = async () => {
             setMessage("");
 
-
             const purchase = props.purchases.find((purchase) => purchase.purchase_id === props.purchase_id);
             if (purchase) {
                 setAdd(false);
-                setDelivered(true);
                 setDelivery_date(purchase.delivery_date);
                 setPurchase_id(purchase.purchase_id);
 
-
                 try {
                     const res = await axiosInstance.get(`/purchaseItems/${purchase.purchase_id}`);
-                    const purchaseItemsData = res.data;
+                    const purchaseItems = res.data.purchaseItem;
 
-                    //console.log('Fetched purchase items:', purchaseItemsData);
+                    const itemsData = purchaseItems.map((item: ItemData) => ({
+                        id: item.id,
+                        name: item.name,
+                        qty: item.qty,
+                        type: item.type,
+                        cost: item.cost
+                    }));
 
-                    if (purchaseItemsData && Array.isArray(purchaseItemsData.purchaseItem)) {
-                        const purchaseItems = purchaseItemsData.purchaseItem;
-
-                        const dishQuantities: { [key: number]: number } = {};
-                        const drinkQuantities: { [key: number]: number } = {};
-
-                        purchaseItems.forEach((item: any) => {
-                            const dish = dishes.find(dish => dish.name === item.name);
-                            if (dish) {
-                                if (item.type === "plats" || item.type === "desserts") {
-                                    dishQuantities[dish.id] = item.qty;
-                                } else if (item.type === "boissons froides" || item.type === "boissons chaudes") {
-                                    drinkQuantities[dish.id] = item.qty;
-                                }
-                            }
-                        });
-
-                        setDishQty(dishQuantities);
-                        setDrinkQty(drinkQuantities);
+                    setItems(itemsData);
 
 
-                        /*setTimeout(() => {
-                            console.log('Updated dishQty:', dishQty);
-                            console.log('Updated drinkQty:', drinkQty);
-                        }, 100);*/
-                    } else {
-                        console.error('Error: purchaseItemsData.purchaseItem is not an array', purchaseItemsData);
-                    }
+                    const dishQuantities = itemsData.filter((item: ItemData) => item.type === "plats" || item.type === "desserts").reduce((acc:{[key:number]:number}, item: ItemData) => {
+                        acc[item.id] = item.qty;
+                        return acc;
+                    }, {} as { [key: number]: number });
 
+                    const drinkQuantities = itemsData.filter((item: ItemData) => item.type === "boissons froides" || item.type === "boissons chaudes").reduce((acc:{[key:number]:number}, item:ItemData) => {
+                        acc[item.id] = item.qty;
+                        return acc;
+                    }, {} as { [key: number]: number });
+
+                    setDishQty(dishQuantities);
+                    setDrinkQty(drinkQuantities);
                 } catch (error) {
                     console.error("Error fetching purchase items", error);
                 }
@@ -153,13 +138,20 @@ const NewPurchase = (props: NewPurchaseData) => {
             handleEdit();
         } else {
             setAdd(true);
-            setDelivered(false);
             setMessage("");
             setSuccess(false);
             setDishQty({});
             setDrinkQty({});
         }
-    }, [props.purchase_id, props.purchases, dishes]);
+    }, [props.purchase_id, props.purchases]);
+
+    useEffect(() => {
+        if (!add) {
+            const dishTotal = items.filter(item => item.type === "plats" || item.type === "desserts").reduce((sum, item) => sum + item.cost * item.qty, 0);
+            const drinkTotal = items.filter(item => item.type === "boissons froides" || item.type === "boissons chaudes").reduce((sum, item) => sum + item.cost * item.qty, 0);
+            setTotal(dishTotal + drinkTotal);
+        }
+    }, [items, add]);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -168,66 +160,65 @@ const NewPurchase = (props: NewPurchaseData) => {
             purchase_date,
             total,
             delivery_date,
-        }
+        };
+
         try {
             if (add) {
-                const purchaseRes = await axiosInstance.post('/purchases/addPurchase', purchase)
-
-                const purchaseId = purchaseRes.data.purchaseResult.purchase_id
+                const purchaseRes = await axiosInstance.post('/purchases/addPurchase', purchase);
+                const purchaseId = purchaseRes.data.purchaseResult.purchase_id;
                 if (purchaseId) {
                     const purchaseItems = [
-                        ...dishes
-                            .filter(item => dishQty[item.id] > 0)
-                            .map(item => ({
-                                purchase_id: purchaseId,
-                                name: item.name,
-                                type: item.cat_id !== 5 ? "plats" : "desserts",
-                                cost: item.cost,
-                                qty: dishQty[item.id],
-                                delivery_date
-                            })),
-                        ...drinks
-                            .filter(item => drinkQty[item.id] > 0)
-                            .map(item => ({
-                                purchase_id: purchaseId,
-                                name: item.name,
-                                type: item.cat_id !== 9 ? "boissons froides" : "boissons chaudes",
-                                cost: item.cost,
-                                qty: drinkQty[item.id],
-                                delivery_date
-                            }))
-                    ]
+                        ...dishes.map(item => ({
+                            purchase_id: purchaseId,
+                            name: item.name,
+                            type: item.cat_id !== 5 ? "plats" : "desserts",
+                            cost: item.cost,
+                            qty: dishQty[item.id] || 0,
+                            delivery_date,
+                        })),
+                        ...drinks.map(item => ({
+                            purchase_id: purchaseId,
+                            name: item.name,
+                            type: item.cat_id !== 9 ? "boissons froides" : "boissons chaudes",
+                            cost: item.cost,
+                            qty: drinkQty[item.id] || 0,
+                            delivery_date,
+                        })),
+                    ];
 
                     for (const purchaseItem of purchaseItems) {
-                        await axiosInstance.post('/purchaseItems/addPurchaseItem', purchaseItem)
+                        await axiosInstance.post('/purchaseItems/addPurchaseItem', purchaseItem);
                     }
-                    setSuccess(true)
-                    setMessage("Le réappro a été envoyé")
-                    dispatch({type: 'ADD_PURCHASE_NOTIF'})
+                    setSuccess(true);
+                    setMessage("Le réappro a été envoyé");
+                    dispatch({ type: 'ADD_PURCHASE_NOTIF' });
+                }
+            } else if (purchase_id && delivery_date !== "en attente") {
+                await axiosInstance.patch(`/purchases/${purchase_id}`, { delivery_date });
+            } else if (purchase_id && delivery_date === "en attente" && total !== 0) {
+                const updateData = items.map(item => ({
+                    id: item.id,
+                    qty: item.qty
+                }));
+
+                try {
+                    for (const item of updateData) {
+                        await axiosInstance.patch(`/purchaseItems/updateQty/${purchase_id}/${item.id}`, { qty: item.qty });
+                    }
+                    setSuccess(true);
+                    setMessage("Les quantités ont été modifiées");
+                } catch (error) {
+                    console.error('Error updating quantities:', error);
+                    setMessage("La modification du réappro a échoué");
+                    setSuccess(false);
                 }
             }
-            else if(delivered){
-                if(purchase_id && delivery_date !== "en attente"){
-                    await axiosInstance.patch(`/purchases/${purchase_id}`,{delivery_date})
-
-                    // code to update delivery_date on each purchaseItem
-                    //await axiosInstance.patch(`/purchaseItems/updateDelivery_date/${purchase_id}`,{delivery_date})
-                }
-
-            } /*else {
-                if(purchase_id && delivery_date === "en attente"){
-                    //code to update the quantities of each drink and dish
-                    //await axiosInstance.patch(`/updateQty/:purchase_id/${item_id}`,{qty})
-                }
-            }*/
-
         } catch (error) {
-            console.error("Error creating new purchase", error)
-            setMessage("La création du réappro a échoué")
-            setSuccess(false)
+            console.error("Error creating new purchase", error);
+            setMessage(add ? "La création du réappro a échoué" : "La modification du réappro a échoué");
+            setSuccess(false);
         }
-    }
-
+    };
 
     return (
         <div className={"w-full flex"}>
@@ -267,18 +258,18 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {dishes.map((dish) => (
                                                         dish.cat_id !== 5 && (
-                                                            <div key={dish.id}>
+                                                            <div key={add ? dish.id : items.find(i => i.name === dish.name)?.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{dish.name} - {dish.cost} € - min:{dish.min}
                                                                     <input
                                                                         type={"number"}
                                                                         min={"0"}
-                                                                        value={dishQty[dish.id] || 0}
+                                                                        value={add ? dishQty[dish.id] || 0 : items.find(i => i.name === dish.name)?.qty || 0}
                                                                         className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                        onChange={(e) => handleDishQty(dish.id, e)}
+                                                                        onChange={(e) => handleQtyChange(add ? dish.id : items.find(i => i.name === dish.name)?.id, 'dish', e)}
                                                                     />
                                                                 </li>
-                                                                <hr/>
+                                                                <hr />
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -294,18 +285,18 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {dishes.map((dish) => (
                                                         dish.cat_id === 5 && (
-                                                            <div key={dish.id}>
+                                                            <div key={add ? dish.id : items.find(i => i.name === dish.name)?.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{dish.name} - {dish.cost} € - min:{dish.min}
                                                                     <input
                                                                         type={"number"}
                                                                         min={"0"}
-                                                                        value={dishQty[dish.id] || 0}
+                                                                        value={add ? dishQty[dish.id] || 0 : items.find(i => i.name === dish.name)?.qty || 0}
                                                                         className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                        onChange={(e) => handleDishQty(dish.id, e)}
+                                                                        onChange={(e) => handleQtyChange(add ? dish.id : items.find(i => i.name === dish.name)?.id, 'dish', e)}
                                                                     />
                                                                 </li>
-                                                                <hr/>
+                                                                <hr />
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -323,18 +314,18 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {drinks.map((drink) => (
                                                         drink.cat_id !== 9 && (
-                                                            <div key={drink.id}>
+                                                            <div key={add ? drink.id : items.find(i => i.name === drink.name)?.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{drink.name} - {drink.cost} € - min:{drink.min}
                                                                     <input
                                                                         type={"number"}
                                                                         min={"0"}
-                                                                        value={drinkQty[drink.id] || 0}
+                                                                        value={add ? drinkQty[drink.id] || 0 : items.find(i => i.name === drink.name)?.qty || 0}
                                                                         className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                        onChange={(e) => handleDrinkQty(drink.id, e)}
+                                                                        onChange={(e) => handleQtyChange(add ? drink.id : items.find(i => i.name === drink.name)?.id, 'drink', e)}
                                                                     />
                                                                 </li>
-                                                                <hr/>
+                                                                <hr />
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -350,19 +341,18 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {drinks.map((drink) => (
                                                         drink.cat_id === 9 && (
-                                                            <div key={drink.id}>
+                                                            <div key={add ? drink.id : items.find(i => i.name === drink.name)?.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{drink.name} - {drink.cost} € - min:{drink.min}
-
                                                                     <input
                                                                         type={"number"}
                                                                         min={"0"}
-                                                                        value={drinkQty[drink.id] || 0}
+                                                                        value={add ? drinkQty[drink.id] || 0 : items.find(i => i.name === drink.name)?.qty || 0}
                                                                         className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                        onChange={(e) => handleDrinkQty(drink.id, e)}
+                                                                        onChange={(e) => handleQtyChange(add ? drink.id : items.find(i => i.name === drink.name)?.id, 'drink', e)}
                                                                     />
                                                                 </li>
-                                                                <hr/>
+                                                                <hr />
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -386,4 +376,5 @@ const NewPurchase = (props: NewPurchaseData) => {
         </div>
     );
 };
+
 export default NewPurchase;
