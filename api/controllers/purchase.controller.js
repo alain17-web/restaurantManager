@@ -1,6 +1,8 @@
 const purchaseService = require('../services/purchase.service');
 const purchaseValidator = require('../validators/purchaseValidator');
 const updateTotalValidator = require('../validators/updateTotalValidator');
+const updateDelDateValidator = require('../validators/updateDelDateValidator');
+const purchaseItemService = require("../services/purchaseItem.service");
 
 const purchaseController = {
     //CREATE
@@ -51,6 +53,26 @@ const purchaseController = {
         }catch(error){
             console.error('Error updateTotalPurchase controller', error)
             res.status(500).json({message:"Error updateTotalPurchase controller",error});
+        }
+    },
+
+    updateDelDate: async (req, res) => {
+        try{
+            const purchase_id = req.params.purchase_id;
+            const validatePurchase = await updateDelDateValidator.validate(req.body);
+
+            const {delivery_date} = validatePurchase;
+
+            const updatedDelDate = await purchaseService.updateDelDate(purchase_id,delivery_date);
+
+            if(updatedDelDate){
+                res.status(201).json({message: 'Delivery date updated successfully.'});
+            } else {
+                res.status(404).json({error:'Delivery date updated successfully.'});
+            }
+        }catch(error){
+            console.error('Error updateDelDate controller',error)
+            res.status(500).json({message:"Error updateDelDate controller",error});
         }
     },
 

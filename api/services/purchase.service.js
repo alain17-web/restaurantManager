@@ -49,6 +49,24 @@ const purchaseService = {
         }
     },
 
+    updateDelDate: async (purchase_id,delivery_date) => {
+        if (!purchase_id || delivery_date === undefined ) {
+            throw new Error('One or more parameters are undefined')
+        }
+        const connection = await createConnection({})
+        try{
+            const [updatedDelDate] = await connection.execute('UPDATE purchases SET delivery_date = ? WHERE purchase_id = ?',[delivery_date,purchase_id]);
+
+            return updatedDelDate.affectedRows > 0;
+
+        }catch(error){
+            console.error('Error updateDelDate service',error);
+            throw error;
+        }finally {
+            await connection.end()
+        }
+    },
+
     //DELETE
     deletePurchase: async (purchase_id) => {
         const connection = await createConnection({})
