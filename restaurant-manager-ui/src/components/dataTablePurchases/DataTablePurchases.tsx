@@ -9,9 +9,13 @@ import axiosInstance from "../../axios/axiosInstance.tsx";
 const DataTablePurchases = (props:DataTablePurchaseData) => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([])
+    const [deliveryDate, setDeliveryDate] = useState<string>("")
 
     useEffect(() => {
         setPurchases(props.purchases)
+        props.purchases.forEach(purchase => {
+            setDeliveryDate(purchase.delivery_date)
+        })
     }, [props.purchases]);
 
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
@@ -84,7 +88,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
             <DataGrid
                 rows={purchases}
                 getRowId={() => crypto.randomUUID()}
-                columns={purchaseColumns.concat(actionColumn)}
+                columns={deliveryDate === "en attente" ? purchaseColumns.concat(actionColumn) : purchaseColumns}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
                 pageSizeOptions={[10]}
