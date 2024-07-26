@@ -30,8 +30,6 @@ const purchaseItemService = {
     },
 
     //UPDATE
-
-    //A CORRIGER
     updateDeliveryDate: async (id,purchase_id,delivery_date) => {
         if (id=== undefined || purchase_id === undefined || delivery_date === undefined ) {
             throw new Error('One or more parameters are undefined');

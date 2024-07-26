@@ -1,7 +1,7 @@
 const purchaseItemService = require('../services/purchaseItem.service');
 const purchaseItemValidator = require('../validators/purchaseItemValidator');
-const updatePurchaseValidator = require('../validators/updateTotalValidator');
 const updateQtyValidator = require('../validators/updateQtyValidator');
+const updateDelDateValidator = require('../validators/updateDelDateValidator');
 
 
 
@@ -41,11 +41,13 @@ const purchaseItemController = {
     //UPDATE
     updateDeliveryDate: async (req, res) => {
         try{
-            const validatedPurchaseItem = await updatePurchaseValidator.validate(req.body);
+            const purchase_id = req.params.purchase_id
+            const id = req.params.id;
+            const validatedPurchaseItem = await updateDelDateValidator.validate(req.body);
 
-            const {purchase_id,delivery_date} = validatedPurchaseItem;
+            const {delivery_date} = validatedPurchaseItem;
 
-            const updatedDelDate = await purchaseItemService.updateDeliveryDate(purchase_id,delivery_date);
+            const updatedDelDate = await purchaseItemService.updateDeliveryDate(purchase_id,id,delivery_date);
             if(updatedDelDate){
                 res.status(201).json({message:"Delivery_date updated successfully."});
             } else {

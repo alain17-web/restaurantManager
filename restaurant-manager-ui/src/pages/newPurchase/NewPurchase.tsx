@@ -194,8 +194,14 @@ const NewPurchase = (props: NewPurchaseData) => {
                     dispatch({ type: 'ADD_PURCHASE_NOTIF' });
                 }
             } else if (purchase_id && delivery_date !== "en attente") {
-                console.log(delivery_date)
+                const updateData = items.map(item => ({
+                    id: item.id,
+                    delivery_date: item.delivery_date
+                }));
                 try{
+                    for (const item of updateData) {
+                        await axiosInstance.patch(`/purchaseItems/updateDelDate/${purchase_id}/${item.id}`, {delivery_date})
+                    }
                     await axiosInstance.patch(`/purchases/updateDelDate/${purchase_id}`, { delivery_date });
                     setSuccess(true);
                     setMessage("Le réappro a été réceptionné")
@@ -206,7 +212,6 @@ const NewPurchase = (props: NewPurchaseData) => {
                 }
 
             } else if (purchase_id && delivery_date === "en attente" && total !== 0) {
-                console.log(delivery_date)
                 const updateData = items.map(item => ({
                     id: item.id,
                     qty: item.qty

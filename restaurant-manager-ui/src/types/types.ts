@@ -259,6 +259,7 @@ export type ItemData = {
     qty: number;
     type: string;
     cost: number;
+    delivery_date: string;
 };
 
 export interface DataTableStockFoodData {
