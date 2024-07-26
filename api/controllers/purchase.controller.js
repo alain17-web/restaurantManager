@@ -25,13 +25,23 @@ const purchaseController = {
     },
 
     //READ
-    getAllPurchases: async(req,res)=>{
+    getAllUndeliveredPurchases: async(req,res)=>{
         try{
-            const purchases = await purchaseService.getAllPurchases();
+            const purchases = await purchaseService.getAllUndeliveredPurchases();
             res.status(201).json(purchases);
         }catch(error){
             console.error('Error getAllPurchases controller',error)
             res.status(500).json({message:"Error getAllPurchases controller",error});
+        }
+    },
+
+    getAllDeliveredPurchases: async(req,res)=>{
+        try{
+            const purchases = await purchaseService.getAllDeliveredPurchases();
+            res.status(201).json(purchases);
+        }catch(error){
+            console.error('Error getAllDeliveredPurchases controller',error)
+            res.status(500).json({message:"Error getAllDeliveredPurchases",error});
         }
     },
 

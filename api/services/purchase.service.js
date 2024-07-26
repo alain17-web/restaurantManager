@@ -17,13 +17,26 @@ const purchaseService = {
     },
 
     //READ
-    getAllPurchases: async () => {
+    getAllUndeliveredPurchases: async () => {
         const connection = await createConnection({})
         try{
-            const [purchases] = await connection.execute('SELECT * FROM purchases ORDER BY purchase_id DESC')
+            const [purchases] = await connection.execute('SELECT * FROM purchases WHERE delivery_date = "en attente" ORDER BY purchase_id DESC')
             return purchases
         }catch(error){
             console.error('Error in getAllPurchases service', error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
+    },
+
+    getAllDeliveredPurchases: async () => {
+        const connection = await createConnection({})
+        try{
+            const [purchases] = await connection.execute('SELECT * FROM purchases WHERE delivery_date != "en attente" ORDER BY purchase_id DESC')
+            return purchases
+        }catch(error){
+            console.error('Error in getAllDeliveredPurchases service',error);
             throw error;
         }finally {
             await connection.end()

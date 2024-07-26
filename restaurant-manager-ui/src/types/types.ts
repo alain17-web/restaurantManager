@@ -241,6 +241,12 @@ export interface DataTablePurchaseData {
     open: () => void
 }
 
+export interface DataTableDeliveredPurchaseData {
+    deliveredPurchases: Purchase[]
+    getPurchaseId: (purchase_id: number) => void
+    open: () => void
+}
+
 export interface NewPurchaseData {
     purchases: Purchase[]
     purchase_id: number | null

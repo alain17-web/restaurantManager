@@ -23,6 +23,7 @@ import ListFinances from "./pages/listFinances/ListFinances.tsx";
 import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes.tsx";
 import {AuthProvider} from "./context/authContext/AuthContext.tsx";
 import {NotifProvider} from "./context/notifContext/NotifContext.tsx";
+import ListDeliveredPurchases from "./pages/listDeliveredPurchases/ListDeliveredPurchases.tsx";
 
 
 const router = createBrowserRouter([
@@ -152,6 +153,13 @@ const router = createBrowserRouter([
                 <ListPurchases/>
             </ProtectedRoutes>
 
+    },
+    {
+        path: "/listDeliveredPurchases",
+        element:
+            <ProtectedRoutes rolesAllowed={[1]}>
+                <ListDeliveredPurchases/>
+            </ProtectedRoutes>
     },
     {
         path: "/listFinances",

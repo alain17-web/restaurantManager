@@ -230,7 +230,7 @@ export const purchaseColumns : GridColDef[]=[
     },
     {
         field: "purchase_date",
-        headerName: "date",
+        headerName: "date d'achat",
         width: 180
     },
     {

@@ -194,8 +194,19 @@ const NewPurchase = (props: NewPurchaseData) => {
                     dispatch({ type: 'ADD_PURCHASE_NOTIF' });
                 }
             } else if (purchase_id && delivery_date !== "en attente") {
-                await axiosInstance.patch(`/purchases/${purchase_id}`, { delivery_date });
+                console.log(delivery_date)
+                try{
+                    await axiosInstance.patch(`/purchases/updateDelDate/${purchase_id}`, { delivery_date });
+                    setSuccess(true);
+                    setMessage("Le réappro a été réceptionné")
+                }catch(error){
+                    console.error("Error updating delivery_date", error);
+                    setMessage("Le réappro n'a pas pu être réceptionné")
+                    setSuccess(false);
+                }
+
             } else if (purchase_id && delivery_date === "en attente" && total !== 0) {
+                console.log(delivery_date)
                 const updateData = items.map(item => ({
                     id: item.id,
                     qty: item.qty
@@ -239,12 +250,13 @@ const NewPurchase = (props: NewPurchaseData) => {
                     </div>
                 )}
                 <div className={"flex justify-between mr-20 text-2xl"}>
-                    {delivery_date === "en attente" &&
+                    {delivery_date === "en attente" ?
                         <Form.Check
                             className={"text-lg ml-16"}
                             type="switch"
                             label="Livrée ?"
-                        />}
+                            onChange={() => setDelivery_date(formattedDate)}
+                        /> : <p className={"pl-15 font-inter text-slate-600"}>Livrée</p>}
                     <p className={"pl-15 font-inter text-slate-600"}>TOTAL: {total.toFixed(2)}€</p>
                 </div>
                 <div className={"custom-shadow p-[10px] m-5 mt-0"}>
@@ -259,7 +271,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {dishes.map((dish) => (
                                                         dish.cat_id !== 5 && (
-                                                            <div key={add ? dish.id : items.find(i => i.name === dish.name)?.id}>
+                                                            <div key={dish.id }>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{dish.name} - {dish.cost} € - min:{dish.min}
                                                                     <input
@@ -286,7 +298,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {dishes.map((dish) => (
                                                         dish.cat_id === 5 && (
-                                                            <div key={add ? dish.id : items.find(i => i.name === dish.name)?.id}>
+                                                            <div key={dish.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{dish.name} - {dish.cost} € - min:{dish.min}
                                                                     <input
@@ -315,7 +327,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {drinks.map((drink) => (
                                                         drink.cat_id !== 9 && (
-                                                            <div key={add ? drink.id : items.find(i => i.name === drink.name)?.id}>
+                                                            <div key={drink.id }>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{drink.name} - {drink.cost} € - min:{drink.min}
                                                                     <input
@@ -342,7 +354,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {drinks.map((drink) => (
                                                         drink.cat_id === 9 && (
-                                                            <div key={add ? drink.id : items.find(i => i.name === drink.name)?.id}>
+                                                            <div key={drink.id }>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{drink.name} - {drink.cost} € - min:{drink.min}
                                                                     <input

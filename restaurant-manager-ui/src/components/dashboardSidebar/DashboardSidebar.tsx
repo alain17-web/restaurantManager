@@ -138,7 +138,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>COMMANDES</p>
                     <NavLink
-                        onClick={()=> dispatch({type:'RESET_ORDER_NOTIF'})}
+                        onClick={() => dispatch({type: 'RESET_ORDER_NOTIF'})}
                         to={"/listOrders"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
@@ -152,8 +152,9 @@ const DashboardSidebar = () => {
                             Commandes Clients
                         </li>
                     </NavLink>
+                    <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>REAPPROS</p>
                     <NavLink
-                        onClick={()=> dispatch({type:'RESET_PURCHASE_NOTIF'})}
+                        onClick={() => dispatch({type: 'RESET_PURCHASE_NOTIF'})}
                         to={"/listPurchases"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
@@ -164,7 +165,21 @@ const DashboardSidebar = () => {
                     >
                         <li className={"flex items-center p-1.5 cursor-pointer"}>
                             <img src={'./img/purchase-order.svg'} width={25} height={25} className={'mr-[10px]'}/>
-                            Réappros Fournisseurs
+                            En attente
+                        </li>
+                    </NavLink>
+                    <NavLink
+                        to={"/listDeliveredPurchases"}
+                        className={({isActive}: { isActive: boolean }) =>
+                            classNames('no-underline', {
+                                'text-gray-500': !isActive,
+                                'text-purple-600': isActive,
+                            })
+                        }
+                    >
+                        <li className={"flex items-center p-1.5 cursor-pointer"}>
+                            <img src={'./img/delivered.svg'} width={25} height={25} className={'mr-[10px]'}/>
+                            Livrés
                         </li>
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>STOCK</p>
@@ -198,7 +213,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>RESERVATIONS</p>
                     <NavLink
-                        onClick={()=> dispatch({type:'RESET_BOOKING_NOTIF'})}
+                        onClick={() => dispatch({type: 'RESET_BOOKING_NOTIF'})}
                         to={"/listBookings"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {

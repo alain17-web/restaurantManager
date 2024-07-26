@@ -9,7 +9,7 @@ import axiosInstance from "../../axios/axiosInstance.tsx";
 const DataTablePurchases = (props:DataTablePurchaseData) => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([])
-    const [deliveryDate, setDeliveryDate] = useState<string>("")
+    const [_deliveryDate, setDeliveryDate] = useState<string>("")
 
     useEffect(() => {
         setPurchases(props.purchases)
@@ -54,12 +54,13 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
                 <div className={"flex items-center mt-3"}>
                     <div
                         className={"py-[2px] px-[5px] mr-2 text-[00008B] border-[1px] border-gray-200 rounded-md cursor-pointer"}
-                        onClick={() => props.getPurchaseIdAndDeliveryDate(params.row.purchase_id,params.row.delivery_date)} data-bs-toggle="tooltip"
+                        onClick={() => props.getPurchaseIdAndDeliveryDate(params.row.purchase_id, params.row.delivery_date)}
+                        data-bs-toggle="tooltip"
                         data-bs-placement="top" title="VOIR DETAIL">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             className="bi bi-search" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffa500"
+                             className="bi bi-pencil-fill cursor-pointer" viewBox="0 0 16 16">
                             <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                         </svg>
                     </div>
                     <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"}
@@ -75,7 +76,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
             )
         }
     }]
-
+    console.log(purchases)
     return (
         <div className={"h-[950px] p-4"}>
             <div className={"w-full flex items-center justify-between text-[24px] mb-[10px]"}>
@@ -88,7 +89,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
             <DataGrid
                 rows={purchases}
                 getRowId={() => crypto.randomUUID()}
-                columns={deliveryDate === "en attente" ? purchaseColumns.concat(actionColumn) : purchaseColumns}
+                columns={ purchaseColumns.concat(actionColumn)}
                 paginationModel={paginationModel}
                 onPaginationModelChange={setPaginationModel}
                 pageSizeOptions={[10]}

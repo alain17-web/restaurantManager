@@ -1,34 +1,34 @@
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar.tsx";
 import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.tsx";
-import DataTablePurchases from "../../components/dataTablePurchases/DataTablePurchases.tsx";
+//import DataTablePurchases from "../../components/dataTablePurchases/DataTablePurchases.tsx";
 import {useEffect, useState} from "react";
 import {Purchase} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
-import NewPurchase from "../newPurchase/NewPurchase.tsx";
+import DataTableDeliveredPurchases from "../../components/dataTableDeliveredPurchases/DataTableDeliveredPurchases.tsx";
+import PurchaseDetail from "../purchaseDetail/PurchaseDetail.tsx";
 
-const ListPurchases = () => {
 
-    const [purchases, setPurchases] = useState<Purchase[]>([]);
-    const [purchaseId, setPurchaseId] = useState<number | null>(null);
-    const [delivery_date, setDelivery_date] = useState<string >("");
-    const [open, setOpen] = useState<boolean>(false);
+const ListDeliveredPurchases = () => {
+
+    const [deliveredPurchases, setDeliveredPurchases] = useState<Purchase[]>([]);
+    const [_purchaseId, setPurchaseId] = useState<number | null>(null);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        const getPurchases = async () => {
+        const getDeliveredPurchases = async () => {
             try {
-                const res = await axiosInstance.get('/purchases/')
-                setPurchases(res.data)
+                const res = await axiosInstance.get('/purchases/delivered')
+                setDeliveredPurchases(res.data)
 
             } catch (error) {
-                console.error('Error in getPurchases', error);
+                console.error('Error in getDeliveredPurchases', error);
             }
         }
-        getPurchases();
+        getDeliveredPurchases();
     }, []);
 
-    const handleGetPurchaseIdAndDeliveryDate = (purchase_id: number,delivery_date:string) => {
+    const handleGetPurchaseId = (purchase_id: number) => {
         setPurchaseId(purchase_id)
-        setDelivery_date(delivery_date)
         setOpen(true);
     }
 
@@ -42,15 +42,14 @@ const ListPurchases = () => {
     }
 
 
-
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats en cours</h1>
-                {!open ? <DataTablePurchases purchases={purchases} getPurchaseIdAndDeliveryDate={handleGetPurchaseIdAndDeliveryDate} open={show}/> :
-                    <NewPurchase  purchases={purchases} purchase_id={purchaseId} delivery_date={delivery_date}/>
+                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats réceptionnés</h1>
+                {!open ? <DataTableDeliveredPurchases deliveredPurchases={deliveredPurchases} getPurchaseId={handleGetPurchaseId} open={show}/> :
+                    <PurchaseDetail />
                 }
                 {open ?
                     <div className={"mb-2 pl-6"}>
@@ -66,4 +65,4 @@ const ListPurchases = () => {
         </div>
     );
 };
-export default ListPurchases;
+export default ListDeliveredPurchases;
