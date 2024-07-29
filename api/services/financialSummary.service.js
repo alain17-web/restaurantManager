@@ -52,12 +52,16 @@ const financialSummaryService = {
         }
     },
 
-    getLastTotal_on_hand: async (id) => {
+    getLastTotal_on_hand: async () => {
         const connection = await createConnection();
         try{
            const [total] = await connection.execute('SELECT total_on_hand FROM finances ORDER BY id DESC LIMIT 1')
+            if(total.length > 0){
+                return total[0].total_on_hand;
+            } else {
+                return 0
+            }
 
-            return total;
         }catch(error){
             console.error('Error getLastTotal_on_hand service', error);
             throw error;
@@ -99,6 +103,7 @@ const financialSummaryService = {
             await connection.end();
         }
     },
+
 
     //DELETE
     deleteFinancialSummary: async (id) => {

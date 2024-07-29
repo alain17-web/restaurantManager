@@ -3,12 +3,12 @@ const financialSummaryController = require("../controllers/financialSummary.cont
 const { authenticate, authorize } = require('../middlewares/authenticate');
 
 financeRouter.route('/addFinanceSummary')
-    .post(authenticate,authorize([1]),financialSummaryController.addFinancialSummary)
+    .post(authenticate,authorize([1,9]),financialSummaryController.addFinancialSummary)
 
 financeRouter.route('/')
     .get(authenticate,authorize([1]),financialSummaryController.getAllFinancialSummaries)
 
-financeRouter.route('/:id')
+financeRouter.route('/lastTotalOnHand')
     .get(authenticate,authorize([1]),financialSummaryController.getLastTotal_on_hand)
 
 financeRouter.route("/:id")

@@ -76,7 +76,7 @@ const DataTablePurchases = (props:DataTablePurchaseData) => {
             )
         }
     }]
-    console.log(purchases)
+
     return (
         <div className={"h-[950px] p-4"}>
             <div className={"w-full flex items-center justify-between text-[24px] mb-[10px]"}>

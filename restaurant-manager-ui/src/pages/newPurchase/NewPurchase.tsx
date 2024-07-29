@@ -6,6 +6,8 @@ import useCurrentDate from "../../hooks/date/useCurrentDate";
 import Accordion from 'react-bootstrap/Accordion';
 import { useNotifDispatch } from "../../hooks/notifications/useNotifDispatch";
 import Form from 'react-bootstrap/Form';
+import useTotalOnHand from "../../hooks/totalOnHand/useTotalOnHand.tsx";
+
 
 const NewPurchase = (props: NewPurchaseData) => {
     const dispatch = useNotifDispatch();
@@ -29,17 +31,26 @@ const NewPurchase = (props: NewPurchaseData) => {
     const [add, setAdd] = useState<boolean>(true);
 
     const { formattedDate } = useCurrentDate();
+    const { totalOnHand} = useTotalOnHand();
+
+    useEffect(() => {
+        if(totalOnHand !== undefined && totalOnHand !== 0) {
+            setMax(totalOnHand );
+        }
+
+    }, [totalOnHand]);
+
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const [financeRes, dishesRes, drinksRes] = await Promise.all([
-                    axiosInstance.get('/finances/'),
+                const [dishesRes, drinksRes] = await Promise.all([
+                    //axiosInstance.get('/finances/lastTotalOnHand'),
                     axiosInstance.get('/dishes/'),
                     axiosInstance.get('/drinks/')
                 ]);
+                //setMax(financeRes.data[0]?.total_on_hand || 0);
 
-                setMax(financeRes.data[0]?.total_on_hand || 0);
                 setDishes(dishesRes.data);
                 setDrinks(drinksRes.data);
             } catch (error) {
