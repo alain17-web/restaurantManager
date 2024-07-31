@@ -262,6 +262,10 @@ export type ItemData = {
     delivery_date: string;
 };
 
+export type purchaseId = {
+    purchase_id: number | null
+}
+
 export interface DataTableStockFoodData {
     dishes: Dish[]
 }

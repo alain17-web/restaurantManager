@@ -11,7 +11,7 @@ import PurchaseDetail from "../purchaseDetail/PurchaseDetail.tsx";
 const ListDeliveredPurchases = () => {
 
     const [deliveredPurchases, setDeliveredPurchases] = useState<Purchase[]>([]);
-    const [_purchaseId, setPurchaseId] = useState<number | null>(null);
+    const [purchaseId, setPurchaseId] = useState<number | null>(null);
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const ListDeliveredPurchases = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats réceptionnés</h1>
                 {!open ? <DataTableDeliveredPurchases deliveredPurchases={deliveredPurchases} getPurchaseId={handleGetPurchaseId} open={show}/> :
-                    <PurchaseDetail />
+                    <PurchaseDetail purchase_id={purchaseId}/>
                 }
                 {open ?
                     <div className={"mb-2 pl-6"}>
