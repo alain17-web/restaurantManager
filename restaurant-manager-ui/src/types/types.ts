@@ -314,14 +314,16 @@ export interface EmployeeCard {
 
 export interface Finance {
     id: number;
-    income_date: string;
-    income: number;
+    order_date?: string;
+    order_id?:number;
+    income?: number;
     comments?: string | null;
-    spendings: number;
-    spending_date:string;
+    totalPurchase?: number;
+    purchase_date?:string;
+    purchase_id?:number;
     remarks?:string | null;
     total_on_hand: number;
-    profits: number;
+    profits?: number;
 }
 
 export interface NewFinanceData {

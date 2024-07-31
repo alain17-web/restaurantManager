@@ -2,12 +2,12 @@ const createConnection = require('../database/database');
 
 const purchaseService = {
     //CREATE
-    addPurchase: async ({purchase_date, total, delivery_date}) => {
+    addPurchase: async ({purchase_date, totalPurchase, delivery_date}) => {
         const connection = await createConnection({})
         try{
-            const [purchase] = await connection.execute('INSERT into purchases (purchase_date,total,delivery_date)VALUES (?,?,?)',[purchase_date,total,delivery_date]);
+            const [purchase] = await connection.execute('INSERT into purchases (purchase_date,totalPurchase,delivery_date)VALUES (?,?,?)',[purchase_date,totalPurchase,delivery_date]);
 
-            return {purchase_id:purchase.insertId,purchase_date,total,delivery_date}
+            return {purchase_id:purchase.insertId,purchase_date,totalPurchase,delivery_date}
         }catch(error){
             console.error('Error addPurchase service',error);
             throw error;
@@ -44,13 +44,13 @@ const purchaseService = {
     },
 
     //UPDATE
-    updateTotalPurchase: async (purchase_id,total) => {
+    updateTotalPurchase: async (purchase_id,totalPurchase) => {
         if (!purchase_id || total === undefined ) {
             throw new Error('One or more parameters are undefined')
         }
         const connection = await createConnection({})
         try{
-            const [updatedPurchase] = await connection.execute('UPDATE purchases SET total = ? WHERE purchase_id = ?',[total,purchase_id]);
+            const [updatedPurchase] = await connection.execute('UPDATE purchases SET totalPurchase = ? WHERE purchase_id = ?',[totalPurchase,purchase_id]);
 
             return updatedPurchase.affectedRows > 0;
 

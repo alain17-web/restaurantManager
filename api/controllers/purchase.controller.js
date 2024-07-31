@@ -10,9 +10,9 @@ const purchaseController = {
         try{
             const validatePurchase = await purchaseValidator.validate(req.body,{abortEarly:false});
 
-            const {purchase_date,total,status,delivery_date} = validatePurchase;
+            const {purchase_date,totalPurchase,status,delivery_date} = validatePurchase;
 
-            const purchaseResult = await purchaseService.addPurchase({purchase_date,total,delivery_date});
+            const purchaseResult = await purchaseService.addPurchase({purchase_date,totalPurchase,delivery_date});
 
             res.status(201).json({message: 'Order created successfully', purchaseResult});
 
@@ -51,9 +51,9 @@ const purchaseController = {
             const purchase_id = req.params.purchase_id;
             const validatePurchase = await updateTotalValidator.validate(req.body);
 
-            const {total} = validatePurchase;
+            const {totalPurchase} = validatePurchase;
 
-            const updatedPurchase = await purchaseService.updateTotalPurchase(purchase_id, total);
+            const updatedPurchase = await purchaseService.updateTotalPurchase(purchase_id, totalPurchase);
 
             if (updatedPurchase) {
                 res.status(201).json({message: 'Purchase total updated successfully.'});

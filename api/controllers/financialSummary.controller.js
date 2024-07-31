@@ -8,9 +8,31 @@ const financialSummaryController = {
         try {
             const validateSummary = await financeValidator.validate(req.body, {abortEarly: false});
 
-            const {income,income_date,comments,spendings,spending_date,remarks,total_on_hand,profits} = validateSummary;
+            const {
+                income = null,
+                order_date = null,
+                order_id = null,
+                comments = null,
+                totalPurchase = null,
+                purchase_date = null,
+                purchase_id = null,
+                remarks = null,
+                total_on_hand,
+                profits = null
+            } = validateSummary;
 
-            const summary = await financialSummaryService.addFinancialSummary({income,income_date,comments,spendings,spending_date,remarks,total_on_hand,profits})
+            const summary = await financialSummaryService.addFinancialSummary({
+                income,
+                order_date,
+                order_id,
+                comments,
+                totalPurchase,
+                purchase_date,
+                purchase_id,
+                remarks,
+                total_on_hand,
+                profits
+            })
 
             res.status(201).json({message: 'Financial Summary Successfully', summary});
         } catch (error) {
@@ -52,10 +74,12 @@ const financialSummaryController = {
 
             const {
                 income,
-                income_date,
+                order_date,
+                order_id,
                 comments,
-                spendings,
-                spending_date,
+                totalPurchase,
+                purchase_date,
+                purchase_id,
                 remarks,
                 total_on_hand,
                 profits,
@@ -65,10 +89,12 @@ const financialSummaryController = {
             const updatedSummary = await financialSummaryService.updateFinancialSummary(
                 id,
                 income,
-                income_date,
+                order_date,
+                order_id,
                 comments,
-                spendings,
-                spending_date,
+                totalPurchase,
+                purchase_date,
+                purchase_id,
                 remarks,
                 total_on_hand,
                 profits

@@ -23,8 +23,9 @@ const NewPurchase = (props: NewPurchaseData) => {
 
     const [purchase_date, setPurchase_date] = useState<string>("");
     const [purchase_id, setPurchase_id] = useState<number | null>(null);
-    const [total, setTotal] = useState<number>(0);
+    const [totalPurchase, setTotalPurchase] = useState<number>(0);
     const [delivery_date, setDelivery_date] = useState<string>("");
+    //const [remarks, setRemarks] = useState<string>("");
 
     const [message, setMessage] = useState<string>("");
     const [success, setSuccess] = useState<boolean>(false);
@@ -45,11 +46,9 @@ const NewPurchase = (props: NewPurchaseData) => {
         const fetchData = async () => {
             try {
                 const [dishesRes, drinksRes] = await Promise.all([
-                    //axiosInstance.get('/finances/lastTotalOnHand'),
                     axiosInstance.get('/dishes/'),
                     axiosInstance.get('/drinks/')
                 ]);
-                //setMax(financeRes.data[0]?.total_on_hand || 0);
 
                 setDishes(dishesRes.data);
                 setDrinks(drinksRes.data);
@@ -94,7 +93,7 @@ const NewPurchase = (props: NewPurchaseData) => {
             }, 0);
 
             const newTotal = dishTotal + drinkTotal;
-            setTotal(parseFloat(newTotal.toFixed(2)));
+            setTotalPurchase(parseFloat(newTotal.toFixed(2)));
             setPurchase_date(formattedDate);
             setDelivery_date("en attente");
         };
@@ -160,7 +159,7 @@ const NewPurchase = (props: NewPurchaseData) => {
         if (!add) {
             const dishTotal = items.filter(item => item.type === "plats" || item.type === "desserts").reduce((sum, item) => sum + item.cost * item.qty, 0);
             const drinkTotal = items.filter(item => item.type === "boissons froides" || item.type === "boissons chaudes").reduce((sum, item) => sum + item.cost * item.qty, 0);
-            setTotal(dishTotal + drinkTotal);
+            setTotalPurchase(dishTotal + drinkTotal);
         }
     }, [items, add]);
 
@@ -169,7 +168,7 @@ const NewPurchase = (props: NewPurchaseData) => {
 
         const purchase = {
             purchase_date,
-            total,
+            totalPurchase,
             delivery_date,
         };
 
@@ -214,6 +213,8 @@ const NewPurchase = (props: NewPurchaseData) => {
                         await axiosInstance.patch(`/purchaseItems/updateDelDate/${purchase_id}/${item.id}`, {delivery_date})
                     }
                     await axiosInstance.patch(`/purchases/updateDelDate/${purchase_id}`, { delivery_date });
+                    const total_on_hand = max - totalPurchase
+                   await axiosInstance.post('/finances/addFinanceSummary',{purchase_id,purchase_date,totalPurchase,total_on_hand})
                     setSuccess(true);
                     setMessage("Le réappro a été réceptionné")
                 }catch(error){
@@ -222,7 +223,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                     setSuccess(false);
                 }
 
-            } else if (purchase_id && delivery_date === "en attente" && total !== 0) {
+            } else if (purchase_id && delivery_date === "en attente" && totalPurchase !== 0) {
                 const updateData = items.map(item => ({
                     id: item.id,
                     qty: item.qty
@@ -232,7 +233,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                     for (const item of updateData) {
                         await axiosInstance.patch(`/purchaseItems/updateQty/${purchase_id}/${item.id}`, { qty: item.qty });
                     }
-                    await axiosInstance.patch(`/purchases/updateTotal/${purchase_id}`, { total });
+                    await axiosInstance.patch(`/purchases/updateTotal/${purchase_id}`, { totalPurchase });
                     setSuccess(true);
                     setMessage("Les quantités et le total ont été modifiées");
                 } catch (error) {
@@ -273,7 +274,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                             label="Livrée ?"
                             onChange={() => setDelivery_date(formattedDate)}
                         /> : <p className={"pl-15 font-inter text-slate-600"}>Livrée</p>}
-                    <p className={"pl-15 font-inter text-slate-600"}>TOTAL: {total.toFixed(2)}€</p>
+                    <p className={"pl-15 font-inter text-slate-600"}>TOTAL: {totalPurchase.toFixed(2)}€</p>
                 </div>
                 <div className={"custom-shadow p-[10px] m-5 mt-0"}>
                     <form className={"w-full"} onSubmit={handleSubmit}>

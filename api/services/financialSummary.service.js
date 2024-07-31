@@ -4,27 +4,31 @@ const createConnection = require('../database/database');
 const financialSummaryService = {
     //CREATE
     addFinancialSummary: async ({
-                                    income,
-                                    income_date,
-                                    comments,
-                                    spendings,
-                                    spending_date,
-                                    remarks,
+                                    income = null,
+                                    order_date = null,
+                                    order_id = null,
+                                    comments = null,
+                                    totalPurchase = null,
+                                    purchase_date = null,
+                                    purchase_id = null,
+                                    remarks = null,
                                     total_on_hand,
-                                    profits
+                                    profits = null
                                 }) => {
         const connection = await createConnection();
         try {
             const [summary] = await connection.execute(
-                'INSERT INTO finances (income,income_date,comments,spendings,spending_date,remarks,total_on_hand,profits) VALUES (?,?,?,?,?,?,?,?)',
-                [income, income_date, comments, spendings, spending_date, remarks, total_on_hand, profits])
+                'INSERT INTO finances (income,order_date,order_id,comments,totalPurchase,purchase_date,purchase_id, remarks,total_on_hand,profits) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                [income, order_date, order_id, comments, totalPurchase, purchase_date, purchase_id, remarks, total_on_hand, profits])
             return {
                 id: summary.insertId,
                 income,
-                income_date,
+                order_date,
+                order_id,
                 comments,
-                spendings,
-                spending_date,
+                totalPurchase,
+                purchase_date,
+                purchase_id,
                 remarks,
                 total_on_hand,
                 profits
@@ -74,22 +78,26 @@ const financialSummaryService = {
     updateFinancialSummary: async (
         id,
         income,
-        income_date,
+        order_date,
+        order_id,
         comments,
-        spendings,
-        spending_date,
+        totalPurchase,
+        purchase_date,
+        purchase_id,
         remarks,
         total_on_hand,
         profits) => {
         const connection = await createConnection();
 
         try {
-            const [updatedSummary] = await connection.execute('UPDATE finances SET income = ?,income_date = ?,comments = ?,spendings = ?,spending_date = ?,remarks = ?,total_on_hand = ?,profits = ? WHERE id = ?',[
+            const [updatedSummary] = await connection.execute('UPDATE finances SET income = ?,order_date = ?, order_id = ?,comments = ?,totalPurchase = ?,purchase_date = ?, purchase_id = ?, remarks = ?,total_on_hand = ?,profits = ? WHERE id = ?',[
                 income,
-                income_date,
+                order_date,
+                order_id,
                 comments,
-                spendings,
-                spending_date,
+                totalPurchase,
+                purchase_date,
+                purchase_id,
                 remarks,
                 total_on_hand,
                 profits,

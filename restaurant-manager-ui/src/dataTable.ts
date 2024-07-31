@@ -234,7 +234,7 @@ export const purchaseColumns : GridColDef[]=[
         width: 180
     },
     {
-        field: "total",
+        field: "totalPurchase",
         headerName: "Coût €",
         width: 120
     },
@@ -306,7 +306,7 @@ export const financesColumns : GridColDef[]=[
     {
         field: "id",
         headerName: "id",
-        width: 100
+        width: 70
     },
     {
         field: "income",
@@ -314,8 +314,13 @@ export const financesColumns : GridColDef[]=[
         width: 100
     },
     {
-        field: "income_date",
+        field: "order_date",
         headerName: "date entrée",
+        width: 100
+    },
+    {
+        field: "order_id",
+        headerName: "commande n°",
         width: 100
     },
     {
@@ -325,13 +330,18 @@ export const financesColumns : GridColDef[]=[
     },
 
     {
-        field: "spendings",
+        field: "totalPurchase",
         headerName: "dépenses €",
         width: 100
     },
     {
-        field: "spending_date",
+        field: "purchase_date",
         headerName: "date dépense",
+        width: 100
+    },
+    {
+        field: "purchase_id",
+        headerName: "achat n°",
         width: 100
     },
     {
