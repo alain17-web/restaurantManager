@@ -316,7 +316,7 @@ export interface Finance {
     id: number;
     order_date?: string;
     order_id?:number;
-    income?: number;
+    total?: number;
     comments?: string | null;
     totalPurchase?: number;
     purchase_date?:string;

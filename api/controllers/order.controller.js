@@ -33,6 +33,19 @@ const orderController = {
         }
     },
 
+    getOrderById: async (req, res) => {
+        try{
+            const order = await orderService.getOrderById(req.params.order_id);
+            if(order.length === 0) {
+                res.status(404).json({message: 'No order with this order found'});
+            }
+            res.status(201).json(order);
+        }catch(error){
+            console.error('Error getOrderById controller', error)
+            res.status(500).json({message: 'Error getOrderById controller', error});
+        }
+    },
+
     //UPDATE
     updateOrder: async (req, res) => {
         try {

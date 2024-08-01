@@ -1,18 +1,23 @@
 import {FormEvent, useState,useEffect} from "react";
 import {NewFinanceData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useTotalOnHand from "../../hooks/totalOnHand/useTotalOnHand.tsx";
 
 
 const NewFinanceSummary = (props: NewFinanceData) => {
 
-    const [income, setIncome] = useState<number>(0);
-    const [income_date, setIncome_date] = useState<string>("");
+    const {totalOnHand} = useTotalOnHand()
+
+    const [total, setTotal] = useState<number>(0);
+    const [order_date, setOrder_date] = useState<string>("");
+    const [order_id,setOrder_id] = useState<number>(0);
     const [comments, setComments] = useState<string > ("");
-    const [spendings, setSpendings] = useState<number>(0);
-    const [spending_date, setSpending_date] = useState<string>("");
+    const [totalPurchase, setTotalPurchase] = useState<number>(0);
+    const [purchase_date, setPurchase_date] = useState<string>("");
+    const [purchase_id, setPurchase_id] = useState<number>(0);
     const [remarks, setRemarks] = useState<string>("");
     const [total_on_hand, setTotal_on_hand] = useState<number>(0);
-    const [profits, setProfits] = useState<number>(0);
+
 
     const [message, setMessage] = useState<string>("")
     const [success, setSuccess] = useState<boolean>(false);
@@ -28,14 +33,15 @@ const NewFinanceSummary = (props: NewFinanceData) => {
 
     const resetForm = () => {
         setAdd(true)
-        setIncome(0)
-        setIncome_date("")
+        setTotal(0)
+        setOrder_date("")
+        setOrder_id(0)
         setComments("")
-        setSpendings(0)
-        setSpending_date("")
+        setTotalPurchase(0)
+        setPurchase_date("")
+        setPurchase_id(0)
         setRemarks("")
-        setTotal_on_hand(0)
-        setProfits(0)
+        setTotal_on_hand(totalOnHand)
         setMessage("")
         setSuccess(false)
     }
@@ -45,26 +51,54 @@ const NewFinanceSummary = (props: NewFinanceData) => {
         const summary = props.financeSummaries.find((summary) => summary.id === props.id)
         if(summary){
             setAdd(false)
-            setIncome(summary.income)
-            setIncome_date(summary.income_date)
+            setTotal(summary.total ?? 0)
+            setOrder_date(summary.order_date ?? "")
+            setOrder_id(summary.order_id ?? 0)
             setComments(summary.comments ?? "")
-            setSpendings(summary.spendings)
-            setSpending_date(summary.spending_date)
+            setTotalPurchase(summary.totalPurchase ?? 0)
+            setPurchase_date(summary.purchase_date ?? "")
+            setPurchase_id(summary.purchase_id ?? 0)
             setRemarks(summary.remarks ?? "")
-            setTotal_on_hand(summary.total_on_hand)
-            setProfits(summary.profits)
+            setTotal_on_hand(summary.total_on_hand )
+
         }
     }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        /*if(total !== 0 && totalPurchase === 0){
+            setTotal_on_hand(total + totalOnHand)
+        } else if(total === 0 && totalPurchase !== 0){
+            setTotal_on_hand(total - totalPurchase)
+        }*/
+
         try{
             if(add){
-                await axiosInstance.post("/finances/addFinanceSummary",{income,income_date,comments,spendings,spending_date,remarks,total_on_hand,profits})
+                await axiosInstance.post("/finances/addFinanceSummary",{
+                    total,
+                    order_date,
+                    order_id,
+                    comments,
+                    totalPurchase,
+                    purchase_date,
+                    purchase_id,
+                    remarks,
+                    total_on_hand
+                })
                 setSuccess(true)
                 setMessage("Le rapport a bien été créé")
             } else {
-                await axiosInstance.patch(`/finances/${props.id}`, {income,income_date,comments,spendings,spending_date,remarks,total_on_hand,profits})
+                await axiosInstance.patch(`/finances/${props.id}`, {
+                    total,
+                    order_date,
+                    order_id,
+                    comments,
+                    totalPurchase,
+                    purchase_date,
+                    purchase_id,
+                    remarks,
+                    total_on_hand
+                })
                 setSuccess(true)
                 setMessage("Le rapport a bien été mis à jour")
             }
@@ -102,8 +136,8 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                             <input
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
-                                value={income}
-                                onChange={(e) => setIncome(parseFloat(e.target.value))}
+                                value={total}
+                                onChange={(e) => setTotal(parseFloat(e.target.value))}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -112,8 +146,8 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
                                 placeholder={"DD/MM/YYYY"}
-                                value={income_date}
-                                onChange={(e) => setIncome_date(e.target.value)}
+                                value={order_date}
+                                onChange={(e) => setOrder_date(e.target.value)}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -130,8 +164,8 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                             <input
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
-                                value={spendings}
-                                onChange={(e) => setSpendings(parseFloat(e.target.value))}
+                                value={totalPurchase}
+                                onChange={(e) => setTotalPurchase(parseFloat(e.target.value))}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -140,8 +174,8 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"text"}
                                 placeholder={"DD/MM/YYYY"}
-                                value={spending_date}
-                                onChange={(e) => setSpending_date(e.target.value)}
+                                value={purchase_date}
+                                onChange={(e) => setPurchase_date(e.target.value)}
                             />
                         </div>
                         <div className={"w-[75%]"}>
@@ -161,18 +195,10 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                                 placeholder={"DD/MM/YYYY"}
                                 required
                                 value={total_on_hand}
-                                onChange={(e) => setTotal_on_hand(parseFloat(e.target.value))}
+                                //onChange={(e) => setTotal_on_hand(parseFloat(e.target.value))}
                             />
                         </div>
-                        <div className={"w-[75%]"}>
-                            <label className={"flex items-center gap-[10px]"}>Bénéfices €</label>
-                            <input
-                                className={"w-full p-[5px] border-b-[1px] border-gray-500"}
-                                type={"text"}
-                                value={profits}
-                                onChange={(e) => setProfits(parseFloat(e.target.value))}
-                            />
-                        </div>
+
 
                         <button
                             type={"submit"}

@@ -309,7 +309,7 @@ export const financesColumns : GridColDef[]=[
         width: 70
     },
     {
-        field: "income",
+        field: "total",
         headerName: "revenus €",
         width: 100
     },
@@ -352,11 +352,6 @@ export const financesColumns : GridColDef[]=[
     {
         field: "total_on_hand",
         headerName:"total € dispo",
-        width: 150
-    },
-    {
-        field: "profits",
-        headerName:"bénéfice €",
         width: 150
     }
 ]

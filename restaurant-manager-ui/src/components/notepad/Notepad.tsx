@@ -1,22 +1,33 @@
 import {MouseEvent, useEffect, useState} from "react";
-import { OrderItems} from "../../types/types.ts";
+import {OrderItems} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import DateDisplay from "../dateDisplay/DateDisplay.tsx";
 import useUsername from "../../hooks/username/useUsername.tsx";
-
+import useTotalOnHand from "../../hooks/totalOnHand/useTotalOnHand.tsx";
 
 
 const Notepad = () => {
 
 
+    const [max, setMax] = useState<number>(0);
     const [orderItems, setOrderItems] = useState<OrderItems[]>([]);
     const [orderId, setOrderId] = useState<number | null>(null);
+    const [order_date, setOrder_date] = useState<string>("");
+    const [total, setTotal] = useState<number>(0);
     const [_validated, setValidated] = useState<string>('');
-    const [_validatedBy,setValidatedBy] = useState<string | null>(null);
+    const [_validatedBy, setValidatedBy] = useState<string | null>(null);
     const [isValidated, setIsValidated] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
+    const {totalOnHand} = useTotalOnHand();
 
-    const { username } = useUsername()
+    useEffect(() => {
+        if (totalOnHand !== undefined && totalOnHand !== 0) {
+            setMax(totalOnHand);
+        }
+
+    }, [totalOnHand]);
+
+    const {username} = useUsername()
 
 
     const getOrderItems = async () => {
@@ -36,25 +47,58 @@ const Notepad = () => {
 
     useEffect(() => {
         getOrderItems();
+
     }, []);
 
+    useEffect(() => {
+        if (orderId !== undefined && orderId !== null) {
+            getOrder(orderId)
+        }
+    }, [orderId]);
 
-    const handleValidate = async (e:MouseEvent<HTMLButtonElement>) => {
+    const getOrder = async (orderId: number | null) => {
+        try {
+            const res = await axiosInstance.get(`/orders/${orderId}`);
+            if (res.data) {
+                setOrder_date(res.data.order_date)
+                setTotal(res.data.total);
+            } else {
+                console.log("no data found")
+            }
+        } catch (error) {
+            console.error('Error in getOrder', error);
+        }
+
+    }
+
+
+    const handleValidate = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        if(!orderId || !username){
+        if (!orderId || !username) {
             console.log("OrderId or username is undefined")
         }
 
         const validated = "ok"
         const validatedBy = username
 
-        try{
+        try {
 
-            await axiosInstance.patch(`orderItems/${orderId}`, {order_id:orderId,validated:validated,validatedBy:validatedBy})
-            await axiosInstance.patch(`orders/${orderId}`, {order_id:orderId,validated:validated,validatedBy:validatedBy})
+            await axiosInstance.patch(`orderItems/${orderId}`, {
+                order_id: orderId,
+                validated: validated,
+                validatedBy: validatedBy
+            })
+            await axiosInstance.patch(`orders/${orderId}`, {
+                order_id: orderId,
+                validated: validated,
+                validatedBy: validatedBy
+            })
+
+            const total_on_hand = max + total
+            await axiosInstance.post('/finances/addFinanceSummary',{order_id:orderId,order_date,total,total_on_hand})
             setIsValidated(true)
 
-        }catch (error){
+        } catch (error) {
             console.error('Error in validate', error);
 
         }
@@ -82,7 +126,7 @@ const Notepad = () => {
     };
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        if(isValidated){
+        if (isValidated) {
             resetValidation(e)
         } else {
             handleValidate(e)
@@ -97,25 +141,26 @@ const Notepad = () => {
             {!isValidated ? (
                 <div className={"w-full h-auto mt-3 flex flex-col items-center justify-center"}>
                     <DateDisplay/>
-                    <h1 className={"text-xl font-inter mt-22"}>Commande n°{orderId && orderId} : {orderItems.length / 4} pers</h1>
-                    <h2 className={"text-lg font-inter font-semibold italic"}>{message !=="" ? message : "Plats :"}</h2>
-                    { orderItems.map((item):any => {
-                       if (item.type === "maineCourse") {
-                          return <p key={item.order_item_id}>{message ==="" && item.name}</p>
-                       }
+                    <h1 className={"text-xl font-inter mt-22"}>Commande
+                        n°{orderId && orderId} : {orderItems.length / 4} pers</h1>
+                    <h2 className={"text-lg font-inter font-semibold italic"}>{message !== "" ? message : "Plats :"}</h2>
+                    {orderItems.map((item): any => {
+                        if (item.type === "maineCourse") {
+                            return <p key={item.order_item_id}>{message === "" && item.name}</p>
+                        }
                     })}
 
-                    <h2 className={"text-lg font-inter font-semibold italic"}>{message !=="" ? "" :"Desserts :"}</h2>
-                    { orderItems.map((item):any => {
+                    <h2 className={"text-lg font-inter font-semibold italic"}>{message !== "" ? "" : "Desserts :"}</h2>
+                    {orderItems.map((item): any => {
                         if (item.type === "desserts") {
-                            return <p key={item.order_item_id}>{message ==="" && item.name}</p>
+                            return <p key={item.order_item_id}>{message === "" && item.name}</p>
                         }
                     })}
 
                 </div>
             ) : (
                 <div className={"w-full h-auto mt-3 flex flex-col items-center justify-center"}>
-                    <h2 className={"text-xl text-green-600 font-inter font-semibold italic"}>Commande {orderId && orderId + " " }
+                    <h2 className={"text-xl text-green-600 font-inter font-semibold italic"}>Commande {orderId && orderId + " "}
                         validée</h2>
                 </div>
             )}

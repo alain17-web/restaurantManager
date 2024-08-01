@@ -9,7 +9,7 @@ const financialSummaryController = {
             const validateSummary = await financeValidator.validate(req.body, {abortEarly: false});
 
             const {
-                income = null,
+                total = null,
                 order_date = null,
                 order_id = null,
                 comments = null,
@@ -17,12 +17,11 @@ const financialSummaryController = {
                 purchase_date = null,
                 purchase_id = null,
                 remarks = null,
-                total_on_hand,
-                profits = null
+                total_on_hand
             } = validateSummary;
 
             const summary = await financialSummaryService.addFinancialSummary({
-                income,
+                total,
                 order_date,
                 order_id,
                 comments,
@@ -31,7 +30,6 @@ const financialSummaryController = {
                 purchase_id,
                 remarks,
                 total_on_hand,
-                profits
             })
 
             res.status(201).json({message: 'Financial Summary Successfully', summary});
@@ -73,7 +71,7 @@ const financialSummaryController = {
             const validateSummary = await financeValidator.validate(req.body, {abortEarly: false});
 
             const {
-                income,
+                total,
                 order_date,
                 order_id,
                 comments,
@@ -82,13 +80,13 @@ const financialSummaryController = {
                 purchase_id,
                 remarks,
                 total_on_hand,
-                profits,
+
 
             } = validateSummary;
 
             const updatedSummary = await financialSummaryService.updateFinancialSummary(
                 id,
-                income,
+                total,
                 order_date,
                 order_id,
                 comments,
@@ -97,7 +95,7 @@ const financialSummaryController = {
                 purchase_id,
                 remarks,
                 total_on_hand,
-                profits
+
             )
             if (updatedSummary) {
                 res.status(200).json({message: 'Financial Summary updated Successfully'});

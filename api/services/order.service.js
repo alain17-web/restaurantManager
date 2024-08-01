@@ -30,6 +30,22 @@ const orderService = {
         }
     },
 
+    getOrderById: async (order_id) => {
+        const connection = await createConnection({})
+        try{
+            const [order] = await connection.execute('SELECT * FROM orders WHERE order_id = ?', [order_id]);
+            if(order.length === 0){
+                return null
+            }
+            return order[0]
+        }catch(error){
+            console.error('Error getOrderById service', error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
+    },
+
 
     //UPDATE
     updateOrder: async (order_id, validated, validatedBy) => {
