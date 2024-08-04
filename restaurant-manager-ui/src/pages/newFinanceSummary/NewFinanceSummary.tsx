@@ -24,6 +24,22 @@ const NewFinanceSummary = (props: NewFinanceData) => {
     const [add, setAdd] = useState<boolean>(true)
 
     useEffect(() => {
+        setTotal_on_hand(totalOnHand);
+    }, [totalOnHand]);
+
+    useEffect(() => {
+        if (total !== 0 && totalPurchase === 0) {
+            setTotal_on_hand(totalOnHand + total);
+        } else if (total === 0 && totalPurchase !== 0) {
+            setTotal_on_hand(totalOnHand - totalPurchase);
+        } else if (total !== 0 && totalPurchase !== 0) {
+            setTotal_on_hand(totalOnHand + total - totalPurchase);
+        } else {
+            setTotal_on_hand(totalOnHand);
+        }
+    }, [total, totalPurchase, totalOnHand]);
+
+    useEffect(() => {
         if (props.id !== null && props.id !== undefined) {
             handleEdit()
         } else {
@@ -66,11 +82,6 @@ const NewFinanceSummary = (props: NewFinanceData) => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        /*if(total !== 0 && totalPurchase === 0){
-            setTotal_on_hand(total + totalOnHand)
-        } else if(total === 0 && totalPurchase !== 0){
-            setTotal_on_hand(total - totalPurchase)
-        }*/
 
         try{
             if(add){
@@ -195,7 +206,7 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                                 placeholder={"DD/MM/YYYY"}
                                 required
                                 value={total_on_hand}
-                                //onChange={(e) => setTotal_on_hand(parseFloat(e.target.value))}
+
                             />
                         </div>
 
