@@ -59,7 +59,7 @@ const ListBookings = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Réservations</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Réservations</h1>
                 {!open ? <DataTableBookings bookings={bookings} getBookingId={handleGetBookingId} open={show}/> :
                     <NewBooking id={bookingId} setBookingId={setBookingId} bookings={bookings} onAddOrEdit={handleAddedOrEdited} close={close}/>}
 

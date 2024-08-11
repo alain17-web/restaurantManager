@@ -47,7 +47,7 @@ const ListOrders = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Commandes clients</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Commandes clients</h1>
                 { !open ? <DataTableOrders orders={orders} getOrderId={handleGetOrderId} open={show}/> :
                     <OrderDetail order_id={orderId} setOrderId={setOrderId} />
                 }

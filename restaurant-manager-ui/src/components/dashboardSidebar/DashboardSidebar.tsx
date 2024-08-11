@@ -13,7 +13,7 @@ const DashboardSidebar = () => {
 
     return (
         <div className={"flex-1 min-h-screen border-r-[0.5px] border-[#D3D3D3]"}>
-            <div className={"h-16 flex items-center justify-center bg-[#ADD8E6]"}>
+            <div className={"h-16 flex items-center justify-center bg-[#87A96B]"}>
                 <img src={"./img/logo.png"} alt="logo" width="48px" height="48px"/>
                 <Link className={"font-inter text-[#013220] decoration-0 italic font-semibold"}>La Branche
                     d'Olivier</Link>

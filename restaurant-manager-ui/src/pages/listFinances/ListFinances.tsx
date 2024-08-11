@@ -44,7 +44,7 @@ const ListFinances = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Comptabilité</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Comptabilité</h1>
                 {!open ?
                     <DataTableFinances
                         financeSummaries={financeSummaries}

@@ -4,9 +4,12 @@ import DataTableStockFood from "../../components/dataTableStockFood/DataTableSto
 import {Dish} from "../../types/types.ts";
 import {useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
 
 
 const ListStockFood = () => {
+
+    const { formattedDate } = useCurrentDate();
 
     const [dishes,setDishes]= useState<Dish[]>([])
 
@@ -28,7 +31,7 @@ const ListStockFood = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Stock nourriture</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Stock nourriture au {formattedDate}</h1>
                 <DataTableStockFood dishes={dishes}/>
             </div>
         </div>

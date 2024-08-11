@@ -8,7 +8,7 @@ const DashboardNavbar = () => {
     const { username } = useUsername()
 
     return (
-        <div className={"h-16 flex items-center text-[#555] text-base bg-[#ADD8E6] border border-[#D3D3D3]"}>
+        <div className={"h-16 flex items-center text-[#555] text-base bg-[#87A96B] border border-[#D3D3D3]"}>
             <div className={"w-full flex items-center justify-between p-5"}>
                 <div className={"flex items-center"}>
                     <div className={"flex items-center mr-5 pr-1 relative"}>

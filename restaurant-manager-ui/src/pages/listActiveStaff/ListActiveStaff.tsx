@@ -50,7 +50,7 @@ const ListActiveStaff = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Employés</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Employés</h1>
                 {!open ? <DataTableActive employees={employees} getEmployeeId={handleGetEmployeeId} open={show} /> : <NewEmployee id={employeeId} setEmployeeId={setEmployeeId} employees={employees} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>

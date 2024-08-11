@@ -52,7 +52,7 @@ const ListInactiveStaff = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Anciens employés</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Anciens employés</h1>
                 {!open ? <DataTableInactive getInactiveId={handleGetInactiveId} open={show} inactives={inactives}/> : <NewEmployee id={inactiveId} setEmployeeId={setInactiveId} employees={inactives} onAddOrEdit={handleAddedOrEdited} close={close}/>
                 }
             </div>

@@ -47,7 +47,7 @@ const ListDeliveredPurchases = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats réceptionnés</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Achats réceptionnés</h1>
                 {!open ? <DataTableDeliveredPurchases deliveredPurchases={deliveredPurchases} getPurchaseId={handleGetPurchaseId} open={show}/> :
                     <PurchaseDetail purchase_id={purchaseId}/>
                 }

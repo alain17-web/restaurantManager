@@ -49,7 +49,7 @@ const ListDrinks = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Boissons</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Boissons</h1>
                 {!open ? <DataTableDrinks drinks={drinks} getDrinkId={handleGetDrinkId} open={show}/> :
                     <NewDrink id={drinkId} setDrinkId={setDrinkId} drinks={drinks} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>

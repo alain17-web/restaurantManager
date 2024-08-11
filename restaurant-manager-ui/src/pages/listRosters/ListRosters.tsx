@@ -43,7 +43,7 @@ const ListRosters = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Horaires staff</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Horaires staff</h1>
                 {!open ? <DataTableRosters rosters={rosters} getRosterId={handleGetRosterId} open={show}/> :
                     <NewRoster id={rosterId} setRosterId={setRosterId} rosters={rosters}/>}
                 {open ?

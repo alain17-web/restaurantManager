@@ -48,7 +48,7 @@ const ListPurchases = () => {
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
-                <h1 className={'text-center text-gray-300 text-2xl font-inter mt-5'}>Achats en cours</h1>
+                <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Achats en cours</h1>
                 {!open ? <DataTablePurchases purchases={purchases} getPurchaseIdAndDeliveryDate={handleGetPurchaseIdAndDeliveryDate} open={show}/> :
                     <NewPurchase  purchases={purchases} purchase_id={purchaseId} delivery_date={delivery_date}/>
                 }
