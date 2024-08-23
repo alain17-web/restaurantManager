@@ -46,6 +46,16 @@ const orderController = {
         }
     },
 
+    getLastValidatedOrderId: async (req, res) => {
+        try{
+            const orderId = await orderService.getLastValidatedOrderId();
+            res.status(200).json(orderId);
+        }catch(error){
+            console.error('Error getLastValidatedOrderId controller', error)
+            res.status(500).json({message: 'Error getLastValidatedOrderId controller', error});
+        }
+    },
+
     //UPDATE
     updateOrder: async (req, res) => {
         try {

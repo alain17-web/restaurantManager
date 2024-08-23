@@ -46,6 +46,19 @@ const orderService = {
         }
     },
 
+    getLastValidatedOrderId: async () => {
+        const connection = await createConnection({})
+        try{
+            const [rows] = await connection.execute('SELECT MAX(order_id) AS order_id FROM orders WHERE validated = "OK"')
+            const orderId = rows[0]?.order_id || null
+            return orderId
+        }catch(error){
+            console.error('Error getLastValidatedOrderId service', error)
+            throw error;
+        }finally {
+            await connection.end()
+        }
+    },
 
     //UPDATE
     updateOrder: async (order_id, validated, validatedBy) => {

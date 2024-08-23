@@ -8,8 +8,12 @@ orderRouter.route("/addOrder")
 orderRouter.route("/")
     .get(authenticate,authorize([1,9]),orderController.getAllOrders);
 
+orderRouter.route("/lastValidatedOrderId")
+    .get(authenticate,authorize([1]),orderController.getLastValidatedOrderId)
+
 orderRouter.route("/:order_id")
     .get(authenticate,authorize([9]),orderController.getOrderById)
+
 
 orderRouter.route("/:id")
     .patch(authenticate,authorize([9]),orderController.updateOrder);

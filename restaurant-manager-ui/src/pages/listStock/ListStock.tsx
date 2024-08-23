@@ -12,22 +12,35 @@ const ListStock = () => {
     const {formattedDate} = useCurrentDate();
 
     const [lastPurchaseId, setLastPurchaseId] = useState<number>(0);
+    const [lastOrderId, setLastOrderId] = useState<number>(0);
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [drinks, setDrinks] = useState<Drink[]>([]);
     //const [purchaseItems,setPurchaseItems] = useState<ItemData[]>([]);
 
 
+
     useEffect(() => {
         getLastPurchaseId();
+        getLastOrderId();
     }, []);
 
     const getLastPurchaseId = async () => {
         try {
             const res = await axiosInstance.get('purchases/lastDeliveredPurchaseId/')
-            console.log(res.data)
+            //console.log(res.data)
             setLastPurchaseId(res.data)
         } catch (error) {
             console.error('Error in getLastPurchaseId', error);
+        }
+    }
+
+    const getLastOrderId = async () => {
+        try{
+            const res = await axiosInstance.get('orders/lastValidatedOrderId/')
+            console.log(res.data)
+            setLastOrderId(res.data)
+        }catch(error){
+            console.error('Error in getLastOrderId', error);
         }
     }
 
