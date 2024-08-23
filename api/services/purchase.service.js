@@ -43,6 +43,20 @@ const purchaseService = {
         }
     },
 
+    getLastDeliveredPurchaseId: async () => {
+        const connection = await createConnection({})
+        try{
+            const [rows] = await connection.execute('SELECT MAX(purchase_id) AS purchase_id FROM purchases WHERE delivery_date != "en attente"')
+            const purchaseId = rows[0]?.purchase_id || null
+            return purchaseId
+        }catch(error){
+            console.error('Error getLastDeliveredPurchaseId service',error)
+            throw error;
+        }finally{
+            await connection.end()
+        }
+    },
+
     //UPDATE
     updateTotalPurchase: async (purchase_id,totalPurchase) => {
         if (!purchase_id || total === undefined ) {

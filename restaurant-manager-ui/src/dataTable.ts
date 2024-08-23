@@ -279,6 +279,7 @@ export const bookingsColumns : GridColDef[]=[
     },
 ]
 
+/*
 export const stockFoodsColumns : GridColDef[]=[
     {
         field: "id",
@@ -301,6 +302,7 @@ export const stockFoodsColumns : GridColDef[]=[
         width: 120
     },
 ]
+*/
 
 export const financesColumns : GridColDef[]=[
     {

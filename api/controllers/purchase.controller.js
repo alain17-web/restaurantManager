@@ -45,6 +45,16 @@ const purchaseController = {
         }
     },
 
+    getLastDeliveredPurchaseId: async(req,res)=>{
+        try{
+            const purchaseId = await purchaseService.getLastDeliveredPurchaseId();
+            res.status(200).json(purchaseId);
+        }catch(error){
+            console.error('Error getLastDeliveredPurchaseId controller',error)
+            res.status(500).json({message:"Error getLastDeliveredPurchaseId controller",error});
+        }
+    },
+
     //UPDATE
     updateTotalPurchase: async (req, res) => {
         try {

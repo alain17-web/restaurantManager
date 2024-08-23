@@ -11,6 +11,9 @@ purchaseRouter.route("/")
 purchaseRouter.route("/delivered/")
     .get(authenticate,authorize([1]),purchaseController.getAllDeliveredPurchases)
 
+purchaseRouter.route("/lastDeliveredPurchaseId")
+    .get(authenticate,authorize([1]),purchaseController.getLastDeliveredPurchaseId)
+
 purchaseRouter.route("/updateTotal/:purchase_id")
     .patch(authenticate,authorize([1]),purchaseController.updateTotalPurchase)
 

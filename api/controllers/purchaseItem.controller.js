@@ -2,6 +2,7 @@ const purchaseItemService = require('../services/purchaseItem.service');
 const purchaseItemValidator = require('../validators/purchaseItemValidator');
 const updateQtyValidator = require('../validators/updateQtyValidator');
 const updateDelDateValidator = require('../validators/updateDelDateValidator');
+const purchaseService = require("../services/purchase.service");
 
 
 
@@ -37,6 +38,8 @@ const purchaseItemController = {
             res.status(500).json({errors:error.errors});
         }
     },
+
+
 
     //UPDATE
     updateDeliveryDate: async (req, res) => {

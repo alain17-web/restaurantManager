@@ -14,8 +14,7 @@ import ListInactiveStaff from "./pages/listInactiveStaff/ListInactiveStaff.tsx";
 import ListOrders from "./pages/listOrders/ListOrders.tsx";
 import ListPurchases from "./pages/listPurchases/ListPurchases.tsx";
 import ListBookings from "./pages/listBookings/ListBookings.tsx";
-import ListStockFood from "./pages/listStockFood/ListStockFood.tsx";
-import ListStockDrinks from "./pages/listStockDrinks/ListStockDrinks.tsx";
+import ListStock from "./pages/listStock/ListStock.tsx";
 import ListCategories from "./pages/listCategories/ListCategories.tsx";
 import ListRoles from "./pages/listRoles/ListRoles.tsx";
 import ListRosters from "./pages/listRosters/ListRosters.tsx";
@@ -132,20 +131,13 @@ const router = createBrowserRouter([
 
     },
     {
-        path: "/listStockFood",
+        path: "/listStock",
         element:
             <ProtectedRoutes rolesAllowed={[1]}>
-                <ListStockFood/>
+                <ListStock/>
             </ProtectedRoutes>
     },
-    {
-        path: "/listStockDrinks",
-        element:
-            <ProtectedRoutes rolesAllowed={[1]}>
-                <ListStockDrinks/>
-            </ProtectedRoutes>
 
-    },
     {
         path: "/listPurchases",
         element:

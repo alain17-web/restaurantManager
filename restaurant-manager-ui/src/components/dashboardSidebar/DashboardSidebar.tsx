@@ -184,7 +184,7 @@ const DashboardSidebar = () => {
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>STOCK</p>
                     <NavLink
-                        to={"/listStockFood"}
+                        to={"/listStock"}
                         className={({isActive}: { isActive: boolean }) =>
                             classNames('no-underline', {
                                 'text-gray-500': !isActive,
@@ -194,21 +194,7 @@ const DashboardSidebar = () => {
                     >
                         <li className={"flex items-center p-1.5 cursor-pointer"}>
                             <img src={'./img/freezer.svg'} width={25} height={25} className={'mr-[10px]'}/>
-                            Stock Nourriture
-                        </li>
-                    </NavLink>
-                    <NavLink
-                        to={"/listStockDrinks"}
-                        className={({isActive}: { isActive: boolean }) =>
-                            classNames('no-underline', {
-                                'text-gray-500': !isActive,
-                                'text-purple-600': isActive,
-                            })
-                        }
-                    >
-                        <li className={"flex items-center p-1.5 cursor-pointer"}>
-                            <img src={'./img/bottles.svg'} width={25} height={25} className={'mr-[10px]'}/>
-                            Stock Boissons
+                            Stock
                         </li>
                     </NavLink>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>RESERVATIONS</p>
