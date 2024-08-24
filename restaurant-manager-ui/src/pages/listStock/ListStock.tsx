@@ -37,7 +37,7 @@ const ListStock = () => {
     const getLastOrderId = async () => {
         try{
             const res = await axiosInstance.get('orders/lastValidatedOrderId/')
-            console.log(res.data)
+            //console.log(res.data)
             setLastOrderId(res.data)
         }catch(error){
             console.error('Error in getLastOrderId', error);
@@ -48,23 +48,24 @@ const ListStock = () => {
         const fetchData = async () => {
             if (lastPurchaseId !== 0) {
                 try {
-                    const [dishesRes, drinksRes, purchaseItemsRes] = await Promise.all([
+                    const [dishesRes, drinksRes, purchaseItemsRes, orderItemsRes] = await Promise.all([
                         axiosInstance.get('/dishes/'),
                         axiosInstance.get('/drinks/'),
                         axiosInstance.get(`/purchaseItems/${lastPurchaseId}`),
-
+                        axiosInstance.get(`/orderItems/${lastOrderId}`),
                     ]);
 
                     setDishes(dishesRes.data);
                     setDrinks(drinksRes.data);
                     console.log(purchaseItemsRes.data);
+                    console.log(orderItemsRes.data);
                 } catch (error) {
                     console.error("Error fetching data", error);
                 }
             }
         }
         fetchData();
-    }, [lastPurchaseId]);
+    }, [lastPurchaseId,lastOrderId]);
 
 
     return (
