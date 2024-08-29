@@ -18,6 +18,18 @@ const stockService = {
     },
 
     //UPDATE
+    updateStock: async (item_name,quantity) => {
+        const connection = await createConnection();
+        try{
+            const [updatedQty] = await connection.execute('UPDATE stock set quantity = quantity + ? WHERE item_name = ?', [quantity,item_name]);
+            return updatedQty.affectedRows > 0;
+        }catch(error){
+            console.error('Error updateStock service',error)
+            throw error;
+        }finally {
+            await connection.end();
+        }
+    }
 }
 
 module.exports = stockService;
