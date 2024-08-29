@@ -94,6 +94,19 @@ const Notepad = () => {
                 validatedBy: validatedBy
             })
 
+            const itemCounts: { [key: string]: number } = {};
+            orderItems.forEach(item => {
+                const normalizedItemName = item.name.trim().toLowerCase();
+                itemCounts[normalizedItemName] = (itemCounts[normalizedItemName] || 0) + 1;
+            });
+
+            for (const [itemName, quantity] of Object.entries(itemCounts)) {
+                await axiosInstance.patch('/stock/updateStock', {
+                    item_name: itemName,
+                    quantity: -quantity,
+                });
+            }
+
             const total_on_hand = max + total
             await axiosInstance.post('/finances/addFinanceSummary',{order_id:orderId,order_date,total,total_on_hand})
             setIsValidated(true)
