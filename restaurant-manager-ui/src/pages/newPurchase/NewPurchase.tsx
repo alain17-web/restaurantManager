@@ -215,6 +215,15 @@ const NewPurchase = (props: NewPurchaseData) => {
                     await axiosInstance.patch(`/purchases/updateDelDate/${purchase_id}`, { delivery_date });
                     const total_on_hand = max - totalPurchase
                    await axiosInstance.post('/finances/addFinanceSummary',{purchase_id,purchase_date,totalPurchase,total_on_hand})
+
+                    for (const item of items) {
+                        const quantity = item.qty;
+                        await axiosInstance.patch('/stock/updateStock', {
+                            item_name: item.name,
+                            quantity: quantity
+                        });
+                    }
+
                     setSuccess(true);
                     setMessage("Le réappro a été réceptionné")
                 }catch(error){
