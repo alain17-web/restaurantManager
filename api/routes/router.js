@@ -12,6 +12,7 @@ const orderItemRouter = require("./orderItem.router");
 const purchaseRouter = require("./purchase.router");
 const purchaseItemRouter = require("./purchaseItem.router");
 const financeRouter = require("./finance.router");
+const stockRouter = require("./stock.router");
 
 
 const router = express.Router();
@@ -29,6 +30,7 @@ router.use('/orderItems',orderItemRouter)
 router.use('/purchases',purchaseRouter)
 router.use('/purchaseItems',purchaseItemRouter)
 router.use('/finances',financeRouter)
+router.use('/stock',stockRouter)
 
 module.exports = router;
 

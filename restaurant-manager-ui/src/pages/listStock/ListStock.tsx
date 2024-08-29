@@ -3,7 +3,7 @@ import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar.ts
 import {useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion';
 import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
-import {Dish, Drink, ItemData} from "../../types/types.ts";
+import {Dish, Drink, ItemData, OrderItems} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
@@ -15,7 +15,10 @@ const ListStock = () => {
     const [lastOrderId, setLastOrderId] = useState<number>(0);
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [drinks, setDrinks] = useState<Drink[]>([]);
-    //const [purchaseItems,setPurchaseItems] = useState<ItemData[]>([]);
+    const [stock, setStock] = useState<{ [name: string]: number }>({});
+    const [purchaseItems, setPurchaseItems] = useState<ItemData[]>([]);
+    const [orderItems, setOrderItems] = useState<OrderItems[]>([]);
+
 
 
 
@@ -27,7 +30,7 @@ const ListStock = () => {
     const getLastPurchaseId = async () => {
         try {
             const res = await axiosInstance.get('purchases/lastDeliveredPurchaseId/')
-            //console.log(res.data)
+            console.log(res.data)
             setLastPurchaseId(res.data)
         } catch (error) {
             console.error('Error in getLastPurchaseId', error);
@@ -37,7 +40,6 @@ const ListStock = () => {
     const getLastOrderId = async () => {
         try{
             const res = await axiosInstance.get('orders/lastValidatedOrderId/')
-            //console.log(res.data)
             setLastOrderId(res.data)
         }catch(error){
             console.error('Error in getLastOrderId', error);
@@ -46,7 +48,7 @@ const ListStock = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            if (lastPurchaseId !== 0) {
+            if (lastPurchaseId !== 0 && lastOrderId !== 0) {
                 try {
                     const [dishesRes, drinksRes, purchaseItemsRes, orderItemsRes] = await Promise.all([
                         axiosInstance.get('/dishes/'),
@@ -57,16 +59,48 @@ const ListStock = () => {
 
                     setDishes(dishesRes.data);
                     setDrinks(drinksRes.data);
-                    console.log(purchaseItemsRes.data);
-                    console.log(orderItemsRes.data);
+                    setPurchaseItems(Array.isArray(purchaseItemsRes.data.purchaseItem) ? purchaseItemsRes.data.purchaseItem : []);
+                    setOrderItems(Array.isArray(orderItemsRes.data.orderItem) ? orderItemsRes.data.orderItem : []);
                 } catch (error) {
                     console.error("Error fetching data", error);
                 }
             }
-        }
+        };
         fetchData();
-    }, [lastPurchaseId,lastOrderId]);
+    }, [lastPurchaseId, lastOrderId]);
 
+    useEffect(() => {
+
+        if (purchaseItems.length > 0 && orderItems.length > 0) {
+            const initialStock: { [name: string]: number } = {};
+
+            const normalizeName = (name: string) => name.trim().toLowerCase().replace(/\s+/g, ' ');
+
+
+            purchaseItems.forEach((item) => {
+                const normalizedName = normalizeName(item.name);
+                initialStock[normalizedName] = (initialStock[normalizedName] || 0) + item.qty;
+            });
+
+            console.log("Initial Stock:", initialStock);
+
+
+            orderItems.forEach((item) => {
+                const normalizedName = normalizeName(item.name);
+                if (initialStock[normalizedName]) {
+                    initialStock[normalizedName] -= 1;
+                    console.log(`Subtracting 1 from ${item.name}, new stock: ${initialStock[normalizedName]}`);
+                } else {
+                    console.log(`Item not found in stock: ${item.name}`);
+                }
+            });
+
+            console.log("Stock after orders:", initialStock);
+
+
+            setStock(initialStock);
+        }
+    }, [purchaseItems, orderItems]);
 
     return (
         <div className={"w-full flex"}>
@@ -92,9 +126,9 @@ const ListStock = () => {
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
-                                                                    //value={add ? dishQty[dish.id] || 0 : items.find(i => i.name === dish.name)?.qty || 0}
+                                                                    value={stock[dish.name.trim().toLowerCase()] || 0}
                                                                     className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                    //onChange={(e) => handleQtyChange(add ? dish.id : items.find(i => i.name === dish.name)?.id, 'dish', e)}
+                                                                    readOnly={true}
                                                                 />
                                                             </li>
                                                             <hr/>
@@ -119,9 +153,9 @@ const ListStock = () => {
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
-                                                                    //value={add ? dishQty[dish.id] || 0 : items.find(i => i.name === dish.name)?.qty || 0}
+                                                                    value={stock[dish.name.trim().toLowerCase()] || 0}
                                                                     className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                    //onChange={(e) => handleQtyChange(add ? dish.id : items.find(i => i.name === dish.name)?.id, 'dish', e)}
+                                                                    readOnly={true}
                                                                 />
                                                             </li>
                                                             <hr/>
@@ -148,9 +182,9 @@ const ListStock = () => {
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
-                                                                    //value={add ? drinkQty[drink.id] || 0 : items.find(i => i.name === drink.name)?.qty || 0}
+                                                                    value={stock[drink.name.trim().toLowerCase()] || 0}
                                                                     className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                    //onChange={(e) => handleQtyChange(add ? drink.id : items.find(i => i.name === drink.name)?.id, 'drink', e)}
+                                                                    readOnly={true}
                                                                 />
                                                             </li>
                                                             <hr/>
@@ -175,9 +209,9 @@ const ListStock = () => {
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
-                                                                    //value={add ? drinkQty[drink.id] || 0 : items.find(i => i.name === drink.name)?.qty || 0}
+                                                                    value={stock[drink.name.trim().toLowerCase()] || 0}
                                                                     className={"w-16 h-6 pl-6 border-1 border-slate-400"}
-                                                                    //onChange={(e) => handleQtyChange(add ? drink.id : items.find(i => i.name === drink.name)?.id, 'drink', e)}
+                                                                    readOnly={true}
                                                                 />
                                                             </li>
                                                             <hr/>
