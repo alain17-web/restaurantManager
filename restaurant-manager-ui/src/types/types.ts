@@ -260,10 +260,18 @@ export type ItemData = {
     type: string;
     cost: number;
     delivery_date: string;
-};
+}
+
 
 export type purchaseId = {
     purchase_id: number | null
+}
+
+export type StockItem = {
+    id: number
+    item_name: string;
+    quantity: number;
+    cat_id: number
 }
 
 export interface DataTableStockFoodData {
