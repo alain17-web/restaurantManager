@@ -10,8 +10,9 @@ const ListPurchases = () => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([]);
     const [purchaseId, setPurchaseId] = useState<number | null>(null);
-    const [delivery_date, setDelivery_date] = useState<string >("");
+    const [delivery_date, setDelivery_date] = useState<string>("");
     const [open, setOpen] = useState<boolean>(false);
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(1)
 
     useEffect(() => {
         const getPurchases = async () => {
@@ -24,9 +25,13 @@ const ListPurchases = () => {
             }
         }
         getPurchases();
-    }, []);
+    }, [refetchTrigger]);
 
-    const handleGetPurchaseIdAndDeliveryDate = (purchase_id: number,delivery_date:string) => {
+    const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    }
+
+    const handleGetPurchaseIdAndDeliveryDate = (purchase_id: number, delivery_date: string) => {
         setPurchaseId(purchase_id)
         setDelivery_date(delivery_date)
         setOpen(true);
@@ -42,25 +47,16 @@ const ListPurchases = () => {
     }
 
 
-
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Achats en cours</h1>
-                {!open ? <DataTablePurchases purchases={purchases} getPurchaseIdAndDeliveryDate={handleGetPurchaseIdAndDeliveryDate} open={show}/> :
-                    <NewPurchase  purchases={purchases} purchase_id={purchaseId} delivery_date={delivery_date}/>
-                }
-                {open ?
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div> : ""
+                {!open ? <DataTablePurchases purchases={purchases}
+                                             getPurchaseIdAndDeliveryDate={handleGetPurchaseIdAndDeliveryDate}
+                                             open={show}/> :
+                    <NewPurchase purchases={purchases} purchase_id={purchaseId} delivery_date={delivery_date} onAddOrEdit={handleAddedOrEdited} close={close}/>
                 }
             </div>
         </div>

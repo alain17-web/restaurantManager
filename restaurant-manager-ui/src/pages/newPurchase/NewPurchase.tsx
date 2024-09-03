@@ -258,6 +258,11 @@ const NewPurchase = (props: NewPurchaseData) => {
         }
     };
 
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
+    }
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -297,7 +302,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {dishes.map((dish) => (
                                                         dish.cat_id !== 5 && (
-                                                            <div key={dish.id }>
+                                                            <div key={dish.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{dish.name} - {dish.cost} € - min:{dish.min}
                                                                     <input
@@ -308,7 +313,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                                         onChange={(e) => handleQtyChange(add ? dish.id : items.find(i => i.name === dish.name)?.id, 'dish', e)}
                                                                     />
                                                                 </li>
-                                                                <hr />
+                                                                <hr/>
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -335,7 +340,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                                         onChange={(e) => handleQtyChange(add ? dish.id : items.find(i => i.name === dish.name)?.id, 'dish', e)}
                                                                     />
                                                                 </li>
-                                                                <hr />
+                                                                <hr/>
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -353,7 +358,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {drinks.map((drink) => (
                                                         drink.cat_id !== 9 && (
-                                                            <div key={drink.id }>
+                                                            <div key={drink.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{drink.name} - {drink.cost} € - min:{drink.min}
                                                                     <input
@@ -364,7 +369,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                                         onChange={(e) => handleQtyChange(add ? drink.id : items.find(i => i.name === drink.name)?.id, 'drink', e)}
                                                                     />
                                                                 </li>
-                                                                <hr />
+                                                                <hr/>
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -380,7 +385,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                 <ul>
                                                     {drinks.map((drink) => (
                                                         drink.cat_id === 9 && (
-                                                            <div key={drink.id }>
+                                                            <div key={drink.id}>
                                                                 <li className={"text-base flex items center justify-between font-inter"}
                                                                 >{drink.name} - {drink.cost} € - min:{drink.min}
                                                                     <input
@@ -391,7 +396,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                                                                         onChange={(e) => handleQtyChange(add ? drink.id : items.find(i => i.name === drink.name)?.id, 'drink', e)}
                                                                     />
                                                                 </li>
-                                                                <hr />
+                                                                <hr/>
                                                             </div>)
                                                     ))}
                                                 </ul>
@@ -410,6 +415,14 @@ const NewPurchase = (props: NewPurchaseData) => {
                             </button>
                         </div>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
         </div>

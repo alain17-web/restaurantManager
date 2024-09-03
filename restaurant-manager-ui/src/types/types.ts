@@ -251,6 +251,8 @@ export interface NewPurchaseData {
     purchases: Purchase[]
     purchase_id: number | null
     delivery_date: string
+    onAddOrEdit: () => void;
+    close: () => void;
 }
 
 export type ItemData = {

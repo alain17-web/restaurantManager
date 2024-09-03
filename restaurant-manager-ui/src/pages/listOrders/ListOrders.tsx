@@ -13,7 +13,6 @@ const ListOrders = () => {
     const [open, setOpen] = useState<boolean>(false);
 
 
-
     useEffect(() => {
         const getOrders = async () => {
             try {
@@ -51,7 +50,7 @@ const ListOrders = () => {
                 { !open ? <DataTableOrders orders={orders} getOrderId={handleGetOrderId} open={show}/> :
                     <OrderDetail order_id={orderId} setOrderId={setOrderId} />
                 }
-                {open ?
+               {open ?
                     <div className={"mb-2 pl-6"}>
                         <button
                             className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}

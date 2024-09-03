@@ -159,7 +159,6 @@ const NewDish = (props: NewDishData) => {
                                 className={"w-full p-[5px] border-b-[1px] border-gray-500"}
                                 type={"file"}
                                 required
-                                //value={img}
                                 onChange={(e) => setImg(e.target.files ? e.target.files[0] : null)}
                             />
                         </div>
