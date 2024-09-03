@@ -11,6 +11,7 @@ const ListRosters = () => {
     const [rosters,setRosters] = useState<Roster[]>([]);
     const [rosterId, setRosterId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(1);
 
     useEffect(() => {
         const getRosters = async () => {
@@ -22,7 +23,11 @@ const ListRosters = () => {
             }
         }
         getRosters()
-    }, []);
+    }, [refetchTrigger]);
+
+    const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    };
 
     const handleGetRosterId = (id: number) => {
         setRosterId(id)
@@ -45,8 +50,8 @@ const ListRosters = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Horaires staff</h1>
                 {!open ? <DataTableRosters rosters={rosters} getRosterId={handleGetRosterId} open={show}/> :
-                    <NewRoster id={rosterId} setRosterId={setRosterId} rosters={rosters}/>}
-                {open ?
+                    <NewRoster id={rosterId} setRosterId={setRosterId} rosters={rosters} onAddOrEdit={handleAddedOrEdited} close={close}/>}
+                {/*{open ?
                     <div className={"mb-2 pl-6"}>
                         <button
                             className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
@@ -55,7 +60,7 @@ const ListRosters = () => {
                             Retour à la liste
                         </button>
                     </div> : ""
-                }
+                }*/}
             </div>
         </div>
     );
