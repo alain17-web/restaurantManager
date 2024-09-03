@@ -173,8 +173,8 @@ export interface DataTableRosterData {
 export interface NewRoleData {
     setRoleId: (id: number | null) => void;
     roles: Role[]
-    //onAddOrEdit: () => void;
-    //close: () => void;
+    onAddOrEdit: () => void;
+    close: () => void;
     id: number | null
 }
 

@@ -11,6 +11,7 @@ const ListRoles = () => {
     const [roles, setRoles] = useState<Role[]>([]);
     const [roleId, setRoleId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(1);
 
     useEffect(() => {
         const getRoles = async () => {
@@ -22,7 +23,11 @@ const ListRoles = () => {
             }
         }
         getRoles()
-    }, []);
+    }, [refetchTrigger]);
+
+    const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    };
 
 
 
@@ -48,17 +53,7 @@ const ListRoles = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Rôles</h1>
                 {!open ? <DataTableRoles roles={roles} getRoleId={handleGetRoleId} open={show}/> :
-                    <NewRole setRoleId={setRoleId} roles={roles} id={roleId} />}
-                {open ?
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div> : ""
-                }
+                    <NewRole setRoleId={setRoleId} roles={roles} id={roleId} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );

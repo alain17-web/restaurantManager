@@ -59,6 +59,10 @@ const NewRole = (props: NewRoleData) => {
         }
     }
 
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
+    }
 
     return (
         <div className={"w-full flex"}>
@@ -98,6 +102,14 @@ const NewRole = (props: NewRoleData) => {
                             {add ? "Ajouter un rôle" : "Modifier un rôle"}
                         </button>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"mt-0 m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
         </div>
