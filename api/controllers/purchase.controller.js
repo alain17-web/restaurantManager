@@ -14,11 +14,11 @@ const purchaseController = {
 
             const purchaseResult = await purchaseService.addPurchase({purchase_date,totalPurchase,delivery_date});
 
-            res.status(201).json({message: 'Order created successfully', purchaseResult});
+            res.status(200).json({message: 'Order created successfully', purchaseResult});
 
         }catch(error){
             if(error.name === 'ValidationError'){
-                return res.status(400).json({errors:error.errors});
+                return res.status(400).json({error:error.message});
             }
             res.status(500).json({message:'Error creating purchase controller',error});
         }
@@ -28,7 +28,7 @@ const purchaseController = {
     getAllUndeliveredPurchases: async(req,res)=>{
         try{
             const purchases = await purchaseService.getAllUndeliveredPurchases();
-            res.status(201).json(purchases);
+            res.status(200).json(purchases);
         }catch(error){
             console.error('Error getAllPurchases controller',error)
             res.status(500).json({message:"Error getAllPurchases controller",error});
@@ -38,7 +38,7 @@ const purchaseController = {
     getAllDeliveredPurchases: async(req,res)=>{
         try{
             const purchases = await purchaseService.getAllDeliveredPurchases();
-            res.status(201).json(purchases);
+            res.status(200).json(purchases);
         }catch(error){
             console.error('Error getAllDeliveredPurchases controller',error)
             res.status(500).json({message:"Error getAllDeliveredPurchases",error});
@@ -66,7 +66,7 @@ const purchaseController = {
             const updatedPurchase = await purchaseService.updateTotalPurchase(purchase_id, totalPurchase);
 
             if (updatedPurchase) {
-                res.status(201).json({message: 'Purchase total updated successfully.'});
+                res.status(200).json({message: 'Purchase total updated successfully.'});
             } else {
                 res.status(404).json({error: 'Purchase not found or no change made'});
             }
@@ -86,7 +86,7 @@ const purchaseController = {
             const updatedDelDate = await purchaseService.updateDelDate(purchase_id,delivery_date);
 
             if(updatedDelDate){
-                res.status(201).json({message: 'Delivery date updated successfully.'});
+                res.status(200).json({message: 'Delivery date updated successfully.'});
             } else {
                 res.status(404).json({error:'Delivery date updated successfully.'});
             }

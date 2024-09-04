@@ -20,10 +20,10 @@ const orderItemController = {
                 validatedBy
             });
 
-            res.status(201).json({message: "orderItem created sucessfully", orderItemResult})
+            res.status(200).json({message: "orderItem created sucessfully", orderItemResult})
         } catch (error) {
             if (error.name === "ValidationError") {
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: 'Error controller addOrderItem', error});
         }
@@ -65,7 +65,7 @@ const orderItemController = {
            const updatedItems = await orderItemService.updateOrderItemFromKitchen(order_id, validated, validatedBy);
 
            if(updatedItems){
-               res.status(201).json({message:"OrderItems validated successfully."});
+               res.status(200).json({message:"OrderItems validated successfully."});
            } else {
                res.status(404).json({error: 'OrderItems not found or no change made'});
            }

@@ -11,7 +11,7 @@ const drinkController =  {
 
            const drinkResult = await drinkService.addDrink({name,cat_id,price,cost,min});
 
-           res.status(201).json({message:"Drink created successfully.", drinkResult});
+           res.status(200).json({message:"Drink created successfully.", drinkResult});
 
         }catch(error){
             if(error.name === "ValidationError"){
@@ -25,7 +25,7 @@ const drinkController =  {
     getAllDrinks: async(req,res)=>{
         try{
            const drinks = await drinkService.getAllDrinks();
-           res.status(201).json(drinks);
+           res.status(200).json(drinks);
         } catch(error){
             console.error('Error getAllDrinks controller',error)
             res.status(500).json({message:"Error getAllDrinks controller"});
@@ -40,7 +40,7 @@ const drinkController =  {
 
             const updatedDrink = await drinkService.updateDrink(req.params.id,name,cat_id,price,cost,min);
             if (updatedDrink) {
-                res.status(201).json({message:"Drink updated successfully."});
+                res.status(200).json({message:"Drink updated successfully."});
             } else {
                 res.status(404).json({error: "Drink not found or no change made"});
             }

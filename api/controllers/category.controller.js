@@ -11,11 +11,11 @@ const categoryController = {
 
             const catResult = await categoryService.addCategory({cat_name,type})
 
-            res.status(201).json({message: "Category created successfully.", catResult});
+            res.status(200).json({message: "Category created successfully.", catResult});
 
         } catch(error){
             if(error.name === 'ValidationError'){
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: 'Error controller creating the category'});
         }
@@ -25,7 +25,7 @@ const categoryController = {
     getAllCategories: async(req,res)=>{
         try{
             const categories = await categoryService.getAllCategories();
-            res.status(201).json(categories);
+            res.status(200).json(categories);
         }catch(error){
             console.error('Error getAllCategories controller',error)
             res.status(500).json({message: 'Error getAllCategories controller'});
@@ -42,7 +42,7 @@ const categoryController = {
             const updatedCat = await categoryService.updateCategory(req.params.id, cat_name,type)
 
             if (updatedCat) {
-                res.status(201).json({message: "Category updated successfully."});
+                res.status(200).json({message: "Category updated successfully."});
             } else {
                 res.status(404).json({error: 'Category not Found or no change made'});
             }

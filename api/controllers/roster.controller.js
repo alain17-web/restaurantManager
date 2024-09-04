@@ -12,11 +12,11 @@ const rosterController = {
 
             const rosterResult = await rosterService.addRoster({roster})
 
-            res.status(201).json({message:"Roster created successfully.", rosterResult});
+            res.status(200).json({message:"Roster created successfully.", rosterResult});
 
         }catch(error){
             if(error.name === 'ValidationError'){
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: "Error controller creating the roster"});
         }
@@ -43,7 +43,7 @@ const rosterController = {
             const updatedRoster = await rosterService.updateRoster(req.params.id, roster)
 
             if(updatedRoster){
-                res.status(201).json({message:"Roster updated successfully."});
+                res.status(200).json({message:"Roster updated successfully."});
             } else {
                 res.status(404).json({error: 'Roster not found or no change made'});
             }

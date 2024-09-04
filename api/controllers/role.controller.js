@@ -11,11 +11,11 @@ const roleController = {
 
             const roleResult = await roleService.addRole({role_name})
 
-            res.status(201).json({message: "Role created successfully.", roleResult});
+            res.status(200).json({message: "Role created successfully.", roleResult});
 
         } catch (error){
             if(error.name === "ValidationError"){
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: "Error controller creating the role."});
         }
@@ -24,7 +24,7 @@ const roleController = {
     getAllRoles: async(req,res)=>{
         try{
             const roles = await roleService.getAllRoles();
-            res.status(201).json(roles);
+            res.status(200).json(roles);
         } catch (error){
             console.error('Error getAllRoles controller',error)
             res.status(500).json({message: 'Error getAllRoles controller'});
@@ -37,7 +37,7 @@ const roleController = {
             const role = await roleService.getRoleById(roleId);
 
             if(role){
-                res.status(201).json(role);
+                res.status(200).json(role);
             } else {
                 res.status(404).json({error: 'Role not Found'});
             }
@@ -57,7 +57,7 @@ const roleController = {
             const updatedRole = await roleService.updateRole(req.params.id, role_name);
 
             if(updatedRole){
-                res.status(201).json({message: "Role updated successfully."});
+                res.status(200).json({message: "Role updated successfully."});
             } else {
                 res.status(404).json({error: 'Role not Found or no change made'});
             }

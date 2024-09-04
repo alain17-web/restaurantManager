@@ -16,10 +16,10 @@ const purchaseItemController = {
 
             const purchaseItemResult = await purchaseItemService.addOrderItem({purchase_id,name,type,cost,qty,delivery_date});
 
-            res.status(201).json({message:"PurchaseItem Successfully added",purchaseItemResult});
+            res.status(200).json({message:"PurchaseItem Successfully added",purchaseItemResult});
         }catch(error){
             if(error.name === 'ValidationError'){
-                return res.status(400).json({errors:error.errors});
+                return res.status(400).json({error:error.message});
             }
             res.status(500).json({errors:error.errors});
         }
@@ -35,7 +35,7 @@ const purchaseItemController = {
             res.status(200).json({purchaseItem});
         }catch(error){
             console.error('Error getPurchaseItemByPurchaseId controller',error)
-            res.status(500).json({errors:error.errors});
+            res.status(500).json({error:error.message});
         }
     },
 
@@ -52,13 +52,13 @@ const purchaseItemController = {
 
             const updatedDelDate = await purchaseItemService.updateDeliveryDate(purchase_id,id,delivery_date);
             if(updatedDelDate){
-                res.status(201).json({message:"Delivery_date updated successfully."});
+                res.status(200).json({message:"Delivery_date updated successfully."});
             } else {
                 res.status(404).json({error:'Delivery_date not found'});
             }
         }catch(error){
             console.error('Error UpdateDeliveryDate controller',error)
-            res.status(500).json({errors:error.errors});
+            res.status(500).json({error:error.message});
         }
     },
 
@@ -72,14 +72,14 @@ const purchaseItemController = {
             const updatedItem = await purchaseItemService.updateQtyByIdAndPurchaseId(purchase_id,id,qty);
 
             if(updatedItem){
-                res.status(201).json({message:"Qty updated successfully."});
+                res.status(200).json({message:"Qty updated successfully."});
             }else {
                 res.status(404).json({error:'PurchaseItem not found'});
             }
 
         }catch(error){
             console.error('Error updateQtyByIdAndPurchaseId controller',error)
-            res.status(500).json({errors:error.errors});
+            res.status(500).json({error:error.message});
         }
     },
 

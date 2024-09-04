@@ -15,11 +15,11 @@ const bookingController = {
 
             const bookingResult = await bookingService.addBooking({date: formattedDate, hour, name, email, people});
 
-            res.status(201).json({message: "Booking created successfully.", bookingResult});
+            res.status(200).json({message: "Booking created successfully.", bookingResult});
         } catch (error) {
             if (error.name === 'ValidationError') {
-                console.error("Validation Error:", error.errors);
-                return res.status(400).json({errors: error.errors});
+                console.error("Validation Error:", error.message);
+                return res.status(400).json({error: error.message});
             }
             console.error("Error in addBooking controller:", error);
             res.status(500).json({message: "Error creating the booking."});
@@ -54,7 +54,7 @@ const bookingController = {
             );
 
             if (updatedBooking) {
-                res.status(201).json({message: "Booking updated successfully."});
+                res.status(200).json({message: "Booking updated successfully."});
             } else {
                 res.status(404).json({error: 'Booking not found or no change made'});
             }

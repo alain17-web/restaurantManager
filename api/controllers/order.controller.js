@@ -12,11 +12,11 @@ const orderController = {
 
             const orderResult = await orderService.addOrder({people,username, order_date, total, validated, validatedBy});
 
-            res.status(201).json({message: 'Order created successfully', orderResult});
+            res.status(200).json({message: 'Order created successfully', orderResult});
 
         } catch (error) {
             if (error.name === 'ValidationError') {
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: 'Error creating order controller', error});
         }
@@ -26,7 +26,7 @@ const orderController = {
     getAllOrders: async (req, res) => {
         try {
             const orders = await orderService.getAllOrders();
-            res.status(201).json(orders);
+            res.status(200).json(orders);
         } catch (error) {
             console.error('Error getAllOrders controller', error)
             res.status(500).json({message: 'Error getAllOrders controller', error});
@@ -39,7 +39,7 @@ const orderController = {
             if(order.length === 0) {
                 res.status(404).json({message: 'No order with this order found'});
             }
-            res.status(201).json(order);
+            res.status(200).json(order);
         }catch(error){
             console.error('Error getOrderById controller', error)
             res.status(500).json({message: 'Error getOrderById controller', error});
@@ -67,7 +67,7 @@ const orderController = {
             const updatedOrder = await orderService.updateOrder(order_id,validated,validatedBy);
 
             if (updatedOrder) {
-                res.status(201).json({message: 'Order updated successfully.'});
+                res.status(200).json({message: 'Order updated successfully.'});
             } else {
                 res.status(404).json({error: 'Order not Found or no change made'});
             }

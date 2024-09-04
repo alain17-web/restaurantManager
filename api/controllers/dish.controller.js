@@ -28,10 +28,10 @@ const dishController = {
                 img
             })
 
-            res.status(201).json({message: 'Dish created successfully.', dish: dishResult});
+            res.status(200).json({message: 'Dish created successfully.', dish: dishResult});
         } catch (error) {
             if (error.name === 'ValidationError') {
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: "Error controller creating the dish", error});
         }
@@ -41,7 +41,7 @@ const dishController = {
     getAllDishes: async (req, res) => {
         try {
             const dishes = await dishService.getAllDishes();
-            res.status(201).json(dishes);
+            res.status(200).json(dishes);
         } catch (error) {
             console.error('Error getAllDishes controller', error)
             res.status(500).json({message: "Error getAllDishes controller", error});
@@ -92,7 +92,7 @@ const dishController = {
 
         } catch (error) {
             if (error.name === 'ValidationError') {
-                return res.status(400).json({errors: error.errors});
+                return res.status(400).json({error: error.message});
             }
             res.status(500).json({message: "Error controller updateDish", error});
         }

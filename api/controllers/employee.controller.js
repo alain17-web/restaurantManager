@@ -1,8 +1,6 @@
 const employeeService = require('../services/employee.service');
 const addEmployeeValidator = require('../validators/employeeValidator');
 const employeeValidator = require("../validators/employeeValidator");
-//const bcrypt = require('bcrypt');
-//const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const employeeController = {
@@ -25,7 +23,7 @@ const employeeController = {
                 gender
             });
 
-            res.status(201).json({message: "Employee created successfully", registrationResult});
+            res.status(200).json({message: "Employee created successfully", registrationResult});
         } catch (error) {
             console.error(error);
             res.status(500).json({message: 'Error addEmployee controller employé'});
@@ -63,7 +61,7 @@ const employeeController = {
             const updatedEmployee = await employeeService.updateEmployee(req.params.id, username, password, role_id, email, tel, status_id, roster_id,gender)
 
             if (updatedEmployee) {
-                res.status(201).json({message: "Employee updated successfully."});
+                res.status(200).json({message: "Employee updated successfully."});
             } else {
                 res.status(404).json({error: 'Employee not found or no change made'});
             }
