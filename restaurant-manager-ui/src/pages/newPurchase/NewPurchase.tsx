@@ -25,7 +25,7 @@ const NewPurchase = (props: NewPurchaseData) => {
     const [purchase_id, setPurchase_id] = useState<number | null>(null);
     const [totalPurchase, setTotalPurchase] = useState<number>(0);
     const [delivery_date, setDelivery_date] = useState<string>("");
-    //const [remarks, setRemarks] = useState<string>("");
+
 
     const [message, setMessage] = useState<string>("");
     const [success, setSuccess] = useState<boolean>(false);
@@ -246,7 +246,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                     setSuccess(true);
                     setMessage("Les quantités et le total ont été modifiées");
                 } catch (error) {
-                    console.error('Error updating quantities or total:', error);
+                    console.error('Error updating quantities or total:', error.response?.data || error.message);
                     setMessage("La modification du réappro a échoué");
                     setSuccess(false);
                 }

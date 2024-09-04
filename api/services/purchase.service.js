@@ -59,7 +59,7 @@ const purchaseService = {
 
     //UPDATE
     updateTotalPurchase: async (purchase_id,totalPurchase) => {
-        if (!purchase_id || total === undefined ) {
+        if (!purchase_id || totalPurchase === undefined ) {
             throw new Error('One or more parameters are undefined')
         }
         const connection = await createConnection({})

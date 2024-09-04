@@ -1,7 +1,7 @@
 const yup = require("yup");
 
 const updateTotalValidator = yup.object({
-    total: yup.number().required(),
+    total: yup.number(),
 });
 
 module.exports = updateTotalValidator;
