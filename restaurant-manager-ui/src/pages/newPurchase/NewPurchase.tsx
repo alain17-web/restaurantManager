@@ -1,10 +1,9 @@
-
 import {Dish, Drink, ItemData, NewPurchaseData} from "../../types/types";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance";
 import useCurrentDate from "../../hooks/date/useCurrentDate";
 import Accordion from 'react-bootstrap/Accordion';
-import { useNotifDispatch } from "../../hooks/notifications/useNotifDispatch";
+import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch";
 import Form from 'react-bootstrap/Form';
 import useTotalOnHand from "../../hooks/totalOnHand/useTotalOnHand.tsx";
 
@@ -31,12 +30,12 @@ const NewPurchase = (props: NewPurchaseData) => {
     const [success, setSuccess] = useState<boolean>(false);
     const [add, setAdd] = useState<boolean>(true);
 
-    const { formattedDate } = useCurrentDate();
-    const { totalOnHand} = useTotalOnHand();
+    const {formattedDate} = useCurrentDate();
+    const {totalOnHand} = useTotalOnHand();
 
     useEffect(() => {
-        if(totalOnHand !== undefined && totalOnHand !== 0) {
-            setMax(totalOnHand );
+        if (totalOnHand !== undefined && totalOnHand !== 0) {
+            setMax(totalOnHand);
         }
 
     }, [totalOnHand]);
@@ -63,14 +62,14 @@ const NewPurchase = (props: NewPurchaseData) => {
         const value = parseInt(event.target.value, 10);
         if (!isNaN(value)) {
             if (type === 'dish') {
-                setDishQty((prevDishQty) => ({ ...prevDishQty, [id]: value }));
+                setDishQty((prevDishQty) => ({...prevDishQty, [id]: value}));
                 if (!add) {
-                    setItems(items.map(item => item.id === id ? { ...item, qty: value } : item));
+                    setItems(items.map(item => item.id === id ? {...item, qty: value} : item));
                 }
             } else if (type === 'drink') {
-                setDrinkQty((prevDrinkQty) => ({ ...prevDrinkQty, [id]: value }));
+                setDrinkQty((prevDrinkQty) => ({...prevDrinkQty, [id]: value}));
                 if (!add) {
-                    setItems(items.map(item => item.id === id ? { ...item, qty: value } : item));
+                    setItems(items.map(item => item.id === id ? {...item, qty: value} : item));
                 }
             }
         }
@@ -126,12 +125,16 @@ const NewPurchase = (props: NewPurchaseData) => {
                     setItems(itemsData);
 
 
-                    const dishQuantities = itemsData.filter((item: ItemData) => item.type === "plats" || item.type === "desserts").reduce((acc:{[key:number]:number}, item: ItemData) => {
+                    const dishQuantities = itemsData.filter((item: ItemData) => item.type === "plats" || item.type === "desserts").reduce((acc: {
+                        [key: number]: number
+                    }, item: ItemData) => {
                         acc[item.id] = item.qty;
                         return acc;
                     }, {} as { [key: number]: number });
 
-                    const drinkQuantities = itemsData.filter((item: ItemData) => item.type === "boissons froides" || item.type === "boissons chaudes").reduce((acc:{[key:number]:number}, item:ItemData) => {
+                    const drinkQuantities = itemsData.filter((item: ItemData) => item.type === "boissons froides" || item.type === "boissons chaudes").reduce((acc: {
+                        [key: number]: number
+                    }, item: ItemData) => {
                         acc[item.id] = item.qty;
                         return acc;
                     }, {} as { [key: number]: number });
@@ -201,20 +204,25 @@ const NewPurchase = (props: NewPurchaseData) => {
                     }
                     setSuccess(true);
                     setMessage("Le réappro a été envoyé");
-                    dispatch({ type: 'ADD_PURCHASE_NOTIF' });
+                    dispatch({type: 'ADD_PURCHASE_NOTIF'});
                 }
             } else if (purchase_id && delivery_date !== "en attente") {
                 const updateData = items.map(item => ({
                     id: item.id,
                     delivery_date: item.delivery_date
                 }));
-                try{
+                try {
                     for (const item of updateData) {
                         await axiosInstance.patch(`/purchaseItems/updateDelDate/${purchase_id}/${item.id}`, {delivery_date})
                     }
-                    await axiosInstance.patch(`/purchases/updateDelDate/${purchase_id}`, { delivery_date });
+                    await axiosInstance.patch(`/purchases/updateDelDate/${purchase_id}`, {delivery_date});
                     const total_on_hand = max - totalPurchase
-                   await axiosInstance.post('/finances/addFinanceSummary',{purchase_id,purchase_date,totalPurchase,total_on_hand})
+                    await axiosInstance.post('/finances/addFinanceSummary', {
+                        purchase_id,
+                        purchase_date,
+                        totalPurchase,
+                        total_on_hand
+                    })
 
                     for (const item of items) {
                         const quantity = item.qty;
@@ -226,7 +234,7 @@ const NewPurchase = (props: NewPurchaseData) => {
 
                     setSuccess(true);
                     setMessage("Le réappro a été réceptionné")
-                }catch(error){
+                } catch (error) {
                     console.error("Error updating delivery_date", error);
                     setMessage("Le réappro n'a pas pu être réceptionné")
                     setSuccess(false);
@@ -240,9 +248,9 @@ const NewPurchase = (props: NewPurchaseData) => {
 
                 try {
                     for (const item of updateData) {
-                        await axiosInstance.patch(`/purchaseItems/updateQty/${purchase_id}/${item.id}`, { qty: item.qty });
+                        await axiosInstance.patch(`/purchaseItems/updateQty/${purchase_id}/${item.id}`, {qty: item.qty});
                     }
-                    await axiosInstance.patch(`/purchases/updateTotal/${purchase_id}`, { totalPurchase });
+                    await axiosInstance.patch(`/purchases/updateTotal/${purchase_id}`, {totalPurchase});
                     setSuccess(true);
                     setMessage("Les quantités et le total ont été modifiées");
                 } catch (error) {
@@ -406,14 +414,20 @@ const NewPurchase = (props: NewPurchaseData) => {
                                 </Accordion>
                             </div>
                         </div>
-                        <div className={"w-full flex justify-center mt-3"}>
-                            <button
-                                type={"submit"}
-                                className={"w-[10%] text-center text-base text-white bg-[#008080] hover:text-amber-50 hover:bg-[#013220] font-inter py-2 rounded-md"}
-                            >
-                                Envoyer
-                            </button>
-                        </div>
+                        {totalPurchase <= max && (
+                            <div className={"w-full flex justify-center mt-3"}>
+                                <button
+                                    type={"submit"}
+                                    className={"w-[10%] text-center text-base text-white bg-[#008080] hover:text-amber-50 hover:bg-[#013220] font-inter py-2 rounded-md"}
+                                >
+                                    Envoyer
+                                </button>
+                            </div>
+                        )}
+                        {totalPurchase >= max && (
+
+                            <p className={"text-center text-lg text-red-500"}>SOLDE INSUFFISANT</p>
+                        )}
                     </form>
                 </div>
                 <div className={"mb-2 pl-6"}>
