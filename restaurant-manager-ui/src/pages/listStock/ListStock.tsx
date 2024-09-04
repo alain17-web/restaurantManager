@@ -45,13 +45,13 @@ const ListStock = () => {
                                                 {stockItems.map((item) => (
                                                     item.cat_id < 5 && (
                                                         <div key={item.id}>
-                                                            <li className={"text-base flex items center justify-between font-inter"}
-                                                            >{item.item_name}
+                                                            <li className={item.quantity >= 10 ?"text-base flex items center justify-between font-inter" : "text-base text-red-500 flex items center justify-between font-inter"}
+                                                            >{item.item_name} - min:10
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
                                                                     value={item.quantity || 0}
-                                                                    className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                    className={item.quantity >= 10 ?"w-16 h-6 pl-6 border-1 border-slate-400" : "w-16 h-6 pl-6 border-1 border-slate-400 text-red-500"}
                                                                     readOnly={true}
                                                                 />
                                                             </li>
@@ -72,13 +72,13 @@ const ListStock = () => {
                                                 {stockItems.map((item) => (
                                                     item.cat_id === 5 && (
                                                         <div key={item.id}>
-                                                            <li className={"text-base flex items center justify-between font-inter"}
-                                                            >{item.item_name}
+                                                            <li className={item.quantity >= 10 ?"text-base flex items center justify-between font-inter" : "text-base text-red-500 flex items center justify-between font-inter"}
+                                                            >{item.item_name} - min:10
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
                                                                     value={item.quantity || 0}
-                                                                    className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                    className={item.quantity >= 10 ?"w-16 h-6 pl-6 border-1 border-slate-400" : "w-16 h-6 pl-6 border-1 border-slate-400 text-red-500"}
                                                                     readOnly={true}
                                                                 />
                                                             </li>
@@ -101,13 +101,13 @@ const ListStock = () => {
                                                 {stockItems.map((item) => (
                                                     item.cat_id < 9 && item.cat_id > 5 && (
                                                         <div key={item.id}>
-                                                            <li className={"text-base flex items center justify-between font-inter"}
-                                                            >{item.item_name}
+                                                            <li className={item.quantity >= 10 ?"text-base flex items center justify-between font-inter" : "text-base text-red-500 flex items center justify-between font-inter"}
+                                                            >{item.item_name} - min:10
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
                                                                     value={item.quantity || 0}
-                                                                    className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                    className={item.quantity >= 10 ?"w-16 h-6 pl-6 border-1 border-slate-400" : "w-16 h-6 pl-6 border-1 border-slate-400 text-red-500"}
                                                                     readOnly={true}
                                                                 />
                                                             </li>
@@ -128,13 +128,13 @@ const ListStock = () => {
                                                 {stockItems.map((item) => (
                                                     item.cat_id === 9 && (
                                                         <div key={item.id}>
-                                                            <li className={"text-base flex items center justify-between font-inter"}
-                                                            >{item.item_name}
+                                                            <li className={item.quantity >= 10 ?"text-base flex items center justify-between font-inter" : "text-base text-red-500 flex items center justify-between font-inter"}
+                                                            >{item.item_name} - min:10
                                                                 <input
                                                                     type={"number"}
                                                                     min={"0"}
                                                                     value={item.quantity || 0}
-                                                                    className={"w-16 h-6 pl-6 border-1 border-slate-400"}
+                                                                    className={item.quantity >= 10 ?"w-16 h-6 pl-6 border-1 border-slate-400" : "w-16 h-6 pl-6 border-1 border-slate-400 text-red-500"}
                                                                     readOnly={true}
                                                                 />
                                                             </li>

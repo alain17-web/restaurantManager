@@ -246,7 +246,7 @@ const NewPurchase = (props: NewPurchaseData) => {
                     setSuccess(true);
                     setMessage("Les quantités et le total ont été modifiées");
                 } catch (error) {
-                    console.error('Error updating quantities or total:', error.response?.data || error.message);
+                    console.error('Error updating quantities or total:', error);
                     setMessage("La modification du réappro a échoué");
                     setSuccess(false);
                 }
