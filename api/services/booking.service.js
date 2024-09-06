@@ -26,7 +26,7 @@ const bookingService = {
         const connection = await createConnection();
 
         try {
-            const [bookings] = await connection.execute('SELECT * FROM bookings');
+            const [bookings] = await connection.execute('SELECT * FROM bookings ORDER BY id DESC');
 
             bookings.forEach(booking => {
                 booking.date = dayjs(booking.date).format('DD/MM/YYYY');

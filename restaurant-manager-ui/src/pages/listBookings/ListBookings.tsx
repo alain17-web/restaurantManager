@@ -61,7 +61,7 @@ const ListBookings = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Réservations</h1>
                 {!open ? <DataTableBookings bookings={bookings} getBookingId={handleGetBookingId} open={show}/> :
-                    <NewBooking id={bookingId} setBookingId={setBookingId} bookings={bookings} onAddOrEdit={handleAddedOrEdited} close={close}/>}
+                    <NewBooking id={bookingId}  bookings={bookings} onAddOrEdit={handleAddedOrEdited} close={close}/>}
 
             </div>
         </div>

@@ -60,7 +60,6 @@ export interface DataTableDishData {
 }
 
 export interface NewDishData {
-    setDishId: (id: number | null) => void;
     dishes: Dish[]
     onAddOrEdit: () => void;
     close: () => void;
@@ -93,7 +92,6 @@ export interface DataTableDrinkData {
 }
 
 export interface NewDrinkData {
-    setDrinkId: (id: number | null) => void;
     drinks: Drink[]
     onAddOrEdit: () => void;
     close: () => void;
@@ -113,7 +111,6 @@ export interface DataTableCatData {
 }
 
 export interface NewCatData {
-    setCategoryId: (id: number | null) => void;
     categories: Category[]
     id: number | null
     onAddOrEdit: () => void;
@@ -145,7 +142,6 @@ export interface DataTableInactiveData {
 }
 
 export interface NewEmployeeData {
-    setEmployeeId: (id: number | null) => void;
     employees: Employee[]
     onAddOrEdit: () => void;
     close: () => void;
@@ -171,7 +167,6 @@ export interface DataTableRosterData {
 }
 
 export interface NewRoleData {
-    setRoleId: (id: number | null) => void;
     roles: Role[]
     onAddOrEdit: () => void;
     close: () => void;
@@ -179,7 +174,6 @@ export interface NewRoleData {
 }
 
 export interface NewRosterData {
-    setRosterId: (id: number | null) => void;
     rosters: Roster[]
     onAddOrEdit: () => void;
     close: () => void;
@@ -208,7 +202,6 @@ export interface DataTableOrderData {
 }
 
 export interface OrderId {
-    setOrderId: (order_id: number) => void
     order_id: number | null;
 }
 
@@ -276,22 +269,6 @@ export type StockItem = {
     cat_id: number
 }
 
-export interface DataTableStockFoodData {
-    dishes: Dish[]
-}
-
-export interface DataTableStockDrinkData {
-    drinks: Drink[]
-}
-
-export interface Food {
-    id: number;
-    name: string;
-    cat_id: number;
-    stock: number;
-    min: number;
-}
-
 export interface Booking {
     id: number;
     date: string;
@@ -308,7 +285,6 @@ export interface DataTableBookingData {
 }
 
 export interface NewBookingData {
-    setBookingId: (id: number | null) => void;
     onAddOrEdit: () => void;
     close: () => void;
     bookings: Booking[]
@@ -337,11 +313,10 @@ export interface Finance {
 }
 
 export interface NewFinanceData {
-    setFinanceSummaryId: (id: number | null) => void;
     financeSummaries: Finance[]
     id: number | null
-    //onAddOrEdit: () => void;
-    //close: () => void;
+    onAddOrEdit: () => void;
+    close: () => void;
 }
 
 export interface DataTableFinanceData {

@@ -105,7 +105,7 @@ export const employeeColumns : GridColDef[]=[
         headerName: "role",
         width: 180,
         renderCell: (params) => {
-            return params.value === 1 ? "Admin" : params.value === 2 ? "Waiter" : params.value === 9 ? "Cook" : "";
+            return params.value === 1 ? "Admin" : params.value === 2 ? "Waiter" : params.value === 9 ? "Cook" : "guest";
         }
     },
     {
@@ -128,7 +128,7 @@ export const employeeColumns : GridColDef[]=[
         headerName: "horaire",
         width: 180,
         renderCell: (params) => {
-            return params.value === 1 ? "lundi à vendredi" : params.value === 2 ? "Weekend" : "Unknown";
+            return params.value === 1 ? "lundi à vendredi" : params.value === 2 ? "Weekend" : "Autre";
         }
     }
 

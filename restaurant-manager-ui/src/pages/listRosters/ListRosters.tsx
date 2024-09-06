@@ -50,17 +50,7 @@ const ListRosters = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Horaires staff</h1>
                 {!open ? <DataTableRosters rosters={rosters} getRosterId={handleGetRosterId} open={show}/> :
-                    <NewRoster id={rosterId} setRosterId={setRosterId} rosters={rosters} onAddOrEdit={handleAddedOrEdited} close={close}/>}
-                {/*{open ?
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div> : ""
-                }*/}
+                    <NewRoster id={rosterId}  rosters={rosters} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );

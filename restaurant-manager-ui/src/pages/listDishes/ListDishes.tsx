@@ -52,7 +52,7 @@ const Dishes = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Plats et desserts</h1>
                 {!open ? <DataTableDishes dishes={dishes} getDishId={handleGetDishId} open={show}/> :
-                    <NewDish id={dishId} setDishId={setDishId} dishes={dishes} onAddOrEdit={handleAddedOrEdited} close={close}/>}
+                    <NewDish id={dishId} dishes={dishes} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );

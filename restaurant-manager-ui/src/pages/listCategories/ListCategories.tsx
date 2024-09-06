@@ -53,7 +53,7 @@ const ListCategories = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Catégories</h1>
                 {!open ? <DataTableCat categories={categories} getCategoryId={handleGetCatId} open={show}/> :
-                    <NewCategory id={categoryId} setCategoryId={setCatId} categories={categories} onAddOrEdit={handleAddedOrEdited} close={close}/>}
+                    <NewCategory id={categoryId} categories={categories} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );

@@ -11,6 +11,7 @@ const ListFinances = () => {
     const [financeSummaries, setFinanceSummaries] = useState<Finance[]>([]);
     const [financeSummaryId, setFinanceSummaryId] = useState<number | null>(null);
     const [open, setOpen] = useState<boolean>(false);
+    const [refetchTrigger, setRefetchTrigger] = useState<number>(1);
 
     useEffect(() => {
         const getFinanceSummaries = async () => {
@@ -22,7 +23,11 @@ const ListFinances = () => {
             }
         }
         getFinanceSummaries()
-    }, []);
+    }, [refetchTrigger]);
+
+    const handleAddedOrEdited = () => {
+        setRefetchTrigger(prev => prev + 1);
+    };
 
     const handleGetFinanceSummaryId = (id: number) => {
         setFinanceSummaryId(id)
@@ -51,17 +56,7 @@ const ListFinances = () => {
                         getFinanceSummaryId={handleGetFinanceSummaryId}
                         open={show}
                     /> :
-                    <NewFinanceSummary setFinanceSummaryId={setFinanceSummaryId} id={financeSummaryId} financeSummaries={financeSummaries}/>
-                }
-                {open ?
-                    <div className={"mb-2 pl-6"}>
-                        <button
-                            className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
-                            onClick={close}
-                        >
-                            Retour à la liste
-                        </button>
-                    </div> : ""
+                    <NewFinanceSummary id={financeSummaryId} financeSummaries={financeSummaries} onAddOrEdit={handleAddedOrEdited} close={close}/>
                 }
             </div>
         </div>

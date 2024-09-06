@@ -53,7 +53,7 @@ const ListRoles = () => {
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Rôles</h1>
                 {!open ? <DataTableRoles roles={roles} getRoleId={handleGetRoleId} open={show}/> :
-                    <NewRole setRoleId={setRoleId} roles={roles} id={roleId} onAddOrEdit={handleAddedOrEdited} close={close}/>}
+                    <NewRole roles={roles} id={roleId} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
         </div>
     );

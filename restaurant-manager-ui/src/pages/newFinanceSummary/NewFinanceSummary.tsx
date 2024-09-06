@@ -119,7 +119,10 @@ const NewFinanceSummary = (props: NewFinanceData) => {
         }
     }
 
-
+    const handleClose = () => {
+        props.onAddOrEdit()
+        props.close()
+    }
 
     return (
         <div className={"w-full flex"}>
@@ -218,6 +221,14 @@ const NewFinanceSummary = (props: NewFinanceData) => {
                             {add ? "Ajouter un rapport" : "Modifier un rapport"}
                         </button>
                     </form>
+                </div>
+                <div className={"mb-2 pl-6"}>
+                    <button
+                        className={"m-3 p-3 text-white bg-[#6B8E23] cursor-pointer"}
+                        onClick={handleClose}
+                    >
+                        Retour à la liste
+                    </button>
                 </div>
             </div>
         </div>
