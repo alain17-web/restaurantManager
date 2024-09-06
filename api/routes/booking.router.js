@@ -9,7 +9,7 @@ bookingRouter.route("/admin/addBooking")
     .post(authenticate, authorize([1]), bookingController.addBooking);
 
 bookingRouter.route("/")
-    .get(authenticate,authorize([1]),bookingController.getAllBookings)
+    .get(authenticate,authorize([1,10]),bookingController.getAllBookings)
 
 bookingRouter.route("/:id")
     .patch(authenticate,authorize([1]),bookingController.updateBooking)

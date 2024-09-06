@@ -7,10 +7,10 @@ employeeRouter.route("/addEmployee")
     .post(authenticate,authorize([1]), employeeController.addEmployee);
 
 employeeRouter.route("/")
-    .get(authenticate,authorize([1]),employeeController.getAllActiveEmployees)
+    .get(authenticate,authorize([1,10]),employeeController.getAllActiveEmployees)
 
 employeeRouter.route("/inactives")
-    .get(authenticate,authorize([1]),employeeController.getAllInactiveEmployees)
+    .get(authenticate,authorize([1,10]),employeeController.getAllInactiveEmployees)
 
 employeeRouter.route("/:id")
     .patch(authenticate,authorize([1]),employeeController.updateEmployee)

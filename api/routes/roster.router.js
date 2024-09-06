@@ -7,7 +7,7 @@ rosterRouter.route("/addRoster")
     .post(authenticate, authorize([1]), rosterController.addRoster)
 
 rosterRouter.route("/")
-    .get(authenticate,authorize([1]), rosterController.getAllRosters)
+    .get(authenticate,authorize([1,10]), rosterController.getAllRosters)
 
 rosterRouter.route("/:id")
     .patch(authenticate,authorize([1]),rosterController.updateRoster)

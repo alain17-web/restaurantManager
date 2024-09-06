@@ -21,7 +21,7 @@ const Kitchen = () => {
                 <Logo/>
                 <div className={"w-auto flex items-center justify-center gap-3"}>
                     <p className={"text-2xl text-white font-inter font-semibold italic"}>Bienvenue {username}</p>
-                    <Avatar username={username}/>
+                    <Avatar username={username} />
                     <div className={"rounded-full ml-4 p-1.5 bg-white hover:disconnect"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
                              className="bi bi-box-arrow-left cursor-pointer" onClick={handleLogout}

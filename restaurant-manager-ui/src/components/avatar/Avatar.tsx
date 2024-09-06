@@ -2,8 +2,8 @@ import {useEffect, useState} from "react";
 
 interface Prop {
     username: string | null
-    gender: string | null
-    roleId: number | null
+    gender?: string | null
+    roleId?: number | null
 }
 
 
@@ -28,6 +28,11 @@ const Avatar = (prop:Prop) => {
 
         if(prop.roleId === 9 && prop.gender === "F"){
             setSrc('./img/cheffe.jpg')
+            setKitchen(true)
+        }
+
+        if(prop.roleId === 10 && prop.gender === "autre"){
+            setSrc('./img/guest.png')
             setKitchen(true)
         }
 

@@ -6,10 +6,10 @@ financeRouter.route('/addFinanceSummary')
     .post(authenticate,authorize([1,9]),financialSummaryController.addFinancialSummary)
 
 financeRouter.route('/')
-    .get(authenticate,authorize([1]),financialSummaryController.getAllFinancialSummaries)
+    .get(authenticate,authorize([1,10]),financialSummaryController.getAllFinancialSummaries)
 
 financeRouter.route('/lastTotalOnHand')
-    .get(authenticate,authorize([1,9]),financialSummaryController.getLastTotal_on_hand)
+    .get(authenticate,authorize([1,9, 10]),financialSummaryController.getLastTotal_on_hand)
 
 financeRouter.route("/:id")
     .patch(authenticate,authorize([1]),financialSummaryController.updateFinancialSummary)

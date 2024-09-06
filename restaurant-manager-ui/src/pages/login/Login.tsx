@@ -76,9 +76,9 @@ const Login = () => {
             }
 
             if (employee && employee.role_id) {
-                if (employee.role_id === 1) {
+                if (employee.role_id === 1 || employee.role_id === 10) {
                     navigate("/dashboard")
-                } else if (employee.role_id === 2) {
+                } else if (employee.role_id === 2 ) {
                     navigate('/restaurant')
                 } else if (employee.role_id === 9) {
                     navigate("/kitchen")

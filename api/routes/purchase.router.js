@@ -6,10 +6,10 @@ purchaseRouter.route("/addPurchase")
     .post(authenticate, authorize([1]), purchaseController.addPurchase);
 
 purchaseRouter.route("/")
-    .get(authenticate,authorize([1]),purchaseController.getAllUndeliveredPurchases)
+    .get(authenticate,authorize([1,10]),purchaseController.getAllUndeliveredPurchases)
 
 purchaseRouter.route("/delivered/")
-    .get(authenticate,authorize([1]),purchaseController.getAllDeliveredPurchases)
+    .get(authenticate,authorize([1,10]),purchaseController.getAllDeliveredPurchases)
 
 
 purchaseRouter.route("/updateTotal/:purchase_id")

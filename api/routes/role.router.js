@@ -6,10 +6,10 @@ roleRouter.route("/addRole")
     .post(authenticate, authorize([1]), roleController.addRole)
 
 roleRouter.route("/")
-    .get(authenticate,authorize([1]),roleController.getAllRoles)
+    .get(authenticate,authorize([1,10]),roleController.getAllRoles)
 
 roleRouter.route("/:id")
-    .get(authenticate,authorize([1]),roleController.getRoleById)
+    .get(authenticate,authorize([1,10]),roleController.getRoleById)
 
 roleRouter.route("/:id")
     .patch(authenticate,authorize([1]),roleController.updateRole)

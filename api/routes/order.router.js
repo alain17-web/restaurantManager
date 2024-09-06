@@ -6,13 +6,13 @@ orderRouter.route("/addOrder")
     .post(authenticate,authorize([2]),orderController.addOrder);
 
 orderRouter.route("/")
-    .get(authenticate,authorize([1,9]),orderController.getAllOrders);
+    .get(authenticate,authorize([1,9,10]),orderController.getAllOrders);
 
 orderRouter.route("/lastValidatedOrderId")
-    .get(authenticate,authorize([1]),orderController.getLastValidatedOrderId)
+    .get(authenticate,authorize([1,10]),orderController.getLastValidatedOrderId)
 
 orderRouter.route("/:order_id")
-    .get(authenticate,authorize([9]),orderController.getOrderById)
+    .get(authenticate,authorize([9,10]),orderController.getOrderById)
 
 
 orderRouter.route("/:id")

@@ -46,14 +46,14 @@ const router = createBrowserRouter([
 
         path: "/dashboard",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1,10]}>
                 <Dashboard/>
             </ProtectedRoutes>
     },
     {
         path: "/restaurant",
         element:
-            <ProtectedRoutes rolesAllowed={[1, 2]}>
+            <ProtectedRoutes rolesAllowed={[1, 2,10]}>
                 <Restaurant/>
             </ProtectedRoutes>
 
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
     {
         path: "/kitchen",
         element:
-            <ProtectedRoutes rolesAllowed={[1, 9]}>
+            <ProtectedRoutes rolesAllowed={[1, 9, 10]}>
                 <Kitchen/>
             </ProtectedRoutes>
 
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     {
         path: "/listDishes",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListDishes/>
             </ProtectedRoutes>
 
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
     {
         path: "/listDrinks",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListDrinks/>
             </ProtectedRoutes>
 
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
     {
         path: "/listCategories",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListCategories/>
             </ProtectedRoutes>
 
@@ -93,7 +93,7 @@ const router = createBrowserRouter([
     {
         path: "/listActive",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListActiveStaff/>
             </ProtectedRoutes>
 
@@ -101,7 +101,7 @@ const router = createBrowserRouter([
     {
         path: "/listInactive",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListInactiveStaff/>
             </ProtectedRoutes>
 
@@ -109,7 +109,7 @@ const router = createBrowserRouter([
     {
         path: "/listRoles",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListRoles/>
             </ProtectedRoutes>
 
@@ -117,7 +117,7 @@ const router = createBrowserRouter([
     {
         path: "/listRosters",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListRosters/>
             </ProtectedRoutes>
 
@@ -125,7 +125,7 @@ const router = createBrowserRouter([
     {
         path: "/listOrders",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListOrders/>
             </ProtectedRoutes>
 
@@ -133,7 +133,7 @@ const router = createBrowserRouter([
     {
         path: "/listStock",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListStock/>
             </ProtectedRoutes>
     },
@@ -141,7 +141,7 @@ const router = createBrowserRouter([
     {
         path: "/listPurchases",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListPurchases/>
             </ProtectedRoutes>
 
@@ -149,14 +149,14 @@ const router = createBrowserRouter([
     {
         path: "/listDeliveredPurchases",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListDeliveredPurchases/>
             </ProtectedRoutes>
     },
     {
         path: "/listFinances",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListFinances/>
             </ProtectedRoutes>
 
@@ -164,7 +164,7 @@ const router = createBrowserRouter([
     {
         path: "/listBookings",
         element:
-            <ProtectedRoutes rolesAllowed={[1]}>
+            <ProtectedRoutes rolesAllowed={[1, 10]}>
                 <ListBookings/>
             </ProtectedRoutes>
 
