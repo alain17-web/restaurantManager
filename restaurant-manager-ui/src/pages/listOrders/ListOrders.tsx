@@ -5,6 +5,7 @@ import axiosInstance from "../../axios/axiosInstance.tsx";
 import {useEffect, useState} from "react";
 import {Order} from "../../types/types.ts";
 import OrderDetail from "../orderDetail/OrderDetail.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const ListOrders = () => {
 
@@ -40,6 +41,7 @@ const ListOrders = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -47,6 +49,7 @@ const ListOrders = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Commandes clients</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 { !open ? <DataTableOrders orders={orders} getOrderId={handleGetOrderId} open={show}/> :
                     <OrderDetail order_id={orderId}  />
                 }

@@ -6,10 +6,13 @@ import NewBooking from "../newBooking/NewBooking.tsx";
 import {Booking} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import dayjs from "dayjs";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 
 const ListBookings = () => {
+
+    const {username} = useUsername()
 
     const [bookings, setBookings] = useState<Booking[]>([])
     const [bookingId, setBookingId] = useState<number | null>(null)
@@ -60,6 +63,7 @@ const ListBookings = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Réservations</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTableBookings bookings={bookings} getBookingId={handleGetBookingId} open={show}/> :
                     <NewBooking id={bookingId}  bookings={bookings} onAddOrEdit={handleAddedOrEdited} close={close}/>}
 

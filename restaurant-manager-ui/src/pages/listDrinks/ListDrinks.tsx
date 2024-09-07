@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import NewDrink from "../newDrink/NewDrink.tsx";
 import {Drink} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const ListDrinks = () => {
@@ -44,12 +45,15 @@ const ListDrinks = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
+
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Boissons</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTableDrinks drinks={drinks} getDrinkId={handleGetDrinkId} open={show}/> :
                     <NewDrink id={drinkId} drinks={drinks} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>

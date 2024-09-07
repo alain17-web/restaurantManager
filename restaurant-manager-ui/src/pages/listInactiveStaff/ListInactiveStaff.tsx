@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {Employee} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import NewEmployee from "../newEmployee/NewEmployee.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 
@@ -46,6 +47,7 @@ const ListInactiveStaff = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -53,6 +55,7 @@ const ListInactiveStaff = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Anciens employés</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTableInactive getInactiveId={handleGetInactiveId} open={show} inactives={inactives}/> : <NewEmployee id={inactiveId} employees={inactives} onAddOrEdit={handleAddedOrEdited} close={close}/>
                 }
             </div>

@@ -5,6 +5,7 @@ import {Category} from "../../types/types.ts";
 import DataTableCat from "../../components/dataTableCat/DataTableCat.tsx";
 import NewCategory from "../newCategory/NewCategory.tsx";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const ListCategories = () => {
 
@@ -44,7 +45,7 @@ const ListCategories = () => {
         setOpen(false);
     }
 
-
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -52,6 +53,7 @@ const ListCategories = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Catégories</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTableCat categories={categories} getCategoryId={handleGetCatId} open={show}/> :
                     <NewCategory id={categoryId} categories={categories} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>

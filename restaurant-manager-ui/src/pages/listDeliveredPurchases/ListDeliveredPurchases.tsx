@@ -8,6 +8,7 @@ import DataTableDeliveredPurchases from "../../components/dataTableDeliveredPurc
 import PurchaseDetail from "../purchaseDetail/PurchaseDetail.tsx";
 
 
+
 const ListDeliveredPurchases = () => {
 
     const [deliveredPurchases, setDeliveredPurchases] = useState<Purchase[]>([]);

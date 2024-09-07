@@ -5,6 +5,7 @@ import axiosInstance from "../../axios/axiosInstance.tsx";
 import {useEffect, useState} from "react";
 import {Finance} from "../../types/types.ts";
 import NewFinanceSummary from "../newFinanceSummary/NewFinanceSummary.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const ListFinances = () => {
 
@@ -43,6 +44,7 @@ const ListFinances = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -50,6 +52,7 @@ const ListFinances = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Comptabilité</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ?
                     <DataTableFinances
                         financeSummaries={financeSummaries}

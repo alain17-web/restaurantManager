@@ -5,6 +5,7 @@ import {useState,useEffect} from "react";
 import NewDish from "../newDish/NewDish.tsx";
 import {Dish} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const Dishes = () => {
@@ -45,12 +46,15 @@ const Dishes = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
+
     return (
         <div className={"w-full flex"}>
             <DashboardSidebar/>
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Plats et desserts</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTableDishes dishes={dishes} getDishId={handleGetDishId} open={show}/> :
                     <NewDish id={dishId} dishes={dishes} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>

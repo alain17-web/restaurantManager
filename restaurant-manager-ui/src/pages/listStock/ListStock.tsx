@@ -5,6 +5,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
 import {StockItem} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const ListStock = () => {
@@ -32,6 +33,7 @@ const ListStock = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Stock au {formattedDate}</h1>
+
                 <div className={"custom-shadow p-[10px] m-5 mt-0"}>
 
                    <div className={"w-full flex items-start justify-between"}>

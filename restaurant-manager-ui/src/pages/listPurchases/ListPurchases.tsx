@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {Purchase} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import NewPurchase from "../newPurchase/NewPurchase.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const ListPurchases = () => {
 
@@ -46,6 +47,7 @@ const ListPurchases = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -53,6 +55,7 @@ const ListPurchases = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Achats en cours</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTablePurchases purchases={purchases} getPurchaseIdAndDeliveryDate={handleGetPurchaseIdAndDeliveryDate} open={show}/> :
                     <NewPurchase purchases={purchases} purchase_id={purchaseId} delivery_date={delivery_date} onAddOrEdit={handleAddedOrEdited} close={close}/>
                 }

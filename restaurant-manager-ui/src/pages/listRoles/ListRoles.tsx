@@ -5,6 +5,7 @@ import {Role} from "../../types/types.ts";
 import DataTableRoles from "../../components/dataTableRoles/DataTableRoles.tsx";
 import NewRole from "../newRole/NewRole.tsx";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const ListRoles = () => {
 
@@ -45,6 +46,7 @@ const ListRoles = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -52,6 +54,7 @@ const ListRoles = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Rôles</h1>
+                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
                 {!open ? <DataTableRoles roles={roles} getRoleId={handleGetRoleId} open={show}/> :
                     <NewRole roles={roles} id={roleId} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
