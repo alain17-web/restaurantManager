@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState} from "react";
 import { NewRosterData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 
@@ -63,6 +64,7 @@ const NewRoster = (props: NewRosterData) => {
         props.close()
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -97,7 +99,8 @@ const NewRoster = (props: NewRosterData) => {
                         </div>
                         <button
                             type={"submit"}
-                            className={"w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer"}
+                            disabled={username === "guest"}
+                            className={username !== "guest" ? "w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer" : "w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-not-allowed"}
                         >
                             {add ? "Ajouter un horaire" : "Modifier un horaire"}
                         </button>

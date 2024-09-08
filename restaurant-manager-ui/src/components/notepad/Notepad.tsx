@@ -146,7 +146,6 @@ const Notepad = () => {
         }
     }
 
-
     return (
         <main
             className={"w-[500px] h-[900px] bg-[url('./img/bloc-notes.png')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center ml-20"}>
@@ -178,7 +177,8 @@ const Notepad = () => {
                 </div>
             )}
             <button
-                className={"w-[80%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
+                disabled={username === "guest"}
+                className={username !== "guest" ? "w-[80%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer" : "w-[80%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-not-allowed"}
                 onClick={handleClick}
             >
                 {!isValidated ? "Valider" : "Reset"}

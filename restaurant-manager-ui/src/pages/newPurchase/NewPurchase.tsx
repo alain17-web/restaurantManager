@@ -6,6 +6,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch";
 import Form from 'react-bootstrap/Form';
 import useTotalOnHand from "../../hooks/totalOnHand/useTotalOnHand.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const NewPurchase = (props: NewPurchaseData) => {
@@ -271,6 +272,8 @@ const NewPurchase = (props: NewPurchaseData) => {
         props.close()
     }
 
+    const {username} = useUsername()
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -418,7 +421,8 @@ const NewPurchase = (props: NewPurchaseData) => {
                             <div className={"w-full flex justify-center mt-3"}>
                                 <button
                                     type={"submit"}
-                                    className={"w-[10%] text-center text-base text-white bg-[#008080] hover:text-amber-50 hover:bg-[#013220] font-inter py-2 rounded-md"}
+                                    disabled={username === "guest"}
+                                    className={username !== "guest" ? "w-[10%] text-center text-base text-white bg-[#008080] hover:text-amber-50 hover:bg-[#013220] font-inter py-2 rounded-md" : "w-[10%] text-center text-base text-white bg-[#008080] hover:text-amber-50 hover:bg-[#013220] font-inter py-2 rounded-md cursor-not-allowed" }
                                 >
                                     Envoyer
                                 </button>

@@ -2,6 +2,7 @@ import {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import CategoryOptions from "../../components/categoryOptions/CategoryOptions.tsx";
 import {NewDrinkData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const NewDrink = (props:NewDrinkData) => {
 
@@ -96,6 +97,7 @@ const NewDrink = (props:NewDrinkData) => {
         props.close()
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -177,7 +179,8 @@ const NewDrink = (props:NewDrinkData) => {
                         </div>
                         <button
                             type={"submit"}
-                            className={"w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer"}
+                            disabled={username === "guest"}
+                            className={username !== "guest"? "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer" : "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-not-allowed"}
                         >
                             {add ? "Ajouter une boisson" : "Modifier une boisson"}
                         </button>

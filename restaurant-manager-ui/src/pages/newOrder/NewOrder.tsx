@@ -7,6 +7,7 @@ import useCurrentDate from "../../hooks/date/useCurrentDate.tsx";
 import {useNotifDispatch} from "../../hooks/notifications/useNotifDispatch.tsx";
 
 
+
 const NewOrder = (props: NewOrderData) => {
 
     const dispatch = useNotifDispatch()
@@ -259,7 +260,8 @@ const NewOrder = (props: NewOrderData) => {
                     </Accordion.Item>
                 </Accordion>
                 {!success && <button
-                    className={"w-[50%] mx-auto h-8 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer"}
+                    disabled={username === "guest"}
+                    className={username !== "guest" ? "w-[50%] mx-auto h-8 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer" : "w-[50%] mx-auto h-8 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-not-allowed"}
                     type={"submit"}
                 >
                     Valider

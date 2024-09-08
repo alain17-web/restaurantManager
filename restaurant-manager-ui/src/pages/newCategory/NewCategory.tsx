@@ -1,10 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import {NewCatData} from "../../types/types.ts";
-
-
-
-
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 const NewCategory = (props: NewCatData) => {
 
@@ -71,6 +68,8 @@ const NewCategory = (props: NewCatData) => {
         props.close()
     }
 
+    const {username} = useUsername()
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -117,7 +116,8 @@ const NewCategory = (props: NewCatData) => {
                         </div>
                         <button
                             type={"submit"}
-                            className={"w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer"}
+                            disabled={username === "guest"}
+                            className={username !== "guest"? "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer" : "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-not-allowed"}
                         >
                             {add ? "Ajouter une catégorie" : "Modifier une catégorie"}
                         </button>

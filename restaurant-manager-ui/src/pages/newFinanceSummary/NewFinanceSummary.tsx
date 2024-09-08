@@ -2,6 +2,7 @@ import {FormEvent, useState,useEffect} from "react";
 import {NewFinanceData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 import useTotalOnHand from "../../hooks/totalOnHand/useTotalOnHand.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const NewFinanceSummary = (props: NewFinanceData) => {
@@ -124,6 +125,8 @@ const NewFinanceSummary = (props: NewFinanceData) => {
         props.close()
     }
 
+    const {username} = useUsername()
+
     return (
         <div className={"w-full flex"}>
             <div className={"flex-[6]"}>
@@ -216,7 +219,8 @@ const NewFinanceSummary = (props: NewFinanceData) => {
 
                         <button
                             type={"submit"}
-                            className={"w-[250px] p-[10px] text-white font-bold mt-[12px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer"}
+                            disabled={username === "guest"}
+                            className={username !== "guest"? "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer" : "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-not-allowed"}
                         >
                             {add ? "Ajouter un rapport" : "Modifier un rapport"}
                         </button>
