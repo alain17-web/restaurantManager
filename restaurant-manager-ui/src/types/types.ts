@@ -146,6 +146,7 @@ export interface NewEmployeeData {
     onAddOrEdit: () => void;
     close: () => void;
     id: number | null
+    user: string | null
 }
 
 

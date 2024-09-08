@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import NewEmployee from "../newEmployee/NewEmployee.tsx";
 import {Employee} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
+import useUsername from "../../hooks/username/useUsername.tsx";
 
 
 const ListActiveStaff = () => {
@@ -44,6 +45,7 @@ const ListActiveStaff = () => {
         setOpen(false);
     }
 
+    const {username} = useUsername()
 
     return (
         <div className={"w-full flex"}>
@@ -51,8 +53,9 @@ const ListActiveStaff = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Employés</h1>
+                {username === "guest" && <p className={"text-center text-red-400 text-base font-inter"}>Guest: READ ONLY</p>}
                 {!open ? <DataTableActive employees={employees} getEmployeeId={handleGetEmployeeId} open={show} /> :
-                    <NewEmployee id={employeeId}  employees={employees} onAddOrEdit={handleAddedOrEdited} close={close}/>}
+                    <NewEmployee id={employeeId}  employees={employees} onAddOrEdit={handleAddedOrEdited} close={close} user={username}/>}
             </div>
         </div>
     );

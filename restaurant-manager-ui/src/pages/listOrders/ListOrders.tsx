@@ -49,7 +49,7 @@ const ListOrders = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Commandes clients</h1>
-                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
+                {username === "guest" && <p className={"text-center text-red-400 text-base font-inter"}>Guest: READ ONLY</p>}
                 { !open ? <DataTableOrders orders={orders} getOrderId={handleGetOrderId} open={show}/> :
                     <OrderDetail order_id={orderId}  />
                 }

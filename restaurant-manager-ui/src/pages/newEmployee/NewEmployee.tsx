@@ -5,6 +5,7 @@ import { NewEmployeeData} from "../../types/types.ts";
 import axiosInstance from "../../axios/axiosInstance.tsx";
 
 
+
 const NewEmployee = (props: NewEmployeeData) => {
 
     const [username, setUsername] = useState<string>('');
@@ -80,8 +81,6 @@ const NewEmployee = (props: NewEmployeeData) => {
     };
 
 
-
-
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (username === "" || password === "" || email === "" || tel === "" || role_id === 0 || status_id === 0 || roster_id === 0 || gender === "") {
@@ -110,6 +109,7 @@ const NewEmployee = (props: NewEmployeeData) => {
         props.onAddOrEdit()
         props.close()
     }
+
 
 
     return (
@@ -228,7 +228,8 @@ const NewEmployee = (props: NewEmployeeData) => {
                         </div>
                         <button
                             type={"submit"}
-                            className={"w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer"}
+                            disabled={props.user === "guest"}
+                            className={props.user !== "guest"? "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-pointer" : "w-[250px] p-[10px] text-white font-bold mt-[25px] mb-5 bg-[#008080] border-0 rounded-[9px] hover:bg-[#6B8E23] cursor-not-allowed"}
                         >
                             {add ? "Ajouter un employé" : "Modifier un employé"}
                         </button>

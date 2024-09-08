@@ -52,7 +52,7 @@ const ListRosters = () => {
             <div className={"flex-[6]"}>
                 <DashboardNavbar/>
                 <h1 className={'text-center text-gray-600 text-2xl font-inter mt-5'}>Horaires staff</h1>
-                {username === "guest" && <p className={"text-center text-red-500 text-lg font-inter"}>fonction SUPPRIMER désactivée</p>}
+                {username === "guest" && <p className={"text-center text-red-400 text-base font-inter"}>Guest: READ ONLY</p>}
                 {!open ? <DataTableRosters rosters={rosters} getRosterId={handleGetRosterId} open={show}/> :
                     <NewRoster id={rosterId}  rosters={rosters} onAddOrEdit={handleAddedOrEdited} close={close}/>}
             </div>
