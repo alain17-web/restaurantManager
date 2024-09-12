@@ -23,6 +23,7 @@ import ProtectedRoutes from "./components/protectedRoutes/ProtectedRoutes.tsx";
 import {AuthProvider} from "./context/authContext/AuthContext.tsx";
 import {NotifProvider} from "./context/notifContext/NotifContext.tsx";
 import ListDeliveredPurchases from "./pages/listDeliveredPurchases/ListDeliveredPurchases.tsx";
+import GuestLogin from "./pages/guestLogin/GuestLogin.tsx";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
         path: "/connexion",
         element: <Login/>
+    },
+    {
+        path: "/loginGuest",
+        element: <GuestLogin/>
     },
     {
 
