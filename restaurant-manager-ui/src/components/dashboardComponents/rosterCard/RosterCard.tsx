@@ -9,15 +9,23 @@ import useCurrentWeekDay from '../../../hooks/date/useCurrentWeekDay.tsx';
 import axiosInstance from "../../../axios/axiosInstance.tsx";
 
 const RosterCard = () => {
+    // Custom hook to get the current day of the week
     const currentDay = useCurrentWeekDay();
+
     const [dayShiftStaff, setDayShiftStaff] = useState<EmployeeCard[]>([]);
     const [_employees, setEmployees] = useState<Employee[]>([]);
 
+    // Function to fetch employees from the server
     const getEmployees = async () => {
         try {
+            // API call to get employees
             const res = await axiosInstance.get('/employees/');
+
+            // Update state with fetched employees
             const employeesData = res.data;
             setEmployees(employeesData);
+
+            // If employees exist, filter the staff based on getStaff function
             if (employeesData.length > 0) {
                 getStaff(employeesData);
             }
@@ -26,10 +34,12 @@ const RosterCard = () => {
         }
     };
 
+    // Function to filter employees based on the current day and their roster
     const getStaff = (employeesData: Employee[]) => {
-        const mondaysStaff: any[] = [];
-        const weekendStaff: any[] = [];
+        const mondaysStaff: any[] = [] // Array to store staff working Monday to Friday
+        const weekendStaff: any[] = []; // Array to store staff working on weekends
 
+        // Loop through each employee and check their roster
         employeesData.forEach((employee) => {
             if (employee.roster_id) {
                 const employeeData = {

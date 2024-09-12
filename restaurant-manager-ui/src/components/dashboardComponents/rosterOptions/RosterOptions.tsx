@@ -6,6 +6,7 @@ const RosterOptions = () => {
 
     const [rosters, setRosters] = useState<Roster[]>([]);
 
+    // fetches all rosters from server when component mounts
     useEffect(() => {
         const getRosters = async () => {
             try {
@@ -19,8 +20,10 @@ const RosterOptions = () => {
     }, []);
 
     return (
+
         <>
             <option>Choisir un horaire</option>
+            {/*map over all rosters and displays them */}
             {rosters.map((roster) => (
                 <option key={roster.id} value={roster.id}>{roster.roster}</option>
             ))}
