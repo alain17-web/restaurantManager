@@ -5,10 +5,13 @@ import {useNotifDispatch} from "../../../hooks/notifications/useNotifDispatch.ts
 
 const DashboardSidebar = () => {
 
+    // Hook to get the current route location (used for dynamic active links)
     const location = useLocation()
 
+    // Destructuring the handleLogout function from the useLogout hook
     const { handleLogout } = useLogout();
 
+    // Getting the dispatch function from the notification hook
     const dispatch = useNotifDispatch()
 
     return (
@@ -19,6 +22,8 @@ const DashboardSidebar = () => {
                     d'Olivier</Link>
             </div>
             <hr className={'h-0 border-[O.5px] border-[#D3D3D3]'}/>
+
+            {/* Navigation section */}
             <div className={'pl-[10px]'}>
                 <ul className={"m-0 p-0 list-none"}>
                     <p className={"text-base text-[#999] mt-[15px] mb-[15px] font-inter font-bold"}>GENERAL</p>
@@ -228,6 +233,8 @@ const DashboardSidebar = () => {
                             Comptabilité
                         </li>
                     </NavLink>
+
+                    {/* Logout section */}
                     <li className={'flex items-center p-1.5 cursor-pointer mt-10'} onClick={handleLogout}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                              className="bi bi-box-arrow-left mr-[10px] cursor-pointer"
