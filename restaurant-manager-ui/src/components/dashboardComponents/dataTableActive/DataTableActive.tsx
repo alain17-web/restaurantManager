@@ -8,22 +8,28 @@ const DataTableActive = (props:DataTableEmployeeData) => {
 
     const [employees, setEmployees] = useState<Employee[]>([])
 
+    // useEffect hook to update employees state whenever props.employees changes
     useEffect(() => {
         setEmployees(props.employees)
     }, [props.employees]);
 
+    // State to handle pagination, including current page and page size
     const [paginationModel, setPaginationModel] = useState({ page: 0, pageSize: 10 });
 
 
+    // Defining an action column that contains buttons for editing employee details
     const actionColumn: GridColDef[] = [{
-        field: "action",
-        headerName: "",
-        width: 80,
+        field: "action", // Name of the field for the column
+        headerName: "",  // No header name for this column, it's just for actions
+        width: 80,       // Width of the column
+
+        // Function to render the custom cell content (edit button)
         renderCell: (params: GridRenderCellParams) => {
             return (
                 <div className={"flex items-center mt-3"}>
                     <div
                         className={"py-[2px] px-[5px] text-[00008B] border-[1px] border-gray-200 rounded-md cursor-pointer"}
+                        // Calls the parent function to handle the employee ID
                         onClick={() => props.getEmployeeId(params.row.id)} data-bs-toggle="tooltip"
                         data-bs-placement="top" title="VOIR DETAIL OU MODIFIER">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffa500"
@@ -46,12 +52,13 @@ const DataTableActive = (props:DataTableEmployeeData) => {
                     Ajouter un employé
                 </button>
             </div>
+            {/* Data grid displaying the employees */}
             <DataGrid
-                rows={employees}
-                columns={employeeColumns.concat(actionColumn)}
-                paginationModel={paginationModel}
-                onPaginationModelChange={setPaginationModel}
-                pageSizeOptions={[10]}
+                rows={employees} // Employee data passed as rows
+                columns={employeeColumns.concat(actionColumn)} // Merges the predefined columns with the action column
+                paginationModel={paginationModel}// Pagination model state
+                onPaginationModelChange={setPaginationModel} // Updates the pagination model when page or page size changes
+                pageSizeOptions={[10]} // Options for the number of rows per page
             />
         </div>
     );
