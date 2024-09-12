@@ -52,7 +52,7 @@ const DataTableActive = (props:DataTableEmployeeData) => {
                     Ajouter un employé
                 </button>
             </div>
-            {/* Data grid displaying the employees */}
+            {/* MUI Data grid displaying the employees */}
             <DataGrid
                 rows={employees} // Employee data passed as rows
                 columns={employeeColumns.concat(actionColumn)} // Merges the predefined columns with the action column

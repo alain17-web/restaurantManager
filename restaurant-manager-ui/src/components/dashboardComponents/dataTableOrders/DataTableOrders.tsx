@@ -8,7 +8,7 @@ import useUsername from "../../../hooks/username/useUsername.tsx";
 import ForbidenDelete from "../forbidenDelete/ForbidenDelete.tsx";
 
 
-
+//See component DataTableCat for explanations about the logic
 const DataTableOrders = (props:DataTableOrderData) => {
 
     const [orders, setOrders] = useState<Order[]>([])

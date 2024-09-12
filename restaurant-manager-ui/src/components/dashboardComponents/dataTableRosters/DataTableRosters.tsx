@@ -8,7 +8,7 @@ import axiosInstance from "../../../axios/axiosInstance.tsx";
 import useUsername from "../../../hooks/username/useUsername.tsx";
 import ForbidenDelete from "../forbidenDelete/ForbidenDelete.tsx";
 
-
+//See component DataTableCat for explanations about the logic
 const DataTableRosters = (props: DataTableRosterData) => {
 
     const [rosters, setRosters] = useState<Roster[]>([])

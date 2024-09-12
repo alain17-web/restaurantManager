@@ -13,23 +13,30 @@ const DataTableCat = (props: DataTableCatData) => {
 
     const [categories, setCategories] = useState<Category[]>([]);
 
+    // useEffect hook to update categories state whenever props.categories changes
     useEffect(() => {
         setCategories(props.categories)
     }, [props.categories]);
 
 
+    // State to handle pagination, including current page and page size
     const [paginationModel, setPaginationModel] = useState({page: 0, pageSize: 10});
 
+    // Ready-made Function from react-confirmztion-alert to handle the deletion of a category, takes the category ID as a parameter after showing a confirmation popup
     const handleDelete = (id: number): void => {
         confirmAlert({
-            title: 'Confirmation',
+            title: 'Confirmation', // Title of the confirmation dialog
             message: 'Etes-vous sûr de vouloir supprimer cette catégorie ?',
             buttons: [
                 {
+                    // If the user confirms (clicks 'Oui'), proceed with deletion
                     label: 'Oui',
                     onClick: async () => {
                         try {
+                            // Sending a DELETE request to remove the category with the given ID
                             await axiosInstance.delete(`/categories/${id}`)
+
+                            // Immediately updates the categories state by filtering out the deleted category
                             setCategories((prevCategories) => prevCategories.filter((category) => category.id !== id))
                         } catch (error) {
                             console.error("deletion failed", error)
@@ -37,6 +44,7 @@ const DataTableCat = (props: DataTableCatData) => {
                     }
                 },
                 {
+                    // If the user cancels (clicks 'Non'), log a message and do nothing
                     label: 'Non',
                     onClick: () => console.log("deletion cancelled")
                 }
@@ -44,17 +52,22 @@ const DataTableCat = (props: DataTableCatData) => {
         })
     }
 
+    // Destructuring the 'username' from the custom hook 'useUsername'
     const {username} = useUsername()
 
+    // Defining an action column that contains buttons for deleting or editing category details
     const actionColumn: GridColDef[] = [{
-        field: "action",
-        headerName: "",
-        width: 80,
+        field: "action", // Name of the field for the column
+        headerName: "",  // No header name for this column, it's just for actions
+        width: 80,       // Width of the column
+
+        // Function to render the custom cell content (edit and delete buttons)
         renderCell: (params: GridRenderCellParams) => {
             return (
                 <div className={"flex items-center mt-3"}>
                     <div
                         className={"py-[2px] px-[5px] mr-2 text-[00008B] border-[1px] border-gray-200 rounded-md cursor-pointer"}
+                        // Calls the parent function to handle the category ID
                         onClick={() => props.getCategoryId(params.row.id)} data-bs-toggle="tooltip"
                         data-bs-placement="top" title="VOIR DETAIL OU MODIFIER">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffa500"
@@ -64,8 +77,10 @@ const DataTableCat = (props: DataTableCatData) => {
                         </svg>
                     </div>
                     <>
+                        {/* Delete function allowed only if logged user is not guest  */}
                         {username !== "guest" ? (
                             <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"}
+                                 //calls handleDelete function with category id
                                  onClick={() => handleDelete(params.row.id)} data-bs-toggle="tooltip"
                                  data-bs-placement="top" title="SUPPRIMER">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ff0000"
@@ -74,6 +89,7 @@ const DataTableCat = (props: DataTableCatData) => {
                                         d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
                                 </svg>
                             </div>) : (
+                            //If user is guest, icon delete visible but deactvated
                             <ForbidenDelete/>
                         )
                         }
@@ -92,13 +108,13 @@ const DataTableCat = (props: DataTableCatData) => {
                     Ajouter une catégorie
                 </button>
             </div>
+            {/* MUI Data grid displaying the categories */}
             <DataGrid
-                rows={categories}
-                //getRowId={(row)=> row.id}
-                columns={categoryColumns.concat(actionColumn)}
-                paginationModel={paginationModel}
-                onPaginationModelChange={setPaginationModel}
-                pageSizeOptions={[10]}
+                rows={categories} // Categories data passed as rows
+                columns={categoryColumns.concat(actionColumn)} // Merges the predefined columns with the action column
+                paginationModel={paginationModel} // Pagination model state
+                onPaginationModelChange={setPaginationModel} // Updates the pagination model when page or page size changes
+                pageSizeOptions={[10]} // Options for the number of rows per page
             />
         </div>
     );

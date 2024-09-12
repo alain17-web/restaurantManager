@@ -3,7 +3,7 @@ import {DataGrid,GridColDef, GridRenderCellParams} from "@mui/x-data-grid";
 import {useState, useEffect} from "react"
 import {DataTableDeliveredPurchaseData, Purchase} from "../../../types/types.ts";
 
-
+//See component DataTableCat for explanations about the logic
 const DataTableDeliveredPurchases = (props:DataTableDeliveredPurchaseData) => {
 
     const [deliveredPurchases, setDeliveredPurchases] = useState<Purchase[]>([])

@@ -8,7 +8,7 @@ import axiosInstance from "../../../axios/axiosInstance.tsx";
 import useUsername from "../../../hooks/username/useUsername.tsx";
 import ForbidenDelete from "../forbidenDelete/ForbidenDelete.tsx";
 
-
+//See component DataTableCat for explanations about the logic
 const DataTableBookings = (props: DataTableBookingData) => {
 
     const [bookings, setBookings] = useState<Booking[]>([])
@@ -64,6 +64,7 @@ const DataTableBookings = (props: DataTableBookingData) => {
                     </div>
 
                     <>
+
                         {username !== "guest" ? (
                             <div className={"py-[2px] px-[5px] text-[DC143C] border-[1px] border-gray-200"}
                                  onClick={() => handleDelete(params.row.id)} data-bs-toggle="tooltip"

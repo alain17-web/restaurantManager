@@ -7,7 +7,7 @@ import axiosInstance from "../../../axios/axiosInstance.tsx";
 import useUsername from "../../../hooks/username/useUsername.tsx";
 import ForbidenDelete from "../forbidenDelete/ForbidenDelete.tsx";
 
-
+//See component DataTableCat for explanations about the logic
 const DataTablePurchases = (props: DataTablePurchaseData) => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([])
