@@ -8,6 +8,7 @@ import {useNotifDispatch} from "../../../hooks/notifications/useNotifDispatch.ts
 
 const BookingForm = () => {
 
+    // Dispatch hook for notifications (used after successful submission)
     const dispatch = useNotifDispatch()
 
     const [success, setSuccess] = useState<boolean>(false);
@@ -25,9 +26,9 @@ const BookingForm = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        validateDate();
-        validateName();
-        validateEmail();
+        validateDate(); // Validate the date input
+        validateName(); // Validate the name input
+        validateEmail(); // Validate the email input
 
         if (currentDate !== "") {
             // Convert 'YYYY-MM-DD' to 'DD/MM/YYYY'
@@ -35,7 +36,8 @@ const BookingForm = () => {
 
             if (allFieldsValid) {
                 try {
-                    setError(false);
+                    setError(false); // Reset error state before submission
+                    // Submit the form data to the server
                      await axios.post("http://localhost:3000/api/bookings/addBooking", {
                         date: formattedDate,
                         hour,
@@ -52,6 +54,7 @@ const BookingForm = () => {
         }
     };
 
+    // Function to reset form state and handle the success message close
     const closeSuccessMsg = () => {
         setCurrentDate("");
         setHour("");
@@ -60,11 +63,13 @@ const BookingForm = () => {
         setPeople(1);
         setSuccess(false);
         setError(false);
-        dispatch({ type: 'ADD_BOOKING_NOTIF'})
+        dispatch({ type: 'ADD_BOOKING_NOTIF'}) // Dispatch a notification after closing success message
     };
 
+    // Validation for the name input
     const validateName = () => {
-        setErrorName('');
+        setErrorName('');// Reset error message for name
+        // Check if the name is valid: between 2 and 25 characters, alphanumeric
         if (name === "" || !/^[A-Za-z0-9 ]{2,25}$/.test(name)) {
             setErrorName("Nom requis min: 2 max: 25");
         } else {
@@ -72,6 +77,7 @@ const BookingForm = () => {
         }
     };
 
+    // Validation for the date input
     const validateDate = () => {
         setErrorDate('');
         if (currentDate === "") {
@@ -81,8 +87,10 @@ const BookingForm = () => {
         }
     };
 
+    // Validation for the email input
     const validateEmail = () => {
         setErrorEmail('');
+        // Check if the email is valid based on the standard email format
         if (email === "" || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
             setErrorEmail("Email non valide");
         } else {
@@ -90,6 +98,7 @@ const BookingForm = () => {
         }
     };
 
+    // useEffect to validate all fields and enable/disable form submission button
     useEffect(() => {
         setAllFieldsValid(
             currentDate !== "" &&
@@ -97,23 +106,25 @@ const BookingForm = () => {
             name !== "" && /^[A-Za-z0-9 ]{2,25}$/.test(name) &&
             email !== "" && /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)
         );
-    }, [currentDate, hour, name, email]);
+    }, [currentDate, hour, name, email]); // Re-run this effect when any of these values change
 
+    // Helper functions to trigger validations on field focus
     const handleNameFocus = () => {
-        validateDate();
+        validateDate(); // Validate the date when name input is focused
     };
 
     const handleEmailFocus = () => {
-        validateName();
+        validateName(); // Validate the name when email input is focused
     };
 
     const handlePeopleFocus = () => {
-        validateEmail();
+        validateEmail();// Validate the email when number of people input is focused
     };
 
     return (
         <section className={"flex-1 h-full flex flex-col items-center"}>
             <h1 className={"text-2xl font-inter italic mt-4"}>Réserver une table</h1>
+            {/* Show form if no success or error, otherwise show SuccessMsg */}
             {!success && !error ? (
                 <form
                     className={"w-[55%] h-auto flex flex-col items-center"}
@@ -192,6 +203,7 @@ const BookingForm = () => {
                             onFocus={handlePeopleFocus}
                         />
                     </div>
+                    {/* Submit button, disabled if fields are invalid */}
                     <div className={"w-[40%] input-group mt-8 flex flex-col items-center"}>
                         <button
                             className={"w-full h-10 bg-[#008080] hover:bg-[#6B8E23] text-white text-xl font-inter cursor-pointer"}
@@ -203,6 +215,7 @@ const BookingForm = () => {
                     </div>
                 </form>
             ) : (
+                // Display success message after successful submission
                 <SuccessMsg closeSuccessMsg={closeSuccessMsg} name={name} people={people} date={currentDate} hour={hour} error={error} />
             )}
         </section>
