@@ -40,6 +40,12 @@ export interface DecodedToken {
     exp: number;
 }
 
+export interface AvatarData {
+    username: string | null
+    gender?: string | null
+    roleId?: number | null
+}
+
 export interface Dish {
     id: number;
     name: string;
