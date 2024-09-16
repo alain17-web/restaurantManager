@@ -4,7 +4,10 @@ import useCurrentDate from "../../../hooks/date/useCurrentDate.tsx";
 
 const CurrentDate = () => {
 
+    // Destructure the 'formattedDate' from the custom hook 'useCurrentDate
     const { formattedDate} = useCurrentDate()
+
+    // Call the 'useCurrentWeekDay' hook to get the current weekday
     const currentDay:string = useCurrentWeekDay()
 
     return (

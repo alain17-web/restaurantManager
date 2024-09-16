@@ -1,15 +1,10 @@
 import {Link} from "react-router-dom"
-import {Category} from "../../../types/types.ts";
+import {DrinkSidebarData} from "../../../types/types.ts";
 
-interface Props {
-    onItemSelect: (item: string) => void
-    selectedItem: string
-    categories:Category[]
-}
-
-const DrinksSidebar = (props: Props) => {
+const DrinksSidebar = (props: DrinkSidebarData) => {
 
 
+    // Function to handle clicks on a category. It calls the onItemSelect function passed as a prop
     const handleClick = (cat: string) => {
         props.onItemSelect(cat)
     }
@@ -17,6 +12,7 @@ const DrinksSidebar = (props: Props) => {
     return (
         <>
             <h1 className={"text-2xl font-inter underline"}>Les boissons</h1>
+            {/* Map over the categories passed through props and render a Link for each */}
             {props.categories.map(cat => {
                 if(cat.type === "beverage") {
                     return <Link

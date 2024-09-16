@@ -40,10 +40,29 @@ export interface DecodedToken {
     exp: number;
 }
 
+export interface NavbarBoolean {
+    isOnAbout: boolean;
+}
+
+export interface SuccessMsgData {
+    closeSuccessMsg: () => void;
+    name: string
+    people: number
+    date: string
+    hour: string
+    error: boolean
+}
+
 export interface AvatarData {
     username: string | null
     gender?: string | null
     roleId?: number | null
+}
+
+export interface MenuSidebarData {
+    onItemSelect: (item:string) => void
+    selectedItem: string
+    categories: Category[]
 }
 
 export interface Dish {
@@ -57,6 +76,12 @@ export interface Dish {
     desc: string;
     img: string;
     allerg?: string;
+}
+
+export interface DishSidebarData {
+    onItemSelect: (item:string) => void
+    selectedItem: string
+    categories:Category[]
 }
 
 export interface DataTableDishData {
@@ -89,6 +114,12 @@ export interface Drink {
     cost: number;
     min: number;
     stock: number;
+}
+
+export interface DrinkSidebarData {
+    onItemSelect: (item: string) => void
+    selectedItem: string
+    categories:Category[]
 }
 
 export interface DataTableDrinkData {

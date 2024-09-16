@@ -1,17 +1,12 @@
 import { Link } from "react-router-dom"
-import {Category} from "../../../types/types.ts";
-
-
-interface Props {
-    onItemSelect: (item:string) => void
-    selectedItem: string
-    categories:Category[]
-}
+import {DishSidebarData} from "../../../types/types.ts";
 
 
 
-const DishesSidebar = (props:Props) => {
+const DishesSidebar = (props:DishSidebarData) => {
 
+    // Function to handle click events on categories
+    // It calls the onItemSelect callback passed through props and passes the selected category name
     const handleClick = (cat:string) => {
         props.onItemSelect(cat)
     }

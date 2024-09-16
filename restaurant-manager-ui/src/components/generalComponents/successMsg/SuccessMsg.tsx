@@ -1,17 +1,12 @@
+import {SuccessMsgData} from "../../../types/types.ts";
 
-type Props = {
-    closeSuccessMsg: () => void;
-    name: string
-    people: number
-    date: string
-    hour: string
-    error: boolean
-};
-const SuccessMsg = (props: Props) => {
+
+const SuccessMsg = (props: SuccessMsgData) => {
 
     return (
         <article className={"w-[60%] h-auto border-2 border-[#6B8E23] rounded-xl mt-20 p-5"}>
 
+            {/* "X" button to close the success message */}
             <p
                 className={"text-2xl hover:text-3xl hover:text-orange-700 font-bold cursor-pointer"}
                 onClick={props.closeSuccessMsg}

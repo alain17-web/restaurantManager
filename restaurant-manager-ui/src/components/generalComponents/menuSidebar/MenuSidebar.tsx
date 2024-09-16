@@ -1,19 +1,18 @@
 
 import DishesSidebar from "../dishesSidebar/DishesSidebar.tsx";
 import DrinksSidebar from "../drinksSidebar/DrinksSidebar.tsx";
-import {Category} from "../../../types/types.ts";
+import {MenuSidebarData} from "../../../types/types.ts";
 
-interface Props {
-    onItemSelect: (item:string) => void
-    selectedItem: string
-    categories: Category[]
-}
 
-const MenuSidebar = (props:Props) => {
+
+const MenuSidebar = (props:MenuSidebarData) => {
 
     return (
         <main className={"w-[15%] h-screen flex flex-col ml-12 pt-14"}>
+            {/* Render DishesSidebar, passing down props like onItemSelect, selectedItem, and categories */}
            <DishesSidebar onItemSelect={props.onItemSelect} selectedItem={props.selectedItem} categories={props.categories}  />
+
+            {/* Render DrinksSidebar with the same props passed down */}
             <DrinksSidebar onItemSelect={props.onItemSelect} selectedItem={props.selectedItem} categories={props.categories} />
         </main>
     );
