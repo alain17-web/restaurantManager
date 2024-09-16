@@ -9,9 +9,11 @@ import {Link} from "react-router-dom"
 
 const Kitchen = () => {
 
+    // Destructuring the handleLogout function from the useLogout hook
     const {handleLogout} = useLogout()
 
 
+    // Destructuring the username, gender, and roleId from the useUsername hook
     const { username,gender, roleId } = useUsername()
 
 
@@ -21,6 +23,7 @@ const Kitchen = () => {
             <div className={"w-full flex items-center justify-between mt-4 px-5"}>
                 <Logo/>
                 <div className={"w-auto flex items-center justify-center gap-3"}>
+                    {/* If the user is a guest, show links to the dashboard and restaurant views */}
                     {username === "guest" &&
                         <>
                             <div className={"flex items-center mr-5 pr-1 relative"}>
@@ -36,6 +39,7 @@ const Kitchen = () => {
                         </>
                     }
                     <p className={"text-2xl text-white font-inter font-semibold italic"}>Bienvenue {username}</p>
+                    {/* Avatar component that displays user's avatar based on username, gender, and role */}
                     <Avatar username={username} gender={gender} roleId={roleId}/>
                     <div className={"rounded-full ml-4 p-1.5 bg-white hover:disconnect"}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"

@@ -10,21 +10,26 @@ import {Link} from "react-router-dom"
 
 const Restaurant = () => {
 
-
+    // Destructuring the handleLogout function from the useLogout hook
     const {handleLogout} = useLogout()
 
+    // Destructuring username, gender, and roleId from the useUsername hook
     const {username, gender, roleId} = useUsername()
+
     const [showNewOrder, setShowNewOrder] = useState<boolean>(false);
+
+    // State to store the number of people for the new order
     const [people, setPeople] = useState<number>(0)
 
 
+    // Function to handle creating a new order, randomly assigning the number of people (max 6)
     const handleNewOrder = () => {
         setPeople(Math.floor(Math.random() * 6) + 1)
         setShowNewOrder(true);
     }
 
     const closeNewOrder = () => {
-        setShowNewOrder(false)
+        setShowNewOrder(false) // Hide the NewOrder component
     }
 
     return (
