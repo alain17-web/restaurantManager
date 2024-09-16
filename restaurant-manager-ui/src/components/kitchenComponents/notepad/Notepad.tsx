@@ -18,8 +18,11 @@ const Notepad = () => {
     const [_validatedBy, setValidatedBy] = useState<string | null>(null);
     const [isValidated, setIsValidated] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
+
+    // Fetches the total stock on hand using a custom hook
     const {totalOnHand} = useTotalOnHand();
 
+    // Effect that sets the max value for stock when totalOnHand changes
     useEffect(() => {
         if (totalOnHand !== undefined && totalOnHand !== 0) {
             setMax(totalOnHand);
@@ -27,9 +30,11 @@ const Notepad = () => {
 
     }, [totalOnHand]);
 
+    // Fetches the username of the connected user using a custom hook
     const {username} = useUsername()
 
 
+    // Async function to fetch order items from the server
     const getOrderItems = async () => {
         try {
             const res = await axiosInstance.get('/orderItems');
@@ -37,7 +42,7 @@ const Notepad = () => {
                 setMessage('Pas de commande en attente');
             } else {
                 setOrderItems(res.data);
-                setOrderId(res.data[0].order_id);
+                setOrderId(res.data[0].order_id); // Set the current order ID retrieved from the DB
                 setMessage('');
             }
         } catch (error) {
@@ -45,17 +50,20 @@ const Notepad = () => {
         }
     };
 
+    // Effect that fetches order items when the component mounts
     useEffect(() => {
         getOrderItems();
 
     }, []);
 
+    // Effect that fetches specific order details when the orderId changes
     useEffect(() => {
         if (orderId !== undefined && orderId !== null) {
             getOrder(orderId)
         }
     }, [orderId]);
 
+    // Async function to fetch a specific order based on its ID
     const getOrder = async (orderId: number | null) => {
         try {
             const res = await axiosInstance.get(`/orders/${orderId}`);
@@ -72,17 +80,19 @@ const Notepad = () => {
     }
 
 
+    // Handles the validation of an order, updates the order's status, and stock
     const handleValidate = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (!orderId || !username) {
             console.log("OrderId or username is undefined")
         }
 
-        const validated = "ok"
-        const validatedBy = username
+        const validated = "ok" // Validation status
+        const validatedBy = username; // User who validated the order
+
 
         try {
-
+            // Updating the validation status of the order items and the order itself
             await axiosInstance.patch(`orderItems/${orderId}`, {
                 order_id: orderId,
                 validated: validated,
@@ -94,12 +104,15 @@ const Notepad = () => {
                 validatedBy: validatedBy
             })
 
+            // Calculating the quantity of each ordered item
             const itemCounts: { [key: string]: number } = {};
             orderItems.forEach(item => {
+                //making sure the name of each item has the correct format
                 const normalizedItemName = item.name.trim().toLowerCase();
                 itemCounts[normalizedItemName] = (itemCounts[normalizedItemName] || 0) + 1;
             });
 
+            // Updating the stock based on the ordered items
             for (const [itemName, quantity] of Object.entries(itemCounts)) {
                 await axiosInstance.patch('/stock/updateStock', {
                     item_name: itemName,
@@ -107,6 +120,7 @@ const Notepad = () => {
                 });
             }
 
+            // Updating the finance summary with the new total on hand
             const total_on_hand = max + total
             await axiosInstance.post('/finances/addFinanceSummary',{order_id:orderId,order_date,total,total_on_hand})
             setIsValidated(true)
@@ -117,12 +131,14 @@ const Notepad = () => {
         }
     }
 
+    // Resets the validation status
     const resetValidation = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         setIsValidated(false);
         setValidated("");
         setValidatedBy(null);
 
+        // and fetches the order items again
         try {
             const res = await axiosInstance.get('/orderItems');
             if (res.data.length === 0) {
@@ -140,9 +156,9 @@ const Notepad = () => {
 
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
         if (isValidated) {
-            resetValidation(e)
+            resetValidation(e) // If already validated, reset the validation
         } else {
-            handleValidate(e)
+            handleValidate(e) // Otherwise, validate the order
         }
     }
 
@@ -150,12 +166,15 @@ const Notepad = () => {
         <main
             className={"w-[500px] h-[900px] bg-[url('./img/bloc-notes.png')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center ml-20"}>
 
+            {/* Conditionally rendering based on whether the order has been validated */}
             {!isValidated ? (
                 <div className={"w-full h-auto mt-3 flex flex-col items-center justify-center"}>
                     <DateDisplay/>
                     <h1 className={"text-xl font-inter mt-22"}>Commande
                         n°{orderId && orderId} : {orderItems.length / 4} pers</h1>
                     <h2 className={"text-lg font-inter font-semibold italic"}>{message !== "" ? message : "Plats :"}</h2>
+
+                    {/* Displaying main course items */}
                     {orderItems.map((item): any => {
                         if (item.type === "maineCourse") {
                             return <p key={item.order_item_id}>{message === "" && item.name}</p>
@@ -163,6 +182,7 @@ const Notepad = () => {
                     })}
 
                     <h2 className={"text-lg font-inter font-semibold italic"}>{message !== "" ? "" : "Desserts :"}</h2>
+                    {/* Displaying dessert items */}
                     {orderItems.map((item): any => {
                         if (item.type === "desserts") {
                             return <p key={item.order_item_id}>{message === "" && item.name}</p>
@@ -176,6 +196,7 @@ const Notepad = () => {
                         validée</h2>
                 </div>
             )}
+            {/* Button for validation or reset depending on the state */}
             <button
                 disabled={username === "guest"}
                 className={username !== "guest" ? "w-[80%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-pointer" : "w-[80%] mx-auto h-12 px-6 py-auto bg-[#013220] hover:bg-[#6B8E23] text-white text-base font-inter rounded-md cursor-not-allowed"}
