@@ -7,7 +7,9 @@ import FooterAbout from "../../../components/generalComponents/footerAbout/Foote
 
 const About = () => {
 
+    //isOnAbout is set to true and passed down to the Navbar as this information determine the style of the bookButton component included in the Navbar
     const [isOnAbout] = useState<boolean>(true);
+
     return (
         <section className={"w-full h-screen overflow-hidden"}>
             <header

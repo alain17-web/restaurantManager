@@ -5,11 +5,18 @@ import {FormEvent, useEffect, useState} from "react";
 import axios from "axios"
 import { useAuth } from '../../../context/authContext/AuthContext.tsx';
 
+// Environment variables for different role IDs
+const managerRoleId = import.meta.env.VITE_API_MNGR_ROLE_ID
+const restaurantStaffRoleId = import.meta.env.VITE_API_STAFF_ROLE_ID
+const chefRoleId = import.meta.env.VITE_API_CHEF_ROLE_ID
+
+// Environment variable for login url
+const loginUrl = import.meta.env.VITE_API_LOGIN_URL
+
 const Login = () => {
 
-    const navigate = useNavigate();
-
-    const { dispatch } = useAuth();
+    const navigate = useNavigate();// Hook to navigate programmatically
+    const { dispatch } = useAuth(); // Destructuring dispatch from the Auth context
 
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -19,6 +26,7 @@ const Login = () => {
     const [passwordError, setPasswordError] = useState<string>("");
     const [allFieldsValid, setAllFieldsValid] = useState<boolean>(false)
 
+    // Function to validate the username input
     const validateUsername = () => {
         if (username === "" || !/^[A-Za-z0-9 ]{4,25}$/.test(username)) {
             setUsernameError("identifiant requis");
@@ -27,6 +35,7 @@ const Login = () => {
         }
     }
 
+    // Function to validate the password input
     const validatePassword = () => {
         if (password === "" || !/^[A-Za-z0-9 ]{4,25}$/.test(password)) {
             setPasswordError("mdp requis");
@@ -35,14 +44,17 @@ const Login = () => {
         }
     }
 
+    // Focus handler to trigger username validation when password field is focused
     const handlePwdFocus = () => {
         validateUsername()
     }
 
+    // Focus handler to trigger password validation when submit button is focused
     const handlSubmitFocus = () => {
         validatePassword()
     }
 
+    // useEffect to check if both username and password are valid for enabling the submit button
     useEffect(() => {
         setAllFieldsValid(
             username !== "" && /^[A-Za-z]{3,25}$/.test(username) &&
@@ -54,20 +66,23 @@ const Login = () => {
         e.preventDefault();
         setError(false)
         setFailed(false)
-        validateUsername()
-        validatePassword()
+        validateUsername() // Validate username on submit
+        validatePassword() // Validate password on submit
 
         try {
-            const res = await axios.post('http://localhost:3000/api/auth/login', {
+            // post API request for login
+            const res = await axios.post(loginUrl, {
                 username,
                 password
             },{
-                withCredentials: true
+                withCredentials: true // Send cookies with the request
             })
 
+            // Destructuring token and employee data from response
             const { token, employee } = res.data;
 
 
+            // If the token is available, dispatch login action and store the token in localStorage
             if (token) {
                 dispatch({ type: 'LOGIN', payload: token });
                 localStorage.setItem("token", token);
@@ -75,12 +90,13 @@ const Login = () => {
                 console.error('No token found in response');
             }
 
+            // If employee role is available, navigate based on the role
             if (employee && employee.role_id) {
-                if (employee.role_id === 1) {
+                if (employee.role_id == managerRoleId) {
                     navigate("/dashboard")
-                } else if (employee.role_id === 2 ) {
+                } else if (employee.role_id == restaurantStaffRoleId ) {
                     navigate('/restaurant')
-                } else if (employee.role_id === 9) {
+                } else if (employee.role_id == chefRoleId) {
                     navigate("/kitchen")
                 } else {
                     setFailed(true)

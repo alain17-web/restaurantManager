@@ -7,11 +7,12 @@ import Stack from '@mui/material/Stack';
 import {Category, Dish, Drink} from '../../../types/types.ts'
 import axios from "axios";
 
-//TS guard
+// TypeScript type guard to differentiate between Dish and Drink
 const isDish = (item: Dish | Drink): item is Dish => {
     return (item as Dish).desc !== undefined;
 };
 
+// API base URL from environment variables
 const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 
@@ -23,25 +24,30 @@ export const Menu = () => {
     const [catId, setCatId] = useState<number>(1)
     const [catType, setCatType] = useState<string>("")
 
+    // Fetch dishes, drinks, and categories on component mount
     useEffect(() => {
         getDishes()
         getDrinks()
         getCategories()
     }, []);
 
+    // Fetch all dishes from API
     const getDishes = async () => {
         const res = await axios.get(`${apiBaseUrl}/dishes`)
         setDishes(res.data)
     }
 
+    // Fetch all drinks from API
     const getDrinks = async () => {
         const res = await axios.get(`${apiBaseUrl}/drinks`)
         setDrinks(res.data)
     }
 
+    // Fetch all categories from API and set initial category ID and type
     const getCategories = async () => {
         const res = await axios.get(`${apiBaseUrl}/categories`)
         setCategories(res.data)
+        // Find selected category
         const initialCat = res.data.find((cat:Category) => cat.cat_name === selectedItem);
         if (initialCat) {
             setCatId(initialCat.id);
@@ -58,6 +64,7 @@ export const Menu = () => {
 
     const [showPopup, setShowPopup] = useState<boolean>(false);
 
+    // Function to handle opening the popup with dish details
     const handlePopup = (dishName: string, dishImg: string, dishDesc: string, dishPrice: number | string, dishAllerg: string) => {
         setShowPopup(true);
         setDishName(dishName);
@@ -71,13 +78,16 @@ export const Menu = () => {
         setShowPopup(false);
     };
 
-    const [page, setPage] = useState(1);
+    // Pagination state variables
+    const [page, setPage] = useState(1);// Current page number
     const itemsPerPage = 5;
 
+    // Handle page change for pagination
     const handleChangePage = (_event: ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
 
+    // Update the category ID and type whenever the selected category changes
     useEffect(() => {
         if (categories.length > 0) {
             setPage(1);
@@ -85,6 +95,7 @@ export const Menu = () => {
         }
     }, [selectedItem]);
 
+    // Function to get category ID and type based on the selected item
     const getCatId = () => {
         const cat = categories.find(cat => cat.cat_name === selectedItem);
         if (cat) {
@@ -93,14 +104,15 @@ export const Menu = () => {
         }
     }
 
+    // Filter items based on the selected category type (food or drink)
     const filteredItems = catType === "food"
         ? dishes.filter(dish => dish.cat_id === catId)
         : drinks.filter(drink => drink.cat_id === catId);
 
 
+    // Paginate the filtered items
     const paginatedItems = filteredItems.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
-    console.log(dishImg)
 
     return (
         <div className={"w-full h-screen bg-no-repeat bg-center bg-cover overflow-hidden"}
@@ -110,6 +122,7 @@ export const Menu = () => {
                 הבא</h1>
             <div className={"w-full flex justify-center"}>
                 <div className={"w-[80%] mx-auto mt-10 flex flex-col items-center"}>
+                    {/* Conditional rendering of DishPopup */}
                     {showPopup && <div
                         className={"absolute inset-0 bg-[#000000d3] opacity-50 backdrop-filter backdrop-blur-md"}></div>}
                     {showPopup &&
@@ -125,6 +138,7 @@ export const Menu = () => {
                     <ul className={"w-[60%] mx-auto"}>
                         <h3 className={"font-inter italic text-2xl text-[#013220] underline mb-3"}>Les {selectedItem}</h3>
                         {paginatedItems.map(item => (
+                            // Render only items matching the category ID
                             item.cat_id === catId && (
                                 <div key={item.id}>
                                     <li className={!isDish(item) ? "list-none" : "list-none bg-[#F5F5F5] rounded-md px-4 py-2"}>
@@ -149,6 +163,7 @@ export const Menu = () => {
                             )
                         ))}
                     </ul>
+                    {/* mui-material Stack pagination component */}
                     <Stack spacing={2} className={"mt-4 bg-white rounded-md"}>
                         <Pagination
                             count={Math.ceil(filteredItems.length / itemsPerPage)}

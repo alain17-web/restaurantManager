@@ -4,6 +4,10 @@ import {FormEvent, useEffect, useState} from "react";
 import axios from "axios"
 import {useAuth} from '../../../context/authContext/AuthContext.tsx';
 
+const guestRoleId = import.meta.env.VITE_API_GUEST_ROLE_ID;
+const loginUrl = import.meta.env.VITE_API_LOGIN_URL
+
+//See comments in Login to understand the logic
 const GuestLogin = () => {
 
     const navigate = useNavigate();
@@ -57,7 +61,7 @@ const GuestLogin = () => {
         validatePassword()
 
         try {
-            const res = await axios.post('http://localhost:3000/api/auth/login', {
+            const res = await axios.post(loginUrl, {
                 username,
                 password
             }, {
@@ -75,7 +79,7 @@ const GuestLogin = () => {
             }
 
             if (employee && employee.role_id) {
-                if (employee.role_id === 10) {
+                if (employee.role_id == guestRoleId) {
                     navigate("/dashboard")
                 } else {
                     setFailed(true)
