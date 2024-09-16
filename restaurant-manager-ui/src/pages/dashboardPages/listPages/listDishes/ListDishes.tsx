@@ -1,13 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableDishes from "../../../components/dashboardComponents/dataTableDishes/DataTableDishes.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTableDishes from "../../../../components/dashboardComponents/dataTableDishes/DataTableDishes.tsx";
 import {useState,useEffect} from "react";
-import NewDish from "../NewItemPages/newDish/NewDish.tsx";
-import {Dish} from "../../../types/types.ts";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import NewDish from "../../newItemPages/newDish/NewDish.tsx";
+import {Dish} from "../../../../types/types.ts";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
-
+//See comments on ListActiveStaff to understand logic
 const Dishes = () => {
 
     const [dishes,setDishes]= useState<Dish[]>([])

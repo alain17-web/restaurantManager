@@ -1,13 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableDrinks from "../../../components/dashboardComponents/dataTableDrinks/DataTableDrinks.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTableDrinks from "../../../../components/dashboardComponents/dataTableDrinks/DataTableDrinks.tsx";
 import {useEffect, useState} from "react";
-import NewDrink from "../NewItemPages/newDrink/NewDrink.tsx";
-import {Drink} from "../../../types/types.ts";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import NewDrink from "../../newItemPages/newDrink/NewDrink.tsx";
+import {Drink} from "../../../../types/types.ts";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
-
+//See comments on ListActiveStaff to understand logic
 const ListDrinks = () => {
 
     const [drinks, setDrinks] = useState<Drink[]>([])

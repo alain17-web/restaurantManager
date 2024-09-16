@@ -1,15 +1,15 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableBookings from "../../../components/dashboardComponents/dataTableBookings/DataTableBookings.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTableBookings from "../../../../components/dashboardComponents/dataTableBookings/DataTableBookings.tsx";
 import {useState,useEffect} from "react";
-import NewBooking from "../NewItemPages/newBooking/NewBooking.tsx";
-import {Booking} from "../../../types/types.ts";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
+import NewBooking from "../../newItemPages/newBooking/NewBooking.tsx";
+import {Booking} from "../../../../types/types.ts";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
 import dayjs from "dayjs";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
 
-
+//See comments on ListActiveStaff to understand logic
 const ListBookings = () => {
 
     const {username} = useUsername()

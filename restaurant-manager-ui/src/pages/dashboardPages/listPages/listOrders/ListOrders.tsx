@@ -1,12 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableOrders from "../../../components/dashboardComponents/dataTableOrders/DataTableOrders.tsx";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTableOrders from "../../../../components/dashboardComponents/dataTableOrders/DataTableOrders.tsx";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
 import {useEffect, useState} from "react";
-import {Order} from "../../../types/types.ts";
-import OrderDetail from "../orderDetail/OrderDetail.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Order} from "../../../../types/types.ts";
+import OrderDetail from "../../orderDetail/OrderDetail.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
+//The logic is the same as ListActiveStaff - see comments - except there is no possibility to add or edit an order from the dashboard ( Only from the kitchen )
 const ListOrders = () => {
 
     const [orders, setOrders] = useState<Order[]>([]);

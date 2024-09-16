@@ -1,12 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
 import {useState, useEffect} from "react";
-import {Category} from "../../../types/types.ts";
-import DataTableCat from "../../../components/dashboardComponents/dataTableCat/DataTableCat.tsx";
-import NewCategory from "../NewItemPages/newCategory/NewCategory.tsx";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Category} from "../../../../types/types.ts";
+import DataTableCat from "../../../../components/dashboardComponents/dataTableCat/DataTableCat.tsx";
+import NewCategory from "../../newItemPages/newCategory/NewCategory.tsx";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
+//See comments on ListActiveStaff to understand logic
 const ListCategories = () => {
 
     const [categories, setCategories] = useState<Category[]>([]);

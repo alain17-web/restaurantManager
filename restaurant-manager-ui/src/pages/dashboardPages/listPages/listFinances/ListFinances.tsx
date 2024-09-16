@@ -1,12 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableFinances from "../../../components/dashboardComponents/dataTableFinances/DataTableFinances.tsx";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTableFinances from "../../../../components/dashboardComponents/dataTableFinances/DataTableFinances.tsx";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
 import {useEffect, useState} from "react";
-import {Finance} from "../../../types/types.ts";
-import NewFinanceSummary from "../NewItemPages/newFinanceSummary/NewFinanceSummary.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Finance} from "../../../../types/types.ts";
+import NewFinanceSummary from "../../newItemPages/newFinanceSummary/NewFinanceSummary.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
+//See comments on ListActiveStaff to understand logic
 const ListFinances = () => {
 
     const [financeSummaries, setFinanceSummaries] = useState<Finance[]>([]);

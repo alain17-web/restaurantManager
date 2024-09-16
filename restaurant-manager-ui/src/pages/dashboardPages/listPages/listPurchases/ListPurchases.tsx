@@ -1,12 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTablePurchases from "../../../components/dashboardComponents/dataTablePurchases/DataTablePurchases.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTablePurchases from "../../../../components/dashboardComponents/dataTablePurchases/DataTablePurchases.tsx";
 import {useEffect, useState} from "react";
-import {Purchase} from "../../../types/types.ts";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import NewPurchase from "../NewItemPages/newPurchase/NewPurchase.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Purchase} from "../../../../types/types.ts";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import NewPurchase from "../../newItemPages/newPurchase/NewPurchase.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
+//See comments on ListActiveStaff to understand logic
 const ListPurchases = () => {
 
     const [purchases, setPurchases] = useState<Purchase[]>([]);

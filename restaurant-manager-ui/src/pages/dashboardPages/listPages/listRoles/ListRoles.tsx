@@ -1,12 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
 import {useState, useEffect} from "react";
-import {Role} from "../../../types/types.ts";
-import DataTableRoles from "../../../components/dashboardComponents/dataTableRoles/DataTableRoles.tsx";
-import NewRole from "../NewItemPages/newRole/NewRole.tsx";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Role} from "../../../../types/types.ts";
+import DataTableRoles from "../../../../components/dashboardComponents/dataTableRoles/DataTableRoles.tsx";
+import NewRole from "../../newItemPages/newRole/NewRole.tsx";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
+//See comments on ListActiveStaff to understand logic
 const ListRoles = () => {
 
     const [roles, setRoles] = useState<Role[]>([]);

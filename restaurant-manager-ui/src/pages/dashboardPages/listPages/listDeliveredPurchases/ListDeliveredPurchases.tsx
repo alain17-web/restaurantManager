@@ -1,14 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-//import DataTablePurchases from "../../components/dataTablePurchases/DataTablePurchases.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
 import {useEffect, useState} from "react";
-import {Purchase} from "../../../types/types.ts";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import DataTableDeliveredPurchases from "../../../components/dashboardComponents/dataTableDeliveredPurchases/DataTableDeliveredPurchases.tsx";
-import PurchaseDetail from "../purchaseDetail/PurchaseDetail.tsx";
+import {Purchase} from "../../../../types/types.ts";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import DataTableDeliveredPurchases from "../../../../components/dashboardComponents/dataTableDeliveredPurchases/DataTableDeliveredPurchases.tsx";
+import PurchaseDetail from "../../purchaseDetail/PurchaseDetail.tsx";
 
 
-
+//See comments on ListActiveStaff to understand logic
 const ListDeliveredPurchases = () => {
 
     const [deliveredPurchases, setDeliveredPurchases] = useState<Purchase[]>([]);

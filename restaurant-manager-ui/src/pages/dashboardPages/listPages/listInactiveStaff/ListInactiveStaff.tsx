@@ -1,14 +1,14 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
-import DataTableInactive from "../../../components/dashboardComponents/dataTableInactive/DataTableInactive.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DataTableInactive from "../../../../components/dashboardComponents/dataTableInactive/DataTableInactive.tsx";
 import {useEffect, useState} from "react";
-import {Employee} from "../../../types/types.ts";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import NewEmployee from "../NewItemPages/newEmployee/NewEmployee.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Employee} from "../../../../types/types.ts";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import NewEmployee from "../../newItemPages/newEmployee/NewEmployee.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
 
-
+//See comments on ListActiveStaff to understand logic
 const ListInactiveStaff = () => {
 
     const [inactives, setInactives] = useState<Employee[]>([])

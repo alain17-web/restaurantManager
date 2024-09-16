@@ -1,12 +1,13 @@
-import DashboardSidebar from "../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
-import DashboardNavbar from "../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
+import DashboardSidebar from "../../../../components/dashboardComponents/dashboardSidebar/DashboardSidebar.tsx";
+import DashboardNavbar from "../../../../components/dashboardComponents/dashboardNavbar/DashboardNavbar.tsx";
 import {useState,useEffect} from "react";
-import {Roster} from "../../../types/types.ts";
-import DataTableRosters from "../../../components/dashboardComponents/dataTableRosters/DataTableRosters.tsx";
-import NewRoster from "../NewItemPages/newRoster/NewRoster.tsx";
-import axiosInstance from "../../../axios/axiosInstance.tsx";
-import useUsername from "../../../hooks/username/useUsername.tsx";
+import {Roster} from "../../../../types/types.ts";
+import DataTableRosters from "../../../../components/dashboardComponents/dataTableRosters/DataTableRosters.tsx";
+import NewRoster from "../../newItemPages/newRoster/NewRoster.tsx";
+import axiosInstance from "../../../../axios/axiosInstance.tsx";
+import useUsername from "../../../../hooks/username/useUsername.tsx";
 
+//See comments on ListActiveStaff to understand logic
 const ListRosters = () => {
 
     const [rosters,setRosters] = useState<Roster[]>([]);

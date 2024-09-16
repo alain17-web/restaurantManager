@@ -1,6 +1,6 @@
 import {useState} from "react";
 import TimeDisplay from "../../../components/generalComponents/timeDisplay/TimeDisplay.tsx";
-import NewOrder from "../../dashboardPages/NewItemPages/newOrder/NewOrder.tsx";
+import NewOrder from "../../dashboardPages/newItemPages/newOrder/NewOrder.tsx";
 import Avatar from "../../../components/generalComponents/avatar/Avatar.tsx";
 import useUsername from "../../../hooks/username/useUsername.tsx";
 import DateDisplay from "../../../components/generalComponents/dateDisplay/DateDisplay.tsx";
