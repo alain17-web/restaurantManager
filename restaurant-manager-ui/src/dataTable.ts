@@ -1,5 +1,6 @@
 import {GridColDef} from "@mui/x-data-grid";
 
+//Provides data for the structure of the data-grids on the DataTableItems components
 
 export const dishColumns : GridColDef[] = [
 

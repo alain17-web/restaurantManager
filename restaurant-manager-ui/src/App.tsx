@@ -25,8 +25,9 @@ import {NotifProvider} from "./context/notifContext/NotifContext.tsx";
 import ListDeliveredPurchases from "./pages/dashboardPages/listPages/listDeliveredPurchases/ListDeliveredPurchases.tsx";
 import GuestLogin from "./pages/publicPages/guestLogin/GuestLogin.tsx";
 
-
+// Create the routes for the application using createBrowserRouter
 const router = createBrowserRouter([
+    // Public routes
     {
         path: "/",
         element: <Home/>
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
         path: "/loginGuest",
         element: <GuestLogin/>
     },
+    // Protected routes (accessible only by users with specific roles)
     {
 
         path: "/dashboard",
@@ -177,10 +179,11 @@ const router = createBrowserRouter([
 
 
 ])
+//Main application component
 const App = () => (
-    <AuthProvider>
-        <NotifProvider>
-            <RouterProvider router={router}/>
+    <AuthProvider> {/* Wrapping the app with AuthProvider for managing authentication */}
+        <NotifProvider> {/* Wrapping the app with NotifProvider for handling notifications */}
+            <RouterProvider router={router}/> {/* RouterProvider to provide the routes created above */}
         </NotifProvider>
     </AuthProvider>
 )
