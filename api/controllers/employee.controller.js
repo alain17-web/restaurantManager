@@ -3,6 +3,7 @@ const addEmployeeValidator = require('../validators/employeeValidator');
 const employeeValidator = require("../validators/employeeValidator");
 require('dotenv').config();
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const employeeController = {
     addEmployee: async (req, res) => {
         try {

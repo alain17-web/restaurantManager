@@ -2,6 +2,7 @@ const rosterService = require('../services/roster.service');
 const rosterValidator = require('../validators/rosterValidator');
 const bookingValidator = require("../validators/bookingValidator");
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const rosterController = {
     //CREATE
     addRoster: async (req, res) => {

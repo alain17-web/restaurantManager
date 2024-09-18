@@ -1,7 +1,7 @@
 const financialSummaryService = require('../services/financialSummary.service');
 const financeValidator = require('../validators/financeValidator');
-const demployeeService = require("./financialSummary.controller");
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const financialSummaryController = {
     //CREATE
     addFinancialSummary: async (req, res) => {

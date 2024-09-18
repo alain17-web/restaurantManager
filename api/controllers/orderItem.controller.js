@@ -2,7 +2,7 @@ const orderItemService = require("../services/orderItem.service");
 const orderItemValidator = require("../validators/orderItemValidator");
 const updateFromKitchenValidator = require("../validators/updateFromKitchenValidator");
 
-
+//See comments in booking.controller to understand the logic on this controller called in the router
 const orderItemController = {
     //CREATE
     addOrderItem: async (req, res) => {

@@ -3,6 +3,7 @@ const dishValidator = require('../validators/dishValidator');
 const path = require('node:path');
 const fs = require('fs');
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const dishController = {
     //CREATE
     addDish: async (req, res) => {
@@ -69,14 +70,18 @@ const dishController = {
 
             const {name, desc, cat_id, allerg, price, cost, min} = validateDish;
 
+            // Check if an image file was uploaded, and if so, get the filename; otherwise, set it to null
             const img = req.file ? req.file.filename : null;
 
+            // Retrieve the previous dish data by its ID (to check if an old image exists)
             const prevDish = await dishService.getDishById(req.params.id)
 
             const updatedDish = await dishService.updateDish(req.params.id, name, desc, cat_id, allerg, price, cost, min, img);
             if (updatedDish) {
+                // If a new image was uploaded and there was an existing image, delete the old image
                 if(img && prevDish && prevDish.img){
                     const imagePath = path.join(__dirname,'../uploads/img', prevDish.img);
+                    // Use fs.unlink to delete the old image file from the file system
                     fs.unlink(imagePath, (error) => {
                         if (error) {
                             console.error('Error deleting previous image file:', error);

@@ -1,3 +1,4 @@
+//See comments in booking.router to understand this router
 const categoryRouter = require("express").Router();
 const categoryController = require("../controllers/category.controller");
 const { authenticate, authorize } = require('../middlewares/authenticate');

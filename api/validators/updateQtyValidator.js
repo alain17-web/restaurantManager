@@ -1,9 +1,7 @@
+//See comments in authValidator to understand this validator used in purchaseItemController
 const yup = require("yup");
 
-/*const updateQtyValidator = yup.object({
-    type: yup.string().required(),
-    qty: yup.number().required()
-});*/
+
 
 const updateQtyValidator = yup.object({
     purchase_id: yup.number(),

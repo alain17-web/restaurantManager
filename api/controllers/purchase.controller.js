@@ -2,8 +2,8 @@ const purchaseService = require('../services/purchase.service');
 const purchaseValidator = require('../validators/purchaseValidator');
 const updateTotalValidator = require('../validators/updateTotalValidator');
 const updateDelDateValidator = require('../validators/updateDelDateValidator');
-const purchaseItemService = require("../services/purchaseItem.service");
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const purchaseController = {
     //CREATE
     addPurchase: async (req, res) => {

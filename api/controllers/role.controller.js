@@ -1,6 +1,7 @@
 const roleService = require("../services/role.service");
 const roleValidator = require("../validators/roleValidator")
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const roleController = {
     //CREATE
     addRole: async (req, res) => {

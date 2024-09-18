@@ -1,4 +1,6 @@
+// Importing Express to create a router
 const express = require('express');
+
 const employeeRouter = require('./employee.router');
 const bookingRouter = require('./booking.router');
 const authRouter = require('./auth.router');
@@ -14,9 +16,10 @@ const purchaseItemRouter = require("./purchaseItem.router");
 const financeRouter = require("./finance.router");
 const stockRouter = require("./stock.router");
 
-
+// Creating an instance of the Express Router
 const router = express.Router();
 
+// Define the routes for the application, associating specific routers with URL paths
 router.use('/bookings', bookingRouter);
 router.use('/auth',authRouter)
 router.use('/employees', employeeRouter);

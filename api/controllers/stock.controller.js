@@ -1,6 +1,7 @@
 const stockService = require('../services/stock.service');
 const stockValidator = require('../validators/stockValidator');
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const stockController = {
     //READ
     getStock: async (req, res) => {

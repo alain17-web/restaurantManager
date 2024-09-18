@@ -1,6 +1,7 @@
 const categoryService = require("../services/category.service");
 const categoryValidator = require("../validators/categoryValidator");
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const categoryController = {
     //CREATE
     addCategory: async (req, res) => {

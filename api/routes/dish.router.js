@@ -1,3 +1,4 @@
+//See comments in booking.router to understand the router
 const dishRouter = require('express').Router();
 const dishController = require('../controllers/dish.controller');
 const {authenticate, authorize} = require("../middlewares/authenticate");

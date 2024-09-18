@@ -1,3 +1,4 @@
+//See comments in authValidator to understand this validator used in orderItemController
 const yup = require("yup");
 
 const orderItemValidator = yup.object({

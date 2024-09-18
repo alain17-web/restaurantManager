@@ -1,3 +1,4 @@
+//See comments in booking.router to understand the router
 const drinkRouter = require("express").Router();
 const drinkController = require("../controllers/drink.controller");
 const {authenticate,authorize} = require("../middlewares/authenticate");

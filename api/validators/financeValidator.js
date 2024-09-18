@@ -1,3 +1,4 @@
+//See comments in authValidator to understand this validator used in financeController
 const yup = require("yup");
 
 const financeValidator = yup.object({

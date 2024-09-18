@@ -1,3 +1,4 @@
+//See comments on booking.service to understand this file called in controller
 const createConnection = require('../database/database');
 
 const stockService = {

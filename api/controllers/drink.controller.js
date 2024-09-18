@@ -1,6 +1,7 @@
 const drinkService = require("../services/drink.service");
 const drinkValidator = require("../validators/drinkValidator");
 
+//See comments in booking.controller to understand the logic on this controller called in the router
 const drinkController =  {
     //CREATE
     addDrink: async (req, res) => {

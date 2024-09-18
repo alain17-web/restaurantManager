@@ -1,3 +1,4 @@
+//See comments in booking.router to understand the router
 const purchaseItemRouter = require("express").Router();
 const purchaseItemController = require("../controllers/purchaseItem.controller");
 const {authenticate,authorize} = require("../middlewares/authenticate")

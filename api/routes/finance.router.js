@@ -1,3 +1,4 @@
+//See comments in booking.router to understand the router
 const financeRouter = require("express").Router();
 const financialSummaryController = require("../controllers/financialSummary.controller");
 const { authenticate, authorize } = require('../middlewares/authenticate');

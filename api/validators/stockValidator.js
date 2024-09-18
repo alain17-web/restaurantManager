@@ -1,3 +1,4 @@
+//See comments in authValidator to understand this validator used in stockController
 const yup = require("yup");
 
 const stockValidator = yup.object({

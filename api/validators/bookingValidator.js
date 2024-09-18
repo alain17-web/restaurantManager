@@ -1,3 +1,4 @@
+//See comments in authValidator to understand this validator used in bookingController
 const yup = require('yup');
 
 const bookingValidator = yup.object({

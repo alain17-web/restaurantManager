@@ -1,3 +1,4 @@
+//See comments in booking.router to understand this router
 const authRouter = require("express").Router();
 const authController = require('../controllers/auth.controller');
 
