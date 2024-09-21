@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-const useIsSmallScreen = () => {
+const useIsMediumScreen = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth !== undefined ? window.innerWidth : null);
 
     // Use useEffect to listen to window resize event
@@ -15,7 +15,7 @@ const useIsSmallScreen = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const isSmallScreen = windowWidth !== null && windowWidth >= 360 && windowWidth < 768
-    return isSmallScreen;
+    const isMediumScreen = windowWidth !== null && windowWidth >= 768 && windowWidth < 1280
+    return isMediumScreen;
 };
-export default useIsSmallScreen;
+export default useIsMediumScreen;

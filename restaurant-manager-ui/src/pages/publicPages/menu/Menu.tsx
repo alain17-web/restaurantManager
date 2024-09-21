@@ -7,6 +7,7 @@ import Stack from '@mui/material/Stack';
 import {Category, Dish, Drink} from '../../../types/types.ts'
 import axios from "axios";
 import useIsLargeScreen from "../../../hooks/screenWidth/largeScreen/useIsLargeScreen.tsx";
+import useIsSmallScreen from "../../../hooks/screenWidth/mobileScreen/useIsSmallScreen.tsx";
 
 // TypeScript type guard to differentiate between Dish and Drink
 const isDish = (item: Dish | Drink): item is Dish => {
@@ -21,6 +22,9 @@ export const Menu = () => {
 
     //defines a screen >= 1280px calling a hook
     const isLargeScreen = useIsLargeScreen()
+
+    //defines a screen < 768
+    const isSmallScreen = useIsSmallScreen()
 
     const [selectedItem, setSelectedItem] = useState("Mezzes");
     const [dishes, setDishes] = useState<Dish[]>([])
@@ -53,7 +57,7 @@ export const Menu = () => {
         const res = await axios.get(`${apiBaseUrl}/categories`)
         setCategories(res.data)
         // Find selected category
-        const initialCat = res.data.find((cat:Category) => cat.cat_name === selectedItem);
+        const initialCat = res.data.find((cat: Category) => cat.cat_name === selectedItem);
         if (initialCat) {
             setCatId(initialCat.id);
             setCatType(initialCat.type);
@@ -85,7 +89,7 @@ export const Menu = () => {
 
     // Pagination state variables
     const [page, setPage] = useState(1);// Current page number
-    const itemsPerPage = 5;
+    const itemsPerPage = isSmallScreen ? 4 : 5;
 
     // Handle page change for pagination
     const handleChangePage = (_event: ChangeEvent<unknown>, value: number) => {
@@ -122,13 +126,12 @@ export const Menu = () => {
     return (
         <div className={"w-full h-screen bg-no-repeat bg-center bg-cover overflow-hidden"}
              style={{backgroundImage: `url('./img/scenery.jpg')`}}>
-            <Navbar isOnAbout={false}/>
-            <h1 className={"text-center text-4xl font-inter italic text-[#013220] mt-16"}>Bienvenue - مَرْحَباً - ברוך
-                הבא</h1>
+            {!showPopup && <Navbar isOnAbout={false}/>}
+            {!showPopup && <h1 className={"text-center text-xl md:text-2xl lg:text-4xl font-inter italic text-[#013220] mt-16"}>Bienvenue - مَرْحَبا</h1>}
             <div className={"w-full flex justify-center"}>
-                <div className={"w-[80%] mx-auto mt-10 flex flex-col items-center"}>
+                <div className={isLargeScreen ? "w-[80%] mx-auto mt-10 flex flex-col items-center" : "w-full mt-0"}>
                     {/* Conditional rendering of DishPopup */}
-                    {showPopup && <div
+                    {showPopup && isLargeScreen && <div
                         className={"absolute inset-0 bg-[#000000d3] opacity-50 backdrop-filter backdrop-blur-md"}></div>}
                     {showPopup &&
                         <DishPopup
@@ -141,27 +144,27 @@ export const Menu = () => {
                         />
                     }
                     <ul className={"w-[60%] mx-auto"}>
-                        <h3 className={"font-inter italic text-2xl text-[#013220] underline mb-3"}>Les {selectedItem}</h3>
+                        <h3 className={"font-inter italic text-lg md:text-2xl text-[#013220] underline mb-3"}>Les {selectedItem}</h3>
                         {paginatedItems.map(item => (
                             // Render only items matching the category ID
                             item.cat_id === catId && (
                                 <div key={item.id}>
                                     <li className={!isDish(item) ? "list-none" : "list-none bg-[#F5F5F5] rounded-md px-4 py-2"}>
-                                        <h3 className={"font-inter italic text-xl text-[#013220] font-bold mb-[4px]"}>
+                                        <h3 className={"font-inter italic text-sm md:text-xl text-[#013220] font-bold mb-[4px]"}>
                                             {item.name} - {item.price}€
                                         </h3>
                                         {isDish(item) && item.desc && (
                                             <div className={"flex flex-col items-start"}>
-                                                <p className={"mb-2 text-lg text-[#013220] font-inter italic"}>
-                                                    {item.desc}
-                                                </p>
-                                                {!isLargeScreen && <hr/>}
-                                                {isLargeScreen && <button
-                                                    className={"cursor-pointer text-base text-white bg-[#6B8E23] hover:bg-[#008080] p-1 rounded-md"}
+                                                {isLargeScreen &&
+                                                    <p className={"mb-2 text-base md:text-lg text-[#013220] font-inter italic"}>
+                                                        {item.desc}
+                                                    </p>}
+                                                <button
+                                                    className={"cursor-pointer text-xs md:text-base text-white bg-[#6B8E23] hover:bg-[#008080] p-1 rounded-md"}
                                                     onClick={() => handlePopup(item.name, item.img, item.desc, item.price, item.allerg ?? "")}
                                                 >
                                                     Voir Plus
-                                                </button>}
+                                                </button>
                                             </div>
                                         )}
                                     </li>
@@ -170,7 +173,7 @@ export const Menu = () => {
                         ))}
                     </ul>
                     {/* mui-material Stack pagination component */}
-                    <Stack spacing={2} className={"mt-2 bg-white rounded-md"}>
+                    <Stack spacing={2} className={"w-[80%] mx-auto mt-1 md:mt-2 lg:mt-4 bg-white rounded-md"}>
                         <Pagination
                             count={Math.ceil(filteredItems.length / itemsPerPage)}
                             page={page}
@@ -178,15 +181,17 @@ export const Menu = () => {
                             shape="rounded"
                             showFirstButton
                             showLastButton
-                            size="large"
+                            size={isLargeScreen ? "large" : "small"}
                         />
                     </Stack>
                 </div>
-                <MenuSidebar
-                    onItemSelect={setSelectedItem}
-                    selectedItem={selectedItem}
-                    categories={categories}
-                />
+                {!isSmallScreen &&
+                    <MenuSidebar
+                        onItemSelect={setSelectedItem}
+                        selectedItem={selectedItem}
+                        categories={categories}
+                    />
+                }
             </div>
         </div>
     );
