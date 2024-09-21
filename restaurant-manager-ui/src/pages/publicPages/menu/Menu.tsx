@@ -6,6 +6,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {Category, Dish, Drink} from '../../../types/types.ts'
 import axios from "axios";
+import useIsLargeScreen from "../../../hooks/screenWidth/largeScreen/useIsLargeScreen.tsx";
 
 // TypeScript type guard to differentiate between Dish and Drink
 const isDish = (item: Dish | Drink): item is Dish => {
@@ -17,6 +18,10 @@ const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 
 export const Menu = () => {
+
+    //defines a screen >= 1280px calling a hook
+    const isLargeScreen = useIsLargeScreen()
+
     const [selectedItem, setSelectedItem] = useState("Mezzes");
     const [dishes, setDishes] = useState<Dish[]>([])
     const [drinks, setDrinks] = useState<Drink[]>([])
@@ -150,12 +155,13 @@ export const Menu = () => {
                                                 <p className={"mb-2 text-lg text-[#013220] font-inter italic"}>
                                                     {item.desc}
                                                 </p>
-                                                <button
+                                                {!isLargeScreen && <hr/>}
+                                                {isLargeScreen && <button
                                                     className={"cursor-pointer text-base text-white bg-[#6B8E23] hover:bg-[#008080] p-1 rounded-md"}
                                                     onClick={() => handlePopup(item.name, item.img, item.desc, item.price, item.allerg ?? "")}
                                                 >
                                                     Voir Plus
-                                                </button>
+                                                </button>}
                                             </div>
                                         )}
                                     </li>
@@ -164,7 +170,7 @@ export const Menu = () => {
                         ))}
                     </ul>
                     {/* mui-material Stack pagination component */}
-                    <Stack spacing={2} className={"mt-4 bg-white rounded-md"}>
+                    <Stack spacing={2} className={"mt-2 bg-white rounded-md"}>
                         <Pagination
                             count={Math.ceil(filteredItems.length / itemsPerPage)}
                             page={page}

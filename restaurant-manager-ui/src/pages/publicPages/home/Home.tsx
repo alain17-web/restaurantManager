@@ -1,11 +1,12 @@
 import BookButton from "../../../components/generalComponents/bookButton/BookButton.tsx";
 import MenuButton from "../../../components/generalComponents/menuButton/MenuButton.tsx";
 import GuestLoginButton from "../../../components/generalComponents/guestLoginButton/GuestLoginButton.tsx";
-import useIsLargeScreen from "../../../hooks/largeScreen/useIsLargeScreen.tsx";
+import useIsLargeScreen from "../../../hooks/screenWidth/largeScreen/useIsLargeScreen.tsx";
 
 
 export const Home = () => {
 
+    //defines a screen >= 1280px calling a hook
     const isLargeScreen = useIsLargeScreen()
 
     return (
