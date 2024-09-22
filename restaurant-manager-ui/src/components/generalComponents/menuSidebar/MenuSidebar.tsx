@@ -8,7 +8,7 @@ import {MenuSidebarData} from "../../../types/types.ts";
 const MenuSidebar = (props:MenuSidebarData) => {
 
     return (
-        <main className={"w-[15%] h-screen flex flex-col ml-12 pt-14"}>
+        <main className={"w-[15%] h-screen flex flex-col mr-12 lg:ml-12 pt-14"}>
             {/* Render DishesSidebar, passing down props like onItemSelect, selectedItem, and categories */}
            <DishesSidebar onItemSelect={props.onItemSelect} selectedItem={props.selectedItem} categories={props.categories}  />
 

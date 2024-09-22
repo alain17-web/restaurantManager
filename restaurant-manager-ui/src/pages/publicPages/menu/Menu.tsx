@@ -8,6 +8,7 @@ import {Category, Dish, Drink} from '../../../types/types.ts'
 import axios from "axios";
 import useIsLargeScreen from "../../../hooks/screenWidth/largeScreen/useIsLargeScreen.tsx";
 import useIsSmallScreen from "../../../hooks/screenWidth/mobileScreen/useIsSmallScreen.tsx";
+import useIsMediumScreen from "../../../hooks/screenWidth/mediumScreen/useIsmediumScreen.tsx";
 
 // TypeScript type guard to differentiate between Dish and Drink
 const isDish = (item: Dish | Drink): item is Dish => {
@@ -22,6 +23,9 @@ export const Menu = () => {
 
     //defines a screen >= 1280px calling a hook
     const isLargeScreen = useIsLargeScreen()
+
+    //defines a screen >= 768px & < 1280 calling a hook
+    const isMediumScreen = useIsMediumScreen()
 
     //defines a screen < 768
     const isSmallScreen = useIsSmallScreen()
@@ -89,7 +93,7 @@ export const Menu = () => {
 
     // Pagination state variables
     const [page, setPage] = useState(1);// Current page number
-    const itemsPerPage = isSmallScreen ? 4 : 5;
+    const itemsPerPage = isSmallScreen ? 3 : isMediumScreen ? 4 : 5;
 
     // Handle page change for pagination
     const handleChangePage = (_event: ChangeEvent<unknown>, value: number) => {
@@ -143,7 +147,7 @@ export const Menu = () => {
                             closePopup={closePopup}
                         />
                     }
-                    <ul className={"w-[60%] mx-auto"}>
+                    <ul className={"w-[60%] md:mx-auto"}>
                         <h3 className={"font-inter italic text-lg md:text-2xl text-[#013220] underline mb-3"}>Les {selectedItem}</h3>
                         {paginatedItems.map(item => (
                             // Render only items matching the category ID
@@ -173,7 +177,7 @@ export const Menu = () => {
                         ))}
                     </ul>
                     {/* mui-material Stack pagination component */}
-                    <Stack spacing={2} className={"w-[80%] mx-auto mt-1 md:mt-2 lg:mt-4 bg-white rounded-md"}>
+                    <Stack spacing={2} className={"w-[80%] md:w-[40%] mx-auto mt-1 md:mt-2 lg:mt-4 bg-white rounded-md"}>
                         <Pagination
                             count={Math.ceil(filteredItems.length / itemsPerPage)}
                             page={page}
@@ -185,13 +189,13 @@ export const Menu = () => {
                         />
                     </Stack>
                 </div>
-                {!isSmallScreen &&
+
                     <MenuSidebar
                         onItemSelect={setSelectedItem}
                         selectedItem={selectedItem}
                         categories={categories}
                     />
-                }
+
             </div>
         </div>
     );

@@ -11,12 +11,12 @@ const DrinksSidebar = (props: DrinkSidebarData) => {
 
     return (
         <>
-            <h1 className={"text-2xl font-inter underline"}>Les boissons</h1>
+            <h1 className={"text-sm md:text-lg lg:text-2xl font-inter underline"}>Les boissons</h1>
             {/* Map over the categories passed through props and render a Link for each */}
             {props.categories.map(cat => {
                 if(cat.type === "beverage") {
                     return <Link
-                        className={props.selectedItem === cat.cat_name ? "w-[33%] font-inter font-semibold italic text-white bg-[#6B8E23] underline text-center text-lg mt-3 rounded-md p-1" : "w-[25%] font-inter font-semibold italic text-[#013220] hover:text-white text-lg text-center mt-3 no-underline"}
+                        className={props.selectedItem === cat.cat_name ? "w-[33%] mr-2 lg:mr-0 font-inter font-semibold italic text-white lg:bg-[#6B8E23] underline text-left text-xs md:text-base lg:text-lg mt-1 lg:mt-3 rounded-md p-1" : "w-[25%] font-inter font-semibold italic text-[#013220] hover:text-white text-xs md:text-base lg:text-lg text-left lg:mt-3 no-underline"}
                         key={cat.id}
                         onClick={() => handleClick(cat.cat_name)}
                     >
