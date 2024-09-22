@@ -4,9 +4,13 @@ import {FormEvent, useEffect, useState} from "react";
 import SuccessMsg from "../successMsg/SuccessMsg.tsx";
 import axios from "axios"
 import {useNotifDispatch} from "../../../hooks/notifications/useNotifDispatch.tsx";
+import useIsLargeScreen from "../../../hooks/screenWidth/largeScreen/useIsLargeScreen.tsx";
 
 
 const BookingForm = () => {
+
+    //defines a screen >= 1280px calling a hook
+    const isLargeScreen = useIsLargeScreen()
 
     // Dispatch hook for notifications (used after successful submission)
     const dispatch = useNotifDispatch()
@@ -122,17 +126,19 @@ const BookingForm = () => {
     };
 
     return (
-        <section className={"flex-1 h-full flex flex-col items-center"}>
-            <h1 className={"text-2xl font-inter italic mt-4"}>Réserver une table</h1>
+        <section className={isLargeScreen ? "flex-1 h-full flex flex-col items-center" : "w-full h-full flex flex-col items-center"}>
+            <h1 className={"text-base md:text-lg lg:text-2xl font-inter italic mt-4"}>Réserver une table</h1>
             {/* Show form if no success or error, otherwise show SuccessMsg */}
             {!success && !error ? (
                 <form
-                    className={"w-[55%] h-auto flex flex-col items-center"}
+                    className={isLargeScreen
+                        ? "w-[55%] h-auto flex flex-col items-center"
+                        : "w-[90%] max-h-[80vh] overflow-y-auto flex flex-col items-center"}
                     noValidate
                     onSubmit={handleSubmit}
                 >
                     <div className={"w-full flex items-center justify-between"}>
-                        <div className={"input-group mt-5 flex flex-col items-center"}>
+                        <div className={"input-group mt-5 flex flex-col items-start"}>
                             <label htmlFor="currentDate" className={!errorDate ? "self-start block" : "self-start block text-red-500"}>{!errorDate ? "Date*" : errorDate}</label>
                             <input
                                 type="date"
