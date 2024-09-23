@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about current purchases that are still pending as well as edit and delete icons. It is called in the ListPurchases page. As soon as the delivered  date value is changed from " en attente" (pending) to an actual date, the purchase leaves this component to appear in the DataTableDeliveredPurchases component.

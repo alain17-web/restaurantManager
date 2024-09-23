@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about purchases with a delivery date other than "en attente" (pending) as well as a "See detail" icon that leads the Purchase detail page. It is called in the ListDeliveredPurchases page in the dashboard ( only authorized users ).

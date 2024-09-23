@@ -1,0 +1,1 @@
+This component is a navigation bar (side) for the Dashboard with links to all the listPages it contains and a Logout button . The Dashboard is only accessible to logged in users ( either as guest or admin ).

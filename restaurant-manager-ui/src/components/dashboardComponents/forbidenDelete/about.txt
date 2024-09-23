@@ -1,0 +1,1 @@
+This component is a deactivated ( no onClick ) delete icon that is called on every DataTableXXX components in the dashboard when the user logs in as "guest".

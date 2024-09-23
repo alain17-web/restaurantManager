@@ -1,0 +1,1 @@
+This component is a navigation bar (top) for the Dashboard and all the listPages it contains with links to the Restaurant and Kitchen pages. The Dashboard is only accessible to logged in users ( either as guest or admin ).

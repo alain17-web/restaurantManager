@@ -1,0 +1,2 @@
+This component fetches the roles of employees from the database.
+It provides the options in a select input in the page NewDEmployee.

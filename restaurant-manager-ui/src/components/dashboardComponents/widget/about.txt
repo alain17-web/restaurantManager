@@ -1,0 +1,1 @@
+This component is called 3 times ( Orders - Purchases - Bookings) in the top section of the Dashboard page and displays a new notification each time a new order / purchase / booking is made. It also provides a link to the Listorders / ListPurchases / ListBookings pages. Clicking the link resets the notifications counter to 0 ( in the Widget as well as in the DashboardSidebar ).

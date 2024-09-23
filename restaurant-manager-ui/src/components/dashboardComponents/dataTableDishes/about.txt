@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about current dishes. It also displays edit and delete icons and is called in the ListDishes page in the dashboard.

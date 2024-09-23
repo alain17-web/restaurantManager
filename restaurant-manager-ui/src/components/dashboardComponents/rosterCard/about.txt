@@ -1,0 +1,1 @@
+This component uses a mui-Card and is called in the Dashboard page to display a card with the avatar and the name of each employee on duty the day the component is rendered.

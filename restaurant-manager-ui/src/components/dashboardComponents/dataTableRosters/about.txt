@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about current rosters ( week,weekend,etc...) an employee can have. It also displays edit and delete icons and is called in the ListRosters page in the dashboard.

@@ -1,0 +1,2 @@
+This component fetches the categories of dishes and drinks from the database.
+It provides the options in a select input in the pages NewDish and NewDrink.

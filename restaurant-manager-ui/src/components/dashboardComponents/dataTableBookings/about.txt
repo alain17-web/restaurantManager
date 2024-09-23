@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about bookings made both from the BookingForm on the About page and the ListBookings in the dashboard where it is called . It also displays edit and delete icons.

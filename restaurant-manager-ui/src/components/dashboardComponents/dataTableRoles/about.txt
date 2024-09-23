@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about current roles ( admin, waiter,etc...) an employee or a visitor can have. It also displays edit and delete icons and is called in the ListRoles page in the dashboard.

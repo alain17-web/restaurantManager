@@ -1,0 +1,1 @@
+This component uses a mui-dataGrid to display data about categories of dishes and drinks as well as edit and delete icons. It is called in the ListCategories page in the dashboard ( only authorized users ).
