@@ -1,0 +1,1 @@
+This is a custom instance of Axios with a default configuration that includes an interceptor that will check before the request is sent that the user is correctly logged in and thus has a token with a role that allows him to make that particular request.
