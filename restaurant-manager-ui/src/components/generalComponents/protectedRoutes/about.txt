@@ -1,0 +1,1 @@
+This component is used in the App component and is designed to restrict access to certain parts of the the app depending on the role of the logged in user.

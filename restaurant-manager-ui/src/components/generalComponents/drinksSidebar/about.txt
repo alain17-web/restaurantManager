@@ -1,0 +1,1 @@
+This component displays all the categories of beverage ( Softs, wines, Beers, etc...) and is used in the MenuSidebar component that is  part of the Menu page. By clicking a category, it allows the user to see all the drinks of the selected category on the Menu.

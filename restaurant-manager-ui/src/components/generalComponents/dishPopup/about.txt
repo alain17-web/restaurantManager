@@ -1,0 +1,1 @@
+This component displays an image of each dish along with a description. It is called by clicking "Voir plus" next to the description of a dish on the Menu page. The images are stored server-side.

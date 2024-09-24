@@ -1,0 +1,1 @@
+This component is simply the image used as logo of the restaurant. It is used in the Navbar and the DisPopup components as wall as on the Kitchen,Login and GuestLogin pages.

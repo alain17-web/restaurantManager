@@ -2,6 +2,12 @@ import {useEffect, useState} from "react";
 import {AvatarData} from "../../../types/types.ts";
 
 
+const staffRoleId = import.meta.env.VITE_API_STAFF_ROLE_ID
+
+const chefRoleId = import.meta.env.VITE_API_CHEF_ROLE_ID
+
+const guestRoleId = import.meta.env.VITE_API_GUEST_ROLE_ID
+
 const Avatar = (prop:AvatarData) => {
 
     const [src, setSrc] = useState<string>('')
@@ -12,25 +18,25 @@ const Avatar = (prop:AvatarData) => {
     // useEffect runs whenever the component renders, and it will also re-run
     // when 'prop.roleId' or 'prop.gender' changes
     useEffect(() => {
-        if(prop.roleId === 2 && prop.gender === "F"){
+        if(prop.roleId == staffRoleId && prop.gender === "F"){
             setSrc('./img/waitress.jpeg')
         }
 
-        if(prop.roleId === 2 && prop.gender === "M"){
+        if(prop.roleId == staffRoleId && prop.gender === "M"){
             setSrc('./img/waiter.jpg')
         }
 
-        if(prop.roleId === 9 && prop.gender === "M"){
+        if(prop.roleId == chefRoleId && prop.gender === "M"){
             setSrc('./img/chef.jpg.avif')
             setKitchen(true)
         }
 
-        if(prop.roleId === 9 && prop.gender === "F"){
+        if(prop.roleId == chefRoleId && prop.gender === "F"){
             setSrc('./img/cheffe.jpg')
             setKitchen(true)
         }
 
-        if(prop.roleId === 10 && prop.gender === "autre"){
+        if(prop.roleId == guestRoleId && prop.gender === "autre"){
             setSrc('./img/guest.png')
             setKitchen(true)
         }

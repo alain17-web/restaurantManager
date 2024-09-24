@@ -1,0 +1,1 @@
+This component is made of 2 components (DishesSidebar and DrinksSidebar) and is used on the right side of the Menu (from which it receives the props that it passes down to the 2 sub componenents) page to display the categories of dishes and drinks that the user can click to see all the dishes or drinks included in the selected category.

@@ -1,0 +1,1 @@
+This component is a Google maps <iframe /> showing the position of the restaurant and used on the About page ( only on large screen ).

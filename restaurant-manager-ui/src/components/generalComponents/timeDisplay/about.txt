@@ -1,0 +1,1 @@
+This component is designed to display the current local time in hour (2 digits ) - min (2 digits). It is used on the Dashboard and the Restaurant pages.

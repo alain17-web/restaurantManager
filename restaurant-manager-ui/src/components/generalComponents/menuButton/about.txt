@@ -1,0 +1,1 @@
+This component is a button with a link to the Menu page. It is used in the Navbar ( when About page is rendered ) and on the Home page.

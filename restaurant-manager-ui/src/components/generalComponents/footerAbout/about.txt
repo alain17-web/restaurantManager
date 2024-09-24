@@ -1,0 +1,1 @@
+This component is the footer of the About page. It contains 2 fake links to imaginary facebbok and instagram pages.

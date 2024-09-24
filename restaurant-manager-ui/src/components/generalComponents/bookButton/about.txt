@@ -1,0 +1,1 @@
+This component is a button with a link to the About page and the BookingForm it contains. It is used on the Home page as well as the Navbar component.

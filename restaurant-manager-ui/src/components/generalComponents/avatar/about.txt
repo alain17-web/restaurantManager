@@ -1,0 +1,1 @@
+This component provides an avatar image to employees based on their role and gender. It is claaedd in the Kitchen and Restaurant pages.

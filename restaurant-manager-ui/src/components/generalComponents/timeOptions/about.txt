@@ -1,0 +1,1 @@
+This component displays the hours where it is possible to book a table. It provides the options in a select input in the BookingForm component on the About page and on the NewBooking page.

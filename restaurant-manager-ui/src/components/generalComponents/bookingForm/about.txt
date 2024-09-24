@@ -1,0 +1,1 @@
+This component displays either a booking form or a success message if the booking has been succesfully sent. It is used in the About page to make a reservation at the restaurant.

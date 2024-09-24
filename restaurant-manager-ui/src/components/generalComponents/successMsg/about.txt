@@ -1,0 +1,1 @@
+This component is used in the BookingForm component on the About page and displays a success message when the booking has been successfully made or a failure message when it has not.

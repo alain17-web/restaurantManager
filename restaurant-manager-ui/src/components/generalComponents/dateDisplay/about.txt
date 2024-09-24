@@ -1,0 +1,1 @@
+This component uses 2 hooks to display the current day and date. It is used in the Notepad, Dashboard and Restaurant components.

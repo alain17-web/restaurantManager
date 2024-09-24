@@ -1,0 +1,1 @@
+This component is a navigation bar used on the Menu and About pages. It includes 3 sub components : Logo that provides a link to the Home page, MenuButton with a link to the Menu page (when rendered on the About page ) and BookButton with a link to the About page ( when rendered on the Menu page )

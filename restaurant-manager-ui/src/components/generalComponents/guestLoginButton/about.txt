@@ -1,0 +1,1 @@
+This component is a bbutton containing a link to the page allowing a user to log in as a guest (GuestLogin) with READ ONLY accesses to all parts of the app. It is used on the Home page only when on a large screen as the dashboard is not designed to be responsive.
