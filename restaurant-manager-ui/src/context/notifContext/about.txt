@@ -1,0 +1,7 @@
+This context is designed to allow the notifications created by a new order / purchase / booking to reach all the relevant parts of the app (Widget and DashboardSidebar) without having to pass props down to multiple components.
+
+NotifContext
+The NotifContext helps the app know if a new notification is created and which action has caused it ( new order / purchase / booking ). It shares this information with the concerned parts of the app
+
+AuthReducer
+The AuthReducer is like a set of instructions that tells the app what to do when a new order / purchase / booking is created or when to execute a reset instruction.

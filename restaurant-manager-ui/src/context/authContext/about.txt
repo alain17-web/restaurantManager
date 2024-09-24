@@ -1,0 +1,7 @@
+This context is designed to allow the authentication of a logged in user to reach all the relevant parts of the app without having to pass props down to multiple components. Components can use this context to determine whether a user is logged in or not, and conditionally render elements or redirect users based on their authentication status.
+
+AuthContext
+The AuthContext helps the app know if someone is logged in. It shares this information with all parts of the app to determine if they are accessible or not to the user. The AuthProvider created in the AuthContext is used in the App component and acts like a wrapper around the whole app, making sure all the parts inside it know who is logged in
+
+AuthReducer
+The AuthReducer is like a set of instructions that tells the app what to do when a user logs in or logs out. It decides whether to remember the login details or forget them based on the actions of the user, like pressing a login or logout button.
