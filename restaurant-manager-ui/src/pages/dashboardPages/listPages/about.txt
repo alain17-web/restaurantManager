@@ -1,0 +1,3 @@
+With the exception of ListStock that relies on a react-bootstrap Accordion to show the current stock of each dish and drink, the ListXXX pages display the related DatatablXXX component that uses a mui-dataGrid to display informations such as the list of employees, of dishes, of orders, etc...
+Depending on their purpose, most of the listPages have a NEWXXX button that when clicked changes the state of a boolean and renders a NewItemPage ( NewBooking, NewPurchase,...) allowing to create a new item.
+Most of the ListPages also show some action icons ( edit, delete, see detail ). Clicking the edit button will cause the NewItemPage to be rendered with a title of "Modify" instead "Add".

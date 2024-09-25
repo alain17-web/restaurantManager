@@ -1,0 +1,1 @@
+Each time a new purchase is made by theadmin, the ListPurchases page is updated with some information about the purchase such as its total, its status (delivered or not ),etc.... The page PurchaseDetail is accessible by clicking the see detail icon on the ListPurchases page and provides details about which and how many dishes and drinks have been purchased.

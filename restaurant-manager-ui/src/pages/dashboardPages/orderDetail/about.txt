@@ -1,0 +1,1 @@
+Each time a new order is made by the waiter, the ListOrders page is updated with some information about the order such as its total, its status (validated or not by the cook in the Kitchen),etc... The page OrderDetail is accessible by clicking the see detail icon on the ListOrders page and provides details about which and how many dishes and drinks have been ordered.

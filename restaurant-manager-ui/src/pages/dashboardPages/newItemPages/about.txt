@@ -1,0 +1,1 @@
+Each NewItemPage contains a form that allows the creation or the modification of an item. It is rendered instead of the matching ListPage when a NewItem button or edit icon is clicked on the ListPage and can be closed by clicking the "Back to the list" button.
