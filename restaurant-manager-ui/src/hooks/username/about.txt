@@ -1,0 +1,1 @@
+This custom hook extracts the username of the logged in user from the token. It is used in the DashboardNavbar component, most of the DataTableXXXX components, most of the ListPages and most of the NewXXXX pages.

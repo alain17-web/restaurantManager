@@ -1,0 +1,5 @@
+The logout process includes 2 custom hooks.
+
+useLogoutService contains a logout function that sends the logout request to the server
+
+useLogout calls the logout function from useLogoutService and updates the AuthContext accordingly. It is used in the DashboardSidebar component and in the Kitchen and Restaurant pages.

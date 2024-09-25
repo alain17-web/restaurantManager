@@ -1,0 +1,5 @@
+This directory contains 2 custom hooks:
+
+useNotifDispatch gives access to a function that sends notification-related commands, like increasing or resetting a counter. It makes sure it is used inside a NotifProvider. It is used in the Widget, DashboardSidebar and BookingForm components as well as in the NewOrder, NewPurchase and NewBooking pages.
+
+useNotifState gives access to a function that manages the state of a current notifications. It also ensures this function is used inside a NotifProvider to avoid errors. It is used in the Widget component.

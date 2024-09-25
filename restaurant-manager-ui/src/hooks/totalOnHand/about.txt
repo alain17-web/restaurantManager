@@ -1,0 +1,1 @@
+This custom hook fetches the latest totalOnHand value from the database. It is used in the Notepad component and on the NewFinanceSummary and NewPurchase pages.

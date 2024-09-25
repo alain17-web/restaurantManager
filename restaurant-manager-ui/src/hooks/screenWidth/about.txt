@@ -1,0 +1,9 @@
+This directory contains 3 identically designed custom hooks that keep measuring the screen width and return a variable
+
+isLargeScreen (when width >=1280px) from the hook useIsLargeScreen used in the BookingForm, DishPopup and Navbar components as well as the Home, Menu and About pages.
+
+isMediumScreen (between 768px and 1280px ) from the hook useIsMediumScreen used in the Menu page.
+
+isSmallScreen ( between 360px and 768px ) from the hook useIsSmallScreen used in the Navbar component and the Menu page.
+
+The purpose of these hook is to help manage the reponsive mode by hiding or displaying elements depending on the width of the screen.

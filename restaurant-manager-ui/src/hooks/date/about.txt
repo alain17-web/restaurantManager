@@ -1,0 +1,5 @@
+This directory contains 2 custom hooks ( functions used in several components that need to be coded only once ) .
+
+useCurrentDate gets the current date and formats it like so: DD/MM/YYYY. it is used in the DateDisplay component and on the ListStock, NewOrder and NewPurchase pages.
+
+useCurrentWeekDay gets the current day in french. It is used in the DateDisplay and RosterCard components.
