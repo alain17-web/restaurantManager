@@ -1,51 +1,58 @@
-import {getRandomItems} from "../../../utils/functions.ts";
-import {FormEvent, useEffect, useState} from "react";
-import Accordion from 'react-bootstrap/Accordion'
-import {Dish, Drink, NewOrderData} from "../../../types/types.ts";
+import { getRandomItems } from "../../../utils/functions.ts";
+import { FormEvent, useEffect, useState } from "react";
+import Accordion from 'react-bootstrap/Accordion';
+import { Dish, Drink, NewOrderData } from "../../../types/types.ts";
 import axiosInstance from "../../../axios/axiosInstance.tsx";
 import useCurrentDate from "../../../hooks/date/useCurrentDate.tsx";
-import {useNotifDispatch} from "../../../hooks/notifications/useNotifDispatch.tsx";
-
+import { useNotifDispatch } from "../../../hooks/notifications/useNotifDispatch.tsx";
 
 
 const NewOrder = (props: NewOrderData) => {
 
-    const dispatch = useNotifDispatch()
+    // use of a hook that adds a notification when a new order is created
+    const dispatch = useNotifDispatch();
 
-    const [dishes, setDishes] = useState<Dish[]>([])
-    const [drinks, setDrinks] = useState<Drink[]>([])
-    const [mainCourses, setMainCourses] = useState<Dish[]>([])
-    const [desserts, setDesserts] = useState<Dish[]>([])
-    const [coldDrinks, setColdDrinks] = useState<Drink[]>([])
-    const [warmDrinks, setWarmDrinks] = useState<Drink[]>([])
-    const [order_date, setOrder_date] = useState<string>("")
-    const [username, setUsername] = useState<string>("")
-    const [people, setPeople] = useState<number>(0)
-    const validated = "en attente"
-    const validatedBy = ""
-    const [total, setTotal] = useState<number>(0)
-    const [message, setMessage] = useState<string>("")
-    const [success, setSuccess] = useState<boolean>(false)
 
-    const {formattedDate} = useCurrentDate()
+    const [dishes, setDishes] = useState<Dish[]>([]);
+    const [drinks, setDrinks] = useState<Drink[]>([]);
+    const [mainCourses, setMainCourses] = useState<Dish[]>([]);
+    const [desserts, setDesserts] = useState<Dish[]>([]);
+    const [coldDrinks, setColdDrinks] = useState<Drink[]>([]);
+    const [warmDrinks, setWarmDrinks] = useState<Drink[]>([]);
+    const [order_date, setOrder_date] = useState<string>("");
+    const [username, setUsername] = useState<string>("");
+    const [people, setPeople] = useState<number>(0);
+    const validated = "en attente";
+    const validatedBy = "";
+    const [total, setTotal] = useState<number>(0);
+    const [message, setMessage] = useState<string>("");
+    const [success, setSuccess] = useState<boolean>(false);
 
+    // Custom hook to get the formatted current date
+    const { formattedDate } = useCurrentDate();
+
+    // Fetches data for dishes and drinks on component mount
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Fetch dishes and drinks data simultaneously
                 const [dishesRes, drinksRes] = await Promise.all([
                     axiosInstance.get('/dishes/'),
                     axiosInstance.get('/drinks/')
                 ]);
 
+                // Convert prices from string to number format
                 const dishesWithNumPrices = dishesRes.data.map((dish: Dish) => ({
                     ...dish,
                     price: parseFloat(dish.price as string)
-                }))
+                }));
 
                 const drinksWithNumPrices = drinksRes.data.map((drink: Drink) => ({
                     ...drink,
                     price: parseFloat(drink.price as string)
-                }))
+                }));
+
+                // Set dishes and drinks state
                 setDishes(dishesWithNumPrices);
                 setDrinks(drinksWithNumPrices);
             } catch (error) {
@@ -56,62 +63,63 @@ const NewOrder = (props: NewOrderData) => {
         fetchData();
     }, []);
 
-
+    // Categorizes dishes and drinks based on their category ID and calculates the total cost
     useEffect(() => {
-
         if (dishes.length > 0 && drinks.length > 0) {
+            // Arrays to store categorized dishes and drinks
+            const mainCoursesArray: Dish[] = [];
+            const dessertsArray: Dish[] = [];
+            const coldDrinksArray: Drink[] = [];
+            const warmDrinksArray: Drink[] = [];
 
-            const mainCoursesArray: Dish[] = []
-            const dessertsArray: Dish[] = []
-            const coldDrinksArray: Drink[] = []
-            const warmDrinksArray: Drink[] = []
-
-
+            // Categorize dishes based on their category ID
             dishes.forEach((dish: Dish) => {
                 if (dish.cat_id !== 5) {
-                    mainCoursesArray.push(dish)
+                    mainCoursesArray.push(dish);
                 } else {
-                    dessertsArray.push(dish)
+                    dessertsArray.push(dish);
                 }
-            })
+            });
 
+            // Categorize drinks based on their category ID
             drinks.forEach((drink: Drink) => {
                 if (drink.cat_id !== 9) {
-                    coldDrinksArray.push(drink)
+                    coldDrinksArray.push(drink);
                 } else {
-                    warmDrinksArray.push(drink)
+                    warmDrinksArray.push(drink);
                 }
-            })
+            });
 
+            // Select random items based on the number of people in the props
+            const selectedMainCourses: Dish[] = getRandomItems(mainCoursesArray, props.people);
+            const selectedDesserts: Dish[] = getRandomItems(dessertsArray, props.people);
+            const selectedColdDrinks: Drink[] = getRandomItems(coldDrinksArray, props.people);
+            const selectedWarmDrinks: Drink[] = getRandomItems(warmDrinksArray, props.people);
 
-            const selectedMainCourses: Dish[] = getRandomItems(mainCoursesArray, props.people)
-            const selectedDesserts: Dish[] = getRandomItems(dessertsArray, props.people)
-            const selectedColdDrinks: Drink[] = getRandomItems(coldDrinksArray, props.people)
-            const selectedWarmDrinks: Drink[] = getRandomItems(warmDrinksArray, props.people)
+            // Set state with selected items
+            setMainCourses(selectedMainCourses);
+            setDesserts(selectedDesserts);
+            setColdDrinks(selectedColdDrinks);
+            setWarmDrinks(selectedWarmDrinks);
 
-            setMainCourses(selectedMainCourses)
-            setDesserts(selectedDesserts)
-            setColdDrinks(selectedColdDrinks)
-            setWarmDrinks(selectedWarmDrinks)
+            // Calculate the total cost
+            const totalCourses = selectedMainCourses.reduce((acc, dish) => acc + (parseFloat(dish.price as string)), 0);
+            const totalDesserts = selectedDesserts.reduce((acc, dish) => acc + (parseFloat(dish.price as string)), 0);
+            const totalColds = selectedColdDrinks.reduce((acc, drink) => acc + (parseFloat(drink.price as string)), 0);
+            const totalWarms = selectedWarmDrinks.reduce((acc, drink) => acc + (parseFloat(drink.price as string)), 0);
 
+            // Total amount
+            const totalAmount = totalCourses + totalDesserts + totalColds + totalWarms;
 
-            const totalCourses = selectedMainCourses.reduce((acc, dish) => acc + (parseFloat(dish.price as string)), 0)
-            const totalDesserts = selectedDesserts.reduce((acc, dish) => acc + (parseFloat(dish.price as string)), 0)
-            const totalColds = selectedColdDrinks.reduce((acc, drink) => acc + (parseFloat(drink.price as string)), 0)
-            const totalWarms = selectedWarmDrinks.reduce((acc, drink) => acc + (parseFloat(drink.price as string)), 0)
-
-
-            const totalAmount = totalCourses + totalDesserts + totalColds + totalWarms
-
-            setTotal(parseFloat(totalAmount.toFixed(2)))
-
-
-            setPeople(props.people)
-            setUsername(props.username as string)
-            setOrder_date(formattedDate)
+            // Set total amount and other order details
+            setTotal(parseFloat(totalAmount.toFixed(2)));
+            setPeople(props.people);
+            setUsername(props.username as string);
+            setOrder_date(formattedDate);
         }
-    }, [dishes, drinks, props.people])
+    }, [dishes, drinks, props.people]);
 
+    // Helper function to extract names and prices from items
     const extractNameAndPrice = (items: { name: string; price: string | number }[]) => {
         return items.map(item => ({
             name: item.name,
@@ -119,14 +127,17 @@ const NewOrder = (props: NewOrderData) => {
         }));
     };
 
+    // Handles form submission
     const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault()
+        e.preventDefault();
 
+        // Transform items to have only necessary fields
         const transformedMainCourses = extractNameAndPrice(mainCourses);
         const transformedDesserts = extractNameAndPrice(desserts);
         const transformedColdDrinks = extractNameAndPrice(coldDrinks);
         const transformedWarmDrinks = extractNameAndPrice(warmDrinks);
 
+        // Order object to be submitted
         const order = {
             people,
             username,
@@ -134,15 +145,14 @@ const NewOrder = (props: NewOrderData) => {
             total,
             validated,
             validatedBy
-        }
-
+        };
 
         try {
-            const orderRes = await axiosInstance.post('/orders/addOrder', order)
+            // Submit the order and get the order ID
+            const orderRes = await axiosInstance.post('/orders/addOrder', order);
+            const orderId = orderRes.data.orderResult.order_id;
 
-            const orderId = orderRes.data.orderResult.order_id
-
-
+            // Create order items array
             const orderItems = [
                 ...transformedMainCourses.map(item => ({
                     ...item,
@@ -172,23 +182,21 @@ const NewOrder = (props: NewOrderData) => {
                     validated,
                     validatedBy
                 })),
-            ]
+            ];
 
-
-
-            for(const orderItem of orderItems) {
-                await axiosInstance.post('/orderItems/addOrderItem', orderItem)
+            // Submit each order item
+            for (const orderItem of orderItems) {
+                await axiosInstance.post('/orderItems/addOrderItem', orderItem);
             }
-            setSuccess(true)
-            setMessage('La commande a été envoyée')
-            dispatch({ type: 'ADD_ORDER_NOTIF'})
+            setSuccess(true); // Set success state
+            setMessage('La commande a été envoyée'); // Set success message
+            dispatch({ type: 'ADD_ORDER_NOTIF' }); // Dispatch notification
 
         } catch (error) {
-            console.error('Error in posting order', error)
-            setMessage("L'envoi de la commande a échoué")
+            console.error('Error in posting order', error);
+            setMessage("L'envoi de la commande a échoué"); // Set error message
         }
-
-    }
+    };
 
     return (
         <>
@@ -197,7 +205,6 @@ const NewOrder = (props: NewOrderData) => {
                     <p className={"text-green-800 text-lg font-bold"}>{message} <span
                         className={"ml-3 text-2xl cursor-pointer px-1 border-1 border-green-600"}
                         onClick={props.closeNewOrder}>X</span></p>
-
                 </div>
             ) : (
                 <div className={"px-2 h-9 m-3 mb-3 text-center text-green-600 flex items center justify-center gap-3 "}>
@@ -269,7 +276,5 @@ const NewOrder = (props: NewOrderData) => {
             </form>
         </>
     );
-
 };
 export default NewOrder;
-
