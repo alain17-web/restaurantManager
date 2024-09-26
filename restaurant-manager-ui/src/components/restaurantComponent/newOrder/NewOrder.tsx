@@ -1,10 +1,10 @@
-import {getRandomItems} from "../../../../utils/functions.ts";
+import {getRandomItems} from "../../../utils/functions.ts";
 import {FormEvent, useEffect, useState} from "react";
 import Accordion from 'react-bootstrap/Accordion'
-import {Dish, Drink, NewOrderData} from "../../../../types/types.ts";
-import axiosInstance from "../../../../axios/axiosInstance.tsx";
-import useCurrentDate from "../../../../hooks/date/useCurrentDate.tsx";
-import {useNotifDispatch} from "../../../../hooks/notifications/useNotifDispatch.tsx";
+import {Dish, Drink, NewOrderData} from "../../../types/types.ts";
+import axiosInstance from "../../../axios/axiosInstance.tsx";
+import useCurrentDate from "../../../hooks/date/useCurrentDate.tsx";
+import {useNotifDispatch} from "../../../hooks/notifications/useNotifDispatch.tsx";
 
 
 
