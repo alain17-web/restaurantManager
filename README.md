@@ -16,3 +16,10 @@ menu page
 
 contact - booking page
 <img width="1767" alt="about" src="https://github.com/user-attachments/assets/2d43a7b5-5d68-40c8-9c4c-d950fcbb8560">
+
+The design was voluntarily kept basic as it needed to be easily modified so that a middle eastern touch can - depeding on the approached reastaurant - become say asian, french or italian with just a few new background images. The dishes displayed in the menu page can be replaced through the interface on the dashboard in the "private pages"
+
+The "connexion guest" button on the Home page leads to a login form allowing the user to register as a guest and gain access to the "private pages" in READ ONLY mode. 
+
+guestLogin page
+
