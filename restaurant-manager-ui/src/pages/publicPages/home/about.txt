@@ -1,0 +1,1 @@
+This is the homepage of the public part of the app. It gives access to the Menu, About and GuestLogin pages. It has a single background image that can easily be changed depending on the type of the restaurant where a demo of the app is intended.

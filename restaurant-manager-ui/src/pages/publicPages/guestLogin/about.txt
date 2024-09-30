@@ -1,0 +1,1 @@
+This page is accessible from the Home page by clicking the Connexion guest button. It contains a small form allowing a user to access the private pages (dashboard, the kitchen and the restaurant) as a guest with a READ ONLY restriction.

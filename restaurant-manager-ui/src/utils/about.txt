@@ -1,0 +1,1 @@
+This file contains a generic function that picks up a random number of items. It is used in te NewOrder page to choose randomly the number of people, drinks and dishes.

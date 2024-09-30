@@ -1,0 +1,1 @@
+This is the login page for the staff. It has an access to the Home page by clicking on the logo.

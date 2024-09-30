@@ -22,7 +22,7 @@ const About = () => {
             >
                 <Navbar isOnAbout={isOnAbout}/>
                 <h2 className={"text-center text-2xl md:text-4xl lg:text-6xl text-white font-inter mt-20"}>La Branche d'Olivier</h2>
-                <p className={"text-center text-sm md:text-base lg::text-2xl text-amber-100 font-inter italic mt-4 lg:mt-8"}>Cuisine traditionnelle palestinienne</p>
+                <p className={"text-center text-sm md:text-base lg:text-2xl text-amber-100 font-inter italic mt-4 lg:mt-8"}>Cuisine traditionnelle palestinienne</p>
             </header>
             <main className={ "w-full h-[40vh] flex items-center justify-center"}>
                 <BookingForm/>
