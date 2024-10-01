@@ -34,9 +34,11 @@ Restaurant
 <img width="1775" alt="resto" src="https://github.com/user-attachments/assets/c0d58ce5-921f-424b-9941-516ecc48d246">
 
 Kitchen 
-
+<img width="1374" alt="kitchen" src="https://github.com/user-attachments/assets/948905d8-2a4c-48d8-a977-0025127e1151">
 
 Dashboard
+<img width="1383" alt="dashboard" src="https://github.com/user-attachments/assets/98d6c18b-9664-4754-ad00-042e6019b61f">
+
 
 
 
