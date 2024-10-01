@@ -55,7 +55,26 @@ and on the kitchen page where the cook can validate it if all the dishes are ava
 
 <img width="403" alt="orderKitchen" src="https://github.com/user-attachments/assets/94876e23-c75a-4814-b8fd-3656c9164b76">
 
-Validating the order will update its status to "ok" as can be seen in the "Commandes clients" tab of the dashboard,
+Validating the order will update its status to "ok" as can be seen in the "Commandes clients" tab of the dashboard
+
+<img width="1093" alt="order" src="https://github.com/user-attachments/assets/cde03bd2-b249-4902-b612-64f0cd69e8a6">
+
+where clicking on the "search" icon displays the contents of the order.
+
+<img width="1378" alt="orderDetail" src="https://github.com/user-attachments/assets/d831a700-5b1c-4cb6-9ac6-0b7982e00ed6">
+
+The ordered items are then substracted from the current stock ( Stock tab of the dashboard ). The available stock is displayed in a MUI - Accordion. 
+
+<img width="1387" alt="stock" src="https://github.com/user-attachments/assets/ea94c4ae-ce8b-4eec-8794-68625ecb7893"> 
+
+In the "Comptabilité" tab, a new financial report is created and adds the income from the order to the total available funds. 
+
+<img width="1375" alt="finance" src="https://github.com/user-attachments/assets/25410a68-71db-4835-919c-4b3dafae8437">
+
+
+
+
+
 
 
 
