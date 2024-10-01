@@ -5,6 +5,8 @@ The purpose of this app is to serve as a visual support for a sales representati
 
 The FRONT-end was created in REACT TYPESCRIPT and styled in TAILWIND while the BACK-end was made in EXPRESS with a MYSQL database. 
 
+<h1>FRONT</h1>
+
 <h2>Public pages</h2>
 
 The front includes 3 "public pages" accessible to all and several "private pages" restricted to logged in users. The 3 public pages purport to look like what might be a minimal and simple restaurant's static website with a
@@ -38,6 +40,10 @@ Kitchen
 
 Dashboard
 <img width="1383" alt="dashboard" src="https://github.com/user-attachments/assets/98d6c18b-9664-4754-ad00-042e6019b61f">
+
+<h2>How it works</h2>
+
+Let's start by the waiter/ress taking an order at the restaurant with a tablet. Instead of an actual order form, pressing the "New order" button will trigger a function that randomly picks a number of customers as well as drinks and dishes. The selected items show in a MUI-Accordion 
 
 
 
