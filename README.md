@@ -19,7 +19,7 @@ contact - booking page
 
 The design was voluntarily kept basic as it needed to be easily modified so that a middle eastern touch can - depeding on the approached reastaurant - become say asian, french or italian with just a few new background images. The dishes displayed in the menu page can be replaced through the interface on the dashboard in the "private pages"
 
-The "connexion guest" button on the Home page leads to a login form allowing the user to register as a guest and gain access to the "private pages" in READ ONLY mode. 
+The "connexion guest" button on the Home page leads to a login form allowing the user to register as a guest and gain access to the "private pages" in READ ONLY mode. There is a similar page to for the staff to login.
 
 guestLogin page
 
