@@ -22,4 +22,6 @@ The design was voluntarily kept basic as it needed to be easily modified so that
 The "connexion guest" button on the Home page leads to a login form allowing the user to register as a guest and gain access to the "private pages" in READ ONLY mode. There is a similar page to for the staff to login.
 
 guestLogin page
+<img width="1763" alt="guestLogin" src="https://github.com/user-attachments/assets/e9630ac4-58c6-4e83-93d1-6b2028de50c1">
+
 
