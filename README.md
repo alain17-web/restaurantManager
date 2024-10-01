@@ -31,5 +31,7 @@ GuestLogin page
 Depending on his role, an logged in employee will land on a restaurant page, a kitchen page or a dashboard page.
 
 Restaurant
+<img width="1775" alt="resto" src="https://github.com/user-attachments/assets/c0d58ce5-921f-424b-9941-516ecc48d246">
+
 
 
