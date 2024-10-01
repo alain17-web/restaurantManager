@@ -47,7 +47,10 @@ Let's start by the waiter/ress taking an order at the restaurant with a tablet. 
 
 <img width="442" alt="newOrder" src="https://github.com/user-attachments/assets/412f1603-bbec-4383-929a-1a0d6ff75ad2">
 
-Once the order is submitted, it is visible in the dashboard and on the kitchen page where the cook can validate it if all the dishes are available.
+Once the order is submitted, it is visible in the dashboard where a notification appears 
+
+
+and on the kitchen page where the cook can validate it if all the dishes are available.
 
 
 
