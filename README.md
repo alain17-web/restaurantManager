@@ -55,6 +55,8 @@ and on the kitchen page where the cook can validate it if all the dishes are ava
 
 <img width="403" alt="orderKitchen" src="https://github.com/user-attachments/assets/94876e23-c75a-4814-b8fd-3656c9164b76">
 
+Validating the order will update its status to "ok" as can be seen in the dashboard,
+
 
 
 
