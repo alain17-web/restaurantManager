@@ -75,7 +75,7 @@ In the "Comptabilité" tab, a new financial report is created and adds the incom
 
 <h3>Purchases</h3> 
 
-In order to replenish the stock, the manager has the possiblity to create a purchase order using the New Purchase form of the "Réappros en attente" tab of the dashboard.
+In order to replenish the stock, the manager has the possiblity to create a purchase order using the New Purchase form of the "Réappros en attente" tab of the dashboard. The maximum available budget is displayed at the top of the page and is updated each time a quantity is increased.  
 
 
 
