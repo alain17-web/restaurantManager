@@ -77,15 +77,33 @@ In the "Comptabilité" tab, a new financial report is created and adds the incom
 
 In order to replenish the stock, the manager has the possiblity to create a purchase order using the New Purchase form of the "Réappros en attente" tab of the dashboard. The maximum available budget is displayed at the top of the page and is updated each time a quantity is increased.
 
+<img width="1144" alt="newPurchase" src="https://github.com/user-attachments/assets/686357ed-37d1-4a86-8162-486d6de63be9">
+
+
 Once the purchase is successfully submitted, it appears in the list of the pending purchases in the dashboard.
+
+<img width="703" alt="pendingPurchase" src="https://github.com/user-attachments/assets/b9ffefb5-e42f-410f-9e7f-8ffb4ec8dffe">
+
 
 Clicking on the edit icon will cause the purchase form to be rendered where a toggle button can change the status from pending ( "Non livrée") to delivered ( "Livrée").
 
+<img width="1171" alt="delivered" src="https://github.com/user-attachments/assets/99e9ac41-dea7-478d-8ded-15a3898f1977">
+
+
 The purchase order then disappears from the pending list and is now displayed on the delivered purchase orders list in the "Réappros livrés" tab of the dashboard with a delivery date.
 
-On this list, there is an "search" icon that allows the user to see the contents of the purchase order. It is not possible to modify or delete a delivered purchase.
+<img width="734" alt="deliveredPurchase" src="https://github.com/user-attachments/assets/f0f257dd-14ad-4089-8182-971c2119118f">
+
+
+On this list, there is a "search" icon that allows the user to see the contents of the purchase order. It is not possible to modify or delete a delivered purchase.
+
+<img width="1136" alt="purchaseDetail" src="https://github.com/user-attachments/assets/c77b3555-d4c2-4700-b169-deb5ec60a649">
+
 
 When a purchase order is delivered, the stock is automatically updated and a new financial report is generated substracting the total price of the purchase from the available funds ("total € dispo").
+
+<img width="1022" alt="updatedFinance" src="https://github.com/user-attachments/assets/4e3e630f-78a8-4176-9afb-7dcb21a93538">
+
 
 
 
