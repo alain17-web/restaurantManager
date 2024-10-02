@@ -43,11 +43,13 @@ Dashboard
 
 <h2>How it works</h2>
 
-Let's start by the waiter/ress taking an order at the restaurant with a tablet. In order to imitate writing down a customer's order, pressing the "New order" button will trigger a function that randomly picks a number of customers as well as drinks and dishes. The selected items show in a MUI-Accordion
+<h3>Orders</h3>
+
+Let's start by the waiter/ress taking an order at the restaurant with a tablet. In order to imitate writing down a customer's order, pressing the "New order" button will trigger a function that randomly picks a number of customers as well as drinks and dishes. The selected items show in a MUI-Accordion on the Restaurant page.
 
 <img width="442" alt="newOrder" src="https://github.com/user-attachments/assets/412f1603-bbec-4383-929a-1a0d6ff75ad2">
 
-Once the order is submitted, it is visible in the dashboard where a notification appears 
+Once the order is successfully submitted, it becomes visible in the dashboard where a notification appears 
 
 <img width="387" alt="notif" src="https://github.com/user-attachments/assets/bca41560-ae3c-4440-89c3-8255c3660cb2">
 
@@ -70,6 +72,10 @@ The ordered items are then substracted from the current stock ( Stock tab of the
 In the "Comptabilité" tab, a new financial report is created and adds the income from the order to the total available funds. 
 
 <img width="1375" alt="finance" src="https://github.com/user-attachments/assets/25410a68-71db-4835-919c-4b3dafae8437">
+
+<h3>Purchases</h3> 
+
+In order to replenish the stock, the manager has the possiblity to create a purchase order using the New Purchase form of the "Réappros en attente" tab of the dashboard.
 
 
 
