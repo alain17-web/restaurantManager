@@ -43,7 +43,7 @@ Dashboard
 
 <h2>How it works</h2>
 
-Let's start by the waiter/ress taking an order at the restaurant with a tablet. Instead of an actual order form, pressing the "New order" button will trigger a function that randomly picks a number of customers as well as drinks and dishes. The selected items show in a MUI-Accordion
+Let's start by the waiter/ress taking an order at the restaurant with a tablet. In order to imitate writing down a customer's order, pressing the "New order" button will trigger a function that randomly picks a number of customers as well as drinks and dishes. The selected items show in a MUI-Accordion
 
 <img width="442" alt="newOrder" src="https://github.com/user-attachments/assets/412f1603-bbec-4383-929a-1a0d6ff75ad2">
 
