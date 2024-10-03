@@ -45,7 +45,7 @@ app.use('/api', router);
 
 // Define a simple route for the root URL ('/')
 app.get('/', (req, res) => {
-    res.send('Hello World'); // Respond with "Hello World"
+    res.send('RestoManager');
 });
 
 // Establish a connection to the database
@@ -57,6 +57,5 @@ createConnection()
         });
     })
     .catch((error) => {
-        // If there's an error connecting to the database, log the error
         console.error('Failed to connect to the database:', error);
     });
