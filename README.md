@@ -136,7 +136,7 @@ A drink or a dish always belongs to a category (dessert, wine, etc...). The cate
 
 <h3>Login and authentication</h3>
 
-
+The authentication process involves generating a token ( JSONWEBTOKEN ) when signing in either as a guest - in READ ONLY mode on the FuestLogin page - or as an employee on the Login pages. The token is destroyed when signing out.
 
 
 
