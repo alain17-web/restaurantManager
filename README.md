@@ -131,7 +131,13 @@ Roles and rosters can be created and managed in the Rôles and Horaires staff ta
 
 In a similar way, the dishes and drinks on the Menu can be managed from the dashboard. 
 
+<img width="129" alt="drinksDishesTabs" src="https://github.com/user-attachments/assets/4ef71b2f-59b6-4ba6-8789-678319f728b6">
+
+
 A drink or a dish always belongs to a category (dessert, wine, etc...). The categories are also created in the dashboard.
+
+<img width="495" alt="categories" src="https://github.com/user-attachments/assets/20df0def-f456-4587-b058-6891800d9b7f">
+
 
 
 <h3>Login and authentication</h3>
