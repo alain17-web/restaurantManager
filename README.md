@@ -1,7 +1,7 @@
 <h1>RESTAURANT MANAGER</h1>
 
 
-The purpose of this app is to serve as a visual support for a sales representative to approach restaurant owners with the aim of selling a management application. 
+The purpose of this app is to serve as a visual support for a sales representative to approach restaurant owners with the aim of selling a management application. It is not an actual restaurant managment tool. This app only tries to help demonstrate how such a tool -once extensively custom-developed can make managing a restaurant less burdensome.
 
 The FRONT-end was created in REACT TYPESCRIPT and styled in TAILWIND while the BACK-end was made in EXPRESS with a MYSQL database. 
 
@@ -126,6 +126,15 @@ It is only possible to delete an employee in the "Inactifs" list.
 Roles and rosters can be created and managed in the Rôles and Horaires staff tabs of the dashboard.
 
 <img width="164" alt="rolesRostersTabs" src="https://github.com/user-attachments/assets/36fd50cf-13f0-4ba7-abb1-60808a67e188">
+
+<h3>Dishes,drinks & categories</h3>
+
+In a similar way, the dishes and drinks on the Menu can be managed from the dashboard. 
+
+A drink or a dish always belongs to a category (dessert, wine, etc...). The categories are also created in the dashboard.
+
+
+<h3>Login and authentication</h3>
 
 
 
