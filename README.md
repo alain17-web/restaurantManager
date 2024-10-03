@@ -203,7 +203,7 @@ ex: route path for dishes
 
 **_router.use('/dishes',dishRouter)_**
 
-<h3>APP file</h3>
+<h2>APP file</h2>
 
 This is the main entry of the app and is  where the router file is imported. The app file defines how the app responds to various requests by setting up the main route handlers :
 
