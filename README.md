@@ -144,6 +144,9 @@ A drink or dish is always assigned to a category (e.g., dessert, wine). Categori
 
 The authentication process uses JSON Web Tokens (JWT). When signing in, either as a guest (in READ-ONLY mode on the GuestLogin page) or as an employee (on the Login pages), a token is generated. This token is destroyed upon signing out.
 
+<img width="662" alt="login" src="https://github.com/user-attachments/assets/24b2e3cf-27d0-4664-917b-9466c7bf3f67">
+
+
 
 
 
