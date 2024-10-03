@@ -104,6 +104,14 @@ When a purchase order is delivered, the stock is automatically updated and a new
 
 <img width="1022" alt="updatedFinance" src="https://github.com/user-attachments/assets/4e3e630f-78a8-4176-9afb-7dcb21a93538">
 
+<h3>Staff and roles</h3>
+
+In the "Employés actifs" tab of the staff section in the dashboard, the admin can use the "Ajouter un employé" form to create a new employee with a role ( admin, waiter, cook ), a roster and a status ( active or inactive ).
+
+Depending on the status, an employee will show in the active or the inactive staff list. It is only possible to delete an employee in the "Inactifs" list.
+
+Roles and rosters can be created and managed in the Rôles and Horaires staff tabs of the dashboard.
+
 
 
 
